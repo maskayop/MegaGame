@@ -1,3 +1,4 @@
+using System.Resources;
 using UnityEngine;
 
 namespace MegaGame
@@ -31,6 +32,11 @@ namespace MegaGame
             Init();
         }
 
+        void Update()
+        {
+            SelectObject();
+        }
+
         public void Init()
         {
             
@@ -51,6 +57,22 @@ namespace MegaGame
             GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
             Character character = ship.GetComponent<Character>();
             character.targetPosition = targetPosition;
+        }
+
+        void SelectObject()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = CameraController.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit, 1000000, 1 << 6))
+                {
+                    Port port = hit.collider.GetComponentInParent<Port>();
+
+                    if (port)
+                        port.OnClickAction();
+                }
+            }
         }
     }
 }

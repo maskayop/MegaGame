@@ -8,12 +8,7 @@ namespace MegaGame
 
         public Owner owner;
 
-        public void Init()
-        {
-
-        }
-
-        void OnMouseUp()
+        public void OnClickAction()
         {
             if (owner == Owner.enemy)
                 GameController.Instance.CreatePlayerShip();
