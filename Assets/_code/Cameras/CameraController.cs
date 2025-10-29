@@ -6,17 +6,22 @@ public class CameraController : MonoBehaviour
 {
 	public static CameraController Instance;
 
+    [Header("Cameras")]
     public Camera mainCamera;
-
     [SerializeField] List<CinemachineCamera> virtualCameras = new List<CinemachineCamera>();
 
+    [Header("Movement")]
     [SerializeField] float movementSpeed = 1.0f;
     [SerializeField] Vector2 positionLimits = new Vector2(100f, 100f);
 
+    [Header("Scroll")]
     [SerializeField] float scrollSpeed = 1;
     [SerializeField] float maxTranslationZ = 500;
     [SerializeField] float minTranslationZ = 100;
     [SerializeField] float currentZoom = 0.5f;
+
+	[Header("Lens")]
+	[SerializeField] float lensFOV = 60;
 
     int currentCamera;
 
@@ -40,12 +45,20 @@ public class CameraController : MonoBehaviour
 		}
 
 		Instance = this;
+
+		Init();
 	}
 
 	void Update()
 	{
 		MoveCamera();
         ZoomView();
+    }
+
+	public void Init()
+	{
+        for (int i = 0; i < virtualCameras.Count; i++)
+			virtualCameras[i].Lens.FieldOfView = lensFOV;
     }
 
 	void MoveCamera()

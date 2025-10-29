@@ -94,9 +94,12 @@ MonoBehaviour:
   healthIndicatorWidget: {fileID: 0}
   health: 10
   currentHealth: 10
-  speed: 6
+  speed: 8
   currentSpeed: 1
-  speedDrop: 4
+  speedDrop: 5
+  damage: 1
+  attackDelay: 1
+  destroyFXprefab: {fileID: 5910495002063247550, guid: cedd626daa06a5d4c8fc7939e0d52ec4, type: 3}
   targetPosition: {fileID: 0}
   targetEnemies: []
 --- !u!1 &8229156860201081542

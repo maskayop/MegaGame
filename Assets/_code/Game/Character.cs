@@ -21,32 +21,60 @@ namespace MegaGame
         public float currentSpeed = 1;
         public float speedDrop = 5.0f;
 
+        [Header("Damage")]
+        public float damage = 1.0f;
+        public float attackDelay = 1.0f;
+
+        [Header("FX")]
+        [SerializeField] GameObject destroyFXprefab;
+
+
         [Header("Info")]
         public Transform targetPosition;
         public List<Character> targetEnemies = new List<Character>();
 
-
         NavMeshAgent agent;
+
+        float currentAttackTime = 0;
 
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            currentHealth = health;
         }
 
         void Update()
         {
-            if (currentHealth == health)
-                healthIndicatorWidget.gameObject.SetActive(false);
-            else
-                healthIndicatorWidget.gameObject.SetActive(true);
-
-            if (targetEnemies.Count == 0)
-                currentSpeed = speed;
-            else
+            if (targetEnemies.Count != 0)
+            {
+                currentAttackTime -= Time.deltaTime;
                 currentSpeed = speed / speedDrop;
+            }
+            else
+                currentSpeed = speed;
 
             agent.destination = targetPosition.position;
             agent.speed = currentSpeed;
+
+            if (currentAttackTime < 0)
+                Attack();
+
+            if (currentHealth != health)
+            {
+                healthIndicatorWidget.SetValue(currentHealth / health);
+                healthIndicatorWidget.gameObject.SetActive(true);
+            }
+            else
+                healthIndicatorWidget.gameObject.SetActive(false);
+
+            if (currentHealth < 0)
+                Kill();
+
+            for (int i = 0; i < targetEnemies.Count; i++)
+            {
+                if (targetEnemies[i] == null)
+                    targetEnemies.Remove(targetEnemies[i]);
+            }
         }
 
         void OnTriggerEnter(Collider coll)
@@ -74,6 +102,22 @@ namespace MegaGame
 
             if (targetCharacter)
                 targetEnemies.Remove(targetCharacter);
+        }
+
+        void Attack()
+        {
+            if (targetEnemies.Count == 0)
+                return;
+
+            targetEnemies[0].currentHealth -= damage;
+
+            currentAttackTime = attackDelay;
+        }
+
+        void Kill()
+        {
+            Instantiate(destroyFXprefab, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
 }
