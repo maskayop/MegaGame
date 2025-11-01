@@ -35,7 +35,11 @@ namespace MegaGame
 
             if (globalTime.currentDay != currentDay)
             {
-                GameController.Instance.piastres += piastresPerDay;
+                if (owner == Owner.player)
+                    GameController.Instance.playerPiastres += piastresPerDay;
+                else if (owner == Owner.enemy)
+                    GameController.Instance.enemyPiastres += piastresPerDay;
+                
                 currentDay = globalTime.currentDay;
             }
         }

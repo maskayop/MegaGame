@@ -7,7 +7,11 @@ namespace MegaGame
         public static GameController Instance { get; private set; }
 
         [Header("Money")]
-        public int piastres;
+        public int playerPiastres;
+        public int enemyPiastres;
+
+        [Header("Prices")]
+        [SerializeField] int shipCost = 10;
 
         [Header("Ports")]
         [SerializeField] Port playerPort;
@@ -47,12 +51,22 @@ namespace MegaGame
 
         public void CreatePlayerShip()
         {
+            if (playerPiastres - shipCost < 0)
+                return;
+
             BuildShip(shipPlayerPrefab, playerPort.transform, enemyPort.transform);
+
+            playerPiastres -= shipCost;
         }
 
         public void CreateEnemyShip()
         {
+            if (enemyPiastres - shipCost < 0)
+                return;
+
             BuildShip(shipEnemyPrefab, enemyPort.transform, playerPort.transform);
+
+            enemyPiastres -= shipCost;
         }
 
         public void BuildShip(GameObject shipOwner, Transform buildingPosition, Transform targetPosition)

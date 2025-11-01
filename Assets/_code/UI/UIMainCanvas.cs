@@ -19,7 +19,8 @@ namespace MegaGame.UI
         [SerializeField] float cameraZoomMultiplier = 2.0f;
 
         [Header("Money")]
-        [SerializeField] TextMeshProUGUI moneyAmounText;        
+        [SerializeField] TextMeshProUGUI playerMoneyAmounText;
+        [SerializeField] TextMeshProUGUI enemyMoneyAmounText;        
 
         int currentDay = 0;
 
@@ -52,7 +53,8 @@ namespace MegaGame.UI
 
         void UpdateMoney()
         {
-            moneyAmounText.text = GameController.Instance.piastres.ToString();
+            playerMoneyAmounText.text = GameController.Instance.playerPiastres.ToString();
+            enemyMoneyAmounText.text = GameController.Instance.enemyPiastres.ToString();
         }
 
         public void GoToCamera(bool isNext)
