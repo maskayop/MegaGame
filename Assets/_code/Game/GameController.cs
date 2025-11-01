@@ -1,11 +1,13 @@
-using System.Resources;
 using UnityEngine;
 
 namespace MegaGame
 {
     public class GameController : MonoBehaviour
     {
-        public static GameController Instance;
+        public static GameController Instance { get; private set; }
+
+        [Header("Money")]
+        public int piastres;
 
         [Header("Ports")]
         [SerializeField] Port playerPort;
@@ -35,6 +37,7 @@ namespace MegaGame
         void Update()
         {
             SelectObject();
+            UpdateMoney();
         }
 
         public void Init()
@@ -73,6 +76,11 @@ namespace MegaGame
                         port.OnClickAction();
                 }
             }
+        }
+
+        void UpdateMoney()
+        {
+
         }
     }
 }

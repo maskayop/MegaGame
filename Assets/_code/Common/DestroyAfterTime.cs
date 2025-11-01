@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Vopere
+namespace Vopere.Common
 {
 	public class DestroyAfterTime : MonoBehaviour
 	{

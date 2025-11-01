@@ -89,14 +89,10 @@ public class CameraController : MonoBehaviour
 		}
 
 		if (Input.GetMouseButtonUp(0))
-		{
 			startCameraPosition = transform.position;
-		}
 
         if (Input.GetMouseButtonDown(2))
-        {
 			transform.position = Vector3.zero;
-        }
     }
 
 	void SetCamera()
@@ -135,8 +131,12 @@ public class CameraController : MonoBehaviour
         currentZoom = Mathf.Clamp01(currentZoom);
 
 		for (int i = 0; i < virtualCameras.Count; i++)
-		{
             virtualCameras[i].transform.localPosition = Vector3.Lerp(new Vector3(0, 0, -minTranslationZ), new Vector3(0, 0, -maxTranslationZ), currentZoom);
-		}
+    }
+
+	public void CameraZoom(float INvalue)
+	{
+		currentZoom += scrollSpeed * INvalue;
+
     }
 }
