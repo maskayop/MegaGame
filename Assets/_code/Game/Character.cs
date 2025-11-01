@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,6 +33,7 @@ namespace MegaGame
         [Header("Info")]
         public Transform targetPosition;
         public List<Character> targetEnemies = new List<Character>();
+        public Port targetPort;
 
         NavMeshAgent agent;
 
@@ -45,7 +47,7 @@ namespace MegaGame
 
         void Update()
         {
-            if (targetEnemies.Count != 0)
+            if (targetEnemies.Count != 0 || targetPort)
             {
                 currentAttackTime -= Time.deltaTime;
                 currentSpeed = speed / speedDrop;
@@ -94,6 +96,22 @@ namespace MegaGame
                         targetEnemies.Add(targetCharacter);
                 }
             }
+
+            Port portTarget = coll.GetComponent<Port>();
+
+            if (portTarget)
+            {
+                if (owner == Owner.player)
+                {
+                    if (portTarget.owner == Port.Owner.enemy)
+                        targetPort = portTarget;
+                }
+                else if (owner == Owner.enemy)
+                {
+                    if (portTarget.owner == Port.Owner.player)
+                        targetPort = portTarget;
+                }
+            }
         }
 
         void OnTriggerExit(Collider coll)
@@ -102,14 +120,20 @@ namespace MegaGame
 
             if (targetCharacter)
                 targetEnemies.Remove(targetCharacter);
+
+            Port portTarget = coll.GetComponent<Port>();
+
+            if (portTarget)
+                targetPort = null;
         }
 
         void Attack()
         {
-            if (targetEnemies.Count == 0)
-                return;
+            if (targetEnemies.Count != 0)
+                targetEnemies[0].currentHealth -= damage;
 
-            targetEnemies[0].currentHealth -= damage;
+            if (targetPort)
+                targetPort.currentHealth -= damage;
 
             currentAttackTime = attackDelay;
         }
