@@ -23,7 +23,7 @@ namespace Vopere.Editor
 		int totalCount;
 		int progressUpdateInterval = 10000;
 
-		[MenuItem("Vopere/Export To Obj...")]
+		[MenuItem("Vopere/Terrain export to obj")]
 		static void Init()
 		{
 			terrain = null;
@@ -234,5 +234,4 @@ namespace Vopere.Editor
 		}
 	}
 }
-
 #endif

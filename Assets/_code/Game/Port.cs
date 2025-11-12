@@ -35,6 +35,9 @@ namespace MegaGame
 
         void Update()
         {
+            if (isCaptured)
+                return;
+
             if (currentHealth < 0)
             {
                 Kill();

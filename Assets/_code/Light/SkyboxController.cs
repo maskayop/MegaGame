@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class SkyboxController : MonoBehaviour
+namespace MegaGame
 {
-    [SerializeField] float rotationSpeed = 1.0f;
-
-    void Update()
+    public class SkyboxController : MonoBehaviour
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * rotationSpeed);
+        [SerializeField] float rotationSpeed = 1.0f;
+
+        void Update()
+        {
+            RenderSettings.skybox.SetFloat("_Rotation", Time.time * rotationSpeed);
+        }
     }
 }
