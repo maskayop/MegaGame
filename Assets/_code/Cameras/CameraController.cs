@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame
 {
@@ -24,6 +25,8 @@ namespace MegaGame
 
 		[Header("Lens")]
 		[SerializeField] float lensFOV = 60;
+
+		bool freeze = false;
 
 		int currentCamera;
 
@@ -53,6 +56,9 @@ namespace MegaGame
 
 		void Update()
 		{
+			if (freeze)
+				return;
+
 			MoveCamera();
 			ZoomView();
 		}
@@ -61,7 +67,12 @@ namespace MegaGame
 		{
 			for (int i = 0; i < virtualCameras.Count; i++)
 				virtualCameras[i].Lens.FieldOfView = lensFOV;
-		}
+
+            float movementSensitivity = DataSaveLoad.Instance.GetSavedFloat("MovementSensitivity");
+
+            if (movementSensitivity != -1)
+                ChangeMovementSensitivity(movementSensitivity);
+        }
 
 		void MoveCamera()
 		{
@@ -139,7 +150,23 @@ namespace MegaGame
 		public void CameraZoom(float INvalue)
 		{
 			currentZoom += scrollSpeed * INvalue;
-
 		}
-	}
+
+		public void Freeze(bool state)
+		{
+			freeze = state;
+		}
+
+        public void ChangeMovementSensitivity(float INvalue)
+        {
+            movementSpeed = INvalue / 100;
+            DataSaveLoad.Instance.Save("MovementSensitivity", INvalue);
+        }
+
+        public void ChangeZoomSensitivity(float INvalue)
+        {
+            scrollSpeed = INvalue / 100;
+            DataSaveLoad.Instance.Save("ZoomSensitivity", INvalue);
+        }
+    }
 }
