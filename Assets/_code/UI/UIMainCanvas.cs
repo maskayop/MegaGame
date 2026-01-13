@@ -6,6 +6,12 @@ namespace MegaGame.UI
 {
     public class UIMainCanvas : MonoBehaviour
     {
+        [Header("Game")]
+        [SerializeField] GameObject startGameWindow;
+        [SerializeField] GameObject endGameWindow;
+        [SerializeField] GameObject victoryPanel;
+        [SerializeField] GameObject defeatPanel;
+
         [Header("Clock")]
         [SerializeField] TextMeshProUGUI currentDayText;
         [SerializeField] Image clockFill;
@@ -30,6 +36,8 @@ namespace MegaGame.UI
         {
             globalTime = GlobalTimeController.Instance;
             currentDayText.text = currentDay.ToString();
+
+            ShowStartGameWindow();
         }
 
         void Update()
@@ -68,6 +76,32 @@ namespace MegaGame.UI
                 CameraController.Instance.CameraZoom(-cameraZoomMultiplier);
             else
                 CameraController.Instance.CameraZoom(+cameraZoomMultiplier);
+        }
+
+        void ShowStartGameWindow()
+        {
+            startGameWindow.SetActive(true);
+            endGameWindow.SetActive(false);
+            victoryPanel.SetActive(false);
+            defeatPanel.SetActive(false);
+        }
+
+        void ShowEndGameWindow()
+        {
+            startGameWindow.SetActive(false);
+            endGameWindow.SetActive(true);
+            victoryPanel.SetActive(false);
+            defeatPanel.SetActive(false);
+
+            if (GameController.Instance.IsVictory)
+                victoryPanel.SetActive(true);
+            else
+                defeatPanel.SetActive(true);
+        }
+
+        public void StartGame()
+        {
+
         }
     }
 }

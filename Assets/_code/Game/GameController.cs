@@ -25,6 +25,9 @@ namespace MegaGame
         Island[] allIslands;
         List<Port> allPorts = new List<Port>();
 
+        bool isVictory = false;
+        public bool IsVictory {  get { return isVictory; } }
+
         void Awake()
         {
             if (Instance != null)
