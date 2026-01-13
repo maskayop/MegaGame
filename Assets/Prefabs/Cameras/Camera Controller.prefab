@@ -56,7 +56,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -163,7 +163,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -238,7 +238,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -313,7 +313,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -420,7 +420,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -563,7 +563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6009753297422213940}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5735764, y: -0, z: -0, w: 0.8191521}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 93.96926, z: -34.202026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -603,7 +603,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 10000
-  field of view: 50
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -769,10 +769,11 @@ MonoBehaviour:
   - {fileID: 4619795358637074642}
   - {fileID: 1314448342882149303}
   movementSpeed: 0.2
-  positionLimits: {x: 300, y: 380}
+  positionLimits: {x: 500, y: 420}
+  zoomInfluence: {x: 4, y: 0.5, z: 2}
   scrollSpeed: 0.08
   maxTranslationZ: 240
-  minTranslationZ: 80
+  minTranslationZ: 50
   currentZoom: 0.5
   lensFOV: 45
 --- !u!1 &6508347908896022664
@@ -831,7 +832,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -938,7 +939,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000
@@ -1077,7 +1078,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 1
     FarClipPlane: 10000

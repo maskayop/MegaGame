@@ -16,6 +16,7 @@ namespace MegaGame
 		[Header("Movement")]
 		[SerializeField] float movementSpeed = 1.0f;
 		[SerializeField] Vector2 positionLimits = new Vector2(100f, 100f);
+		[SerializeField] Vector3 zoomInfluence = new Vector3(1f, 0f, 1f);
 
 		[Header("Scroll")]
 		[SerializeField] float scrollSpeed = 1;
@@ -90,7 +91,7 @@ namespace MegaGame
 				cos = Mathf.Cos(currentCameraRotation.y * Mathf.PI / 180);
 				sin = Mathf.Sin(currentCameraRotation.y * Mathf.PI / 180);
 
-				mousePositionOffset = (startMousePosition - currentMousePosition) * movementSpeed * Mathf.Clamp(currentZoom, 0.5f, 1.5f);
+				mousePositionOffset = (startMousePosition - currentMousePosition) * movementSpeed * Mathf.Clamp(currentZoom * zoomInfluence.x, zoomInfluence.y, zoomInfluence.z);
 
 				float positionX = mousePositionOffset.x * cos + mousePositionOffset.y * sin;
 				float positionZ = mousePositionOffset.y * cos - mousePositionOffset.x * sin;

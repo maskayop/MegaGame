@@ -5,8 +5,8 @@ namespace MegaGame
     public class Port : MonoBehaviour
     {
         public enum Owner { player, enemy, neutral }
-
         public Owner owner;
+
         [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
 
         [Header("Money")]
@@ -16,6 +16,8 @@ namespace MegaGame
         public float health = 100;
         public float currentHealth = 100;
         public float healthRegeneration = 1;
+
+        [HideInInspector] public Island island;
 
         int currentDay = 0;
         GlobalTimeController globalTime;
