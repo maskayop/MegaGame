@@ -1,4 +1,3 @@
-using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +9,7 @@ namespace MegaGame
         public enum Owner { player, enemy }
 
         public Owner owner;
-        
+
         [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
 
         [Header("Health")]

@@ -29,6 +29,9 @@ namespace MegaGame
 
         void Update()
         {
+            if (!GameController.Instance.IsBattle)
+                return;
+
             currentTime += Time.deltaTime;
 
             if (useTimeDeceleration)

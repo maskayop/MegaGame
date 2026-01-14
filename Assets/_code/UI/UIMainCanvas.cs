@@ -31,6 +31,7 @@ namespace MegaGame.UI
         int currentDay = 0;
 
         GlobalTimeController globalTime;
+        bool isBattle = false;
 
         void Start()
         {
@@ -44,6 +45,16 @@ namespace MegaGame.UI
         {
             UpdateClockAndWind();
             UpdateMoney();
+
+            if (GameController.Instance.IsBattle != isBattle)
+            {
+                if (GameController.Instance.IsBattle)
+                    HideStartGameWindow();
+                else
+                    ShowEndGameWindow();
+            }
+
+            isBattle = GameController.Instance.IsBattle;
         }
 
         void UpdateClockAndWind()
@@ -86,6 +97,14 @@ namespace MegaGame.UI
             defeatPanel.SetActive(false);
         }
 
+        void HideStartGameWindow()
+        {
+            startGameWindow.SetActive(false);
+            endGameWindow.SetActive(false);
+            victoryPanel.SetActive(false);
+            defeatPanel.SetActive(false);
+        }
+
         void ShowEndGameWindow()
         {
             startGameWindow.SetActive(false);
@@ -101,7 +120,8 @@ namespace MegaGame.UI
 
         public void StartGame()
         {
-
+            HideStartGameWindow();
+            GameController.Instance.StartBattle();
         }
     }
 }

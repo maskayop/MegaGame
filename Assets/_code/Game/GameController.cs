@@ -28,6 +28,9 @@ namespace MegaGame
         bool isVictory = false;
         public bool IsVictory {  get { return isVictory; } }
 
+        bool isBattle = false;
+        public bool IsBattle { get { return isBattle; } }
+
         void Awake()
         {
             if (Instance != null)
@@ -48,7 +51,7 @@ namespace MegaGame
         void Update()
         {
             SelectObject();
-            UpdateMoney();
+            UpdateGameState();
         }
 
         public void Init()
@@ -121,12 +124,6 @@ namespace MegaGame
                 }
             }
         }
-
-        void UpdateMoney()
-        {
-
-        }
-
         
         Port FindClosestPortToTargetPort(Port target)
         {
@@ -148,6 +145,30 @@ namespace MegaGame
             }
 
             return port;
+        }
+
+        public void StartBattle()
+        {
+            isBattle = true;
+        }
+
+        public void EndBattle()
+        {
+            isBattle = false;
+        }
+
+        void UpdateGameState()
+        {
+            if (playerPort.currentHealth <= 0)
+            {
+                EndBattle();
+                isVictory = false;
+            }
+            else if (enemyPort.currentHealth <= 0)
+            {
+                EndBattle();
+                isVictory = true;
+            }
         }
     }
 }
