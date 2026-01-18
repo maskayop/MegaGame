@@ -23,8 +23,8 @@ namespace MegaGame
 
         [HideInInspector] public Island island;
 
-        int currentDay = 0;
         GlobalTimeController globalTime;
+        int currentDay = 0;
         bool isCaptured = false;
 
         void Start()

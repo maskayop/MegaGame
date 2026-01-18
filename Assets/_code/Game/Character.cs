@@ -32,7 +32,6 @@ namespace MegaGame
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
 
-
         [Header("Info")]
         public Transform destinationPosition;
         public List<Character> targetEnemies = new List<Character>();
