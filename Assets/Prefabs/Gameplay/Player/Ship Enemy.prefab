@@ -6,7 +6,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1317585481157197089}
+    m_TransformParent: {fileID: 6059687761804649416}
     m_Modifications:
     - target: {fileID: 5017467629293527332, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_Name
@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -75,7 +75,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2028329335568222948, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
-      propertyPath: destroyFXprefab
+      propertyPath: FXDestroyPrefab
       value: 
       objectReference: {fileID: 8459548334628662, guid: 615c9637c7c5f5047baf3dea9e28894a, type: 3}
     - target: {fileID: 2028329335568222948, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
@@ -86,10 +86,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 6815334295954294032, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0df29ee72dcaa774a80fa573de6e1725, type: 2}
     - target: {fileID: 9138028168887617915, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -136,15 +132,20 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9138028168887617915, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7879820801307529856}
-    - targetCorrespondingSourceObject: {fileID: 9138028168887617915, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8211491084185402697}
+    - targetCorrespondingSourceObject: {fileID: 4071703617432491922, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7879820801307529856}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
 --- !u!4 &1317585481157197089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9138028168887617915, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
+  m_PrefabInstance: {fileID: 7825511467659654234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6059687761804649416 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4071703617432491922, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
   m_PrefabInstance: {fileID: 7825511467659654234}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9175299986966114074

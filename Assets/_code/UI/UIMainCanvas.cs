@@ -89,20 +89,16 @@ namespace MegaGame.UI
                 CameraController.Instance.CameraZoom(+cameraZoomMultiplier);
         }
 
-        void ShowStartGameWindow()
+        public void ShowStartGameWindow()
         {
             startGameWindow.SetActive(true);
-            endGameWindow.SetActive(false);
-            victoryPanel.SetActive(false);
-            defeatPanel.SetActive(false);
+            HideEndGameWindow();
         }
 
         void HideStartGameWindow()
         {
             startGameWindow.SetActive(false);
-            endGameWindow.SetActive(false);
-            victoryPanel.SetActive(false);
-            defeatPanel.SetActive(false);
+            HideEndGameWindow();
         }
 
         void ShowEndGameWindow()
@@ -118,10 +114,23 @@ namespace MegaGame.UI
                 defeatPanel.SetActive(true);
         }
 
-        public void StartGame()
+        void HideEndGameWindow()
+        {
+            endGameWindow.SetActive(false);
+            victoryPanel.SetActive(false);
+            defeatPanel.SetActive(false);
+        }
+
+        public void StartBattle()
         {
             HideStartGameWindow();
             GameController.Instance.StartBattle();
+        }
+
+        public void EndBattle()
+        {
+            ShowStartGameWindow();
+            GameController.Instance.EndBattle();
         }
     }
 }

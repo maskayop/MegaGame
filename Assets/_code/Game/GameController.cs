@@ -12,7 +12,7 @@ namespace MegaGame
         public int enemyPiastres;
 
         [Header("Prices")]
-        [SerializeField] int shipCost = 10;
+        public int shipCost = 10;
 
         [Header("Ports")]
         public Port playerPort;
@@ -106,7 +106,7 @@ namespace MegaGame
         {
             GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
             Character character = ship.GetComponent<Character>();
-            character.targetPosition = targetPosition;
+            character.destinationPosition = targetPosition;
         }
 
         void SelectObject()
@@ -115,7 +115,7 @@ namespace MegaGame
             {
                 Ray ray = CameraController.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, 1000000, 1 << 6))
+                if (Physics.Raycast(ray, out RaycastHit hit, 1000000, 1 << 9))
                 {
                     Port port = hit.collider.GetComponentInParent<Port>();
 
@@ -155,6 +155,7 @@ namespace MegaGame
         public void EndBattle()
         {
             isBattle = false;
+            PrepareNewBattle();
         }
 
         void UpdateGameState()
@@ -169,6 +170,11 @@ namespace MegaGame
                 EndBattle();
                 isVictory = true;
             }
+        }
+
+        public void PrepareNewBattle()
+        {
+            ObjectsManager.Instance.Init();
         }
     }
 }

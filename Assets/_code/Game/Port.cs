@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MegaGame
@@ -16,6 +17,9 @@ namespace MegaGame
         public float health = 100;
         public float currentHealth = 100;
         public float healthRegeneration = 1;
+
+        [Header("Info")]
+        public List<Character> targetEnemies = new List<Character>();
 
         [HideInInspector] public Island island;
 
@@ -46,17 +50,37 @@ namespace MegaGame
                 return;
             }
 
-            if (healthIndicatorWidget)
-            {
-                if (currentHealth != health)
-                {
-                    healthIndicatorWidget.SetValue(currentHealth / health);
-                    healthIndicatorWidget.gameObject.SetActive(true);
-                }
-                else
-                    healthIndicatorWidget.gameObject.SetActive(false);
-            }
+            UpdateHealthWidget();
+            UpdateProperties();
+        }
 
+        public void OnClickAction()
+        {
+            if (owner == Owner.enemy)
+                GameController.Instance.CreatePlayerShip();
+        }
+
+        void Kill()
+        {
+            isCaptured = true;
+        }
+        
+        void UpdateHealthWidget()
+        {
+            if (!healthIndicatorWidget)
+                return;
+
+            if (currentHealth != health)
+            {
+                healthIndicatorWidget.SetValue(currentHealth / health);
+                healthIndicatorWidget.gameObject.SetActive(true);
+            }
+            else
+                healthIndicatorWidget.gameObject.SetActive(false);
+        }
+
+        void UpdateProperties()
+        {
             if (globalTime.currentDay != currentDay)
             {
                 if (owner == Owner.player)
@@ -69,19 +93,6 @@ namespace MegaGame
 
                 currentDay = globalTime.currentDay;
             }
-        }
-
-        public void OnClickAction()
-        {
-            if (owner == Owner.enemy)
-                GameController.Instance.CreatePlayerShip();
-            else if (owner == Owner.player)
-                GameController.Instance.CreateEnemyShip();
-        }
-
-        void Kill()
-        {
-            isCaptured = true;
         }
     }
 }

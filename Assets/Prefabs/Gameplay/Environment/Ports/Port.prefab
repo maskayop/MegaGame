@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8735496839144407519}
   - component: {fileID: 4413137874322255951}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: NavMesh Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 2, z: 4}
+  m_Size: {x: 8, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2456935112268570848
 GameObject:
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1245377640615327868}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Light Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 8010022857067643393}
   - component: {fileID: 4826161218504423443}
   - component: {fileID: 1992513328948351594}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Port
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 4, z: 5}
+  m_Size: {x: 12, y: 6, z: 6}
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!54 &4826161218504423443
 Rigidbody:

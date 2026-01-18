@@ -26,17 +26,27 @@ namespace MegaGame
         public float attackDelay = 1.0f;
 
         [Header("FX")]
-        [SerializeField] GameObject destroyFXprefab;
+        [SerializeField] GameObject FXDestroyPrefab;
+        [SerializeField] ParticleSystem FXShot;
+
+        [Header("Visual")]
+        [SerializeField] GameObject visualObject;
 
 
         [Header("Info")]
-        public Transform targetPosition;
+        public Transform destinationPosition;
         public List<Character> targetEnemies = new List<Character>();
         public Port targetPort;
 
         NavMeshAgent agent;
 
         float currentAttackTime = 0;
+
+        void Awake()
+        {
+            if (ObjectsManager.Instance)
+                ObjectsManager.Instance.allCharacters.Add(gameObject);
+        }
 
         void Start()
         {
@@ -54,28 +64,17 @@ namespace MegaGame
             else
                 currentSpeed = speed;
 
-            agent.destination = targetPosition.position;
+            agent.destination = destinationPosition.position;
             agent.speed = currentSpeed;
 
             if (currentAttackTime < 0)
                 Attack();
 
-            if (currentHealth != health)
-            {
-                healthIndicatorWidget.SetValue(currentHealth / health);
-                healthIndicatorWidget.gameObject.SetActive(true);
-            }
-            else
-                healthIndicatorWidget.gameObject.SetActive(false);
+            UpdateHealthWidget();
+            UpdateTargets();
 
             if (currentHealth < 0)
                 Kill();
-
-            for (int i = 0; i < targetEnemies.Count; i++)
-            {
-                if (targetEnemies[i] == null)
-                    targetEnemies.Remove(targetEnemies[i]);
-            }
         }
 
         void OnTriggerEnter(Collider coll)
@@ -129,18 +128,51 @@ namespace MegaGame
         void Attack()
         {
             if (targetEnemies.Count != 0)
+            {
                 targetEnemies[0].currentHealth -= damage;
+                //visualObject.transform.LookAt(targetEnemies[0].transform);
+            }
+            else
+                visualObject.transform.localRotation = Quaternion.identity;
 
             if (targetPort)
+            {
                 targetPort.currentHealth -= damage;
+                //visualObject.transform.LookAt(targetPort.transform);
+            }
+            else
+                visualObject.transform.localRotation = Quaternion.identity;
 
             currentAttackTime = attackDelay;
+
+            if (FXShot)
+                FXShot.Play();
         }
 
         void Kill()
         {
-            Instantiate(destroyFXprefab, transform.position, transform.rotation);
+            Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
+        }
+
+        void UpdateHealthWidget()
+        {
+            if (currentHealth != health)
+            {
+                healthIndicatorWidget.SetValue(currentHealth / health);
+                healthIndicatorWidget.gameObject.SetActive(true);
+            }
+            else
+                healthIndicatorWidget.gameObject.SetActive(false);
+        }
+
+        void UpdateTargets()
+        {
+            for (int i = 0; i < targetEnemies.Count; i++)
+            {
+                if (targetEnemies[i] == null)
+                    targetEnemies.Remove(targetEnemies[i]);
+            }
         }
     }
 }
