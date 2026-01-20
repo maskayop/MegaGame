@@ -3,22 +3,15 @@ using UnityEngine;
 
 namespace MegaGame
 {
-    public class BaseCharacter : MonoBehaviour
+    public abstract class BaseCharacter : MonoBehaviour
     {
-        public enum Owner { player, enemy, neutral }
+        public enum Owner { player, enemy, neutral, mixed }
         public Owner owner;
-
-        [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
 
         [Header("Health")]
         public float health = 10;
         public float currentHealth = 10;
         public float healthRegeneration = 1;
-
-        [Header("Speed")]
-        public float speed = 1;
-        public float currentSpeed = 1;
-        public float speedDrop = 5.0f;
 
         [Header("Damage")]
         public float damage = 1.0f;
@@ -27,11 +20,26 @@ namespace MegaGame
         [Header("Info")]
         public List<Character> targetEnemies = new List<Character>();
 
-        GlobalTimeController globalTime;
+        protected GameController gameController;
+        protected GlobalTimeController globalTime;
+        
+        void Awake()
+        {
+            OnAwake();
+        }
 
         void Start()
         {
-            Init();
+            OnStart();
+        }
+
+        void Update()
+        {
+            for (int i = 0; i < targetEnemies.Count; i++)
+                if (!targetEnemies[i])
+                    targetEnemies.Remove(targetEnemies[i]);
+
+            OnUpdate();
         }
 
         public void Init()
@@ -40,6 +48,19 @@ namespace MegaGame
 
             if (GlobalTimeController.Instance)
                 globalTime = GlobalTimeController.Instance;
+
+            if (GameController.Instance)
+                gameController = GameController.Instance;
+
+            OnInit();
         }
+
+        protected virtual void OnAwake() { }
+
+        protected virtual void OnStart() { }
+
+        protected virtual void OnInit() { }
+
+        protected virtual void OnUpdate() { }
     }
 }

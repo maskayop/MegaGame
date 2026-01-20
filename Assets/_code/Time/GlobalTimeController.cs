@@ -13,7 +13,7 @@ namespace MegaGame
         [Space(20)]
         public bool useTimeDeceleration = true;
         [Range(0.001f, 1f)]
-        public float miltiplier = 0.01f;
+        public float multiplier = 0.01f;
 
         void Awake()
         {
@@ -35,7 +35,7 @@ namespace MegaGame
             currentTime += Time.deltaTime;
 
             if (useTimeDeceleration)
-                dayLenght = miltiplier * currentDay;
+                dayLenght = multiplier * currentDay;
 
             if (currentTime >= dayLenght)
             {

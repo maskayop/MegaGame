@@ -1,29 +1,16 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace MegaGame
 {
-    public class Character : MonoBehaviour
+    public class Character : BaseCharacter
     {
-        public enum Owner { player, enemy }
-
-        public Owner owner;
-
         [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
-
-        [Header("Health")]
-        public float health = 10;
-        public float currentHealth = 10;
 
         [Header("Speed")]
         public float speed = 1;
         public float currentSpeed = 1;
         public float speedDrop = 5.0f;
-
-        [Header("Damage")]
-        public float damage = 1.0f;
-        public float attackDelay = 1.0f;
 
         [Header("FX")]
         [SerializeField] GameObject FXDestroyPrefab;
@@ -34,26 +21,25 @@ namespace MegaGame
 
         [Header("Info")]
         public Transform destinationPosition;
-        public List<Character> targetEnemies = new List<Character>();
         public Port targetPort;
 
         NavMeshAgent agent;
 
         float currentAttackTime = 0;
 
-        void Awake()
+        protected override void OnAwake()
         {
             if (ObjectsManager.Instance)
                 ObjectsManager.Instance.allCharacters.Add(gameObject);
-        }
 
-        void Start()
-        {
             agent = GetComponent<NavMeshAgent>();
-            currentHealth = health;
         }
 
-        void Update()
+        protected override void OnStart() { }
+
+        protected override void OnInit() { }
+
+        protected override void OnUpdate()
         {
             if (targetEnemies.Count != 0 || targetPort)
             {

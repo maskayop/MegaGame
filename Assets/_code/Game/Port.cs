@@ -1,45 +1,45 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MegaGame
 {
-    public class Port : MonoBehaviour
+    public class Port : BaseCharacter
     {
-        public enum Owner { player, enemy, neutral }
-        public Owner owner;
-
-        [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
-
         [Header("Money")]
         public int piastresPerDay = 1;
 
-        [Header("Health")]
-        public float health = 100;
-        public float currentHealth = 100;
-        public float healthRegeneration = 1;
+        [Header("Visual")]
+        [SerializeField] GameObject playerVisual;
+        [SerializeField] GameObject enemyVisual;
+        [SerializeField] GameObject neutralVisual;
 
-        [Header("Info")]
-        public List<Character> targetEnemies = new List<Character>();
+        [Header("Widgets")]
+        [SerializeField] HealthIndicatorWidget playerHealthWidget;
+        [SerializeField] HealthIndicatorWidget enemyHealthWidget;
+
+        [Header("FX")]
+        [SerializeField] ParticleSystem FXShot;
 
         [HideInInspector] public Island island;
 
-        GlobalTimeController globalTime;
         int currentDay = 0;
         bool isCaptured = false;
 
-        void Start()
+        float currentAttackTime = 0;
+
+        protected override void OnAwake() { }
+
+        protected override void OnStart()
         {
-            Init();            
+            Init();
         }
 
-        public void Init()
+        protected override void OnInit()
         {
-            currentHealth = health;
             isCaptured = false;
-            globalTime = GlobalTimeController.Instance;
+            SetVisual();
         }
 
-        void Update()
+        protected override void OnUpdate()
         {
             if (isCaptured)
                 return;
@@ -52,6 +52,50 @@ namespace MegaGame
 
             UpdateHealthWidget();
             UpdateProperties();
+
+            if (targetEnemies.Count != 0)
+                currentAttackTime -= Time.deltaTime;
+
+            if (currentAttackTime < 0)
+                Attack();
+        }
+
+        void OnTriggerEnter(Collider coll)
+        {
+            Character targetCharacter = coll.GetComponentInParent<Character>();
+
+            if (targetCharacter)
+            {
+                if (owner == Owner.player)
+                {
+                    if (targetCharacter.owner == Owner.enemy)
+                        targetEnemies.Add(targetCharacter);
+                }
+                else if (owner == Owner.enemy)
+                {
+                    if (targetCharacter.owner == Owner.player)
+                        targetEnemies.Add(targetCharacter);
+                }
+            }
+        }
+
+        void OnTriggerExit(Collider coll)
+        {
+            Character targetCharacter = coll.GetComponentInParent<Character>();
+
+            if (targetCharacter)
+                targetEnemies.Remove(targetCharacter);
+        }
+
+        void Attack()
+        {
+            if (targetEnemies.Count != 0)
+                targetEnemies[0].currentHealth -= damage;
+
+            currentAttackTime = attackDelay;
+
+            if (FXShot)
+                FXShot.Play();
         }
 
         public void OnClickAction()
@@ -64,19 +108,19 @@ namespace MegaGame
         {
             isCaptured = true;
         }
-        
+
         void UpdateHealthWidget()
         {
-            if (!healthIndicatorWidget)
+            if (GetCurrentHealthWidget() == null)
                 return;
 
             if (currentHealth != health)
             {
-                healthIndicatorWidget.SetValue(currentHealth / health);
-                healthIndicatorWidget.gameObject.SetActive(true);
+                GetCurrentHealthWidget().SetValue(currentHealth / health);
+                GetCurrentHealthWidget().gameObject.SetActive(true);
             }
             else
-                healthIndicatorWidget.gameObject.SetActive(false);
+                GetCurrentHealthWidget().gameObject.SetActive(false);
         }
 
         void UpdateProperties()
@@ -93,6 +137,30 @@ namespace MegaGame
 
                 currentDay = globalTime.currentDay;
             }
+        }
+
+        HealthIndicatorWidget GetCurrentHealthWidget()
+        {
+            if (owner == Owner.player)
+                return playerHealthWidget;
+            else if (owner == Owner.enemy)
+                return enemyHealthWidget;
+            else
+                return null;
+        }
+
+        void SetVisual()
+        {
+            playerVisual.gameObject.SetActive(false);
+            enemyVisual.gameObject.SetActive(false);
+            neutralVisual.gameObject.SetActive(false);
+
+            if (owner == Owner.player)
+                playerVisual.gameObject.SetActive(true);
+            else if (owner == Owner.enemy)
+                enemyVisual.gameObject.SetActive(true);
+            else if (owner == Owner.neutral)
+                neutralVisual.gameObject.SetActive(true);
         }
     }
 }

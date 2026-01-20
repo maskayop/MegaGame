@@ -22,11 +22,12 @@ namespace MegaGame
         [SerializeField] GameObject shipPlayerPrefab;
         [SerializeField] GameObject shipEnemyPrefab;
 
-        Island[] allIslands;
-        List<Port> allPorts = new List<Port>();
+        [Header("Islands and Ports")]
+        public List<Island> allIslands = new List<Island>();
+        public List<Port> allPorts = new List<Port>();
 
         bool isVictory = false;
-        public bool IsVictory {  get { return isVictory; } }
+        public bool IsVictory { get { return isVictory; } }
 
         bool isBattle = false;
         public bool IsBattle { get { return isBattle; } }
@@ -43,11 +44,6 @@ namespace MegaGame
             Instance = this;
         }
 
-        void Start()
-        {
-            Init();
-        }
-
         void Update()
         {
             SelectObject();
@@ -56,30 +52,27 @@ namespace MegaGame
 
         public void Init()
         {
-            allIslands = FindObjectsByType<Island>(FindObjectsSortMode.None);
-            allPorts.Clear();
-
-            for (int i = 0; i < allIslands.Length; i++)
-                for (int p = 0; p < allIslands[i].ports.Count; p++)
-                    allPorts.Add(allIslands[i].ports[p]);
-
-            for (int i = 0; i < allPorts.Count; i++)
-                allPorts[i].owner = Port.Owner.neutral;
-
-            playerPort = allIslands[Random.Range(0, allIslands.Length)].ports[0];
-            playerPort.island.owner = Island.Owner.player;
+            playerPort = allIslands[Random.Range(0, allIslands.Count)].ports[0];
+            InitPort(playerPort, BaseCharacter.Owner.player);
 
             enemyPort = FindClosestPortToTargetPort(playerPort);
-            enemyPort.island.owner = Island.Owner.enemy;
-
-            for (int i = 0; i < allIslands.Length; i++)
-                allIslands[i].CreatePorts();
+            InitPort(enemyPort, BaseCharacter.Owner.enemy);
 
             Vector3 cameraPosition = Vector3.zero;
             cameraPosition += playerPort.transform.position + enemyPort.transform.position;
             cameraPosition /= 2;
             cameraPosition.y = 0;
             CameraController.Instance.transform.position = cameraPosition;
+
+            playerPiastres = 0;
+            enemyPiastres = 0;
+        }
+
+        void InitPort(Port port, BaseCharacter.Owner owner)
+        {
+            port.island.owner = owner;
+            port.owner = owner;
+            port.Init();
         }
 
         public void CreatePlayerShip()
@@ -124,7 +117,7 @@ namespace MegaGame
                 }
             }
         }
-        
+
         Port FindClosestPortToTargetPort(Port target)
         {
             float distance = 1000000;
@@ -149,6 +142,7 @@ namespace MegaGame
 
         public void StartBattle()
         {
+            Init();
             isBattle = true;
         }
 
@@ -160,6 +154,9 @@ namespace MegaGame
 
         void UpdateGameState()
         {
+            if (!playerPort || !enemyPort)
+                return;
+
             if (playerPort.currentHealth <= 0)
             {
                 EndBattle();
