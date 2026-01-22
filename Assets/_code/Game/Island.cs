@@ -1,23 +1,35 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace MegaGame
 {
-    public class Island : BaseCharacter
+    public class Island : MonoBehaviour
     {
+        public BaseCharacter.Owner owner;
+
+        public Data_Island islandData;
+
+        [SerializeField] NameWidget nameWidget;
+
         public List<Port> ports = new List<Port>();
 
-        protected override void OnAwake()
+        GameController gameController;
+
+        void Awake()
         {
             SetThisIslandToPorts();
         }
 
-        protected override void OnStart()
+        void Start()
         {
             Init();
         }
 
-        protected override void OnInit()
+        void Init()
         {
+            if (GameController.Instance)
+                gameController = GameController.Instance;
+
             if (!gameController)
                 return;
 
@@ -25,6 +37,9 @@ namespace MegaGame
 
             for (int i = 0; i < ports.Count; i++)
                 gameController.allPorts.Add(ports[i]);
+
+            if (nameWidget)
+                nameWidget.SetText(islandData.islandName.GetLocalizedString());
         }
 
         void SetThisIslandToPorts()

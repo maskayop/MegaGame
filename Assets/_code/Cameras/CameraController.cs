@@ -153,7 +153,12 @@ namespace MegaGame
 			currentZoom += scrollSpeed * INvalue;
 		}
 
-		public void Freeze(bool state)
+        public float GetCameraZoom()
+        {
+			return currentZoom;
+        }
+
+        public void Freeze(bool state)
 		{
 			freeze = state;
 		}

@@ -37,10 +37,17 @@ namespace MegaGame
         {
             if (gameController.enemyPiastres >= gameController.shipCost)
             {
-                int r = Random.Range(0, shipSpawnChance);
-
-                if (r == 0)
+                if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();
+                else if (gameController.playerPort.currentHealth / gameController.playerPort.health < 0.5f)
+                    SpawnShip();
+                else
+                {
+                    int r = Random.Range(0, shipSpawnChance);
+
+                    if (r == 0)
+                        SpawnShip();
+                }
             }
         }
 
