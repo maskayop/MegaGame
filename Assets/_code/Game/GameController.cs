@@ -32,6 +32,8 @@ namespace MegaGame
         bool isBattle = false;
         public bool IsBattle { get { return isBattle; } }
 
+        List<Island> neutralIslands = new List<Island>();
+
         void Awake()
         {
             if (Instance != null)
@@ -52,27 +54,54 @@ namespace MegaGame
 
         public void Init()
         {
-            playerPort = allIslands[Random.Range(0, allIslands.Count)].ports[0];
-            InitPort(playerPort, BaseCharacter.Owner.player);
+            playerPiastres = 0;
+            enemyPiastres = 0;
 
-            enemyPort = FindClosestPortToTargetPort(playerPort);
-            InitPort(enemyPort, BaseCharacter.Owner.enemy);
+            neutralIslands.Clear();
+
+            for (int i = 0; i < allIslands.Count; i++)
+            {
+                SetIslandId(allIslands[i], i);
+
+                if (allIslands[i].owner == BaseCharacter.Owner.neutral)
+                    neutralIslands.Add(allIslands[i]);
+            }
+
+            int r = Random.Range(0, neutralIslands.Count);
+
+            if (r == 0)
+            {
+                EndCampaign();
+                return;
+            }
+
+            playerPort = neutralIslands[r].ports[0];
+            UpdatePortState(playerPort, BaseCharacter.Owner.player);
+
+            enemyPort = FindClosestNeutralPortToTargetPort(playerPort);
+
+            if (enemyPort != null)
+                UpdatePortState(enemyPort, BaseCharacter.Owner.enemy);
+            else
+            {
+                EndCampaign();
+                return;
+            }
 
             Vector3 cameraPosition = Vector3.zero;
             cameraPosition += playerPort.transform.position + enemyPort.transform.position;
             cameraPosition /= 2;
             cameraPosition.y = 0;
             CameraController.Instance.transform.position = cameraPosition;
-
-            playerPiastres = 0;
-            enemyPiastres = 0;
         }
 
-        void InitPort(Port port, BaseCharacter.Owner owner)
+        void UpdatePortState(Port port, BaseCharacter.Owner owner)
         {
-            port.island.owner = owner;
             port.owner = owner;
             port.Init();
+
+            port.island.owner = owner;
+            port.island.UpdateIslandState();
         }
 
         public void CreatePlayerShip()
@@ -118,7 +147,7 @@ namespace MegaGame
             }
         }
 
-        Port FindClosestPortToTargetPort(Port target)
+        Port FindClosestNeutralPortToTargetPort(Port target)
         {
             float distance = 1000000;
             Port port = null;
@@ -129,7 +158,7 @@ namespace MegaGame
 
                 if (allPorts[i] != target)
                 {
-                    if (tempDistance < distance)
+                    if (tempDistance < distance && allPorts[i].owner == BaseCharacter.Owner.neutral)
                     {
                         distance = tempDistance;
                         port = allPorts[i];
@@ -152,6 +181,11 @@ namespace MegaGame
             PrepareNewBattle();
         }
 
+        public void EndCampaign()
+        {
+
+        }
+
         void UpdateGameState()
         {
             if (!playerPort || !enemyPort)
@@ -160,11 +194,13 @@ namespace MegaGame
             if (playerPort.currentHealth <= 0)
             {
                 EndBattle();
+                UpdatePortState(playerPort, BaseCharacter.Owner.enemy);
                 isVictory = false;
             }
             else if (enemyPort.currentHealth <= 0)
             {
                 EndBattle();
+                UpdatePortState(enemyPort, BaseCharacter.Owner.player);
                 isVictory = true;
             }
         }
@@ -172,6 +208,15 @@ namespace MegaGame
         public void PrepareNewBattle()
         {
             ObjectsManager.Instance.Init();
+        }
+
+        void SetIslandId(Island island, int id)
+        {
+            if (island.islandData.id == -1)
+            {
+                island.islandData.id = id;
+                island.islandData.SetId(id);
+            }
         }
     }
 }

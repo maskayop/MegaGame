@@ -9,6 +9,11 @@ namespace MegaGame
 		[SerializeField] float minScale;
 		[SerializeField] bool useLookAt = true;
 
+		[Header("Colors")]
+		[SerializeField] Color playerColor = Color.white;
+		[SerializeField] Color enemyColor = Color.white;
+		[SerializeField] Color neutralColor = Color.white;
+
         void Update()
 		{
 			if (useLookAt)
@@ -26,5 +31,16 @@ namespace MegaGame
 		{
             text.text = nameText;
 		}
+
+		public void SetColor(BaseCharacter.Owner owner)
+		{
+			if (owner == BaseCharacter.Owner.player)
+				text.color = playerColor;
+			else if (owner == BaseCharacter.Owner.enemy)
+				text.color = enemyColor;
+			else if (owner == BaseCharacter.Owner.neutral)
+				text.color = neutralColor;
+
+        }
 	}
 }
