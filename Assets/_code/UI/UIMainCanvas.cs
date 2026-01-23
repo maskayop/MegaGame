@@ -6,11 +6,14 @@ namespace MegaGame.UI
 {
     public class UIMainCanvas : MonoBehaviour
     {
+        public static UIMainCanvas Instance { get; private set; }
+
         [Header("Game")]
         [SerializeField] GameObject startGameWindow;
         [SerializeField] GameObject endGameWindow;
         [SerializeField] GameObject victoryPanel;
         [SerializeField] GameObject defeatPanel;
+        [SerializeField] GameObject endCampaignWindow;
 
         [Header("Clock")]
         [SerializeField] TextMeshProUGUI currentDayText;
@@ -32,6 +35,18 @@ namespace MegaGame.UI
 
         GlobalTimeController globalTime;
         bool isBattle = false;
+
+        void Awake()
+        {
+            if (Instance != null)
+            {
+                Debug.LogWarning("Cannot create UIMainCanvas");
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
 
         void Start()
         {
@@ -131,6 +146,11 @@ namespace MegaGame.UI
         {
             ShowStartGameWindow();
             GameController.Instance.EndBattle();
+        }
+
+        public void ShowEndCampaignWindow()
+        {
+            endCampaignWindow.SetActive(true);
         }
     }
 }

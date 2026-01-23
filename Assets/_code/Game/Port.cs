@@ -12,6 +12,9 @@ namespace MegaGame
         [SerializeField] GameObject enemyVisual;
         [SerializeField] GameObject neutralVisual;
 
+        [SerializeField] GameObject playerTarget;
+        [SerializeField] GameObject enemyTarget;
+
         [Header("Widgets")]
         [SerializeField] HealthIndicatorWidget playerHealthWidget;
         [SerializeField] HealthIndicatorWidget enemyHealthWidget;
@@ -161,6 +164,20 @@ namespace MegaGame
                 enemyVisual.gameObject.SetActive(true);
             else if (owner == Owner.neutral)
                 neutralVisual.gameObject.SetActive(true);
+        }
+
+        public void SetAsTarget(bool isTarget, Owner targetOwner)
+        {
+            playerTarget.SetActive(false);
+            enemyTarget.SetActive(false);
+
+            if (!isTarget)
+                return;
+
+            if (targetOwner == Owner.player)
+                playerTarget.SetActive(true);
+            else if (targetOwner == Owner.enemy)
+                enemyTarget.SetActive(true);
         }
     }
 }

@@ -10,7 +10,8 @@ namespace MegaGame
         [Header("Speed")]
         public float speed = 1;
         public float currentSpeed = 1;
-        public float speedDrop = 5.0f;
+        public float speedDrop = 5;
+        public float windSpeedMinMultiplier = 1;
 
         [Header("FX")]
         [SerializeField] GameObject FXDestroyPrefab;
@@ -26,6 +27,7 @@ namespace MegaGame
         NavMeshAgent agent;
 
         float currentAttackTime = 0;
+        float cos = 0;
 
         protected override void OnAwake()
         {
@@ -48,6 +50,19 @@ namespace MegaGame
             }
             else
                 currentSpeed = speed;
+
+            if (WindController.Instance)
+            {
+                cos = WindController.Instance.currentRotation.eulerAngles.y - transform.rotation.eulerAngles.y;
+                cos = Mathf.Cos(Mathf.Deg2Rad * cos);
+                cos = (cos + 1) / 2;
+
+                if (cos <= windSpeedMinMultiplier)
+                    cos = windSpeedMinMultiplier;
+
+                currentSpeed *= cos;
+                currentSpeed *= WindController.Instance.currentStrength;
+            }
 
             agent.destination = destinationPosition.position;
             agent.speed = currentSpeed;

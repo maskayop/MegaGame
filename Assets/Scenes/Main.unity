@@ -4607,6 +4607,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 7229015770234383156, guid: e4d3a8b43c117314b870a504c274766f, type: 3}
+      propertyPath: maxTranslationZ
+      value: 1200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7419,10 +7423,6 @@ PrefabInstance:
     - target: {fileID: 7810778071157569871, guid: 535b58793575f7a4daeeecd3f1affefc, type: 3}
       propertyPath: shipCost
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288885944846870642, guid: 535b58793575f7a4daeeecd3f1affefc, type: 3}
-      propertyPath: dayLenght
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

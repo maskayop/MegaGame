@@ -1,5 +1,7 @@
+using MegaGame.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame
 {
@@ -34,6 +36,9 @@ namespace MegaGame
 
         List<Island> neutralIslands = new List<Island>();
 
+        // Save Load Data
+        string islandOwnerFormat = " IO";
+
         void Awake()
         {
             if (Instance != null)
@@ -54,6 +59,8 @@ namespace MegaGame
 
         public void Init()
         {
+            LoadGameData();
+
             playerPiastres = 0;
             enemyPiastres = 0;
 
@@ -63,30 +70,38 @@ namespace MegaGame
             {
                 SetIslandId(allIslands[i], i);
 
+                allIslands[i].UpdateIslandState();
+
                 if (allIslands[i].owner == BaseCharacter.Owner.neutral)
                     neutralIslands.Add(allIslands[i]);
             }
 
             int r = Random.Range(0, neutralIslands.Count);
 
-            if (r == 0)
+            if (neutralIslands.Count == 0)
             {
                 EndCampaign();
                 return;
             }
-
+            
             playerPort = neutralIslands[r].ports[0];
             UpdatePortState(playerPort, BaseCharacter.Owner.player);
+            playerPort.SetAsTarget(true, BaseCharacter.Owner.player);
 
             enemyPort = FindClosestNeutralPortToTargetPort(playerPort);
 
             if (enemyPort != null)
+            {
                 UpdatePortState(enemyPort, BaseCharacter.Owner.enemy);
+                enemyPort.SetAsTarget(true, BaseCharacter.Owner.enemy);
+            }
             else
             {
                 EndCampaign();
                 return;
             }
+
+            SaveGameData();
 
             Vector3 cameraPosition = Vector3.zero;
             cameraPosition += playerPort.transform.position + enemyPort.transform.position;
@@ -179,11 +194,12 @@ namespace MegaGame
         {
             isBattle = false;
             PrepareNewBattle();
+            SaveGameData();
         }
 
         public void EndCampaign()
         {
-
+            UIMainCanvas.Instance.ShowEndCampaignWindow();
         }
 
         void UpdateGameState()
@@ -216,6 +232,36 @@ namespace MegaGame
             {
                 island.islandData.id = id;
                 island.islandData.SetId(id);
+            }
+        }
+
+        void SaveGameData()
+        {
+            for (int i = 0; i < allIslands.Count; i++)
+            {
+                if (allIslands[i].owner == BaseCharacter.Owner.player)
+                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 0);
+                else if (allIslands[i].owner == BaseCharacter.Owner.enemy)
+                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 1);
+                else if (allIslands[i].owner == BaseCharacter.Owner.neutral)
+                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 2);
+                else if (allIslands[i].owner == BaseCharacter.Owner.mixed)
+                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 3);
+            }
+        }
+
+        void LoadGameData()
+        {
+            for (int i = 0; i < allIslands.Count; i++)
+            {
+                if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 0)
+                    allIslands[i].owner = BaseCharacter.Owner.player;
+                else if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 1)
+                    allIslands[i].owner = BaseCharacter.Owner.enemy;
+                else if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 2)
+                    allIslands[i].owner = BaseCharacter.Owner.neutral;
+                else if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 3)
+                    allIslands[i].owner = BaseCharacter.Owner.mixed;
             }
         }
     }

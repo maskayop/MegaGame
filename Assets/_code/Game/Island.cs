@@ -38,11 +38,7 @@ namespace MegaGame
             for (int i = 0; i < ports.Count; i++)
                 gameController.allPorts.Add(ports[i]);
 
-            if (nameWidget)
-            {
-                nameWidget.SetText(islandData.islandName.GetLocalizedString());
-                nameWidget.SetColor(owner);
-            }
+            UpdateIslandState();
         }
 
         void SetThisIslandToPorts()
@@ -53,7 +49,14 @@ namespace MegaGame
 
         public void UpdateIslandState()
         {
-            nameWidget.SetColor(owner);
+            if (nameWidget)
+            {
+                nameWidget.SetText(islandData.islandName.GetLocalizedString());
+                nameWidget.SetColor(owner);
+            }
+
+            for (int i =0; i < ports.Count; i++)
+                ports[i].SetAsTarget(false, owner);
         }
     }
 }
