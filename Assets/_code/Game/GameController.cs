@@ -37,7 +37,12 @@ namespace MegaGame
         List<Island> neutralIslands = new List<Island>();
 
         // Save Load Data
+        DataSaveLoad dataSaveLoad;
+
         string islandOwnerFormat = " IO";
+
+        string playerPiastresFormat = "PP";
+        string enemyPiastresFormat = "EP";
 
         void Awake()
         {
@@ -51,6 +56,11 @@ namespace MegaGame
             Instance = this;
         }
 
+        void Start()
+        {
+            dataSaveLoad = DataSaveLoad.Instance;
+        }
+
         void Update()
         {
             SelectObject();
@@ -61,8 +71,16 @@ namespace MegaGame
         {
             LoadGameData();
 
+            /*
             playerPiastres = 0;
             enemyPiastres = 0;
+            */
+            /*
+            string tempMoneyCode = Strint.GetString(playerPiastres);
+            Debug.Log("playerPiastres = " + playerPiastres);
+            Debug.Log("temp code = " + tempMoneyCode);
+            Debug.Log("finalInt = " + Strint.GetInt(tempMoneyCode));
+            */
 
             neutralIslands.Clear();
 
@@ -86,14 +104,14 @@ namespace MegaGame
             
             playerPort = neutralIslands[r].ports[0];
             UpdatePortState(playerPort, BaseCharacter.Owner.player);
-            playerPort.SetAsTarget(true, BaseCharacter.Owner.player);
+            playerPort.SetVisualAsTarget(true, BaseCharacter.Owner.player);
 
             enemyPort = FindClosestNeutralPortToTargetPort(playerPort);
 
             if (enemyPort != null)
             {
                 UpdatePortState(enemyPort, BaseCharacter.Owner.enemy);
-                enemyPort.SetAsTarget(true, BaseCharacter.Owner.enemy);
+                enemyPort.SetVisualAsTarget(true, BaseCharacter.Owner.enemy);
             }
             else
             {
@@ -240,29 +258,35 @@ namespace MegaGame
             for (int i = 0; i < allIslands.Count; i++)
             {
                 if (allIslands[i].owner == BaseCharacter.Owner.player)
-                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 0);
+                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 0);
                 else if (allIslands[i].owner == BaseCharacter.Owner.enemy)
-                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 1);
+                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 1);
                 else if (allIslands[i].owner == BaseCharacter.Owner.neutral)
-                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 2);
+                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 2);
                 else if (allIslands[i].owner == BaseCharacter.Owner.mixed)
-                    DataSaveLoad.Instance.Save(allIslands[i].islandData.id + islandOwnerFormat, 3);
+                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 3);
             }
+
+            dataSaveLoad.Save(playerPiastresFormat, Strint.GetString(playerPiastres));
+            dataSaveLoad.Save(enemyPiastresFormat, Strint.GetString(enemyPiastres));
         }
 
         void LoadGameData()
         {
             for (int i = 0; i < allIslands.Count; i++)
             {
-                if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 0)
+                if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 0)
                     allIslands[i].owner = BaseCharacter.Owner.player;
-                else if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 1)
+                else if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 1)
                     allIslands[i].owner = BaseCharacter.Owner.enemy;
-                else if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 2)
+                else if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 2)
                     allIslands[i].owner = BaseCharacter.Owner.neutral;
-                else if (DataSaveLoad.Instance.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 3)
+                else if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 3)
                     allIslands[i].owner = BaseCharacter.Owner.mixed;
             }
+
+            playerPiastres = Strint.GetInt(dataSaveLoad.GetSavedString(playerPiastresFormat));
+            enemyPiastres = Strint.GetInt(dataSaveLoad.GetSavedString(enemyPiastresFormat));
         }
     }
 }

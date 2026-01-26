@@ -104,7 +104,7 @@ namespace MegaGame
         public void OnClickAction()
         {
             if (owner == Owner.enemy)
-                GameController.Instance.CreatePlayerShip();
+                gameController.CreatePlayerShip();
         }
 
         void Kill()
@@ -131,9 +131,19 @@ namespace MegaGame
             if (globalTime.currentDay != currentDay)
             {
                 if (owner == Owner.player)
-                    GameController.Instance.playerPiastres += piastresPerDay;
+                {
+                    if (int.MaxValue - gameController.playerPiastres <= piastresPerDay)
+                        gameController.playerPiastres = int.MaxValue;
+                    else
+                        gameController.playerPiastres += piastresPerDay;
+                }
                 else if (owner == Owner.enemy)
-                    GameController.Instance.enemyPiastres += piastresPerDay;
+                {
+                    if (int.MaxValue - gameController.enemyPiastres <= piastresPerDay)
+                        gameController.enemyPiastres = int.MaxValue;
+                    else
+                        gameController.enemyPiastres += piastresPerDay;
+                }
 
                 currentHealth += healthRegeneration;
                 currentHealth = Mathf.Clamp(currentHealth, 0, health);
@@ -166,7 +176,7 @@ namespace MegaGame
                 neutralVisual.gameObject.SetActive(true);
         }
 
-        public void SetAsTarget(bool isTarget, Owner targetOwner)
+        public void SetVisualAsTarget(bool isTarget, Owner targetOwner)
         {
             playerTarget.SetActive(false);
             enemyTarget.SetActive(false);

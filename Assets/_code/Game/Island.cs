@@ -55,8 +55,11 @@ namespace MegaGame
                 nameWidget.SetColor(owner);
             }
 
-            for (int i =0; i < ports.Count; i++)
-                ports[i].SetAsTarget(false, owner);
+            for (int i = 0; i < ports.Count; i++)
+            {
+                ports[i].owner = owner;
+                ports[i].SetVisualAsTarget(false, owner);
+            }
         }
     }
 }

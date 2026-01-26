@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 9187697643850627823}
   - {fileID: 5178002894953662043}
+  - {fileID: 4359474551608597149}
   m_Father: {fileID: 9138028168887617915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5330536564953207849
@@ -132,10 +133,10 @@ MonoBehaviour:
   attackDelay: 1
   targetEnemies: []
   healthIndicatorWidget: {fileID: 0}
-  speed: 20
+  speed: 12
   currentSpeed: 1
   speedDrop: 10
-  windSpeedMinMultiplier: 0.25
+  windSpeedMinMultiplier: 0.4
   FXDestroyPrefab: {fileID: 5910495002063247550, guid: cedd626daa06a5d4c8fc7939e0d52ec4, type: 3}
   FXShot: {fileID: 1309626319987756586}
   visualObject: {fileID: 1021785611154541580}
@@ -224,6 +225,68 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &4036087726436616227
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4071703617432491922}
+    m_Modifications:
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415755217878356729, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+      propertyPath: m_Name
+      value: Ship Trail
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+--- !u!4 &4359474551608597149 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 323387702419247806, guid: ef155932d18ff564787342bd4bf28578, type: 3}
+  m_PrefabInstance: {fileID: 4036087726436616227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8328553473195442617
 PrefabInstance:
   m_ObjectHideFlags: 0
