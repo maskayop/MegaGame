@@ -27,13 +27,17 @@ namespace MegaGame.UI
         [Header("Camera")]
         [SerializeField] float cameraZoomMultiplier = 2.0f;
 
-        [Header("Money")]
+        [Header("Info")]
         [SerializeField] TextMeshProUGUI playerMoneyAmounText;
-        [SerializeField] TextMeshProUGUI enemyMoneyAmounText;        
+        [SerializeField] TextMeshProUGUI playerShipsAmounText;
+
+        [SerializeField] TextMeshProUGUI enemyMoneyAmounText;
+        [SerializeField] TextMeshProUGUI enemyShipsAmounText;
 
         int currentDay = 0;
 
         GlobalTimeController globalTime;
+        GameController gameController;
         bool isBattle = false;
 
         void Awake()
@@ -51,6 +55,7 @@ namespace MegaGame.UI
         void Start()
         {
             globalTime = GlobalTimeController.Instance;
+            gameController = GameController.Instance;
             currentDayText.text = currentDay.ToString();
 
             ShowStartGameWindow();
@@ -58,18 +63,21 @@ namespace MegaGame.UI
 
         void Update()
         {
-            UpdateClockAndWind();
-            UpdateMoney();
+            if (!gameController)
+                return;
 
-            if (GameController.Instance.IsBattle != isBattle)
+            UpdateClockAndWind();
+            UpdateGameCharacteristics();
+
+            if (gameController.IsBattle != isBattle)
             {
-                if (GameController.Instance.IsBattle)
+                if (gameController.IsBattle)
                     HideStartGameWindow();
                 else
                     ShowEndGameWindow();
             }
 
-            isBattle = GameController.Instance.IsBattle;
+            isBattle = gameController.IsBattle;
         }
 
         void UpdateClockAndWind()
@@ -85,10 +93,13 @@ namespace MegaGame.UI
             windStrengthFillLeft.fillAmount = windStrengthFillRight.fillAmount = WindController.Instance.GetNormalizedCurrentStrength() / 2;
         }
 
-        void UpdateMoney()
+        void UpdateGameCharacteristics()
         {
-            playerMoneyAmounText.text = GameController.Instance.GetPlayerMoney().ToString();
-            enemyMoneyAmounText.text = GameController.Instance.GetEnemyMoney().ToString();
+            playerMoneyAmounText.text = gameController.GetPlayerMoney().ToString();
+            enemyMoneyAmounText.text = gameController.GetEnemyMoney().ToString();
+
+            playerShipsAmounText.text = ObjectsManager.Instance.playerShips.Count.ToString();
+            enemyShipsAmounText.text = ObjectsManager.Instance.enemyShips.Count.ToString();
         }
 
         public void GoToCamera(bool isNext)
@@ -123,7 +134,7 @@ namespace MegaGame.UI
             victoryPanel.SetActive(false);
             defeatPanel.SetActive(false);
 
-            if (GameController.Instance.IsVictory)
+            if (gameController.IsVictory)
                 victoryPanel.SetActive(true);
             else
                 defeatPanel.SetActive(true);
@@ -139,13 +150,13 @@ namespace MegaGame.UI
         public void StartBattle()
         {
             HideStartGameWindow();
-            GameController.Instance.StartBattle();
+            gameController.StartBattle();
         }
 
         public void EndBattle()
         {
             ShowStartGameWindow();
-            GameController.Instance.EndBattle();
+            gameController.EndBattle();
         }
 
         public void ShowEndCampaignWindow()

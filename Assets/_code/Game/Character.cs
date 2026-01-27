@@ -153,6 +153,7 @@ namespace MegaGame
         {
             Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
+            ObjectsManager.Instance.allCharacters.Remove(gameObject);
         }
 
         void UpdateHealthWidget()
