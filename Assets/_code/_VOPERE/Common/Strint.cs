@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Vopere.Common
 {
     public static class Strint
@@ -50,6 +52,10 @@ namespace Vopere.Common
         public static int GetInt(string IN)
         {
             int value = 0;
+
+            if (IN == null)
+                return 0;
+
             char[] textBuffer = IN.ToCharArray();
 
             for (int i = 0; i < textBuffer.Length; i++)
@@ -113,6 +119,26 @@ namespace Vopere.Common
             }
 
             return value;
+        }
+
+        public static int Summation(string a, string b)
+        {
+            return GetInt(a) + GetInt(b);
+        }
+
+        public static int Subtraction(string a, string b)
+        {
+            return GetInt(a) - GetInt(b);
+        }
+
+        public static int Multiplication(string a, string b)
+        {
+            return GetInt(a) * GetInt(b);
+        }
+
+        public static int Division(string a, string b)
+        {
+            return GetInt(a) / GetInt(b);
         }
     }
 }

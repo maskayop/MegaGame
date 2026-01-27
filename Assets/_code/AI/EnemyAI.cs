@@ -35,7 +35,7 @@ namespace MegaGame
 
         void MakeDecision()
         {
-            if (gameController.enemyPiastres >= gameController.shipCost)
+            if (gameController.GetEnemyMoney() >= gameController.smallShipBuildingCost)
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();

@@ -5,7 +5,7 @@ namespace MegaGame
     public class Port : BaseCharacter
     {
         [Header("Money")]
-        public int piastresPerDay = 1;
+        public short piastresPerDay = 1;
 
         [Header("Visual")]
         [SerializeField] GameObject playerVisual;
@@ -131,19 +131,9 @@ namespace MegaGame
             if (globalTime.currentDay != currentDay)
             {
                 if (owner == Owner.player)
-                {
-                    if (int.MaxValue - gameController.playerPiastres <= piastresPerDay)
-                        gameController.playerPiastres = int.MaxValue;
-                    else
-                        gameController.playerPiastres += piastresPerDay;
-                }
+                    gameController.AddMoneyToPlayer(piastresPerDay);
                 else if (owner == Owner.enemy)
-                {
-                    if (int.MaxValue - gameController.enemyPiastres <= piastresPerDay)
-                        gameController.enemyPiastres = int.MaxValue;
-                    else
-                        gameController.enemyPiastres += piastresPerDay;
-                }
+                    gameController.AddMoneyToEnemy(piastresPerDay);
 
                 currentHealth += healthRegeneration;
                 currentHealth = Mathf.Clamp(currentHealth, 0, health);

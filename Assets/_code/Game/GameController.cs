@@ -9,12 +9,13 @@ namespace MegaGame
     {
         public static GameController Instance { get; private set; }
 
-        [Header("Money")]
-        public int playerPiastres;
-        public int enemyPiastres;
+        string playerMoney;
+        string enemyMoney;
 
         [Header("Prices")]
-        public int shipCost = 10;
+        public int smallShipBuildingCost = 10;
+
+        string smallShipCost;
 
         [Header("Ports")]
         public Port playerPort;
@@ -41,8 +42,8 @@ namespace MegaGame
 
         string islandOwnerFormat = " IO";
 
-        string playerPiastresFormat = "PP";
-        string enemyPiastresFormat = "EP";
+        string playerMoneyFormat = "PP";
+        string enemyMoneyFormat = "EP";
 
         void Awake()
         {
@@ -59,6 +60,7 @@ namespace MegaGame
         void Start()
         {
             dataSaveLoad = DataSaveLoad.Instance;
+            smallShipCost = Strint.GetString(smallShipBuildingCost);
         }
 
         void Update()
@@ -70,17 +72,6 @@ namespace MegaGame
         public void Init()
         {
             LoadGameData();
-
-            /*
-            playerPiastres = 0;
-            enemyPiastres = 0;
-            */
-            /*
-            string tempMoneyCode = Strint.GetString(playerPiastres);
-            Debug.Log("playerPiastres = " + playerPiastres);
-            Debug.Log("temp code = " + tempMoneyCode);
-            Debug.Log("finalInt = " + Strint.GetInt(tempMoneyCode));
-            */
 
             neutralIslands.Clear();
 
@@ -139,22 +130,20 @@ namespace MegaGame
 
         public void CreatePlayerShip()
         {
-            if (playerPiastres - shipCost < 0)
+            if (Strint.Subtraction(playerMoney, smallShipCost) < 0)
                 return;
 
             BuildShip(shipPlayerPrefab, playerPort.transform, enemyPort.transform);
-
-            playerPiastres -= shipCost;
+            RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
         public void CreateEnemyShip()
         {
-            if (enemyPiastres - shipCost < 0)
+            if (Strint.Subtraction(enemyMoney, smallShipCost) < 0)
                 return;
 
             BuildShip(shipEnemyPrefab, enemyPort.transform, playerPort.transform);
-
-            enemyPiastres -= shipCost;
+            RemoveMoneyFromEnemy(smallShipBuildingCost);
         }
 
         public void BuildShip(GameObject shipOwner, Transform buildingPosition, Transform targetPosition)
@@ -267,8 +256,11 @@ namespace MegaGame
                     dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 3);
             }
 
-            dataSaveLoad.Save(playerPiastresFormat, Strint.GetString(playerPiastres));
-            dataSaveLoad.Save(enemyPiastresFormat, Strint.GetString(enemyPiastres));
+            dataSaveLoad.Save(playerMoneyFormat, playerMoney);
+            dataSaveLoad.Save(enemyMoneyFormat, enemyMoney);
+
+            dataSaveLoad.Save("Player Money", Strint.GetInt(playerMoney));
+            dataSaveLoad.Save("Enemy Money", Strint.GetInt(enemyMoney));
         }
 
         void LoadGameData()
@@ -285,8 +277,44 @@ namespace MegaGame
                     allIslands[i].owner = BaseCharacter.Owner.mixed;
             }
 
-            playerPiastres = Strint.GetInt(dataSaveLoad.GetSavedString(playerPiastresFormat));
-            enemyPiastres = Strint.GetInt(dataSaveLoad.GetSavedString(enemyPiastresFormat));
+            playerMoney = dataSaveLoad.GetSavedString(playerMoneyFormat);
+            enemyMoney = dataSaveLoad.GetSavedString(enemyMoneyFormat);
+        }
+
+        public int GetPlayerMoney()
+        {
+            return Strint.GetInt(playerMoney);
+        }
+
+        public int GetEnemyMoney()
+        {
+            return Strint.GetInt(enemyMoney);
+        }
+
+        public void RemoveMoneyFromPlayer(int value)
+        {
+            playerMoney = Strint.GetString(Strint.Subtraction(playerMoney, Strint.GetString(value)));
+        }
+
+        public void RemoveMoneyFromEnemy(int value)
+        {
+            enemyMoney = Strint.GetString(Strint.Subtraction(enemyMoney, Strint.GetString(value)));
+        }
+
+        public void AddMoneyToPlayer(int value)
+        {
+            if (int.MaxValue - Strint.GetInt(playerMoney) <= value)
+                playerMoney = Strint.GetString(int.MaxValue);
+            else
+                playerMoney = Strint.GetString(Strint.Summation(playerMoney, Strint.GetString(value)));
+        }
+
+        public void AddMoneyToEnemy(int value)
+        {
+            if (int.MaxValue - Strint.GetInt(enemyMoney) <= value)
+                enemyMoney = Strint.GetString(int.MaxValue);
+            else
+                enemyMoney = Strint.GetString(Strint.Summation(enemyMoney, Strint.GetString(value)));
         }
     }
 }

@@ -87,8 +87,8 @@ namespace MegaGame.UI
 
         void UpdateMoney()
         {
-            playerMoneyAmounText.text = GameController.Instance.playerPiastres.ToString();
-            enemyMoneyAmounText.text = GameController.Instance.enemyPiastres.ToString();
+            playerMoneyAmounText.text = GameController.Instance.GetPlayerMoney().ToString();
+            enemyMoneyAmounText.text = GameController.Instance.GetEnemyMoney().ToString();
         }
 
         public void GoToCamera(bool isNext)
