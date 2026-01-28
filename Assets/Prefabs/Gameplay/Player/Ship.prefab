@@ -128,10 +128,11 @@ MonoBehaviour:
   owner: 0
   health: 10
   currentHealth: 10
-  healthRegeneration: 1
+  healthRegeneration: 0
   damage: 1
   attackDelay: 1
   targetEnemies: []
+  maintenancePerDay: 1
   healthIndicatorWidget: {fileID: 0}
   speed: 12
   currentSpeed: 1

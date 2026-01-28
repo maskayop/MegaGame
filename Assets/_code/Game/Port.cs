@@ -5,7 +5,7 @@ namespace MegaGame
     public class Port : BaseCharacter
     {
         [Header("Money")]
-        public short piastresPerDay = 1;
+        public short revenue = 1;
 
         [Header("Visual")]
         [SerializeField] GameObject playerVisual;
@@ -129,12 +129,7 @@ namespace MegaGame
         void UpdateProperties()
         {
             if (globalTime.currentDay != currentDay)
-            {
-                if (owner == Owner.player)
-                    gameController.AddMoneyToPlayer(piastresPerDay);
-                else if (owner == Owner.enemy)
-                    gameController.AddMoneyToEnemy(piastresPerDay);
-
+            {                
                 currentHealth += healthRegeneration;
                 currentHealth = Mathf.Clamp(currentHealth, 0, health);
 

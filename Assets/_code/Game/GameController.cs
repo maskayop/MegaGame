@@ -29,6 +29,15 @@ namespace MegaGame
         public List<Island> allIslands = new List<Island>();
         public List<Port> allPorts = new List<Port>();
 
+        List<Port> playerPorts = new List<Port>();
+        List<Port> enemyPorts = new List<Port>();
+
+        short playerPortsCount;
+        public short PlayerPortsCount { get { return playerPortsCount; } }
+
+        short enemyPortsCount;
+        public short EnemyPortsCount { get { return enemyPortsCount; } }
+
         bool isVictory = false;
         public bool IsVictory { get { return isVictory; } }
 
@@ -37,6 +46,19 @@ namespace MegaGame
 
         List<Island> neutralIslands = new List<Island>();
 
+        ObjectsManager objectsManager;
+        GlobalTimeController globalTime;
+        int currentDay = 0;
+
+        int playerRevenue = 0;
+        int playerMaintenance = 0;
+
+        int enemyRevenue = 0;
+        int enemyMaintenance = 0;
+
+        short playerShipsCount = 0;
+        short enemyShipsCount = 0;
+
         // Save Load Data
         DataSaveLoad dataSaveLoad;
 
@@ -44,6 +66,8 @@ namespace MegaGame
 
         string playerMoneyFormat = "PP";
         string enemyMoneyFormat = "EP";
+
+        string currentDayFormat = "CD";
 
         void Awake()
         {
@@ -60,13 +84,25 @@ namespace MegaGame
         void Start()
         {
             dataSaveLoad = DataSaveLoad.Instance;
+
+            globalTime = GlobalTimeController.Instance;
+            currentDay = globalTime.currentDay;
+
+            objectsManager = ObjectsManager.Instance;
             smallShipCost = Strint.GetString(smallShipBuildingCost);
+
+            if (dataSaveLoad.GetSavedInt(currentDayFormat) < 0)
+            {
+                GlobalTimeController.Instance.currentDay = 0;
+                dataSaveLoad.Save(currentDayFormat, 0);
+            }
         }
 
         void Update()
         {
             SelectObject();
             UpdateGameState();
+            UpdateMoney();
         }
 
         public void Init()
@@ -92,7 +128,7 @@ namespace MegaGame
                 EndCampaign();
                 return;
             }
-            
+
             playerPort = neutralIslands[r].ports[0];
             UpdatePortState(playerPort, BaseCharacter.Owner.player);
             playerPort.SetVisualAsTarget(true, BaseCharacter.Owner.player);
@@ -111,12 +147,8 @@ namespace MegaGame
             }
 
             SaveGameData();
-
-            Vector3 cameraPosition = Vector3.zero;
-            cameraPosition += playerPort.transform.position + enemyPort.transform.position;
-            cameraPosition /= 2;
-            cameraPosition.y = 0;
-            CameraController.Instance.transform.position = cameraPosition;
+            PlaceCameraBetweenPorts();
+            UpdatePortsLists();
         }
 
         void UpdatePortState(Port port, BaseCharacter.Owner owner)
@@ -261,6 +293,8 @@ namespace MegaGame
 
             dataSaveLoad.Save("Player Money", Strint.GetInt(playerMoney));
             dataSaveLoad.Save("Enemy Money", Strint.GetInt(enemyMoney));
+
+            dataSaveLoad.Save(currentDayFormat, GlobalTimeController.Instance.currentDay);
         }
 
         void LoadGameData()
@@ -279,16 +313,8 @@ namespace MegaGame
 
             playerMoney = dataSaveLoad.GetSavedString(playerMoneyFormat);
             enemyMoney = dataSaveLoad.GetSavedString(enemyMoneyFormat);
-        }
 
-        public int GetPlayerMoney()
-        {
-            return Strint.GetInt(playerMoney);
-        }
-
-        public int GetEnemyMoney()
-        {
-            return Strint.GetInt(enemyMoney);
+            GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentDayFormat);
         }
 
         public void RemoveMoneyFromPlayer(int value)
@@ -315,6 +341,106 @@ namespace MegaGame
                 enemyMoney = Strint.GetString(int.MaxValue);
             else
                 enemyMoney = Strint.GetString(Strint.Summation(enemyMoney, Strint.GetString(value)));
+        }
+
+        void PlaceCameraBetweenPorts()
+        {
+            if (!playerPort || !enemyPort || !CameraController.Instance)
+                return;
+
+            Vector3 cameraPosition = Vector3.zero;
+            cameraPosition += playerPort.transform.position + enemyPort.transform.position;
+            cameraPosition /= 2;
+            cameraPosition.y = 0;
+            CameraController.Instance.transform.position = cameraPosition;
+        }
+
+        void UpdatePortsLists()
+        {
+            playerPorts.Clear();
+            enemyPorts.Clear();
+
+            for (int i = 0; i < allPorts.Count; i++)
+                if (allPorts[i].owner == BaseCharacter.Owner.player)
+                    playerPorts.Add(allPorts[i]);
+                else if (allPorts[i].owner == BaseCharacter.Owner.enemy)
+                    enemyPorts.Add(allPorts[i]);
+
+            playerPortsCount = (short)playerPorts.Count;
+            enemyPortsCount = (short)enemyPorts.Count;
+        }
+
+        void UpdateMoney()
+        {
+            if (playerShipsCount != objectsManager.playerShips.Count)
+            {
+                playerMaintenance = 0;
+
+                for (int i = 0; i < objectsManager.playerShips.Count; i++)
+                    playerMaintenance += objectsManager.playerShips[i].GetComponent<Character>().maintenance;
+
+                playerShipsCount = (short)objectsManager.playerShips.Count;
+            }
+
+            if (enemyShipsCount != objectsManager.enemyShips.Count)
+            {
+                enemyMaintenance = 0;
+
+                for (int i = 0; i < objectsManager.enemyShips.Count; i++)
+                    enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Character>().maintenance;
+
+                enemyShipsCount = (short)objectsManager.enemyShips.Count;
+            }
+
+            if (globalTime.currentDay != currentDay)
+            {
+                playerRevenue = 0;
+                enemyRevenue = 0;
+
+                for (int i = 0; i < playerPorts.Count; i++)
+                    playerRevenue += playerPorts[i].revenue;
+
+                for (int i = 0; i < enemyPorts.Count; i++)
+                    enemyRevenue += enemyPorts[i].revenue;
+
+                AddMoneyToPlayer(playerRevenue);
+                AddMoneyToEnemy(enemyRevenue);
+
+                RemoveMoneyFromPlayer(playerMaintenance);
+                RemoveMoneyFromEnemy(enemyMaintenance);
+
+                currentDay = globalTime.currentDay;
+            }
+        }
+
+        public int GetPlayerMoney()
+        {
+            return Strint.GetInt(playerMoney);
+        }
+
+        public int GetEnemyMoney()
+        {
+            return Strint.GetInt(enemyMoney);
+        }
+
+        public int GetPlayerRevenue()
+        {
+            return playerRevenue;
+        }
+
+        public int GetEnemyRevenue()
+        {
+            return enemyRevenue;
+        }
+
+        public int GetPlayerMaintenance()
+        {
+            return playerMaintenance;
+        }
+
+        public int GetEnemyMaintenance()
+        {
+            return enemyMaintenance;
         }
     }
 }

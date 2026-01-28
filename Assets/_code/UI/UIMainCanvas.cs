@@ -27,13 +27,6 @@ namespace MegaGame.UI
         [Header("Camera")]
         [SerializeField] float cameraZoomMultiplier = 2.0f;
 
-        [Header("Info")]
-        [SerializeField] TextMeshProUGUI playerMoneyAmounText;
-        [SerializeField] TextMeshProUGUI playerShipsAmounText;
-
-        [SerializeField] TextMeshProUGUI enemyMoneyAmounText;
-        [SerializeField] TextMeshProUGUI enemyShipsAmounText;
-
         int currentDay = 0;
 
         GlobalTimeController globalTime;
@@ -67,7 +60,6 @@ namespace MegaGame.UI
                 return;
 
             UpdateClockAndWind();
-            UpdateGameCharacteristics();
 
             if (gameController.IsBattle != isBattle)
             {
@@ -91,15 +83,6 @@ namespace MegaGame.UI
             clockFill.fillAmount = globalTime.currentTime / globalTime.dayLenght;
             windArrow.rotation = Quaternion.Euler(0, 0, -WindController.Instance.currentRotation.eulerAngles.y);
             windStrengthFillLeft.fillAmount = windStrengthFillRight.fillAmount = WindController.Instance.GetNormalizedCurrentStrength() / 2;
-        }
-
-        void UpdateGameCharacteristics()
-        {
-            playerMoneyAmounText.text = gameController.GetPlayerMoney().ToString();
-            enemyMoneyAmounText.text = gameController.GetEnemyMoney().ToString();
-
-            playerShipsAmounText.text = ObjectsManager.Instance.playerShips.Count.ToString();
-            enemyShipsAmounText.text = ObjectsManager.Instance.enemyShips.Count.ToString();
         }
 
         public void GoToCamera(bool isNext)

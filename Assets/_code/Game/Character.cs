@@ -5,6 +5,10 @@ namespace MegaGame
 {
     public class Character : BaseCharacter
     {
+        [Header("Money")]
+        public short maintenance = 1;
+
+        [Header("Widgets")]
         [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
 
         [Header("Speed")]
@@ -29,6 +33,8 @@ namespace MegaGame
         float currentAttackTime = 0;
         float cos = 0;
 
+        int currentDay = 0;
+
         protected override void OnAwake()
         {
             if (ObjectsManager.Instance)
@@ -37,9 +43,15 @@ namespace MegaGame
             agent = GetComponent<NavMeshAgent>();
         }
 
-        protected override void OnStart() { }
+        protected override void OnStart()
+        {
+            Init();
+        }
 
-        protected override void OnInit() { }
+        protected override void OnInit()
+        {
+            currentDay = globalTime.currentDay;
+        }
 
         protected override void OnUpdate()
         {
@@ -72,6 +84,7 @@ namespace MegaGame
 
             UpdateHealthWidget();
             UpdateTargets();
+            UpdateProperties();
 
             if (currentHealth < 0)
                 Kill();
@@ -173,6 +186,14 @@ namespace MegaGame
             {
                 if (targetEnemies[i] == null)
                     targetEnemies.Remove(targetEnemies[i]);
+            }
+        }
+
+        void UpdateProperties()
+        {
+            if (globalTime.currentDay != currentDay)
+            {
+                currentDay = globalTime.currentDay;
             }
         }
     }
