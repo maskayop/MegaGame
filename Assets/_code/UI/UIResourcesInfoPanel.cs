@@ -21,8 +21,15 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI enemyRevenueText;
         [SerializeField] TextMeshProUGUI enemyMaintenanceText;
 
+        [Header("Enemy")]
+        [SerializeField] string growthColorFormat = "<color=green>";
+        [SerializeField] string wasteColorFormat = "<color=red>";
+
         GameController gameController;
         ObjectsManager objectsManager;
+
+        int playerMoneyGrowth;
+        int enemyMoneyGrowth;
 
         void Awake()
         {
@@ -54,13 +61,29 @@ namespace MegaGame.UI
 
         void UpdateGameCharacteristics()
         {
-            playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString();
+            playerMoneyGrowth = gameController.GetPlayerRevenue() - gameController.GetPlayerMaintenance();
+
+            if (playerMoneyGrowth > 0)
+                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString() + growthColorFormat + " +" + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+            else if (playerMoneyGrowth == 0)
+                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString();
+            else 
+                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString() + wasteColorFormat + " -" + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+
             playerShipsAmountText.text = objectsManager.playerShips.Count.ToString();
             playerPortsAmountText.text = gameController.PlayerPortsCount.ToString();
             playerRevenueText.text = "+" + gameController.GetPlayerRevenue().ToString();
             playerMaintenanceText.text = "-" + gameController.GetPlayerMaintenance().ToString();
 
-            enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString();
+            enemyMoneyGrowth = gameController.GetEnemyRevenue() - gameController.GetEnemyMaintenance();
+
+            if (enemyMoneyGrowth > 0)
+                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString() + growthColorFormat + " +" + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+            else if (enemyMoneyGrowth == 0)
+                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString();
+            else
+                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString() + wasteColorFormat + " -" + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+
             enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
             enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
             enemyRevenueText.text = "+" + gameController.GetEnemyRevenue().ToString();
