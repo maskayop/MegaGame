@@ -20,16 +20,17 @@ namespace MegaGame
 
 		[Header("Scroll")]
 		[SerializeField] float scrollSpeed = 1;
-		[SerializeField] float maxTranslationZ = 500;
-		[SerializeField] float minTranslationZ = 100;
 		[SerializeField] float currentZoom = 0.5f;
+		[SerializeField] Vector2Int baseTranslationZ = new Vector2Int(100, 500);
 
-		[Header("Lens")]
+        Vector2Int translationZ = new Vector2Int(100, 500);
+
+        [Header("Lens")]
 		[SerializeField] float lensFOV = 60;
 
 		bool freeze = false;
 
-		int currentCamera;
+		short currentCamera;
 
 		Vector2 startMousePosition;
 		Vector2 currentMousePosition;
@@ -69,10 +70,12 @@ namespace MegaGame
 			for (int i = 0; i < virtualCameras.Count; i++)
 				virtualCameras[i].Lens.FieldOfView = lensFOV;
 
-            float movementSensitivity = DataSaveLoad.Instance.GetSavedFloat("MovementSensitivity");
+			float movementSensitivity = DataSaveLoad.Instance.GetSavedFloat("MovementSensitivity");
 
-            if (movementSensitivity != -1)
-                ChangeMovementSensitivity(movementSensitivity);
+			if (movementSensitivity != -1)
+				ChangeMovementSensitivity(movementSensitivity);
+
+			SetTranslationZToBase();
         }
 
 		void MoveCamera()
@@ -130,7 +133,7 @@ namespace MegaGame
 			if (currentCamera >= virtualCameras.Count)
 				currentCamera = 0;
 			else if (currentCamera < 0)
-				currentCamera = virtualCameras.Count - 1;
+				currentCamera = (short)(virtualCameras.Count - 1);
 
 			SetCamera();
 		}
@@ -145,7 +148,7 @@ namespace MegaGame
 			currentZoom = Mathf.Clamp01(currentZoom);
 
 			for (int i = 0; i < virtualCameras.Count; i++)
-				virtualCameras[i].transform.localPosition = Vector3.Lerp(new Vector3(0, 0, -minTranslationZ), new Vector3(0, 0, -maxTranslationZ), currentZoom);
+				virtualCameras[i].transform.localPosition = Vector3.Lerp(new Vector3(0, 0, -translationZ.x), new Vector3(0, 0, -translationZ.y), currentZoom);
 		}
 
 		public void CameraZoom(float INvalue)
@@ -153,26 +156,36 @@ namespace MegaGame
 			currentZoom += scrollSpeed * INvalue;
 		}
 
-        public float GetCameraZoom()
-        {
+		public float GetCameraZoom()
+		{
 			return currentZoom;
-        }
+		}
 
-        public void Freeze(bool state)
+		public void Freeze(bool state)
 		{
 			freeze = state;
 		}
 
-        public void ChangeMovementSensitivity(float INvalue)
-        {
-            movementSpeed = INvalue / 100;
-            DataSaveLoad.Instance.Save("MovementSensitivity", INvalue);
-        }
+		public void ChangeMovementSensitivity(float INvalue)
+		{
+			movementSpeed = INvalue / 100;
+			DataSaveLoad.Instance.Save("MovementSensitivity", INvalue);
+		}
 
-        public void ChangeZoomSensitivity(float INvalue)
+		public void ChangeZoomSensitivity(float INvalue)
+		{
+			scrollSpeed = INvalue / 100;
+			DataSaveLoad.Instance.Save("ZoomSensitivity", INvalue);
+		}
+
+		public void SetTranslationZToBase()
+		{
+			translationZ = baseTranslationZ;
+		}
+
+        public void SetTranslationZToMax()
         {
-            scrollSpeed = INvalue / 100;
-            DataSaveLoad.Instance.Save("ZoomSensitivity", INvalue);
+            translationZ = new Vector2Int(baseTranslationZ.y, baseTranslationZ.y);
         }
     }
 }

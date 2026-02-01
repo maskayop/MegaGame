@@ -47,13 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8232c04c474a94bbd6f3652d2f79dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameController
-  playerPiastres: 0
-  enemyPiastres: 0
-  shipCost: 10
+  gameState: 0
+  smallShipBuildingCost: 10
   playerPort: {fileID: 0}
   enemyPort: {fileID: 0}
   shipPlayerPrefab: {fileID: 2693174518542573683, guid: 4a56d9afcbf7cdc4b993da2ba54ac42f, type: 3}
   shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
+  startGameModelButton: {fileID: 0}
+  offsetY: 10
   allIslands: []
   allPorts: []
 --- !u!114 &8288885944846870642
@@ -86,6 +87,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ObjectsManager
   allCharacters: []
+  playerShips: []
+  enemyShips: []
 --- !u!114 &3272045349617746637
 MonoBehaviour:
   m_ObjectHideFlags: 0

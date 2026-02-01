@@ -9,6 +9,9 @@ namespace MegaGame
     {
         public static GameController Instance { get; private set; }
 
+        public enum GameState { world, battle }
+        public GameState gameState;
+
         string playerMoney;
         string enemyMoney;
 
@@ -24,6 +27,10 @@ namespace MegaGame
         [Header("Gameplay")]
         [SerializeField] GameObject shipPlayerPrefab;
         [SerializeField] GameObject shipEnemyPrefab;
+
+        [Header("3D Model Buttons")]
+        [SerializeField] ModelButton startGameModelButton;
+        [SerializeField] float offsetY = 0;
 
         [Header("Islands and Ports")]
         public List<Island> allIslands = new List<Island>();
@@ -47,7 +54,9 @@ namespace MegaGame
         List<Island> neutralIslands = new List<Island>();
 
         ObjectsManager objectsManager;
+        CameraController cameraController;
         GlobalTimeController globalTime;
+
         int currentDay = 0;
 
         int playerRevenue = 0;
@@ -89,6 +98,8 @@ namespace MegaGame
             currentDay = globalTime.currentDay;
 
             objectsManager = ObjectsManager.Instance;
+            cameraController = CameraController.Instance;
+
             smallShipCost = Strint.GetString(smallShipBuildingCost);
 
             if (dataSaveLoad.GetSavedInt(currentDayFormat) < 0)
@@ -96,6 +107,10 @@ namespace MegaGame
                 GlobalTimeController.Instance.currentDay = 0;
                 dataSaveLoad.Save(currentDayFormat, 0);
             }
+
+            startGameModelButton = FindFirstObjectByType<ModelButton>();
+
+            SetGameStateAsWorld();
         }
 
         void Update()
@@ -147,8 +162,10 @@ namespace MegaGame
             }
 
             SaveGameData();
-            PlaceCameraBetweenPorts();
             UpdatePortsLists();
+
+            PlaceCameraBetweenPorts();
+            PlaceStartGameModelButtonBetweenPorts();
         }
 
         void UpdatePortState(Port port, BaseCharacter.Owner owner)
@@ -227,6 +244,9 @@ namespace MegaGame
         {
             Init();
             isBattle = true;
+            SetGameStateAsBattle();
+
+            startGameModelButton.gameObject.SetActive(false);
         }
 
         public void EndBattle()
@@ -234,6 +254,9 @@ namespace MegaGame
             isBattle = false;
             PrepareNewBattle();
             SaveGameData();
+            SetGameStateAsWorld();
+
+            startGameModelButton.gameObject.SetActive(true);
         }
 
         public void EndCampaign()
@@ -348,11 +371,26 @@ namespace MegaGame
             if (!playerPort || !enemyPort || !CameraController.Instance)
                 return;
 
-            Vector3 cameraPosition = Vector3.zero;
-            cameraPosition += playerPort.transform.position + enemyPort.transform.position;
-            cameraPosition /= 2;
-            cameraPosition.y = 0;
-            CameraController.Instance.transform.position = cameraPosition;
+            CameraController.Instance.transform.position = CalculatePositionBetweenPorts();
+        }
+
+        void PlaceStartGameModelButtonBetweenPorts()
+        {
+            if (!playerPort || !enemyPort || !CameraController.Instance || !startGameModelButton)
+                return;
+
+            startGameModelButton.transform.position = CalculatePositionBetweenPorts();
+            startGameModelButton.transform.position += new Vector3(0, offsetY, 0);
+        }
+
+        Vector3 CalculatePositionBetweenPorts()
+        {
+            Vector3 newPosition = Vector3.zero;
+            newPosition += playerPort.transform.position + enemyPort.transform.position;
+            newPosition /= 2;
+            newPosition.y = 0;
+
+            return newPosition;
         }
 
         void UpdatePortsLists()
@@ -441,6 +479,18 @@ namespace MegaGame
         public int GetEnemyMaintenance()
         {
             return enemyMaintenance;
+        }
+
+        public void SetGameStateAsWorld()
+        {
+            gameState = GameState.world;
+            cameraController.SetTranslationZToMax();
+        }
+
+        public void SetGameStateAsBattle()
+        {
+            gameState = GameState.battle;
+            cameraController.SetTranslationZToBase();
         }
     }
 }
