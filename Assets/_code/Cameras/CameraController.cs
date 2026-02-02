@@ -27,6 +27,7 @@ namespace MegaGame
 
         [Header("Lens")]
 		[SerializeField] float lensFOV = 60;
+		[SerializeField] int farClipPlane= 1000;
 
 		bool freeze = false;
 		bool scrollLock = false;
@@ -68,8 +69,11 @@ namespace MegaGame
 
 		public void Init()
 		{
-			for (int i = 0; i < virtualCameras.Count; i++)
+            for (int i = 0; i < virtualCameras.Count; i++)
+			{
 				virtualCameras[i].Lens.FieldOfView = lensFOV;
+				virtualCameras[i].Lens.FarClipPlane = farClipPlane;
+			}
 
 			float movementSensitivity = DataSaveLoad.Instance.GetSavedFloat("MovementSensitivity");
 
@@ -198,6 +202,15 @@ namespace MegaGame
             translationZ = new Vector2Int(baseTranslationZ.y, baseTranslationZ.y);
             scrollLock = true;
             currentZoom = 1.0f;
+        }
+
+		public void SetFarClipPlane(bool isZero)
+		{
+            for (int i = 0; i < virtualCameras.Count; i++)
+				if (isZero)
+					virtualCameras[i].Lens.FarClipPlane = 0;
+				else
+					virtualCameras[i].Lens.FarClipPlane = farClipPlane;
         }
     }
 }

@@ -8,6 +8,9 @@ namespace MegaGame.UI
     {
         public static UIMainCanvas Instance { get; private set; }
 
+        [Header("Main Menu")]
+        [SerializeField] UIMainMenu mainMenu;
+
         [Header("Game")]
         [SerializeField] GameObject startGameWindow;
         [SerializeField] GameObject endGameWindow;
@@ -31,7 +34,8 @@ namespace MegaGame.UI
 
         GlobalTimeController globalTime;
         GameController gameController;
-        bool isBattle = false;
+
+        GameController.GameState currentGameState;
 
         void Awake()
         {
@@ -61,15 +65,15 @@ namespace MegaGame.UI
 
             UpdateClockAndWind();
 
-            if (gameController.IsBattle != isBattle)
+            if (gameController.gameState != currentGameState)
             {
-                if (gameController.IsBattle)
+                if (gameController.gameState == GameController.GameState.battle)
                     HideStartGameWindow();
                 else
                     ShowEndGameWindow();
             }
 
-            isBattle = gameController.IsBattle;
+            currentGameState = gameController.gameState;
         }
 
         void UpdateClockAndWind()

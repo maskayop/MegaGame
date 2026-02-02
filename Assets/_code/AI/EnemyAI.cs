@@ -19,7 +19,7 @@ namespace MegaGame
 
         void Update()
         {
-            if (!gameController.IsBattle)
+            if (gameController.gameState != GameController.GameState.battle)
                 return;
 
             currentPort = gameController.enemyPort;

@@ -29,7 +29,7 @@ namespace MegaGame
 
         void Update()
         {
-            if (!GameController.Instance.IsBattle)
+            if (GameController.Instance.gameState != GameController.GameState.battle)
                 return;
 
             currentTime += Time.deltaTime;
