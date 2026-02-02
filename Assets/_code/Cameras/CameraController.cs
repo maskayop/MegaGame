@@ -29,6 +29,7 @@ namespace MegaGame
 		[SerializeField] float lensFOV = 60;
 
 		bool freeze = false;
+		bool scrollLock = false;
 
 		short currentCamera;
 
@@ -140,12 +141,15 @@ namespace MegaGame
 
 		void ZoomView()
 		{
-			if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-				currentZoom -= scrollSpeed;
-			else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-				currentZoom += scrollSpeed;
+			if (!scrollLock)
+			{
+				if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+					currentZoom -= scrollSpeed;
+				else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+					currentZoom += scrollSpeed;
 
-			currentZoom = Mathf.Clamp01(currentZoom);
+				currentZoom = Mathf.Clamp01(currentZoom);
+			}
 
 			for (int i = 0; i < virtualCameras.Count; i++)
 				virtualCameras[i].transform.localPosition = Vector3.Lerp(new Vector3(0, 0, -translationZ.x), new Vector3(0, 0, -translationZ.y), currentZoom);
@@ -153,8 +157,12 @@ namespace MegaGame
 
 		public void CameraZoom(float INvalue)
 		{
+			if (scrollLock)
+				return;
+
 			currentZoom += scrollSpeed * INvalue;
-		}
+            currentZoom = Mathf.Clamp01(currentZoom);
+        }
 
 		public float GetCameraZoom()
 		{
@@ -181,11 +189,15 @@ namespace MegaGame
 		public void SetTranslationZToBase()
 		{
 			translationZ = baseTranslationZ;
-		}
+			scrollLock = false;
+			currentZoom = 0.5f;
+        }
 
         public void SetTranslationZToMax()
         {
             translationZ = new Vector2Int(baseTranslationZ.y, baseTranslationZ.y);
+            scrollLock = true;
+            currentZoom = 1.0f;
         }
     }
 }

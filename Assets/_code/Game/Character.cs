@@ -24,9 +24,8 @@ namespace MegaGame
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
 
-        [Header("Info")]
+        [HideInInspector]
         public Transform destinationPosition;
-        public Port targetPort;
 
         NavMeshAgent agent;
 
@@ -55,7 +54,7 @@ namespace MegaGame
 
         protected override void OnUpdate()
         {
-            if (targetEnemies.Count != 0 || targetPort)
+            if (targetEnemies.Count != 0)
             {
                 currentAttackTime -= Time.deltaTime;
                 currentSpeed = speed / speedDrop;
@@ -92,7 +91,7 @@ namespace MegaGame
 
         void OnTriggerEnter(Collider coll)
         {
-            Character targetCharacter = coll.GetComponentInParent<Character>();
+            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
 
             if (targetCharacter)
             {
@@ -107,35 +106,14 @@ namespace MegaGame
                         targetEnemies.Add(targetCharacter);
                 }
             }
-
-            Port portTarget = coll.GetComponent<Port>();
-
-            if (portTarget)
-            {
-                if (owner == Owner.player)
-                {
-                    if (portTarget.owner == Port.Owner.enemy)
-                        targetPort = portTarget;
-                }
-                else if (owner == Owner.enemy)
-                {
-                    if (portTarget.owner == Port.Owner.player)
-                        targetPort = portTarget;
-                }
-            }
         }
 
         void OnTriggerExit(Collider coll)
         {
-            Character targetCharacter = coll.GetComponentInParent<Character>();
+            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
 
             if (targetCharacter)
                 targetEnemies.Remove(targetCharacter);
-
-            Port portTarget = coll.GetComponent<Port>();
-
-            if (portTarget)
-                targetPort = null;
         }
 
         void Attack()
@@ -144,14 +122,6 @@ namespace MegaGame
             {
                 targetEnemies[0].currentHealth -= damage;
                 //visualObject.transform.LookAt(targetEnemies[0].transform);
-            }
-            else
-                visualObject.transform.localRotation = Quaternion.identity;
-
-            if (targetPort)
-            {
-                targetPort.currentHealth -= damage;
-                //visualObject.transform.LookAt(targetPort.transform);
             }
             else
                 visualObject.transform.localRotation = Quaternion.identity;

@@ -161,11 +161,7 @@ namespace MegaGame
                 return;
             }
 
-            SaveGameData();
-            UpdatePortsLists();
-
-            PlaceCameraBetweenPorts();
-            PlaceStartGameModelButtonBetweenPorts();
+            PrepareNewBattle();
         }
 
         void UpdatePortState(Port port, BaseCharacter.Owner owner)
@@ -286,6 +282,12 @@ namespace MegaGame
         public void PrepareNewBattle()
         {
             ObjectsManager.Instance.Init();
+
+            SaveGameData();
+            UpdatePortsLists();
+
+            PlaceCameraBetweenPorts();
+            PlaceStartGameModelButtonBetweenPorts();
         }
 
         void SetIslandId(Island island, int id)
@@ -342,11 +344,23 @@ namespace MegaGame
 
         public void RemoveMoneyFromPlayer(int value)
         {
+            if (Strint.Subtraction(playerMoney, Strint.GetString(value)) < 0)
+            {
+                playerMoney = Strint.GetString(0);
+                return;
+            }
+
             playerMoney = Strint.GetString(Strint.Subtraction(playerMoney, Strint.GetString(value)));
         }
 
         public void RemoveMoneyFromEnemy(int value)
         {
+            if (Strint.Subtraction(enemyMoney, Strint.GetString(value)) < 0)
+            {
+                enemyMoney = Strint.GetString(0);
+                return;
+            }
+
             enemyMoney = Strint.GetString(Strint.Subtraction(enemyMoney, Strint.GetString(value)));
         }
 

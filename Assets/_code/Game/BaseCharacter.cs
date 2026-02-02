@@ -18,7 +18,7 @@ namespace MegaGame
         public float attackDelay = 1.0f;
 
         [Header("Info")]
-        public List<Character> targetEnemies = new List<Character>();
+        public List<BaseCharacter> targetEnemies = new List<BaseCharacter>();
 
         protected GameController gameController;
         protected GlobalTimeController globalTime;

@@ -65,7 +65,7 @@ namespace MegaGame
 
         void OnTriggerEnter(Collider coll)
         {
-            Character targetCharacter = coll.GetComponentInParent<Character>();
+            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
 
             if (targetCharacter)
             {
@@ -84,7 +84,7 @@ namespace MegaGame
 
         void OnTriggerExit(Collider coll)
         {
-            Character targetCharacter = coll.GetComponentInParent<Character>();
+            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
 
             if (targetCharacter)
                 targetEnemies.Remove(targetCharacter);
