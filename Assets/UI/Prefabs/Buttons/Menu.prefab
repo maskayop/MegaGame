@@ -33,14 +33,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -78,19 +70,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_Name
-      value: Zoom In Camera
+      value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155022692835360873, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5013494874272056649, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1a86d997e1aab3b49b6fd9ae08e69e2f, type: 3}
+    - target: {fileID: 5546133743891224372, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804713501747450455, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804713501747450455, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_text
-      value: +
-      objectReference: {fileID: 0}
-    - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_fontSize
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 55
+      value: "\u041E"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -54,9 +54,11 @@ MonoBehaviour:
   shipPlayerPrefab: {fileID: 2693174518542573683, guid: 4a56d9afcbf7cdc4b993da2ba54ac42f, type: 3}
   shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
   startGameModelButton: {fileID: 0}
-  offsetY: 10
+  offsetY: 15
   allIslands: []
   allPorts: []
+  playerPorts: []
+  enemyPorts: []
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0

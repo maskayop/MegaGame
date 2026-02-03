@@ -56,6 +56,7 @@ namespace MegaGame.UI
             currentDayText.text = currentDay.ToString();
 
             ShowStartGameWindow();
+            mainMenu.Open();
         }
 
         void Update()

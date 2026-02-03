@@ -1,12 +1,15 @@
+using TMPro;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace MegaGame.UI
 {
     public class UIMainMenu : MonoBehaviour
     {
         public bool isOpen = false;
+
+        [SerializeField] GameObject window;
 
         void Start()
         {
@@ -26,16 +29,26 @@ namespace MegaGame.UI
         public void Open()
         {
             isOpen = true;
+            window.SetActive(true);
+            CameraController.Instance.SetFarClipPlaneToZero(true);
         }
 
         public void Close()
         {
             isOpen = false;
+            window.SetActive(false);
+            CameraController.Instance.SetFarClipPlaneToZero(false);
         }
 
         public void OpenSettingsWindow()
         {
             UISettingsWindow.Instance.Open();
+        }
+
+        public void StartGame()
+        {
+            Close();
+            GameController.Instance.PrepareNewBattle();
         }
     }
 }

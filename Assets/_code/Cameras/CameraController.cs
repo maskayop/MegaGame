@@ -204,11 +204,11 @@ namespace MegaGame
             currentZoom = 1.0f;
         }
 
-		public void SetFarClipPlane(bool isZero)
+		public void SetFarClipPlaneToZero(bool isZero)
 		{
             for (int i = 0; i < virtualCameras.Count; i++)
 				if (isZero)
-					virtualCameras[i].Lens.FarClipPlane = 0;
+					virtualCameras[i].Lens.FarClipPlane = virtualCameras[i].Lens.NearClipPlane + 0.1f;
 				else
 					virtualCameras[i].Lens.FarClipPlane = farClipPlane;
         }

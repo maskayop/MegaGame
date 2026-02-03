@@ -18,6 +18,7 @@ namespace MegaGame
         [SerializeField] List<TextMeshProUGUI> screenResolutionTexts = new List<TextMeshProUGUI>();
 
         [Header("Graphics Level")]
+        [SerializeField] short defaultGraphicsLevel;
         [SerializeField] List<Toggle> graphicsLevelToggles = new List<Toggle>();
 
         [Header("Audio")]
@@ -55,14 +56,16 @@ namespace MegaGame
 
             if (graphicsLeveId != -1)
                 graphicsLevelToggles[graphicsLeveId].isOn = true;
-
+            else
+                ChangeGraphicsLevel(defaultGraphicsLevel);
+            
             SetSliderLoadedValue("MusicVolume", musicSlider, musicValueText, 100);
             SetSliderLoadedValue("UIVolume", UIAudioSlider, UIAudioValueText, 100);
 
             SetSliderLoadedValue("MovementSensitivity", movementSensitivitySlider, movementSensitivityValueText, 5);
             SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, 7);
 
-            SetScreenResolutionProperties();
+            SetScreenResolutionSettings();
 
             Close();
         }
@@ -74,6 +77,13 @@ namespace MegaGame
 
             if (CameraController.Instance)
                 CameraController.Instance.Freeze(true);
+
+            int graphicsLeveId = DataSaveLoad.Instance.GetSavedInt("GraphicsLevel");
+
+            if (graphicsLeveId != -1)
+                graphicsLevelToggles[graphicsLeveId].isOn = true;
+            else
+                graphicsLevelToggles[defaultGraphicsLevel].isOn = true;
         }
 
         public void Close()
@@ -149,7 +159,7 @@ namespace MegaGame
                 App.Instance.SetResolution(id);
         }
 
-        void SetScreenResolutionProperties()
+        void SetScreenResolutionSettings()
         {
             int screenResolution = DataSaveLoad.Instance.GetSavedInt("ScreenResolution");
 
