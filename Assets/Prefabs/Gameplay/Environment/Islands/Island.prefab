@@ -73,6 +73,7 @@ MonoBehaviour:
   nameWidget: {fileID: 4211345175774475087}
   ports:
   - {fileID: 5723791626995265530}
+  possibleTargets: []
 --- !u!1 &8357413837840471502
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,11 +204,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7962397893877922218, guid: 3fcaa856c3d3f53408edad4a68fcca05, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7962397893877922218, guid: 3fcaa856c3d3f53408edad4a68fcca05, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7962397893877922218, guid: 3fcaa856c3d3f53408edad4a68fcca05, type: 3}
       propertyPath: m_LocalRotation.y
@@ -219,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7962397893877922218, guid: 3fcaa856c3d3f53408edad4a68fcca05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 7962397893877922218, guid: 3fcaa856c3d3f53408edad4a68fcca05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

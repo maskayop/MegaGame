@@ -6,12 +6,15 @@ namespace MegaGame
     public class Island : MonoBehaviour
     {
         public BaseCharacter.Owner owner;
-
         public Data_Island islandData;
 
         [SerializeField] NameWidget nameWidget;
 
         public List<Port> ports = new List<Port>();
+
+        [Header("Battle")]
+        public bool isStartIsland = false;
+        public List<Island> possibleTargets = new List<Island>();
 
         GameController gameController;
 

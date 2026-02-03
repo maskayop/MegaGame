@@ -48,7 +48,7 @@ namespace MegaGame.UI
         public void StartGame()
         {
             Close();
-            GameController.Instance.PrepareNewBattle();
+            GameController.Instance.StartGame();
         }
     }
 }
