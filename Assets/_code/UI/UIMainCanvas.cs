@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace MegaGame.UI
 {
@@ -141,10 +141,10 @@ namespace MegaGame.UI
             gameController.StartBattle();
         }
 
-        public void EndBattle()
+        public void PrepareNewBattle()
         {
             ShowStartGameWindow();
-            gameController.EndBattle();
+            gameController.PrepareNewBattle();
         }
 
         public void ShowEndCampaignWindow()

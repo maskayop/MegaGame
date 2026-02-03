@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameController
   gameState: 0
   smallShipBuildingCost: 10
-  playerPort: {fileID: 0}
-  enemyPort: {fileID: 0}
+  currentPlayerPort: {fileID: 0}
+  currentEnemyPort: {fileID: 0}
   shipPlayerPrefab: {fileID: 2693174518542573683, guid: 4a56d9afcbf7cdc4b993da2ba54ac42f, type: 3}
   shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
   startGameModelButton: {fileID: 0}
@@ -59,6 +59,7 @@ MonoBehaviour:
   allPorts: []
   playerPorts: []
   enemyPorts: []
+  allPossibleTargetPorts: []
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GlobalTimeController
   currentDay: 0
-  dayLenght: 3
+  dayLenght: 1
   currentTime: 0
   useTimeDeceleration: 0
   multiplier: 0.01

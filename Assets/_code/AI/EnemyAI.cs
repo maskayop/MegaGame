@@ -22,7 +22,7 @@ namespace MegaGame
             if (gameController.gameState != GameController.GameState.battle)
                 return;
 
-            currentPort = gameController.enemyPort;
+            currentPort = gameController.currentEnemyPort;
 
             currentDecisionTime -= Time.deltaTime;
 
@@ -39,7 +39,7 @@ namespace MegaGame
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();
-                else if (gameController.playerPort.currentHealth / gameController.playerPort.health < 0.5f)
+                else if (gameController.currentPlayerPort.currentHealth / gameController.currentPlayerPort.health < 0.5f)
                     SpawnShip();
                 else
                 {

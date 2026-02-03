@@ -1,7 +1,4 @@
-using TMPro;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MegaGame.UI
 {

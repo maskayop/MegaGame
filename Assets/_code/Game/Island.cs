@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace MegaGame
@@ -62,6 +63,7 @@ namespace MegaGame
             {
                 ports[i].owner = owner;
                 ports[i].SetVisualAsTarget(false, owner);
+                ports[i].gameObject.name = islandData.islandName.GetLocalizedString() + " - Port " + i.ToString();
             }
         }
     }
