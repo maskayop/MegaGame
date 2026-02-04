@@ -9,7 +9,7 @@ namespace MegaGame
     {
         public static GameController Instance { get; private set; }
 
-        public enum GameState { world, battle }
+        public enum GameState { world, battle, menu }
         public GameState gameState;
 
         string playerMoney;
@@ -56,8 +56,10 @@ namespace MegaGame
 
         public int currentDay = 0;
 
-        short currentAccountId = -1;
-        string accountName;
+        [Header("Accounts")]
+        public short currentAccountId = -1;
+        public string currentAccountName;
+        public short totalAccountsAmount = -1;
 
         short playerRevenue = 0;
         short playerMaintenance = 0;
@@ -83,7 +85,8 @@ namespace MegaGame
 
         string accountNameFormat = "ACC";
         string lastAccountIdFormat = "LACC";
-        string currentAccountNameKey;
+        string currentAccountNameKey = "";
+        string totalAccountsAmountFormat = "TAC";
 
         void Awake()
         {
@@ -122,14 +125,32 @@ namespace MegaGame
 
             smallShipCost = Strint.GetString(smallShipBuildingCost);
 
-            LoadAccount();
+            LoadLastAccount();
 
             startGameModelButton = FindFirstObjectByType<ModelButton>();
         }
 
+        void InitializeScene()
+        {
+            playerPorts.Clear();
+            enemyPorts.Clear();
+            allPossibleTargetPorts.Clear();
+
+            currentPlayerPort = null;
+            currentEnemyPort = null;
+
+            for (int i = 0; i < allIslands.Count; i++)
+            {
+                allIslands[i].owner = BaseCharacter.Owner.neutral;
+                allIslands[i].UpdateIslandState();
+            }
+        }
+
         public void StartGame()
         {
-            LoadAccount();
+            InitializeScene();
+            
+            LoadLastAccount();
             LoadGameData();
 
             for (int i = 0; i < allIslands.Count; i++)
@@ -270,6 +291,8 @@ namespace MegaGame
             SetGameStateAsWorld();
 
             startGameModelButton.gameObject.SetActive(true);
+
+            SaveGameData();
         }
 
         void CalculateCurrentPorts()
@@ -373,13 +396,13 @@ namespace MegaGame
             for (int i = 0; i < allIslands.Count; i++)
             {
                 if (allIslands[i].owner == BaseCharacter.Owner.player)
-                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 0);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)0);
                 else if (allIslands[i].owner == BaseCharacter.Owner.enemy)
-                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 1);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)1);
                 else if (allIslands[i].owner == BaseCharacter.Owner.neutral)
-                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 2);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)2);
                 else if (allIslands[i].owner == BaseCharacter.Owner.mixed)
-                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 3);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)3);
             }
 
             dataSaveLoad.Save(currentAccountNameKey + playerMoneyFormat, playerMoney);
@@ -566,50 +589,93 @@ namespace MegaGame
             cameraController.SetTranslationZToBase();
         }
 
-        public void LoadAccount()
+        public void SetGameStateAsMenu()
+        {
+            gameState = GameState.menu;
+        }
+
+        void LoadLastAccount()
         {
             short lastAccount = dataSaveLoad.GetSavedShort(lastAccountIdFormat);
 
             if (dataSaveLoad.GetSavedShort(lastAccountIdFormat) == -1)
-            {
                 currentAccountId = 1;
-                SaveLastAccount();
-            }
             else
                 currentAccountId = lastAccount;
-            
+
             currentAccountNameKey = accountNameFormat + currentAccountId.ToString() + "-";
 
             if (dataSaveLoad.GetSavedString(currentAccountNameKey) == "")
-            {
-                accountName = "A" + currentAccountId.ToString();
-                dataSaveLoad.Save(currentAccountNameKey, accountName);
-            }
+                currentAccountName = "A" + currentAccountId.ToString();
             else
-                accountName = dataSaveLoad.GetSavedString(currentAccountNameKey);
+                currentAccountName = dataSaveLoad.GetSavedString(currentAccountNameKey);
 
             if (dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat) == -1)
             {
                 GlobalTimeController.Instance.currentDay = 0;
                 dataSaveLoad.Save(currentAccountNameKey + currentDayFormat, 0);
             }
+
+            if (dataSaveLoad.GetSavedShort(totalAccountsAmountFormat) == -1)
+                totalAccountsAmount = 1;
+            else
+                totalAccountsAmount = dataSaveLoad.GetSavedShort(totalAccountsAmountFormat);
+
+            SaveLastAccount();
         }
 
         public void SaveLastAccount()
         {
             dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
-            dataSaveLoad.Save(currentAccountNameKey, accountName);
+
+            currentAccountNameKey = accountNameFormat + currentAccountId.ToString() + "-";
+            dataSaveLoad.Save(currentAccountNameKey, currentAccountName);
+
+            dataSaveLoad.Save(totalAccountsAmountFormat, totalAccountsAmount);
         }
 
-        public string GetAccountName()
+        public string GetCurrentAccountName()
         {
-            return accountName;
+            return currentAccountName;
         }
 
         public void SetAccountName(string textValue)
         {
-            accountName = textValue;
+            currentAccountName = textValue;
             SaveLastAccount();
+        }
+
+        public void CreateAccount(string textValue)
+        {
+            totalAccountsAmount++;
+            currentAccountId = totalAccountsAmount;
+            currentAccountName = textValue;
+            SaveLastAccount();
+        }
+
+        public List<string> GetAccountsNames()
+        {
+            List<string> accountsNames = new List<string>();
+
+            for (int i = 1; i <= totalAccountsAmount; i++)
+                accountsNames.Add(dataSaveLoad.GetSavedString(accountNameFormat + i + "-"));
+
+            return accountsNames;
+        }
+
+        public void LoadAccount(string targetAccountName)
+        {
+            int value = -1;
+            List<string> accountsNames = GetAccountsNames();
+
+            for (int i = 0; i < accountsNames.Count; i++)
+                if (accountsNames[i] == targetAccountName)
+                    value = i + 1;
+
+            currentAccountId = (short)value;
+            dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
+
+            LoadLastAccount();
         }
     }
 }

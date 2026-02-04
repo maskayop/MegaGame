@@ -59,7 +59,6 @@ namespace MegaGame.UI
             currentDayText.text = currentDay.ToString();
 
             ShowStartGameWindow();
-            mainMenu.Open();
         }
 
         void Update()
@@ -75,7 +74,7 @@ namespace MegaGame.UI
 
             UpdateClockAndWind();
 
-            if (gameController.gameState != currentGameState)
+            if (gameController.gameState != currentGameState && currentGameState != GameController.GameState.menu)
             {
                 if (gameController.gameState == GameController.GameState.battle)
                     HideStartGameWindow();
@@ -85,7 +84,7 @@ namespace MegaGame.UI
 
             currentGameState = gameController.gameState;
 
-            currentAccountNameText.text = gameController.GetAccountName();
+            currentAccountNameText.text = gameController.GetCurrentAccountName();
         }
 
         void UpdateClockAndWind()

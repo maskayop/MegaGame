@@ -54,6 +54,9 @@ namespace MegaGame
 
         protected override void OnUpdate()
         {
+            if (gameController.gameState == GameController.GameState.menu)
+                DestroyImmediate(gameObject);
+
             if (targetEnemies.Count != 0)
             {
                 currentAttackTime -= Time.deltaTime;
