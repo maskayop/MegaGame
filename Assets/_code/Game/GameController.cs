@@ -129,6 +129,7 @@ namespace MegaGame
 
         public void StartGame()
         {
+            LoadAccount();
             LoadGameData();
 
             for (int i = 0; i < allIslands.Count; i++)
@@ -597,11 +598,18 @@ namespace MegaGame
         public void SaveLastAccount()
         {
             dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
+            dataSaveLoad.Save(currentAccountNameKey, accountName);
         }
 
         public string GetAccountName()
         {
             return accountName;
+        }
+
+        public void SetAccountName(string textValue)
+        {
+            accountName = textValue;
+            SaveLastAccount();
         }
     }
 }

@@ -60,8 +60,6 @@ namespace MegaGame.UI
 
             ShowStartGameWindow();
             mainMenu.Open();
-
-            currentAccountNameText.text = gameController.GetAccountName();
         }
 
         void Update()
@@ -80,6 +78,8 @@ namespace MegaGame.UI
             }
 
             currentGameState = gameController.gameState;
+
+            currentAccountNameText.text = gameController.GetAccountName();
         }
 
         void UpdateClockAndWind()
