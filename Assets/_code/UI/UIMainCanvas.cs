@@ -8,6 +8,9 @@ namespace MegaGame.UI
     {
         public static UIMainCanvas Instance { get; private set; }
 
+        [Header("Account")]
+        [SerializeField] TextMeshProUGUI currentAccountNameText;
+
         [Header("Main Menu")]
         [SerializeField] UIMainMenu mainMenu;
 
@@ -57,6 +60,8 @@ namespace MegaGame.UI
 
             ShowStartGameWindow();
             mainMenu.Open();
+
+            currentAccountNameText.text = gameController.GetAccountName();
         }
 
         void Update()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8288885944846870642}
   - component: {fileID: 8204411319204542549}
   - component: {fileID: 3272045349617746637}
+  - component: {fileID: 6039075397147238773}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -51,8 +52,6 @@ MonoBehaviour:
   smallShipBuildingCost: 10
   currentPlayerPort: {fileID: 0}
   currentEnemyPort: {fileID: 0}
-  shipPlayerPrefab: {fileID: 2693174518542573683, guid: 4a56d9afcbf7cdc4b993da2ba54ac42f, type: 3}
-  shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
   startGameModelButton: {fileID: 0}
   offsetY: 15
   allIslands: []
@@ -73,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GlobalTimeController
   currentDay: 0
-  dayLenght: 1
+  dayLenght: 3
   currentTime: 0
   useTimeDeceleration: 0
   multiplier: 0.01
@@ -106,3 +105,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
   timeForDecision: 0.3
   shipSpawnChance: 20
+--- !u!114 &6039075397147238773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462718075957510001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba4a2c1138f08c4583384f8872358a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.FXManager
+  shipPlayerPrefab: {fileID: 2693174518542573683, guid: 4a56d9afcbf7cdc4b993da2ba54ac42f, type: 3}
+  shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
+  FXTargetEnemy: {fileID: 8761975602101030722, guid: 5e35a2487a5cee645b84205aa1d50df4, type: 3}
+  FXTargetPlayer: {fileID: 8907093577828947285, guid: 64e26d34465644d479b58a7964ba0c95, type: 3}

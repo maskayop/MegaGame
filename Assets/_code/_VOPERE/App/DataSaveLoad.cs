@@ -27,6 +27,11 @@ namespace Vopere.Common
             PlayerPrefs.SetInt(key, value);
         }
 
+        public void Save(string key, short value)
+        {
+            PlayerPrefs.SetInt(key, value);
+        }
+
         public void Save(string key, float value)
         {
             PlayerPrefs.SetFloat(key, value);
@@ -41,6 +46,17 @@ namespace Vopere.Common
         {
             if (PlayerPrefs.HasKey(key))
                 return PlayerPrefs.GetInt(key);
+            else
+                return -1;
+        }
+
+        public short GetSavedShort(string key)
+        {
+            if (PlayerPrefs.HasKey(key))
+                if (PlayerPrefs.GetInt(key) > short.MaxValue || PlayerPrefs.GetInt(key) < short.MinValue)
+                    return -1;
+                else
+                    return (short)PlayerPrefs.GetInt(key);
             else
                 return -1;
         }

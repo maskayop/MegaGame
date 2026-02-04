@@ -21,6 +21,7 @@ namespace MegaGame
 
         [Header("FX")]
         [SerializeField] ParticleSystem FXShot;
+        [SerializeField] ParticleSystem FXTarget;
 
         [HideInInspector] public Island island;
 

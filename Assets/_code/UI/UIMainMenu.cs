@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace MegaGame.UI
@@ -6,6 +7,10 @@ namespace MegaGame.UI
     {
         public bool isOpen = false;
 
+        [Header("Account")]
+        [SerializeField] TextMeshProUGUI currentAccountNameText;
+
+        [Header("Windows")]
         [SerializeField] GameObject window;
 
         void Start()
@@ -13,14 +18,9 @@ namespace MegaGame.UI
             Init();
         }
 
-        void Update()
-        {
-
-        }
-
         public void Init()
         {
-
+            currentAccountNameText.text = GameController.Instance.GetAccountName();
         }
 
         public void Open()

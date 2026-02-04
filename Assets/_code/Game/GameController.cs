@@ -24,10 +24,6 @@ namespace MegaGame
         public Port currentPlayerPort;
         public Port currentEnemyPort;
 
-        [Header("Gameplay")]
-        [SerializeField] GameObject shipPlayerPrefab;
-        [SerializeField] GameObject shipEnemyPrefab;
-
         [Header("3D Model Buttons")]
         [SerializeField] ModelButton startGameModelButton;
         [SerializeField] float offsetY = 0;
@@ -56,8 +52,12 @@ namespace MegaGame
         ObjectsManager objectsManager;
         CameraController cameraController;
         GlobalTimeController globalTime;
+        ScenePrefabsManager scenePrefabsManager;
 
-        int currentDay = 0;
+        public int currentDay = 0;
+
+        short currentAccountId = -1;
+        string accountName;
 
         short playerRevenue = 0;
         short playerMaintenance = 0;
@@ -81,6 +81,10 @@ namespace MegaGame
 
         string currentDayFormat = "CD";
 
+        string accountNameFormat = "ACC";
+        string lastAccountIdFormat = "LACC";
+        string currentAccountNameKey;
+
         void Awake()
         {
             if (Instance != null)
@@ -100,6 +104,9 @@ namespace MegaGame
 
         void Update()
         {
+            if (gameState != GameState.battle)
+                return;
+
             SelectObject();
             UpdateGameState();
             UpdateMoney();
@@ -108,20 +115,14 @@ namespace MegaGame
         public void Init()
         {
             dataSaveLoad = DataSaveLoad.Instance;
-
             globalTime = GlobalTimeController.Instance;
-            currentDay = globalTime.currentDay;
-
             objectsManager = ObjectsManager.Instance;
             cameraController = CameraController.Instance;
+            scenePrefabsManager = ScenePrefabsManager.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingCost);
 
-            if (dataSaveLoad.GetSavedInt(currentDayFormat) < 0)
-            {
-                GlobalTimeController.Instance.currentDay = 0;
-                dataSaveLoad.Save(currentDayFormat, 0);
-            }
+            LoadAccount();
 
             startGameModelButton = FindFirstObjectByType<ModelButton>();
         }
@@ -187,7 +188,7 @@ namespace MegaGame
             if (Strint.Subtraction(playerMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(shipPlayerPrefab, currentPlayerPort.transform, currentEnemyPort.transform);
+            BuildShip(scenePrefabsManager.GetShipPrefab(true), currentPlayerPort.transform, currentEnemyPort.transform);
             RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
@@ -196,7 +197,7 @@ namespace MegaGame
             if (Strint.Subtraction(enemyMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(shipEnemyPrefab, currentEnemyPort.transform, currentPlayerPort.transform);
+            BuildShip(scenePrefabsManager.GetShipPrefab(false), currentEnemyPort.transform, currentPlayerPort.transform);
             RemoveMoneyFromEnemy(smallShipBuildingCost);
         }
 
@@ -205,6 +206,11 @@ namespace MegaGame
             GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
             Character character = ship.GetComponent<Character>();
             character.destinationPosition = targetPosition;
+
+            if (character.owner == BaseCharacter.Owner.player)
+                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, true);
+            else if (character.owner == BaseCharacter.Owner.enemy)
+                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, false);
         }
 
         void SelectObject()
@@ -333,9 +339,6 @@ namespace MegaGame
 
         void UpdateGameState()
         {
-            if (gameState != GameState.battle)
-                return;
-
             if (!currentPlayerPort && !currentEnemyPort)
                 return;
 
@@ -364,49 +367,52 @@ namespace MegaGame
 
         void SaveGameData()
         {
-            dataSaveLoad.Save(startPlayerIslandFormat, playerStartIslandId);
+            dataSaveLoad.Save(currentAccountNameKey + startPlayerIslandFormat, playerStartIslandId);
 
             for (int i = 0; i < allIslands.Count; i++)
             {
                 if (allIslands[i].owner == BaseCharacter.Owner.player)
-                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 0);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 0);
                 else if (allIslands[i].owner == BaseCharacter.Owner.enemy)
-                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 1);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 1);
                 else if (allIslands[i].owner == BaseCharacter.Owner.neutral)
-                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 2);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 2);
                 else if (allIslands[i].owner == BaseCharacter.Owner.mixed)
-                    dataSaveLoad.Save(allIslands[i].islandData.id + islandOwnerFormat, 3);
+                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short) 3);
             }
 
-            dataSaveLoad.Save(playerMoneyFormat, playerMoney);
-            dataSaveLoad.Save(enemyMoneyFormat, enemyMoney);
+            dataSaveLoad.Save(currentAccountNameKey + playerMoneyFormat, playerMoney);
+            dataSaveLoad.Save(currentAccountNameKey + enemyMoneyFormat, enemyMoney);
 
-            dataSaveLoad.Save("Player Money", Strint.GetInt(playerMoney));
-            dataSaveLoad.Save("Enemy Money", Strint.GetInt(enemyMoney));
+            dataSaveLoad.Save(currentAccountNameKey + "Player Money", Strint.GetInt(playerMoney));
+            dataSaveLoad.Save(currentAccountNameKey + "Enemy Money", Strint.GetInt(enemyMoney));
 
-            dataSaveLoad.Save(currentDayFormat, GlobalTimeController.Instance.currentDay);
+            dataSaveLoad.Save(currentAccountNameKey + currentDayFormat, GlobalTimeController.Instance.currentDay);
+
+            SaveLastAccount();
         }
 
         void LoadGameData()
         {
-            playerStartIslandId = (short)dataSaveLoad.GetSavedInt(startPlayerIslandFormat);
+            playerStartIslandId = dataSaveLoad.GetSavedShort(currentAccountNameKey + startPlayerIslandFormat);
 
             for (int i = 0; i < allIslands.Count; i++)
             {
-                if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 0)
+                if (dataSaveLoad.GetSavedShort(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat) == 0)
                     allIslands[i].owner = BaseCharacter.Owner.player;
-                else if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 1)
+                else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat) == 1)
                     allIslands[i].owner = BaseCharacter.Owner.enemy;
-                else if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 2)
+                else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat) == 2)
                     allIslands[i].owner = BaseCharacter.Owner.neutral;
-                else if (dataSaveLoad.GetSavedInt(allIslands[i].islandData.id + islandOwnerFormat) == 3)
+                else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat) == 3)
                     allIslands[i].owner = BaseCharacter.Owner.mixed;
             }
 
-            playerMoney = dataSaveLoad.GetSavedString(playerMoneyFormat);
-            enemyMoney = dataSaveLoad.GetSavedString(enemyMoneyFormat);
+            playerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
+            enemyMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + enemyMoneyFormat);
 
-            GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentDayFormat);
+            GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
+            currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
         }
 
         public void RemoveMoneyFromPlayer(int value)
@@ -557,6 +563,45 @@ namespace MegaGame
         {
             gameState = GameState.battle;
             cameraController.SetTranslationZToBase();
+        }
+
+        public void LoadAccount()
+        {
+            short lastAccount = dataSaveLoad.GetSavedShort(lastAccountIdFormat);
+
+            if (dataSaveLoad.GetSavedShort(lastAccountIdFormat) == -1)
+            {
+                currentAccountId = 1;
+                SaveLastAccount();
+            }
+            else
+                currentAccountId = lastAccount;
+            
+            currentAccountNameKey = accountNameFormat + currentAccountId.ToString() + "-";
+
+            if (dataSaveLoad.GetSavedString(currentAccountNameKey) == "")
+            {
+                accountName = "A" + currentAccountId.ToString();
+                dataSaveLoad.Save(currentAccountNameKey, accountName);
+            }
+            else
+                accountName = dataSaveLoad.GetSavedString(currentAccountNameKey);
+
+            if (dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat) == -1)
+            {
+                GlobalTimeController.Instance.currentDay = 0;
+                dataSaveLoad.Save(currentAccountNameKey + currentDayFormat, 0);
+            }
+        }
+
+        public void SaveLastAccount()
+        {
+            dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
+        }
+
+        public string GetAccountName()
+        {
+            return accountName;
         }
     }
 }
