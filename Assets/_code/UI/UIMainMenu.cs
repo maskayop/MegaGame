@@ -43,6 +43,7 @@ namespace MegaGame.UI
             isOpen = true;
             mainWindow.SetActive(true);
             CameraController.Instance.SetFarClipPlaneToZero(true);
+            GameController.Instance.SetGameStateAsWorld();
         }
 
         public void Close()

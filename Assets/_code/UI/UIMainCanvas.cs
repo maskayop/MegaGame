@@ -67,6 +67,12 @@ namespace MegaGame.UI
             if (!gameController)
                 return;
 
+            if (mainMenu.isOpen)
+            {
+                currentGameState = gameController.gameState;
+                return;
+            }
+
             UpdateClockAndWind();
 
             if (gameController.gameState != currentGameState)
