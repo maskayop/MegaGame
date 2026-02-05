@@ -21,7 +21,6 @@ namespace MegaGame
 
         [Header("FX")]
         [SerializeField] ParticleSystem FXShot;
-        [SerializeField] ParticleSystem FXTarget;
 
         [HideInInspector] public Island island;
 
@@ -130,7 +129,7 @@ namespace MegaGame
         void UpdateProperties()
         {
             if (globalTime.currentDay != currentDay)
-            {                
+            {
                 currentHealth += healthRegeneration;
                 currentHealth = Mathf.Clamp(currentHealth, 0, health);
 

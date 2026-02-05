@@ -743,7 +743,7 @@ MonoBehaviour:
   damage: 2
   attackDelay: 1
   targetEnemies: []
-  revenue: 10
+  revenue: 5
   playerVisual: {fileID: 2166336572211561684}
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}
@@ -752,6 +752,7 @@ MonoBehaviour:
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   FXShot: {fileID: 3860106786867524571}
+  FXTarget: {fileID: 0}
   island: {fileID: 0}
 --- !u!1 &8143654446351510362
 GameObject:
