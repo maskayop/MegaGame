@@ -4633,7 +4633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3196181145739408365, guid: 202baf55b3896f940bfa894cb654565d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -1
+      value: -0.9238793
       objectReference: {fileID: 0}
     - target: {fileID: 3196181145739408365, guid: 202baf55b3896f940bfa894cb654565d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4641,7 +4641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3196181145739408365, guid: 202baf55b3896f940bfa894cb654565d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000008940697
+      value: 0.38268402
       objectReference: {fileID: 0}
     - target: {fileID: 3196181145739408365, guid: 202baf55b3896f940bfa894cb654565d, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4653,7 +4653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3196181145739408365, guid: 202baf55b3896f940bfa894cb654565d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 3196181145739408365, guid: 202baf55b3896f940bfa894cb654565d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -7023,10 +7023,10 @@ MonoBehaviour:
   m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
+  m_OverrideTileSize: 1
+  m_TileSize: 128
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.26666668
+  m_VoxelSize: 0.33333334
   m_MinRegionArea: 4
   m_NavMeshData: {fileID: 23800000, guid: ccaee079cfe96d14caa9c9626e18fef1, type: 2}
   m_BuildHeightMesh: 0
