@@ -132,7 +132,7 @@ MonoBehaviour:
   damage: 1
   attackDelay: 1
   targetEnemies: []
-  maintenancePerDay: 1
+  maintenance: 1
   healthIndicatorWidget: {fileID: 0}
   speed: 12
   currentSpeed: 1
@@ -142,7 +142,6 @@ MonoBehaviour:
   FXShot: {fileID: 1309626319987756586}
   visualObject: {fileID: 1021785611154541580}
   destinationPosition: {fileID: 0}
-  targetPort: {fileID: 0}
 --- !u!1 &8229156860201081542
 GameObject:
   m_ObjectHideFlags: 0

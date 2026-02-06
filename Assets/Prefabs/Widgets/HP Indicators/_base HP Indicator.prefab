@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6636641084727284556}
   - component: {fileID: 1882692638832964466}
   - component: {fileID: 7698964467382418880}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1366426418490978470}
   - component: {fileID: 1536327191964039511}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: _base HP Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,5 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec1df64fc24d3c48b2c71205caaf4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLookAt: 1
   meshRenderer: {fileID: 7698964467382418880}
   floatValueName: _Value
