@@ -101,14 +101,9 @@ namespace MegaGame
                 FXShot.Play();
         }
 
-        public void OnClickAction()
-        {
-            if (owner == Owner.enemy)
-                gameController.CreatePlayerShip();
-        }
-
         void Kill()
         {
+            UpdateHealthWidget();
             isCaptured = true;
         }
 
@@ -119,7 +114,11 @@ namespace MegaGame
 
             if (currentHealth != health)
             {
-                GetCurrentHealthWidget().SetValue(currentHealth / health);
+                if (currentHealth <= 0)
+                    GetCurrentHealthWidget().SetValue(0);
+                else
+                    GetCurrentHealthWidget().SetValue(currentHealth / health);
+
                 GetCurrentHealthWidget().gameObject.SetActive(true);
             }
             else

@@ -93,6 +93,16 @@ namespace MegaGame
 
             if (currentHealth < 0)
                 Kill();
+
+            /*
+            if (targetEnemies.Count != 0)
+            {
+                visualObject.transform.LookAt(targetEnemies[0].transform);
+                visualObject.transform.Rotate(new Vector3(0, 45, 0));
+            }
+            else
+                visualObject.transform.localRotation = Quaternion.identity;
+            */
         }
 
         void OnTriggerEnter(Collider coll)
@@ -103,12 +113,12 @@ namespace MegaGame
             {
                 if (owner == Owner.player)
                 {
-                    if (targetCharacter.owner == Owner.enemy)
+                    if (targetCharacter.owner != Owner.player)
                         targetEnemies.Add(targetCharacter);
                 }
                 else if (owner == Owner.enemy)
                 {
-                    if (targetCharacter.owner == Owner.player)
+                    if (targetCharacter.owner != Owner.enemy)
                         targetEnemies.Add(targetCharacter);
                 }
             }
@@ -125,17 +135,30 @@ namespace MegaGame
         void Attack()
         {
             if (targetEnemies.Count != 0)
-            {
                 targetEnemies[0].currentHealth -= damage;
-                //visualObject.transform.LookAt(targetEnemies[0].transform);
-            }
-            else
-                visualObject.transform.localRotation = Quaternion.identity;
 
             currentAttackTime = attackDelay;
 
             if (FXShot)
                 FXShot.Play();
+
+            if (targetEnemies[0].currentHealth <= 0)
+            {
+                if (targetEnemies[0] as Village)
+                {
+                    if (owner == Owner.player)
+                        targetEnemies[0].owner = Owner.player;
+                    else if (owner == Owner.enemy)
+                        targetEnemies[0].owner = Owner.enemy;
+
+                    targetEnemies.Remove(targetEnemies[0]);
+                }
+
+                if (owner == Owner.player)
+                    destinationPosition = gameController.currentEnemyPort.transform;
+                else if (owner == Owner.enemy)
+                    destinationPosition = gameController.currentPlayerPort.transform;
+            }
         }
 
         void Kill()

@@ -10,11 +10,14 @@ namespace MegaGame
         Port currentPort;
 
         GameController gameController;
+        GameplayObjectsBuilder gameplayObjectsBuilder;
+
         float currentDecisionTime = 0;
 
         void Start()
         {
             gameController = GameController.Instance;
+            gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
         }
 
         void Update()
@@ -35,7 +38,7 @@ namespace MegaGame
 
         void MakeDecision()
         {
-            if (gameController.GetEnemyMoney() >= gameController.smallShipBuildingCost)
+            if (gameController.GetEnemyMoney() >= gameplayObjectsBuilder.smallShipBuildingCost)
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();
@@ -53,7 +56,7 @@ namespace MegaGame
 
         void SpawnShip()
         {
-            gameController.CreateEnemyShip();
+            gameplayObjectsBuilder.CreateEnemyShip();
         }
     }
 }

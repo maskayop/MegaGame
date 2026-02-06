@@ -2325,7 +2325,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 101a229f4bac72f4e8b267e0a5422986, type: 2}
     - target: {fileID: 5584990632501657591, guid: 30fb462a4d436e4488f787531b9b7703, type: 3}
       propertyPath: isStartIsland
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 30fb462a4d436e4488f787531b9b7703, type: 3}
       propertyPath: possibleTargets.Array.size
@@ -2701,7 +2701,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d9c5e323478896540be90ad3aaef703c, type: 2}
     - target: {fileID: 5584990632501657591, guid: 0ade61e048a06d344a1e42d331454a5f, type: 3}
       propertyPath: isStartIsland
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 0ade61e048a06d344a1e42d331454a5f, type: 3}
       propertyPath: possibleTargets.Array.size
@@ -3000,6 +3000,7 @@ Transform:
   - {fileID: 1769607211}
   - {fileID: 1990137586}
   - {fileID: 333129388}
+  - {fileID: 696645953}
   m_Father: {fileID: 1583714158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &571858335
@@ -4595,6 +4596,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82521da583ededf4f937d889d14e119f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.Island
+--- !u!1001 &696645952
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 562839865}
+    m_Modifications:
+    - target: {fileID: 4791404138563316690, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: islandData
+      value: 
+      objectReference: {fileID: 11400000, guid: 537ccf3b1eeba9f488d0140b627af5ce, type: 2}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00502
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135618099421877708, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_Name
+      value: Village Island 50
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+--- !u!4 &696645953 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+  m_PrefabInstance: {fileID: 696645952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &712194026 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5584990632501657591, guid: 52600123dc57ce847928edb99baf0089, type: 3}
@@ -5917,7 +5984,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3d08eb63c2573444b9ba43bcfc843677, type: 2}
     - target: {fileID: 5584990632501657591, guid: 3e2c73c1465cf204582ce67d6527432a, type: 3}
       propertyPath: isStartIsland
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 3e2c73c1465cf204582ce67d6527432a, type: 3}
       propertyPath: possibleTargets.Array.size
@@ -8018,7 +8085,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6ac8dc96e118aa6489faf6f5a50d432b, type: 2}
     - target: {fileID: 5584990632501657591, guid: 7931d3cbfd80ee049b908b4e76b9791a, type: 3}
       propertyPath: isStartIsland
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 7931d3cbfd80ee049b908b4e76b9791a, type: 3}
       propertyPath: possibleTargets.Array.size
@@ -9099,7 +9166,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: bc6eddce66cbfe84daeb9db6c900d8b1, type: 2}
     - target: {fileID: 5584990632501657591, guid: 6c18cd4011e8e544e80ce36db74c75ed, type: 3}
       propertyPath: isStartIsland
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 6c18cd4011e8e544e80ce36db74c75ed, type: 3}
       propertyPath: possibleTargets.Array.size

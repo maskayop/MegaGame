@@ -12,13 +12,10 @@ namespace MegaGame
         public enum GameState { world, battle, menu }
         public GameState gameState;
 
-        string playerMoney;
-        string enemyMoney;
-
-        [Header("Prices")]
-        public int smallShipBuildingCost = 10;
-
-        string smallShipCost;
+        [HideInInspector]
+        public string playerMoney;
+        [HideInInspector]
+        public string enemyMoney;
 
         [Header("Ports")]
         public Port currentPlayerPort;
@@ -55,7 +52,6 @@ namespace MegaGame
         ObjectsManager objectsManager;
         CameraController cameraController;
         GlobalTimeController globalTime;
-        ScenePrefabsManager scenePrefabsManager;
 
         public int currentDay = 0;
 
@@ -117,7 +113,6 @@ namespace MegaGame
             if (gameState != GameState.battle)
                 return;
 
-            SelectObject();
             UpdateGameState();
             UpdateMoney();
         }
@@ -128,9 +123,6 @@ namespace MegaGame
             globalTime = GlobalTimeController.Instance;
             objectsManager = ObjectsManager.Instance;
             cameraController = CameraController.Instance;
-            scenePrefabsManager = ScenePrefabsManager.Instance;
-
-            smallShipCost = Strint.GetString(smallShipBuildingCost);
 
             LoadLastAccount();
 
@@ -218,52 +210,6 @@ namespace MegaGame
 
             port.island.owner = owner;
             port.island.UpdateIslandState();
-        }
-
-        public void CreatePlayerShip()
-        {
-            if (Strint.Subtraction(playerMoney, smallShipCost) < 0)
-                return;
-
-            BuildShip(scenePrefabsManager.GetShipPrefab(true), currentPlayerPort.transform, currentEnemyPort.transform);
-            RemoveMoneyFromPlayer(smallShipBuildingCost);
-        }
-
-        public void CreateEnemyShip()
-        {
-            if (Strint.Subtraction(enemyMoney, smallShipCost) < 0)
-                return;
-
-            BuildShip(scenePrefabsManager.GetShipPrefab(false), currentEnemyPort.transform, currentPlayerPort.transform);
-            RemoveMoneyFromEnemy(smallShipBuildingCost);
-        }
-
-        public void BuildShip(GameObject shipOwner, Transform buildingPosition, Transform targetPosition)
-        {
-            GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
-            Character character = ship.GetComponent<Character>();
-            character.destinationPosition = targetPosition;
-
-            if (character.owner == BaseCharacter.Owner.player)
-                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, true);
-            else if (character.owner == BaseCharacter.Owner.enemy)
-                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, false);
-        }
-
-        void SelectObject()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = CameraController.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out RaycastHit hit, 1000000, 1 << 9))
-                {
-                    Port port = hit.collider.GetComponentInParent<Port>();
-
-                    if (port)
-                        port.OnClickAction();
-                }
-            }
         }
 
         public void PrepareNewBattle()
@@ -433,8 +379,6 @@ namespace MegaGame
                     dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)1);
                 else if (allIslands[i].owner == BaseCharacter.Owner.neutral)
                     dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)2);
-                else if (allIslands[i].owner == BaseCharacter.Owner.mixed)
-                    dataSaveLoad.Save(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat, (short)3);
             }
 
             dataSaveLoad.Save(currentAccountNameKey + playerMoneyFormat, playerMoney);
@@ -470,8 +414,6 @@ namespace MegaGame
                     allIslands[i].owner = BaseCharacter.Owner.enemy;
                 else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat) == 2)
                     allIslands[i].owner = BaseCharacter.Owner.neutral;
-                else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + allIslands[i].islandData.id + islandOwnerFormat) == 3)
-                    allIslands[i].owner = BaseCharacter.Owner.mixed;
             }
 
             playerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);

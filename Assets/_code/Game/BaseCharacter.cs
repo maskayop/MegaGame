@@ -5,7 +5,7 @@ namespace MegaGame
 {
     public abstract class BaseCharacter : MonoBehaviour
     {
-        public enum Owner { player, enemy, neutral, mixed }
+        public enum Owner { player, enemy, neutral }
         public Owner owner;
 
         [Header("Health")]
@@ -22,7 +22,7 @@ namespace MegaGame
 
         protected GameController gameController;
         protected GlobalTimeController globalTime;
-        
+
         void Awake()
         {
             OnAwake();

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8204411319204542549}
   - component: {fileID: 3272045349617746637}
   - component: {fileID: 6039075397147238773}
+  - component: {fileID: 15590748652426754}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -127,3 +128,15 @@ MonoBehaviour:
   shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
   FXTargetEnemy: {fileID: 8761975602101030722, guid: 5e35a2487a5cee645b84205aa1d50df4, type: 3}
   FXTargetPlayer: {fileID: 8907093577828947285, guid: 64e26d34465644d479b58a7964ba0c95, type: 3}
+--- !u!114 &15590748652426754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462718075957510001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04871b59d59e895479d2fff9d6076810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameplayObjectsBuilder

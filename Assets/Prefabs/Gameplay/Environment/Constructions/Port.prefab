@@ -752,7 +752,6 @@ MonoBehaviour:
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   FXShot: {fileID: 3860106786867524571}
-  FXTarget: {fileID: 0}
   island: {fileID: 0}
 --- !u!1 &8143654446351510362
 GameObject:
@@ -918,10 +917,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5567220205125920937}
     m_Modifications:
-    - target: {fileID: 649787172592655266, guid: a59081a86d04b2b41b18d85535e0f45b, type: 3}
-      propertyPath: useLookAt
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1053883114254406227, guid: a59081a86d04b2b41b18d85535e0f45b, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -1003,10 +998,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2414422446813068117}
     m_Modifications:
-    - target: {fileID: 649787172592655266, guid: 04b913d2833e3944fb2bd99a25f88dd4, type: 3}
-      propertyPath: useLookAt
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1053883114254406227, guid: 04b913d2833e3944fb2bd99a25f88dd4, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
