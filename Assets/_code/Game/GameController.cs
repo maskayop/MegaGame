@@ -43,8 +43,11 @@ namespace MegaGame
         short enemyPortsCount;
         public short EnemyPortsCount { get { return enemyPortsCount; } }
 
-        bool isVictory = false;
+        public bool isVictory = false;
         public bool IsVictory { get { return isVictory; } }
+
+        public bool campaignIsEnded = false;
+        public bool CampaignIsEnded { get { return campaignIsEnded; } }
 
         List<Island> startIslands = new List<Island>();
         List<Island> neutralIslands = new List<Island>();
@@ -82,6 +85,7 @@ namespace MegaGame
         string enemyMoneyFormat = "EP";
 
         string currentDayFormat = "CD";
+        string campaignIsEndedFormat = "CIE";
 
         string accountNameFormat = "ACC";
         string lastAccountIdFormat = "LACC";
@@ -107,6 +111,9 @@ namespace MegaGame
 
         void Update()
         {
+            if (campaignIsEnded)
+                return;
+
             if (gameState != GameState.battle)
                 return;
 
@@ -149,9 +156,15 @@ namespace MegaGame
         public void StartGame()
         {
             InitializeScene();
-            
+
             LoadLastAccount();
             LoadGameData();
+
+            if (campaignIsEnded)
+            {
+                EndCampaign();
+                return;
+            }
 
             for (int i = 0; i < allIslands.Count; i++)
             {
@@ -173,6 +186,8 @@ namespace MegaGame
 
             UpdatePortsLists();
             PrepareNewBattle();
+
+            campaignIsEnded = false;
         }
 
         void UpdatePortsLists()
@@ -266,21 +281,30 @@ namespace MegaGame
                     neutralIslands.Add(allIslands[i]);
             }
 
-            if (neutralIslands.Count == 0)
+            if (allPossibleTargetPorts.Count == 0)
             {
+                isVictory = false;
                 EndCampaign();
                 return;
             }
 
             CalculateCurrentPorts();
 
-            if (currentEnemyPort)
+            if (!currentEnemyPort)
+            {
+                isVictory = true;
+                EndCampaign();
+                return;
+            }
+            else
             {
                 UpdatePortState(currentEnemyPort, BaseCharacter.Owner.enemy);
                 currentEnemyPort.SetVisualAsTarget(true, BaseCharacter.Owner.enemy);
             }
-            else
+
+            if (!currentPlayerPort)
             {
+                isVictory = false;
                 EndCampaign();
                 return;
             }
@@ -289,6 +313,10 @@ namespace MegaGame
             PlaceCameraBetweenPorts();
             PlaceStartGameModelButtonBetweenPorts();
             SetGameStateAsWorld();
+
+            UpdatePlayerShips();
+            UpdateEnemyShips();
+            UpdateRevenues();
 
             startGameModelButton.gameObject.SetActive(true);
 
@@ -357,8 +385,12 @@ namespace MegaGame
 
         public void EndCampaign()
         {
-            UIMainCanvas.Instance.ShowEndCampaignWindow();
+            campaignIsEnded = true;
+
             startGameModelButton.gameObject.SetActive(false);
+            UIMainCanvas.Instance.ShowEndCampaignWindow();
+
+            SaveGameData();
         }
 
         void UpdateGameState()
@@ -413,6 +445,16 @@ namespace MegaGame
 
             dataSaveLoad.Save(currentAccountNameKey + currentDayFormat, GlobalTimeController.Instance.currentDay);
 
+            if (campaignIsEnded)
+            {
+                if (isVictory)
+                    dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)1);
+                else
+                    dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)2);
+            }
+            else
+                dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)0);
+
             SaveLastAccount();
         }
 
@@ -437,6 +479,19 @@ namespace MegaGame
 
             GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
             currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
+
+            if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 1)
+            {
+                isVictory = true;
+                campaignIsEnded = true;
+            }
+            else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 2)
+            {
+                isVictory = false;
+                campaignIsEnded = true;
+            }
+            else
+                campaignIsEnded = false;
         }
 
         public void RemoveMoneyFromPlayer(int value)
@@ -507,44 +562,53 @@ namespace MegaGame
         void UpdateMoney()
         {
             if (playerShipsCount != objectsManager.playerShips.Count)
-            {
-                playerMaintenance = 0;
-
-                for (int i = 0; i < objectsManager.playerShips.Count; i++)
-                    playerMaintenance += objectsManager.playerShips[i].GetComponent<Character>().maintenance;
-
-                playerShipsCount = (short)objectsManager.playerShips.Count;
-            }
+                UpdatePlayerShips();
 
             if (enemyShipsCount != objectsManager.enemyShips.Count)
-            {
-                enemyMaintenance = 0;
-
-                for (int i = 0; i < objectsManager.enemyShips.Count; i++)
-                    enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Character>().maintenance;
-
-                enemyShipsCount = (short)objectsManager.enemyShips.Count;
-            }
+                UpdateEnemyShips();
 
             if (globalTime.currentDay != currentDay)
-            {
-                playerRevenue = 0;
-                enemyRevenue = 0;
+                UpdateRevenues();
+        }
 
-                for (int i = 0; i < playerPorts.Count; i++)
-                    playerRevenue += playerPorts[i].revenue;
+        void UpdatePlayerShips()
+        {
+            playerMaintenance = 0;
 
-                for (int i = 0; i < enemyPorts.Count; i++)
-                    enemyRevenue += enemyPorts[i].revenue;
+            for (int i = 0; i < objectsManager.playerShips.Count; i++)
+                playerMaintenance += objectsManager.playerShips[i].GetComponent<Character>().maintenance;
 
-                AddMoneyToPlayer(playerRevenue);
-                AddMoneyToEnemy(enemyRevenue);
+            playerShipsCount = (short)objectsManager.playerShips.Count;
+        }
 
-                RemoveMoneyFromPlayer(playerMaintenance);
-                RemoveMoneyFromEnemy(enemyMaintenance);
+        void UpdateEnemyShips()
+        {
+            enemyMaintenance = 0;
 
-                currentDay = globalTime.currentDay;
-            }
+            for (int i = 0; i < objectsManager.enemyShips.Count; i++)
+                enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Character>().maintenance;
+
+            enemyShipsCount = (short)objectsManager.enemyShips.Count;
+        }
+
+        void UpdateRevenues()
+        {
+            playerRevenue = 0;
+            enemyRevenue = 0;
+
+            for (int i = 0; i < playerPorts.Count; i++)
+                playerRevenue += playerPorts[i].revenue;
+
+            for (int i = 0; i < enemyPorts.Count; i++)
+                enemyRevenue += enemyPorts[i].revenue;
+
+            AddMoneyToPlayer(playerRevenue);
+            AddMoneyToEnemy(enemyRevenue);
+
+            RemoveMoneyFromPlayer(playerMaintenance);
+            RemoveMoneyFromEnemy(enemyMaintenance);
+
+            currentDay = globalTime.currentDay;
         }
 
         public int GetPlayerMoney()

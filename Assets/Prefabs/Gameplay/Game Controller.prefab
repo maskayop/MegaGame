@@ -53,15 +53,17 @@ MonoBehaviour:
   currentPlayerPort: {fileID: 0}
   currentEnemyPort: {fileID: 0}
   startGameModelButton: {fileID: 0}
-  offsetY: 15
+  offsetY: 20
   allIslands: []
   allPorts: []
   playerPorts: []
   enemyPorts: []
   allPossibleTargetPorts: []
+  isVictory: 0
+  campaignIsEnded: 0
   currentDay: 0
   currentAccountId: -1
-  accountName: 
+  currentAccountName: 
   totalAccountsAmount: -1
 --- !u!114 &8288885944846870642
 MonoBehaviour:

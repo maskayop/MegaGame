@@ -19,7 +19,11 @@ namespace MegaGame.UI
         [SerializeField] GameObject endGameWindow;
         [SerializeField] GameObject victoryPanel;
         [SerializeField] GameObject defeatPanel;
+
+        [Header("Campaign")]
         [SerializeField] GameObject endCampaignWindow;
+        [SerializeField] GameObject campaignVictoryPanel;
+        [SerializeField] GameObject campaignDefeatPanel;
 
         [Header("Clock")]
         [SerializeField] TextMeshProUGUI currentDayText;
@@ -66,6 +70,11 @@ namespace MegaGame.UI
             if (!gameController)
                 return;
 
+            currentAccountNameText.text = gameController.GetCurrentAccountName();
+
+            if (gameController.campaignIsEnded)
+                return;
+
             if (mainMenu.isOpen)
             {
                 currentGameState = gameController.gameState;
@@ -83,8 +92,6 @@ namespace MegaGame.UI
             }
 
             currentGameState = gameController.gameState;
-
-            currentAccountNameText.text = gameController.GetCurrentAccountName();
         }
 
         void UpdateClockAndWind()
@@ -160,6 +167,29 @@ namespace MegaGame.UI
         public void ShowEndCampaignWindow()
         {
             endCampaignWindow.SetActive(true);
+            campaignVictoryPanel.SetActive(false);
+            campaignDefeatPanel.SetActive(false);
+
+            if (gameController.CampaignIsEnded)
+            {
+                if (gameController.IsVictory)
+                    campaignVictoryPanel.SetActive(true);
+                else
+                    campaignDefeatPanel.SetActive(true);
+            }
+        }
+
+        void HideEndCampaignWindow()
+        {
+            endCampaignWindow.SetActive(false);
+            campaignVictoryPanel.SetActive(false);
+            campaignDefeatPanel.SetActive(false);
+        }
+
+        public void OpenMainMenu()
+        {
+            mainMenu.Open();
+            HideEndCampaignWindow();
         }
     }
 }
