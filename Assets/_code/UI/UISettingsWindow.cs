@@ -59,11 +59,11 @@ namespace MegaGame
             else
                 ChangeGraphicsLevel(defaultGraphicsLevel);
             
-            SetSliderLoadedValue("MusicVolume", musicSlider, musicValueText, 100);
-            SetSliderLoadedValue("UIVolume", UIAudioSlider, UIAudioValueText, 100);
+            SetSliderLoadedValue("MusicVolume", musicSlider, musicValueText, musicSlider.maxValue / 2);
+            SetSliderLoadedValue("UIVolume", UIAudioSlider, UIAudioValueText, UIAudioSlider.maxValue / 2);
 
-            SetSliderLoadedValue("MovementSensitivity", movementSensitivitySlider, movementSensitivityValueText, 5);
-            SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, 7);
+            SetSliderLoadedValue("MovementSensitivity", movementSensitivitySlider, movementSensitivityValueText, movementSensitivitySlider.maxValue / 2);
+            SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, zoomSensitivitySlider.maxValue / 2);
 
             SetScreenResolutionSettings();
 

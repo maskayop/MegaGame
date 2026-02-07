@@ -25,7 +25,7 @@ namespace MegaGame
 
 		public void SetValue(float floatValue)
 		{
-			value = floatValue;
+			value = Mathf.Clamp01(floatValue);
 		}
 	}
 }

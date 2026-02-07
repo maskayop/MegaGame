@@ -13,7 +13,10 @@ namespace MegaGame
         public void SetId(int value)
         {
             id = value;
+
+#if UNITY_EDITOR
             EditorUtility.SetDirty(this);
+#endif
         }
     }
 }

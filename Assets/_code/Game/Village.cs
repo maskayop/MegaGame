@@ -40,10 +40,10 @@ namespace MegaGame
             if (isCaptured)
                 return;
 
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 Kill();
-                return;
+                //return;
             }
 
             UpdateHealthWidget();
@@ -61,13 +61,16 @@ namespace MegaGame
             if (GetCurrentHealthWidget() == null)
                 return;
 
+            if (isCaptured)
+            {
+                Debug.Log("!!!");
+                GetCurrentHealthWidget().SetValue(0);
+                return;
+            }
+
             if (currentHealth != health)
             {
-                if (currentHealth < 0)
-                    GetCurrentHealthWidget().SetValue(0);
-                else
-                    GetCurrentHealthWidget().SetValue(currentHealth / health);
-
+                GetCurrentHealthWidget().SetValue(currentHealth / health);
                 GetCurrentHealthWidget().gameObject.SetActive(true);
             }
             else
