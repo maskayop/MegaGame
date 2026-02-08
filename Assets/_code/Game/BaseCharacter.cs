@@ -8,6 +8,10 @@ namespace MegaGame
         public enum Owner { player, enemy, neutral }
         public Owner owner;
 
+        [Header("Money")]
+        public short revenue = 1;
+        public short maintenance = 1;
+
         [Header("Health")]
         public float health = 10;
         public float currentHealth = 10;
@@ -17,11 +21,26 @@ namespace MegaGame
         public float damage = 1.0f;
         public float attackDelay = 1.0f;
 
+        [Header("Widgets")]
+        [SerializeField] protected HealthIndicatorWidget playerHealthWidget;
+        [SerializeField] protected HealthIndicatorWidget enemyHealthWidget;
+        [SerializeField] protected HealthIndicatorWidget neutralHealthWidget;
+
         [Header("Info")]
         public List<BaseCharacter> targetEnemies = new List<BaseCharacter>();
 
         protected GameController gameController;
         protected GlobalTimeController globalTime;
+
+        float currentHealthNormalized;
+
+        protected int currentDay = 0;
+        protected bool isCaptured = false;
+
+        Island island;
+        public Island Island { get { return island; } set { island = value; } }
+
+        float currentAttackTime = 0;
 
         void Awake()
         {
@@ -35,9 +54,26 @@ namespace MegaGame
 
         void Update()
         {
+            currentHealthNormalized = currentHealth / health;
+
+            if (currentHealth <= 0)
+            {
+                Kill();
+                return;
+            }
+
             for (int i = 0; i < targetEnemies.Count; i++)
                 if (!targetEnemies[i])
                     targetEnemies.Remove(targetEnemies[i]);
+
+            if (targetEnemies.Count != 0)
+                currentAttackTime -= Time.deltaTime;
+
+            if (currentAttackTime < 0)
+                Attack();
+
+            UpdateHealthWidget();
+            UpdateProperties();
 
             OnUpdate();
         }
@@ -62,5 +98,92 @@ namespace MegaGame
         protected virtual void OnInit() { }
 
         protected virtual void OnUpdate() { }
+
+        protected virtual void OnTriggerEnter(Collider coll)
+        {
+            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
+
+            if (targetCharacter)
+            {
+                if (owner == Owner.player)
+                {
+                    if (targetCharacter.owner != Owner.player)
+                        targetEnemies.Add(targetCharacter);
+                }
+                else if (owner == Owner.enemy)
+                {
+                    if (targetCharacter.owner != Owner.enemy)
+                        targetEnemies.Add(targetCharacter);
+                }
+            }
+        }
+
+        protected virtual void OnTriggerExit(Collider coll)
+        {
+            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
+
+            if (targetCharacter)
+                targetEnemies.Remove(targetCharacter);
+        }
+
+        protected void UpdateHealthWidget()
+        {
+            if (GetCurrentHealthWidget() == null)
+                return;
+
+            if (currentHealth != health)
+            {
+                if (currentHealth <= 0)
+                    GetCurrentHealthWidget().SetValue(0);
+                else
+                    GetCurrentHealthWidget().SetValue(currentHealthNormalized);
+
+                GetCurrentHealthWidget().gameObject.SetActive(true);
+            }
+            else
+                GetCurrentHealthWidget().gameObject.SetActive(false);
+        }
+
+        HealthIndicatorWidget GetCurrentHealthWidget()
+        {
+            if (owner == Owner.player && playerHealthWidget)
+                return playerHealthWidget;
+            else if (owner == Owner.enemy && enemyHealthWidget)
+                return enemyHealthWidget;
+            else if (owner == Owner.neutral && neutralHealthWidget)
+                return neutralHealthWidget;
+            else
+                return null;
+        }
+
+        void UpdateProperties()
+        {
+            if (globalTime.currentDay != currentDay)
+            {
+                currentHealth += healthRegeneration;
+                currentHealth = Mathf.Clamp(currentHealth, 0, health);
+
+                currentDay = globalTime.currentDay;
+            }
+        }
+
+        void Kill()
+        {
+            OnKilled();
+        }
+
+        protected virtual void OnKilled() { }
+
+        void Attack()
+        {
+            if (targetEnemies.Count != 0)
+                targetEnemies[0].currentHealth -= damage;
+
+            currentAttackTime = attackDelay;
+
+            OnAttack();
+        }
+
+        protected virtual void OnAttack() { }
     }
 }

@@ -173,7 +173,7 @@ namespace MegaGame
             }
 
             for (int i = 0; i < allPorts.Count; i++)
-                if (allPorts[i].island.islandData.id == playerStartIslandId)
+                if (allPorts[i].Island.islandData.id == playerStartIslandId)
                     allPorts[i].owner = BaseCharacter.Owner.player;
 
             UpdatePortsLists();
@@ -198,9 +198,9 @@ namespace MegaGame
             enemyPortsCount = (short)enemyPorts.Count;
 
             for (int i = 0; i < playerPorts.Count; i++)
-                for (int p = 0; p < playerPorts[i].island.possibleTargets.Count; p++)
-                    if (playerPorts[i].island.possibleTargets[p].owner != BaseCharacter.Owner.player)
-                        allPossibleTargetPorts.Add(playerPorts[i].island.possibleTargets[p].ports[0]);
+                for (int p = 0; p < playerPorts[i].Island.possibleTargets.Count; p++)
+                    if (playerPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.player)
+                        allPossibleTargetPorts.Add(playerPorts[i].Island.possibleTargets[p].ports[0]);
         }
 
         void UpdatePortState(Port port, BaseCharacter.Owner owner)
@@ -208,8 +208,8 @@ namespace MegaGame
             port.owner = owner;
             port.Init();
 
-            port.island.owner = owner;
-            port.island.UpdateIslandState();
+            port.Island.owner = owner;
+            port.Island.UpdateIslandState();
         }
 
         public void PrepareNewBattle()
@@ -298,15 +298,15 @@ namespace MegaGame
 
             if (rand == 0)
             {
-                for (int i = 0; i < target.island.possibleTargets.Count; i++)
-                    if (target.island.possibleTargets[i].owner == BaseCharacter.Owner.player)
-                        return target.island.possibleTargets[i].ports[0];
+                for (int i = 0; i < target.Island.possibleTargets.Count; i++)
+                    if (target.Island.possibleTargets[i].owner == BaseCharacter.Owner.player)
+                        return target.Island.possibleTargets[i].ports[0];
             }
             else
             {
-                for (int i = target.island.possibleTargets.Count - 1; i >= 0; i--)
-                    if (target.island.possibleTargets[i].owner == BaseCharacter.Owner.player)
-                        return target.island.possibleTargets[i].ports[0];
+                for (int i = target.Island.possibleTargets.Count - 1; i >= 0; i--)
+                    if (target.Island.possibleTargets[i].owner == BaseCharacter.Owner.player)
+                        return target.Island.possibleTargets[i].ports[0];
             }
 
             return port;
@@ -518,7 +518,8 @@ namespace MegaGame
             playerMaintenance = 0;
 
             for (int i = 0; i < objectsManager.playerShips.Count; i++)
-                playerMaintenance += objectsManager.playerShips[i].GetComponent<Character>().maintenance;
+                if (objectsManager.playerShips[i])
+                    playerMaintenance += objectsManager.playerShips[i].GetComponent<Character>().maintenance;
 
             playerShipsCount = (short)objectsManager.playerShips.Count;
         }

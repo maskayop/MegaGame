@@ -5,12 +5,6 @@ namespace MegaGame
 {
     public class Character : BaseCharacter
     {
-        [Header("Money")]
-        public short maintenance = 1;
-
-        [Header("Widgets")]
-        [SerializeField] HealthIndicatorWidget healthIndicatorWidget;
-
         [Header("Speed")]
         public float speed = 1;
         public float currentSpeed = 1;
@@ -24,15 +18,10 @@ namespace MegaGame
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
 
-        [HideInInspector]
-        public Transform destinationPosition;
-
         NavMeshAgent agent;
+        Transform destinationPosition;
 
-        float currentAttackTime = 0;
         float cos = 0;
-
-        int currentDay = 0;
 
         protected override void OnAwake()
         {
@@ -61,84 +50,20 @@ namespace MegaGame
             }
 
             if (targetEnemies.Count != 0)
-            {
-                currentAttackTime -= Time.deltaTime;
                 currentSpeed = speed / speedDrop;
-            }
             else
                 currentSpeed = speed;
 
-            if (WindController.Instance)
-            {
-                cos = WindController.Instance.currentRotation.eulerAngles.y - transform.rotation.eulerAngles.y;
-                cos = Mathf.Cos(Mathf.Deg2Rad * cos);
-                cos = (cos + 1) / 2;
-
-                if (cos <= windSpeedMinMultiplier)
-                    cos = windSpeedMinMultiplier;
-
-                currentSpeed *= cos;
-                currentSpeed *= WindController.Instance.currentStrength;
-            }
+            UpdateSpeedByWind();
 
             agent.destination = destinationPosition.position;
             agent.speed = currentSpeed;
 
-            if (currentAttackTime < 0)
-                Attack();
-
-            UpdateHealthWidget();
             UpdateTargets();
-            UpdateProperties();
-
-            if (currentHealth < 0)
-                Kill();
-
-            /*
-            if (targetEnemies.Count != 0)
-            {
-                visualObject.transform.LookAt(targetEnemies[0].transform);
-                visualObject.transform.Rotate(new Vector3(0, 45, 0));
-            }
-            else
-                visualObject.transform.localRotation = Quaternion.identity;
-            */
         }
 
-        void OnTriggerEnter(Collider coll)
+        protected override void OnAttack()
         {
-            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
-
-            if (targetCharacter)
-            {
-                if (owner == Owner.player)
-                {
-                    if (targetCharacter.owner != Owner.player)
-                        targetEnemies.Add(targetCharacter);
-                }
-                else if (owner == Owner.enemy)
-                {
-                    if (targetCharacter.owner != Owner.enemy)
-                        targetEnemies.Add(targetCharacter);
-                }
-            }
-        }
-
-        void OnTriggerExit(Collider coll)
-        {
-            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
-
-            if (targetCharacter)
-                targetEnemies.Remove(targetCharacter);
-        }
-
-        void Attack()
-        {
-            if (targetEnemies.Count != 0)
-                targetEnemies[0].currentHealth -= damage;
-
-            currentAttackTime = attackDelay;
-
             if (FXShot)
                 FXShot.Play();
 
@@ -161,22 +86,11 @@ namespace MegaGame
             }
         }
 
-        void Kill()
+        protected override void OnKilled()
         {
             Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
             ObjectsManager.Instance.allCharacters.Remove(gameObject);
-        }
-
-        void UpdateHealthWidget()
-        {
-            if (currentHealth != health)
-            {
-                healthIndicatorWidget.SetValue(currentHealth / health);
-                healthIndicatorWidget.gameObject.SetActive(true);
-            }
-            else
-                healthIndicatorWidget.gameObject.SetActive(false);
         }
 
         void UpdateTargets()
@@ -188,12 +102,25 @@ namespace MegaGame
             }
         }
 
-        void UpdateProperties()
+        void UpdateSpeedByWind()
         {
-            if (globalTime.currentDay != currentDay)
-            {
-                currentDay = globalTime.currentDay;
-            }
+            if (!WindController.Instance)
+                return;
+
+            cos = WindController.Instance.currentRotation.eulerAngles.y - transform.rotation.eulerAngles.y;
+            cos = Mathf.Cos(Mathf.Deg2Rad * cos);
+            cos = (cos + 1) / 2;
+
+            if (cos <= windSpeedMinMultiplier)
+                cos = windSpeedMinMultiplier;
+
+            currentSpeed *= cos;
+            currentSpeed *= WindController.Instance.currentStrength;
+        }
+
+        public void SetDestinationPosition(Transform destination)
+        {
+            destinationPosition = destination;
         }
     }
 }

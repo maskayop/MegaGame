@@ -47,7 +47,7 @@ namespace MegaGame
         void SetThisIslandToPorts()
         {
             for (int i = 0; i < ports.Count; i++)
-                ports[i].island = this;
+                ports[i].Island = this;
         }
 
         public void UpdateIslandState()

@@ -4,9 +4,6 @@ namespace MegaGame
 {
     public class Port : BaseCharacter
     {
-        [Header("Money")]
-        public short revenue = 1;
-
         [Header("Visual")]
         [SerializeField] GameObject playerVisual;
         [SerializeField] GameObject enemyVisual;
@@ -15,21 +12,8 @@ namespace MegaGame
         [SerializeField] GameObject playerTarget;
         [SerializeField] GameObject enemyTarget;
 
-        [Header("Widgets")]
-        [SerializeField] HealthIndicatorWidget playerHealthWidget;
-        [SerializeField] HealthIndicatorWidget enemyHealthWidget;
-
         [Header("FX")]
         [SerializeField] ParticleSystem FXShot;
-
-        [HideInInspector] public Island island;
-
-        int currentDay = 0;
-        bool isCaptured = false;
-
-        float currentAttackTime = 0;
-
-        protected override void OnAwake() { }
 
         protected override void OnStart()
         {
@@ -46,104 +30,18 @@ namespace MegaGame
         {
             if (isCaptured)
                 return;
-
-            if (currentHealth < 0)
-            {
-                Kill();
-                return;
-            }
-
-            UpdateHealthWidget();
-            UpdateProperties();
-
-            if (targetEnemies.Count != 0)
-                currentAttackTime -= Time.deltaTime;
-
-            if (currentAttackTime < 0)
-                Attack();
         }
 
-        void OnTriggerEnter(Collider coll)
+        protected override void OnAttack()
         {
-            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
-
-            if (targetCharacter)
-            {
-                if (owner == Owner.player)
-                {
-                    if (targetCharacter.owner == Owner.enemy)
-                        targetEnemies.Add(targetCharacter);
-                }
-                else if (owner == Owner.enemy)
-                {
-                    if (targetCharacter.owner == Owner.player)
-                        targetEnemies.Add(targetCharacter);
-                }
-            }
-        }
-
-        void OnTriggerExit(Collider coll)
-        {
-            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
-
-            if (targetCharacter)
-                targetEnemies.Remove(targetCharacter);
-        }
-
-        void Attack()
-        {
-            if (targetEnemies.Count != 0)
-                targetEnemies[0].currentHealth -= damage;
-
-            currentAttackTime = attackDelay;
-
             if (FXShot)
                 FXShot.Play();
         }
 
-        void Kill()
+        protected override void OnKilled()
         {
             UpdateHealthWidget();
             isCaptured = true;
-        }
-
-        void UpdateHealthWidget()
-        {
-            if (GetCurrentHealthWidget() == null)
-                return;
-
-            if (currentHealth != health)
-            {
-                if (currentHealth <= 0)
-                    GetCurrentHealthWidget().SetValue(0);
-                else
-                    GetCurrentHealthWidget().SetValue(currentHealth / health);
-
-                GetCurrentHealthWidget().gameObject.SetActive(true);
-            }
-            else
-                GetCurrentHealthWidget().gameObject.SetActive(false);
-        }
-
-        void UpdateProperties()
-        {
-            if (globalTime.currentDay != currentDay)
-            {
-                currentHealth += healthRegeneration;
-                currentHealth = Mathf.Clamp(currentHealth, 0, health);
-
-                currentDay = globalTime.currentDay;
-            }
-        }
-
-        HealthIndicatorWidget GetCurrentHealthWidget()
-        {
-            if (owner == Owner.player)
-                return playerHealthWidget;
-            else if (owner == Owner.enemy)
-                return enemyHealthWidget;
-            else
-                return null;
         }
 
         void SetVisual()

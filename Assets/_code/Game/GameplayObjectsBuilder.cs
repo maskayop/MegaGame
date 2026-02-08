@@ -95,7 +95,7 @@ namespace MegaGame
         {
             GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
             Character character = ship.GetComponent<Character>();
-            character.destinationPosition = targetPosition;
+            character.SetDestinationPosition(targetPosition);
 
             if (character.owner == BaseCharacter.Owner.player)
                 ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, true);
