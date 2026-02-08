@@ -35,7 +35,6 @@ namespace MegaGame
         float currentHealthNormalized;
 
         protected int currentDay = 0;
-        protected bool isCaptured = false;
 
         Island island;
         public Island Island { get { return island; } set { island = value; } }
@@ -49,22 +48,26 @@ namespace MegaGame
 
         void Start()
         {
-            OnStart();
+            Init();
         }
 
         void Update()
         {
-            currentHealthNormalized = currentHealth / health;
+            if (health != 0)
+                currentHealthNormalized = currentHealth / health;
+            else
+                return;
 
             if (currentHealth <= 0)
-            {
-                Kill();
                 return;
-            }
 
             for (int i = 0; i < targetEnemies.Count; i++)
+            {
                 if (!targetEnemies[i])
                     targetEnemies.Remove(targetEnemies[i]);
+                else if (targetEnemies[i].owner == owner)
+                    targetEnemies.Remove(targetEnemies[i]);
+            }
 
             if (targetEnemies.Count != 0)
                 currentAttackTime -= Time.deltaTime;
@@ -74,6 +77,7 @@ namespace MegaGame
 
             UpdateHealthWidget();
             UpdateProperties();
+            UpdateTargets();
 
             OnUpdate();
         }
@@ -85,6 +89,8 @@ namespace MegaGame
             if (GlobalTimeController.Instance)
                 globalTime = GlobalTimeController.Instance;
 
+            currentDay = globalTime.currentDay;
+
             if (GameController.Instance)
                 gameController = GameController.Instance;
 
@@ -92,8 +98,6 @@ namespace MegaGame
         }
 
         protected virtual void OnAwake() { }
-
-        protected virtual void OnStart() { }
 
         protected virtual void OnInit() { }
 
@@ -167,8 +171,19 @@ namespace MegaGame
             }
         }
 
+        void UpdateTargets()
+        {
+            for (int i = 0; i < targetEnemies.Count; i++)
+            {
+                if (targetEnemies[i] == null)
+                    targetEnemies.Remove(targetEnemies[i]);
+            }
+        }
+
         void Kill()
         {
+            currentHealth = 0;
+            UpdateHealthWidget();
             OnKilled();
         }
 
@@ -177,7 +192,7 @@ namespace MegaGame
         void Attack()
         {
             if (targetEnemies.Count != 0)
-                targetEnemies[0].currentHealth -= damage;
+                targetEnemies[0].DealDamage(damage);
 
             currentAttackTime = attackDelay;
 
@@ -185,5 +200,16 @@ namespace MegaGame
         }
 
         protected virtual void OnAttack() { }
+
+        public void DealDamage(float INdamage)
+        {
+            currentHealth -= INdamage;
+
+            if (currentHealth <= 0)
+            {
+                UpdateHealthWidget();
+                Kill();
+            }
+        }
     }
 }

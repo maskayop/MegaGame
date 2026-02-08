@@ -63,22 +63,22 @@ namespace MegaGame
 
                     if (port && port.owner == BaseCharacter.Owner.enemy)
                         if (port == gameController.currentEnemyPort)
-                            CreatePlayerShip(gameController.currentEnemyPort.transform);
+                            CreatePlayerShip(gameController.currentEnemyPort);
 
                     Village village = hit.collider.GetComponentInParent<Village>();
 
                     if (village && village.owner != BaseCharacter.Owner.player)
-                        CreatePlayerShip(village.transform);
+                        CreatePlayerShip(village);
                 }
             }
         }
 
-        public void CreatePlayerShip(Transform targetPosition)
+        public void CreatePlayerShip(BaseSettlement targetSettlement)
         {
             if (Strint.Subtraction(gameController.playerMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(scenePrefabsManager.GetShipPrefab(true), gameController.currentPlayerPort.transform, targetPosition);
+            BuildShip(scenePrefabsManager.GetShipPrefab(true), gameController.currentPlayerPort.transform, targetSettlement);
             gameController.RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
@@ -87,20 +87,20 @@ namespace MegaGame
             if (Strint.Subtraction(gameController.enemyMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.currentEnemyPort.transform, gameController.currentPlayerPort.transform);
+            BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.currentEnemyPort.transform, gameController.currentPlayerPort);
             gameController.RemoveMoneyFromEnemy(smallShipBuildingCost);
         }
 
-        public void BuildShip(GameObject shipOwner, Transform buildingPosition, Transform targetPosition)
+        public void BuildShip(GameObject shipOwner, Transform buildingPosition, BaseSettlement targetSettlement)
         {
             GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
             Character character = ship.GetComponent<Character>();
-            character.SetDestinationPosition(targetPosition);
+            character.SetDestinationPosition(targetSettlement);
 
             if (character.owner == BaseCharacter.Owner.player)
-                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, true);
+                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetSettlement.transform.position, true);
             else if (character.owner == BaseCharacter.Owner.enemy)
-                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetPosition.position, false);
+                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetSettlement.transform.position, false);
         }
     }
 }

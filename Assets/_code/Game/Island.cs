@@ -11,6 +11,7 @@ namespace MegaGame
         [SerializeField] NameWidget nameWidget;
 
         public List<Port> ports = new List<Port>();
+        public List<Village> villages = new List<Village>();
 
         [Header("Battle")]
         public bool isStartIsland = false;
@@ -20,7 +21,7 @@ namespace MegaGame
 
         void Awake()
         {
-            SetThisIslandToPorts();
+            SetThisIslandToSettlements();
         }
 
         void Start()
@@ -44,10 +45,13 @@ namespace MegaGame
             UpdateIslandState();
         }
 
-        void SetThisIslandToPorts()
+        void SetThisIslandToSettlements()
         {
             for (int i = 0; i < ports.Count; i++)
                 ports[i].Island = this;
+
+            for (int i = 0; i < villages.Count; i++)
+                villages[i].Island = this;
         }
 
         public void UpdateIslandState()
@@ -61,6 +65,7 @@ namespace MegaGame
             for (int i = 0; i < ports.Count; i++)
             {
                 ports[i].owner = owner;
+                ports[i].SetVisual();
                 ports[i].SetVisualAsTarget(false, owner);
                 ports[i].gameObject.name = islandData.islandName.GetLocalizedString() + " - Port " + i.ToString();
             }

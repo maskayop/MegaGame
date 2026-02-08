@@ -20,6 +20,7 @@ namespace MegaGame
 
         NavMeshAgent agent;
         Transform destinationPosition;
+        BaseSettlement targetSettlement;
 
         float cos = 0;
 
@@ -30,17 +31,7 @@ namespace MegaGame
 
             agent = GetComponent<NavMeshAgent>();
         }
-
-        protected override void OnStart()
-        {
-            Init();
-        }
-
-        protected override void OnInit()
-        {
-            currentDay = globalTime.currentDay;
-        }
-
+        
         protected override void OnUpdate()
         {
             if (gameController.gameState == GameController.GameState.menu)
@@ -50,16 +41,25 @@ namespace MegaGame
             }
 
             if (targetEnemies.Count != 0)
-                currentSpeed = speed / speedDrop;
+            {
+                if (speedDrop != 0)
+                    currentSpeed = speed / speedDrop;
+                else
+                    currentSpeed = speed;
+            }
             else
                 currentSpeed = speed;
 
             UpdateSpeedByWind();
 
+            if (owner == Owner.player && targetSettlement.owner == Owner.player)
+                targetSettlement = gameController.currentEnemyPort;
+            else if (owner == Owner.enemy && targetSettlement.owner == Owner.enemy)
+                targetSettlement = gameController.currentPlayerPort;
+            
+            destinationPosition = targetSettlement.transform;
             agent.destination = destinationPosition.position;
             agent.speed = currentSpeed;
-
-            UpdateTargets();
         }
 
         protected override void OnAttack()
@@ -71,18 +71,24 @@ namespace MegaGame
             {
                 if (targetEnemies[0] as Village)
                 {
+                    Village targetVillage = targetEnemies[0].GetComponent<Village>();
+
                     if (owner == Owner.player)
-                        targetEnemies[0].owner = Owner.player;
+                    {
+                        targetVillage.owner = Owner.player;
+                        targetVillage.Island.owner = Owner.player;
+                    }
                     else if (owner == Owner.enemy)
-                        targetEnemies[0].owner = Owner.enemy;
+                    {
+                        targetVillage.owner = Owner.enemy;
+                        targetVillage.Island.owner = Owner.enemy;
+                    }
 
-                    targetEnemies.Remove(targetEnemies[0]);
+                    targetVillage.Island.UpdateIslandState();
+                    targetVillage.Init();
+                    targetVillage.currentHealth = 1;
+                    targetEnemies.Remove(targetVillage);
                 }
-
-                if (owner == Owner.player)
-                    destinationPosition = gameController.currentEnemyPort.transform;
-                else if (owner == Owner.enemy)
-                    destinationPosition = gameController.currentPlayerPort.transform;
             }
         }
 
@@ -91,15 +97,6 @@ namespace MegaGame
             Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
             ObjectsManager.Instance.allCharacters.Remove(gameObject);
-        }
-
-        void UpdateTargets()
-        {
-            for (int i = 0; i < targetEnemies.Count; i++)
-            {
-                if (targetEnemies[i] == null)
-                    targetEnemies.Remove(targetEnemies[i]);
-            }
         }
 
         void UpdateSpeedByWind()
@@ -118,9 +115,10 @@ namespace MegaGame
             currentSpeed *= WindController.Instance.currentStrength;
         }
 
-        public void SetDestinationPosition(Transform destination)
+        public void SetDestinationPosition(BaseSettlement destinationSettlement)
         {
-            destinationPosition = destination;
+            targetSettlement = destinationSettlement;
+            destinationPosition = targetSettlement.transform;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace MegaGame.UI
             else if (playerMoneyGrowth == 0)
                 playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString();
             else 
-                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString() + wasteColorFormat + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString() + wasteColorFormat + " " + playerMoneyGrowth.ToString() + "</color>" + "</size>";
 
             playerShipsAmountText.text = objectsManager.playerShips.Count.ToString();
             playerPortsAmountText.text = gameController.PlayerPortsCount.ToString();
@@ -85,7 +85,7 @@ namespace MegaGame.UI
             else if (enemyMoneyGrowth == 0)
                 enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString();
             else
-                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString() + wasteColorFormat + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString() + wasteColorFormat + " " + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
 
             enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
             enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();

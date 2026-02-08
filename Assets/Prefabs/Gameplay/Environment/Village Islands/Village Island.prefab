@@ -71,6 +71,8 @@ MonoBehaviour:
   islandData: {fileID: 0}
   nameWidget: {fileID: 4211345175774475087, guid: 845c44f4974691447b250f555965b7b6, type: 3}
   ports: []
+  villages:
+  - {fileID: 4612086604358412153}
   isStartIsland: 0
   possibleTargets: []
 --- !u!1 &7018247979384959124
@@ -344,3 +346,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1219924178703769635, guid: 6e21d8b31b75ed940a13834a40c3f870, type: 3}
   m_PrefabInstance: {fileID: 4407078020134945209}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4612086604358412153 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9018592706176067264, guid: 6e21d8b31b75ed940a13834a40c3f870, type: 3}
+  m_PrefabInstance: {fileID: 4407078020134945209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034dfdd07123c7444a09db10354c268e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.Village
