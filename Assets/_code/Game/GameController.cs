@@ -25,20 +25,31 @@ namespace MegaGame
         [SerializeField] ModelButton startGameModelButton;
         [SerializeField] float offsetY = 0;
 
-        [Header("Islands and Ports")]
+        [Header("Islands and Settlements")]
         public List<Island> allIslands = new List<Island>();
+
         public List<Port> allPorts = new List<Port>();
+        public List<Village> allVillages = new List<Village>();
 
         public List<Port> playerPorts = new List<Port>();
+        public List<Village> playerVillages = new List<Village>();
+
         public List<Port> enemyPorts = new List<Port>();
+        public List<Village> enemyVillages = new List<Village>();
 
         public List<Port> allPossibleTargetPorts = new List<Port>();
 
         short playerPortsCount;
         public short PlayerPortsCount { get { return playerPortsCount; } }
 
+        short playerVillagesCount;
+        public short PlayerVillagesCount { get { return playerVillagesCount; } }
+
         short enemyPortsCount;
         public short EnemyPortsCount { get { return enemyPortsCount; } }
+
+        short enemyVillagesCount;
+        public short EnemyVillagesCount { get { return enemyVillagesCount; } }
 
         public bool isVictory = false;
         public bool IsVictory { get { return isVictory; } }
@@ -176,13 +187,13 @@ namespace MegaGame
                 if (allPorts[i].Island.islandData.id == playerStartIslandId)
                     allPorts[i].owner = BaseCharacter.Owner.player;
 
-            UpdatePortsLists();
+            UpdateSettlementsLists();
             PrepareNewBattle();
 
             campaignIsEnded = false;
         }
 
-        void UpdatePortsLists()
+        public void UpdateSettlementsLists()
         {
             playerPorts.Clear();
             enemyPorts.Clear();
@@ -201,6 +212,18 @@ namespace MegaGame
                 for (int p = 0; p < playerPorts[i].Island.possibleTargets.Count; p++)
                     if (playerPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.player)
                         allPossibleTargetPorts.Add(playerPorts[i].Island.possibleTargets[p].ports[0]);
+
+            playerVillages.Clear();
+            enemyVillages.Clear();
+
+            for (int i = 0; i < allVillages.Count; i++)
+                if (allVillages[i].owner == BaseCharacter.Owner.player)
+                    playerVillages.Add(allVillages[i]);
+                else if (allVillages[i].owner == BaseCharacter.Owner.enemy)
+                    enemyVillages.Add(allVillages[i]);
+
+            playerVillagesCount = (short)playerVillages.Count;
+            enemyVillagesCount = (short)enemyVillages.Count;
         }
 
         void UpdatePortState(Port port, BaseCharacter.Owner owner)
@@ -255,7 +278,7 @@ namespace MegaGame
                 return;
             }
 
-            UpdatePortsLists();
+            UpdateSettlementsLists();
             PlaceCameraBetweenPorts();
             PlaceStartGameModelButtonBetweenPorts();
             SetGameStateAsWorld();
@@ -314,7 +337,7 @@ namespace MegaGame
 
         public void StartBattle()
         {
-            UpdatePortsLists();
+            UpdateSettlementsLists();
             SetGameStateAsBattle();
             PlaceCameraBetweenPorts();
             startGameModelButton.gameObject.SetActive(false);
@@ -324,7 +347,7 @@ namespace MegaGame
         {
             ObjectsManager.Instance.Init();
             SaveGameData();
-            UpdatePortsLists();
+            UpdateSettlementsLists();
             SetGameStateAsWorld();
             startGameModelButton.gameObject.SetActive(false);
         }
@@ -529,7 +552,8 @@ namespace MegaGame
             enemyMaintenance = 0;
 
             for (int i = 0; i < objectsManager.enemyShips.Count; i++)
-                enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Character>().maintenance;
+                if (objectsManager.enemyShips[i])
+                    enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Character>().maintenance;
 
             enemyShipsCount = (short)objectsManager.enemyShips.Count;
         }
@@ -542,8 +566,14 @@ namespace MegaGame
             for (int i = 0; i < playerPorts.Count; i++)
                 playerRevenue += playerPorts[i].revenue;
 
+            for (int i = 0; i < playerVillages.Count; i++)
+                playerRevenue += playerVillages[i].revenue;
+
             for (int i = 0; i < enemyPorts.Count; i++)
                 enemyRevenue += enemyPorts[i].revenue;
+
+            for (int i = 0; i < enemyVillages.Count; i++)
+                enemyRevenue += enemyVillages[i].revenue;
 
             AddMoneyToPlayer(playerRevenue);
             AddMoneyToEnemy(enemyRevenue);

@@ -88,6 +88,8 @@ namespace MegaGame
                     targetVillage.Init();
                     targetVillage.currentHealth = 1;
                     targetEnemies.Remove(targetVillage);
+
+                    gameController.UpdateSettlementsLists();
                 }
             }
         }

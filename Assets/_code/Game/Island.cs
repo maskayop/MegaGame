@@ -42,6 +42,9 @@ namespace MegaGame
             for (int i = 0; i < ports.Count; i++)
                 gameController.allPorts.Add(ports[i]);
 
+            for (int i = 0; i < villages.Count; i++)
+                gameController.allVillages.Add(villages[i]);
+
             UpdateIslandState();
         }
 
@@ -68,6 +71,13 @@ namespace MegaGame
                 ports[i].SetVisual();
                 ports[i].SetVisualAsTarget(false, owner);
                 ports[i].gameObject.name = islandData.islandName.GetLocalizedString() + " - Port " + i.ToString();
+            }
+
+            for (int i = 0; i < villages.Count; i++)
+            {
+                villages[i].owner = owner;
+                villages[i].SetVisual();
+                villages[i].gameObject.name = islandData.islandName.GetLocalizedString() + " - Village " + i.ToString();
             }
         }
     }

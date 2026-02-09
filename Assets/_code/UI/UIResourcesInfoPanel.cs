@@ -11,6 +11,7 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI playerMoneyAmountText;
         [SerializeField] TextMeshProUGUI playerShipsAmountText;
         [SerializeField] TextMeshProUGUI playerPortsAmountText;
+        [SerializeField] TextMeshProUGUI playerVillagesAmountText;
         [SerializeField] TextMeshProUGUI playerRevenueText;
         [SerializeField] TextMeshProUGUI playerMaintenanceText;
 
@@ -18,6 +19,7 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI enemyMoneyAmountText;
         [SerializeField] TextMeshProUGUI enemyShipsAmountText;
         [SerializeField] TextMeshProUGUI enemyPortsAmountText;
+        [SerializeField] TextMeshProUGUI enemyVillagesAmountText;
         [SerializeField] TextMeshProUGUI enemyRevenueText;
         [SerializeField] TextMeshProUGUI enemyMaintenanceText;
 
@@ -75,6 +77,7 @@ namespace MegaGame.UI
 
             playerShipsAmountText.text = objectsManager.playerShips.Count.ToString();
             playerPortsAmountText.text = gameController.PlayerPortsCount.ToString();
+            playerVillagesAmountText.text = gameController.PlayerVillagesCount.ToString();
             playerRevenueText.text = "+" + gameController.GetPlayerRevenue().ToString();
             playerMaintenanceText.text = "-" + gameController.GetPlayerMaintenance().ToString();
 
@@ -89,6 +92,7 @@ namespace MegaGame.UI
 
             enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
             enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
+            enemyVillagesAmountText.text = gameController.EnemyVillagesCount.ToString();
             enemyRevenueText.text = "+" + gameController.GetEnemyRevenue().ToString();
             enemyMaintenanceText.text = "-" + gameController.GetEnemyMaintenance().ToString();
         }
