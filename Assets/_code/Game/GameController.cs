@@ -392,7 +392,7 @@ namespace MegaGame
             }
 
             if (island.islandData.id == -1)
-                island.islandData.SetId(maxId);
+                island.islandData.SetId(maxId + 1);
         }
 
         void SaveGameData()
