@@ -242,7 +242,7 @@ namespace MegaGame
 
             for (int i = 0; i < allIslands.Count; i++)
             {
-                SetIslandId(allIslands[i], i);
+                SetIslandId(allIslands[i]);
 
                 allIslands[i].UpdateIslandState();
 
@@ -381,13 +381,18 @@ namespace MegaGame
             }
         }
 
-        void SetIslandId(Island island, int id)
+        void SetIslandId(Island island)
         {
-            if (island.islandData.id == -1)
+            int maxId = 0;
+
+            for (int i = 0; i < allIslands.Count; i++)
             {
-                island.islandData.id = id;
-                island.islandData.SetId(id);
+                if (allIslands[i].islandData.id > maxId)
+                    maxId = allIslands[i].islandData.id;
             }
+
+            if (island.islandData.id == -1)
+                island.islandData.SetId(maxId);
         }
 
         void SaveGameData()

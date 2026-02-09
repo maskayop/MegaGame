@@ -4607,7 +4607,7 @@ PrefabInstance:
     - target: {fileID: 4791404138563316690, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
       propertyPath: islandData
       value: 
-      objectReference: {fileID: 11400000, guid: 537ccf3b1eeba9f488d0140b627af5ce, type: 2}
+      objectReference: {fileID: 11400000, guid: 322ea8bd44661a44296c672da8b7542f, type: 2}
     - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.4
@@ -4650,7 +4650,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9135618099421877708, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
       propertyPath: m_Name
-      value: Village Island 50
+      value: "\u0412\u0435\u0440\u0448\u0438\u043D\u043D\u044B\u0439 \u041E\u0441\u0442\u0440\u043E\u0432
+        - Village Island 50"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6154,6 +6155,7 @@ Transform:
   - {fileID: 557351731}
   - {fileID: 655091757}
   - {fileID: 1899857034}
+  - {fileID: 1590754513}
   m_Father: {fileID: 1583714158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1249306624
@@ -7097,6 +7099,73 @@ MonoBehaviour:
   m_MinRegionArea: 4
   m_NavMeshData: {fileID: 23800000, guid: ccaee079cfe96d14caa9c9626e18fef1, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1001 &1590754512
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1243094381}
+    m_Modifications:
+    - target: {fileID: 4791404138563316690, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: islandData
+      value: 
+      objectReference: {fileID: 11400000, guid: 537ccf3b1eeba9f488d0140b627af5ce, type: 2}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135618099421877708, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_Name
+      value: "\u0420\u043E\u0437\u043E\u0432\u044B\u0435 \u0443\u0442\u0451\u0441\u044B
+        - Village Island 50"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+--- !u!4 &1590754513 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6151196923958752060, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+  m_PrefabInstance: {fileID: 1590754512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1608797519
 GameObject:
   m_ObjectHideFlags: 0
