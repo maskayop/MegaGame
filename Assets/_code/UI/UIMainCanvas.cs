@@ -21,7 +21,7 @@ namespace MegaGame.UI
         [SerializeField] GameObject defeatPanel;
 
         [Header("Campaign")]
-        [SerializeField] GameObject endCampaignWindow;
+        [SerializeField] GameObject endCampaignWindow;        
         [SerializeField] GameObject campaignVictoryPanel;
         [SerializeField] GameObject campaignDefeatPanel;
 
@@ -36,6 +36,7 @@ namespace MegaGame.UI
 
         [Header("Camera")]
         [SerializeField] float cameraZoomMultiplier = 2.0f;
+        [SerializeField] GameObject cameraZoomButtons;
 
         int currentDay = 0;
 
@@ -120,10 +121,16 @@ namespace MegaGame.UI
                 CameraController.Instance.CameraZoom(+cameraZoomMultiplier);
         }
 
+        public void ShowCameraZoomButtons(bool state)
+        {
+            cameraZoomButtons.SetActive(state);
+        }
+
         public void ShowStartGameWindow()
         {
             startGameWindow.SetActive(true);
             HideEndGameWindow();
+            ShowCameraZoomButtons(false);
         }
 
         void HideStartGameWindow()
@@ -143,6 +150,8 @@ namespace MegaGame.UI
                 victoryPanel.SetActive(true);
             else
                 defeatPanel.SetActive(true);
+
+            ShowCameraZoomButtons(false);
         }
 
         void HideEndGameWindow()
@@ -156,12 +165,14 @@ namespace MegaGame.UI
         {
             HideStartGameWindow();
             gameController.StartBattle();
+            ShowCameraZoomButtons(true);
         }
 
         public void PrepareNewBattle()
         {
             ShowStartGameWindow();
             gameController.PrepareNewBattle();
+            ShowCameraZoomButtons(false);
         }
 
         public void ShowEndCampaignWindow()
@@ -177,6 +188,8 @@ namespace MegaGame.UI
                 else
                     campaignDefeatPanel.SetActive(true);
             }
+
+            ShowCameraZoomButtons(false);
         }
 
         void HideEndCampaignWindow()

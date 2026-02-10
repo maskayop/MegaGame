@@ -6,8 +6,12 @@ namespace MegaGame
 	public class NameWidget : MonoBehaviour
 	{
 		[SerializeField] TextMeshPro text;
-		[SerializeField] float minScale;
-		[SerializeField] bool useLookAt = true;
+		[SerializeField] float minScale = 0;
+		[SerializeField] bool useLookAt = false;
+
+		[Header("Inverse")]
+		[SerializeField] bool inverseScaling = false;
+		[SerializeField] float scaleForDisabling = 1;
 
 		[Header("Colors")]
 		[SerializeField] Color playerColor = Color.white;
@@ -16,15 +20,23 @@ namespace MegaGame
 
         void Update()
 		{
+			if (transform.localScale.x < scaleForDisabling)
+				text.gameObject.SetActive(false);
+			else
+				text.gameObject.SetActive(true);
+
 			if (useLookAt)
 				transform.LookAt(CameraController.Instance.mainCamera.transform.position);
 			else
 			{
 				transform.rotation = CameraController.Instance.mainCamera.transform.rotation;
 				transform.Rotate(180, 0, 180);
-            }
+			}
 
-			transform.localScale = Vector3.one * Mathf.Clamp(CameraController.Instance.GetCameraZoom(), minScale, 1.0f);
+			if (!inverseScaling)
+				transform.localScale = Vector3.one * Mathf.Clamp(CameraController.Instance.GetCameraZoom(), minScale, 1);
+			else
+				transform.localScale = Vector3.one * Mathf.Clamp((1 - CameraController.Instance.GetCameraZoom()), 0, minScale);
 		}
 
 		public void SetText(string nameText)
