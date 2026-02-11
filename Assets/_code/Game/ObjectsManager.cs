@@ -39,9 +39,9 @@ namespace MegaGame
 
                 for (int i = 0; i < allCharacters.Count; i++)
                 {
-                    if (allCharacters[i].GetComponent<Character>().owner == BaseCharacter.Owner.player)
+                    if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.player)
                         playerShips.Add(allCharacters[i]);
-                    else if (allCharacters[i].GetComponent<Character>().owner == BaseCharacter.Owner.enemy)
+                    else if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.enemy)
                         enemyShips.Add(allCharacters[i]);
                 }
             }

@@ -94,7 +94,7 @@ namespace MegaGame
         public void BuildShip(GameObject shipOwner, Transform buildingPosition, BaseSettlement targetSettlement)
         {
             GameObject ship = Instantiate(shipOwner, buildingPosition.position, buildingPosition.rotation);
-            Character character = ship.GetComponent<Character>();
+            Warship character = ship.GetComponent<Warship>();
             character.SetDestinationPosition(targetSettlement);
 
             if (character.owner == BaseCharacter.Owner.player)

@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace MegaGame
 {
-    public class Character : BaseCharacter
+    public class Warship : BaseCharacter
     {
         [Header("Speed")]
         public float speed = 1;
@@ -40,12 +40,18 @@ namespace MegaGame
                 return;
             }
 
+            if (speedDrop == 0)
+                return;
+
             if (targetEnemies.Count != 0)
             {
-                if (speedDrop != 0)
-                    currentSpeed = speed / speedDrop;
-                else
-                    currentSpeed = speed;
+                currentSpeed = speed / speedDrop;
+
+                if (targetEnemies[0] as Port)
+                {
+                    if (targetEnemies[0].GetComponent<Port>() != targetSettlement)
+                        currentSpeed = speed;
+                }
             }
             else
                 currentSpeed = speed;
@@ -62,16 +68,26 @@ namespace MegaGame
             agent.speed = currentSpeed;
         }
 
+        protected override bool CanAddTargetToList(BaseCharacter targetCharacter)
+        {
+            if (targetCharacter as Port)
+                if (targetCharacter != targetSettlement)
+                    return false;
+
+            if (targetCharacter as Village)
+                if (targetCharacter != targetSettlement)
+                    return false;
+
+            return true;
+        }
+
         protected override void OnAttack()
         {
-            if (FXShot)
-                FXShot.Play();
-
             if (targetEnemies[0].currentHealth <= 0)
             {
                 if (targetEnemies[0] as Village)
                 {
-                    Village targetVillage = targetEnemies[0].GetComponent<Village>();
+                    Village targetVillage = (Village)targetEnemies[0];
 
                     if (owner == Owner.player)
                     {
@@ -91,7 +107,17 @@ namespace MegaGame
 
                     gameController.UpdateSettlementsLists();
                 }
+                else if (targetEnemies[0] as Port)
+                {
+                    Port port = (Port)targetEnemies[0];
+
+                    if (port != targetSettlement)
+                        return;
+                }
             }
+
+            if (FXShot)
+                FXShot.Play();
         }
 
         protected override void OnKilled()

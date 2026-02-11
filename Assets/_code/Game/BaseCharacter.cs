@@ -111,12 +111,12 @@ namespace MegaGame
             {
                 if (owner == Owner.player)
                 {
-                    if (targetCharacter.owner != Owner.player)
+                    if (targetCharacter.owner != Owner.player && CanAddTargetToList(targetCharacter))
                         targetEnemies.Add(targetCharacter);
                 }
                 else if (owner == Owner.enemy)
                 {
-                    if (targetCharacter.owner != Owner.enemy)
+                    if (targetCharacter.owner != Owner.enemy && CanAddTargetToList(targetCharacter))
                         targetEnemies.Add(targetCharacter);
                 }
             }
@@ -211,5 +211,7 @@ namespace MegaGame
                 Kill();
             }
         }
+
+        protected virtual bool CanAddTargetToList(BaseCharacter targetCharacter) { return true; }
     }
 }
