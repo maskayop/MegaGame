@@ -21,7 +21,7 @@ namespace MegaGame.UI
         [SerializeField] GameObject defeatPanel;
 
         [Header("Campaign")]
-        [SerializeField] GameObject endCampaignWindow;        
+        [SerializeField] GameObject endCampaignWindow;
         [SerializeField] GameObject campaignVictoryPanel;
         [SerializeField] GameObject campaignDefeatPanel;
 
@@ -42,6 +42,7 @@ namespace MegaGame.UI
 
         GlobalTimeController globalTime;
         GameController gameController;
+        GameDataSaver gameDataSaver;
 
         GameController.GameState currentGameState;
 
@@ -62,6 +63,7 @@ namespace MegaGame.UI
             globalTime = GlobalTimeController.Instance;
             gameController = GameController.Instance;
             currentDayText.text = currentDay.ToString();
+            gameDataSaver = GameDataSaver.Instance;
 
             ShowStartGameWindow();
         }
@@ -71,7 +73,7 @@ namespace MegaGame.UI
             if (!gameController)
                 return;
 
-            currentAccountNameText.text = gameController.GetCurrentAccountName();
+            currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
 
             if (gameController.campaignIsEnded)
                 return;

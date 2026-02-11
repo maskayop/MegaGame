@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3272045349617746637}
   - component: {fileID: 6039075397147238773}
   - component: {fileID: 15590748652426754}
+  - component: {fileID: 7090913357105979908}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -50,22 +51,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameController
   gameState: 0
-  smallShipBuildingCost: 10
+  playerMoney: 
+  enemyMoney: 
   currentPlayerPort: {fileID: 0}
   currentEnemyPort: {fileID: 0}
   startGameModelButton: {fileID: 0}
   offsetY: 20
   allIslands: []
   allPorts: []
+  allVillages: []
   playerPorts: []
+  playerVillages: []
   enemyPorts: []
+  enemyVillages: []
   allPossibleTargetPorts: []
   isVictory: 0
   campaignIsEnded: 0
   currentDay: 0
-  currentAccountId: -1
-  currentAccountName: 
-  totalAccountsAmount: -1
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +142,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04871b59d59e895479d2fff9d6076810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameplayObjectsBuilder
+  smallShipBuildingCost: 10
+--- !u!114 &7090913357105979908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462718075957510001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22640e42e58dce94e834c6e67780db38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameDataSaver
+  currentAccountId: -1
+  currentAccountName: 
+  totalAccountsAmount: -1

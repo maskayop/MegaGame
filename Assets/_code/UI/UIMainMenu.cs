@@ -23,6 +23,7 @@ namespace MegaGame.UI
         [SerializeField] GameObject createAccountButton;
 
         GameController gameController;
+        GameDataSaver gameDataSaver;
 
         List<string> accountsNames = new List<string>();
 
@@ -37,7 +38,7 @@ namespace MegaGame.UI
             if (!isOpen)
                 return;
 
-            if (accountNameInputField.text == gameController.GetCurrentAccountName())
+            if (accountNameInputField.text == gameDataSaver.GetCurrentAccountName())
             {
                 renameAccountButton.SetActive(false);
                 createAccountButton.SetActive(false);
@@ -52,8 +53,9 @@ namespace MegaGame.UI
         public void Init()
         {
             gameController = GameController.Instance;
+            gameDataSaver = GameDataSaver.Instance;
 
-            currentAccountNameText.text = gameController.GetCurrentAccountName();
+            currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
             CloseAccountManagerWindow();
         }
 
@@ -86,7 +88,7 @@ namespace MegaGame.UI
         public void OpenAccountManagerWindow()
         {
             accountManagerWindow.SetActive(true);
-            accountNameInputField.text = gameController.GetCurrentAccountName();
+            accountNameInputField.text = gameDataSaver.GetCurrentAccountName();
             GetAccountsNames();
         }
 
@@ -97,13 +99,13 @@ namespace MegaGame.UI
 
         public void OnRenameAccountButtonClicked()
         {
-            gameController.SetAccountName(accountNameInputField.text);
+            gameDataSaver.SetAccountName(accountNameInputField.text);
             Init();
         }
 
         public void OnCreateAccountButtonClicked()
         {
-            gameController.CreateAccount(accountNameInputField.text);
+            gameDataSaver.CreateAccount(accountNameInputField.text);
             Init();
         }
 
@@ -112,7 +114,7 @@ namespace MegaGame.UI
             foreach (Transform t in accountButtonsContainer)
                 Destroy(t.gameObject);
 
-            accountsNames = gameController.GetAccountsNames();
+            accountsNames = gameDataSaver.GetAccountsNames();
 
             for (int i = 0; i < accountsNames.Count; i++)
             {
@@ -123,8 +125,8 @@ namespace MegaGame.UI
 
         public void LoadAccount(string targetAccountName)
         {
-            GameController.Instance.LoadAccount(targetAccountName);
-            gameController.SetAccountName(targetAccountName);
+            gameDataSaver.LoadAccount(targetAccountName);
+            gameDataSaver.SetAccountName(targetAccountName);
             Init();
         }
     }
