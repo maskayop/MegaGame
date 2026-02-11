@@ -82,12 +82,12 @@ namespace MegaGame
             gameController.RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
-        public void CreateEnemyShip()
+        public void CreateEnemyShip(BaseSettlement targetSettlement)
         {
             if (Strint.Subtraction(gameController.enemyMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.currentEnemyPort.transform, gameController.currentPlayerPort);
+            BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.currentEnemyPort.transform, targetSettlement);
             gameController.RemoveMoneyFromEnemy(smallShipBuildingCost);
         }
 

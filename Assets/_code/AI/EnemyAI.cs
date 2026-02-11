@@ -5,7 +5,8 @@ namespace MegaGame
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float timeForDecision = 1.0f;
-        [SerializeField] int shipSpawnChance = 1;
+        [SerializeField] short shipSpawnChance = 1;
+        [SerializeField] short villageTargetChance = 1;
 
         Port currentPort;
 
@@ -56,7 +57,20 @@ namespace MegaGame
 
         void SpawnShip()
         {
-            gameplayObjectsBuilder.CreateEnemyShip();
+            int r = Random.Range(0, villageTargetChance);
+
+            if (gameController.possibleTargetVillagesForEnemy.Count == 0)
+                r = -1;
+
+            if (r == 0)
+                gameplayObjectsBuilder.CreateEnemyShip(GetRandomPossibleVillage());
+            else
+                gameplayObjectsBuilder.CreateEnemyShip(gameController.currentPlayerPort);
+        }
+
+        Village GetRandomPossibleVillage()
+        {
+            return gameController.possibleTargetVillagesForEnemy[Random.Range(0, gameController.possibleTargetVillagesForEnemy.Count)];
         }
     }
 }

@@ -65,9 +65,8 @@ MonoBehaviour:
   enemyPorts: []
   enemyVillages: []
   allPossibleTargetPorts: []
-  isVictory: 0
-  campaignIsEnded: 0
-  currentDay: 0
+  distanceForEnemyPossibleTargets: 150
+  possibleTargetVillagesForEnemy: []
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
   timeForDecision: 0.3
-  shipSpawnChance: 20
+  shipSpawnChance: 15
+  villageTargetChance: 2
 --- !u!114 &6039075397147238773
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,6 +39,10 @@ namespace MegaGame
 
         public List<Port> allPossibleTargetPorts = new List<Port>();
 
+        [Header("Enemy's Targets")]
+        public short distanceForEnemyPossibleTargets = 100;
+        public List<Village> possibleTargetVillagesForEnemy = new List<Village>();
+
         short playerPortsCount;
         public short PlayerPortsCount { get { return playerPortsCount; } }
 
@@ -51,11 +55,11 @@ namespace MegaGame
         short enemyVillagesCount;
         public short EnemyVillagesCount { get { return enemyVillagesCount; } }
 
-        public bool isVictory = false;
-        public bool IsVictory { get { return isVictory; } }
+        bool isVictory = false;
+        public bool IsVictory { get { return isVictory; } set { isVictory = value; } }
 
-        public bool campaignIsEnded = false;
-        public bool CampaignIsEnded { get { return campaignIsEnded; } }
+        bool campaignIsEnded = false;
+        public bool CampaignIsEnded { get { return campaignIsEnded; } set { campaignIsEnded = value; } }
 
         List<Island> startIslands = new List<Island>();
         List<Island> neutralIslands = new List<Island>();
@@ -65,7 +69,8 @@ namespace MegaGame
         GlobalTimeController globalTime;
         GameDataSaver gameDataSaver;
 
-        public int currentDay = 0;
+        int currentDay = 0;
+        public int CurrentDay { get { return currentDay; } set { currentDay = value; } }
 
         short playerRevenue = 0;
         short playerMaintenance = 0;
@@ -205,6 +210,16 @@ namespace MegaGame
 
             playerVillagesCount = (short)playerVillages.Count;
             enemyVillagesCount = (short)enemyVillages.Count;
+
+            possibleTargetVillagesForEnemy.Clear();
+
+            if (currentEnemyPort)
+            {
+                for (int i = 0; i < allVillages.Count; i++)
+                    if (allVillages[i].owner != BaseCharacter.Owner.enemy)
+                        if (Vector3.Distance(allVillages[i].transform.position, currentEnemyPort.transform.position) <= distanceForEnemyPossibleTargets)
+                            possibleTargetVillagesForEnemy.Add(allVillages[i]);
+            }
         }
 
         void UpdatePortState(Port port, BaseCharacter.Owner owner)

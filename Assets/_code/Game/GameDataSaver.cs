@@ -70,9 +70,9 @@ namespace MegaGame
 
             dataSaveLoad.Save(currentAccountNameKey + currentDayFormat, GlobalTimeController.Instance.currentDay);
 
-            if (gameController.campaignIsEnded)
+            if (gameController.CampaignIsEnded)
             {
-                if (gameController.isVictory)
+                if (gameController.IsVictory)
                     dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)1);
                 else
                     dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)2);
@@ -101,20 +101,20 @@ namespace MegaGame
             gameController.enemyMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + enemyMoneyFormat);
 
             GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
-            gameController.currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
+            gameController.CurrentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
 
             if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 1)
             {
-                gameController.isVictory = true;
-                gameController.campaignIsEnded = true;
+                gameController.IsVictory = true;
+                gameController.CampaignIsEnded = true;
             }
             else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 2)
             {
-                gameController.isVictory = false;
-                gameController.campaignIsEnded = true;
+                gameController.IsVictory = false;
+                gameController.CampaignIsEnded = true;
             }
             else
-                gameController.campaignIsEnded = false;
+                gameController.CampaignIsEnded = false;
         }
 
         public void LoadLastAccount()

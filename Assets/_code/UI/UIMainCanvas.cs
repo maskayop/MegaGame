@@ -75,7 +75,7 @@ namespace MegaGame.UI
 
             currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
 
-            if (gameController.campaignIsEnded)
+            if (gameController.CampaignIsEnded)
                 return;
 
             if (mainMenu.isOpen)

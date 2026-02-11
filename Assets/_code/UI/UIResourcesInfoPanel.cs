@@ -58,7 +58,7 @@ namespace MegaGame.UI
 
         void Update()
         {
-            if (gameController.campaignIsEnded)
+            if (gameController.CampaignIsEnded)
                 return;
 
             UpdateGameCharacteristics();
