@@ -10,9 +10,7 @@ namespace MegaGame
 
         [SerializeField] NameWidget nameWidget;
 
-        public List<Port> ports = new List<Port>();
-        public List<Village> villages = new List<Village>();
-        public List<Fortress> fortresses = new List<Fortress>();
+        public List<BaseSettlement> settlements = new List<BaseSettlement>();
 
         [Header("Battle")]
         public bool isStartIsland = false;
@@ -40,28 +38,23 @@ namespace MegaGame
 
             gameController.allIslands.Add(this);
 
-            for (int i = 0; i < ports.Count; i++)
-                gameController.allPorts.Add(ports[i]);
-
-            for (int i = 0; i < villages.Count; i++)
-                gameController.allVillages.Add(villages[i]);
-
-            for (int i = 0; i < fortresses.Count; i++)
-                gameController.allFortresses.Add(fortresses[i]);
+            for (int i = 0; i < settlements.Count; i++)
+            {
+                if (settlements[i] as Port)
+                    gameController.allPorts.Add((Port)settlements[i]);
+                else if (settlements[i] as Village)
+                    gameController.allVillages.Add((Village)settlements[i]);
+                else if (settlements[i] as Fortress)
+                    gameController.allFortresses.Add((Fortress)settlements[i]);
+            }
 
             UpdateIslandState();
         }
 
         void SetThisIslandToSettlements()
         {
-            for (int i = 0; i < ports.Count; i++)
-                ports[i].Island = this;
-
-            for (int i = 0; i < villages.Count; i++)
-                villages[i].Island = this;
-
-            for (int i = 0; i < fortresses.Count; i++)
-                fortresses[i].Island = this;
+            for (int i = 0; i < settlements.Count; i++)
+                settlements[i].Island = this;
         }
 
         public void UpdateIslandState()
@@ -72,17 +65,13 @@ namespace MegaGame
                 nameWidget.SetColor(owner);
             }
 
-            for (int i = 0; i < ports.Count; i++)
+            for (int i = 0; i < settlements.Count; i++)
             {
-                UpdateSettlementState(ports[i], i);
-                ports[i].SetVisualAsTarget(false, owner);
+                UpdateSettlementState(settlements[i], i);
+
+                if (settlements[i] as Port)
+                    settlements[i].GetComponent<Port>().SetVisualAsTarget(false, owner);
             }
-
-            for (int i = 0; i < villages.Count; i++)
-                UpdateSettlementState(villages[i], i);
-
-            for (int i = 0; i < fortresses.Count; i++)
-                UpdateSettlementState(fortresses[i], i);
         }
 
         void UpdateSettlementState(BaseSettlement settlement, int id)

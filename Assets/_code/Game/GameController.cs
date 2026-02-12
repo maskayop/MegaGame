@@ -130,6 +130,8 @@ namespace MegaGame
             gameDataSaver = GameDataSaver.Instance;
             gameDataSaver.Init();
 
+            campaignIsEnded = false;
+
             gameDataSaver.LoadLastAccount();
 
             startGameModelButton = FindFirstObjectByType<ModelButton>();
@@ -206,7 +208,8 @@ namespace MegaGame
             for (int i = 0; i < playerPorts.Count; i++)
                 for (int p = 0; p < playerPorts[i].Island.possibleTargets.Count; p++)
                     if (playerPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.player)
-                        allPossibleTargetPorts.Add(playerPorts[i].Island.possibleTargets[p].ports[0]);
+                        if (playerPorts[i].Island.possibleTargets[p].settlements[0] as Port)
+                            allPossibleTargetPorts.Add((Port)playerPorts[i].Island.possibleTargets[p].settlements[0]);
 
             playerVillages.Clear();
             enemyVillages.Clear();
@@ -319,7 +322,7 @@ namespace MegaGame
                     if (allIslands[i].islandData.id == playerStartIslandId)
                         currentPlayerIsland = allIslands[i];
 
-                currentPlayerPort = currentPlayerIsland.ports[0];
+                currentPlayerPort = (Port)currentPlayerIsland.settlements[0];
             }
 
             currentEnemyPort = allPossibleTargetPorts[Random.Range(0, allPossibleTargetPorts.Count)];
@@ -340,13 +343,15 @@ namespace MegaGame
             {
                 for (int i = 0; i < target.Island.possibleTargets.Count; i++)
                     if (target.Island.possibleTargets[i].owner == BaseCharacter.Owner.player)
-                        return target.Island.possibleTargets[i].ports[0];
+                        if (target.Island.possibleTargets[i].settlements[0] as Port)
+                            return (Port)target.Island.possibleTargets[i].settlements[0];
             }
             else
             {
                 for (int i = target.Island.possibleTargets.Count - 1; i >= 0; i--)
                     if (target.Island.possibleTargets[i].owner == BaseCharacter.Owner.player)
-                        return target.Island.possibleTargets[i].ports[0];
+                        if (target.Island.possibleTargets[i].settlements[0] as Port)
+                            return (Port)target.Island.possibleTargets[i].settlements[0];
             }
 
             return port;
