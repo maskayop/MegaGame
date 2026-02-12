@@ -30,12 +30,15 @@ namespace MegaGame
 
         public List<Port> allPorts = new List<Port>();
         public List<Village> allVillages = new List<Village>();
+        public List<Fortress> allFortresses = new List<Fortress>();
 
         public List<Port> playerPorts = new List<Port>();
         public List<Village> playerVillages = new List<Village>();
+        public List<Fortress> playerFortresses = new List<Fortress>();
 
         public List<Port> enemyPorts = new List<Port>();
         public List<Village> enemyVillages = new List<Village>();
+        public List<Fortress> enemyFortresses = new List<Fortress>();
 
         public List<Port> allPossibleTargetPorts = new List<Port>();
 
@@ -49,11 +52,17 @@ namespace MegaGame
         short playerVillagesCount;
         public short PlayerVillagesCount { get { return playerVillagesCount; } }
 
+        short playerFortressesCount;
+        public short PlayerFortressesCount { get { return playerFortressesCount; } }
+
         short enemyPortsCount;
         public short EnemyPortsCount { get { return enemyPortsCount; } }
 
         short enemyVillagesCount;
         public short EnemyVillagesCount { get { return enemyVillagesCount; } }
+
+        short enemyFortressesCount;
+        public short EnemyFortressesCount { get { return enemyFortressesCount; } }
 
         bool isVictory = false;
         public bool IsVictory { get { return isVictory; } set { isVictory = value; } }
@@ -210,6 +219,18 @@ namespace MegaGame
 
             playerVillagesCount = (short)playerVillages.Count;
             enemyVillagesCount = (short)enemyVillages.Count;
+
+            playerFortresses.Clear();
+            enemyFortresses.Clear();
+
+            for (int i = 0; i < allFortresses.Count; i++)
+                if (allFortresses[i].owner == BaseCharacter.Owner.player)
+                    playerFortresses.Add(allFortresses[i]);
+                else if (allFortresses[i].owner == BaseCharacter.Owner.enemy)
+                    enemyFortresses.Add(allFortresses[i]);
+
+            playerFortressesCount = (short)playerFortresses.Count;
+            enemyFortressesCount = (short)enemyFortresses.Count;
 
             possibleTargetVillagesForEnemy.Clear();
 

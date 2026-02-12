@@ -12,6 +12,7 @@ namespace MegaGame
 
         public List<Port> ports = new List<Port>();
         public List<Village> villages = new List<Village>();
+        public List<Fortress> fortresses = new List<Fortress>();
 
         [Header("Battle")]
         public bool isStartIsland = false;
@@ -45,6 +46,9 @@ namespace MegaGame
             for (int i = 0; i < villages.Count; i++)
                 gameController.allVillages.Add(villages[i]);
 
+            for (int i = 0; i < fortresses.Count; i++)
+                gameController.allFortresses.Add(fortresses[i]);
+
             UpdateIslandState();
         }
 
@@ -55,6 +59,9 @@ namespace MegaGame
 
             for (int i = 0; i < villages.Count; i++)
                 villages[i].Island = this;
+
+            for (int i = 0; i < fortresses.Count; i++)
+                fortresses[i].Island = this;
         }
 
         public void UpdateIslandState()
@@ -67,18 +74,32 @@ namespace MegaGame
 
             for (int i = 0; i < ports.Count; i++)
             {
-                ports[i].owner = owner;
-                ports[i].SetVisual();
+                UpdateSettlementState(ports[i], i);
                 ports[i].SetVisualAsTarget(false, owner);
-                ports[i].gameObject.name = islandData.islandName.GetLocalizedString() + " - Port " + i.ToString();
             }
 
             for (int i = 0; i < villages.Count; i++)
-            {
-                villages[i].owner = owner;
-                villages[i].SetVisual();
-                villages[i].gameObject.name = islandData.islandName.GetLocalizedString() + " - Village " + i.ToString();
-            }
+                UpdateSettlementState(villages[i], i);
+
+            for (int i = 0; i < fortresses.Count; i++)
+                UpdateSettlementState(fortresses[i], i);
+        }
+
+        void UpdateSettlementState(BaseSettlement settlement, int id)
+        {
+            settlement.owner = owner;
+            settlement.SetVisual();
+
+            string settlementType = "";
+
+            if (settlement as Port)
+                settlementType = " Port ";
+            else if (settlement as Village)
+                settlementType = " Village ";
+            else if (settlement as Fortress)
+                settlementType = " Fortress ";
+
+            settlement.gameObject.name = islandData.islandName.GetLocalizedString() + settlementType + id.ToString();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace MegaGame
         public static GameplayObjectsBuilder Instance { get; private set; }
 
         [Header("Prices")]
-        public int smallShipBuildingCost = 10;
+        public short smallShipBuildingCost = 10;
 
         string smallShipCost;
 
@@ -69,6 +69,11 @@ namespace MegaGame
 
                     if (village && village.owner != BaseCharacter.Owner.player)
                         CreatePlayerShip(village);
+
+                    Fortress fortress = hit.collider.GetComponentInParent<Fortress>();
+
+                    if (fortress && fortress.owner != BaseCharacter.Owner.player)
+                        CreatePlayerShip(fortress);
                 }
             }
         }

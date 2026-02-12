@@ -192,7 +192,7 @@ namespace MegaGame
         void Attack()
         {
             if (targetEnemies.Count != 0)
-                targetEnemies[0].DealDamage(damage);
+                targetEnemies[0].DealDamage(damage, this);
 
             currentAttackTime = attackDelay;
 
@@ -201,8 +201,12 @@ namespace MegaGame
 
         protected virtual void OnAttack() { }
 
-        public void DealDamage(float INdamage)
+        public void DealDamage(float INdamage, BaseCharacter character)
         {
+            if (owner == Owner.neutral && CanAddTargetToList(character))
+                if (targetEnemies.Count == 0 || targetEnemies[0] != character)
+                    targetEnemies.Add(character);
+
             currentHealth -= INdamage;
 
             if (currentHealth <= 0)

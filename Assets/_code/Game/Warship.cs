@@ -78,6 +78,10 @@ namespace MegaGame
                 if (targetCharacter != targetSettlement)
                     return false;
 
+            if (targetCharacter as Fortress)
+                if (targetCharacter != targetSettlement)
+                    return false;
+
             return true;
         }
 
@@ -104,6 +108,28 @@ namespace MegaGame
                     targetVillage.Init();
                     targetVillage.currentHealth = 1;
                     targetEnemies.Remove(targetVillage);
+
+                    gameController.UpdateSettlementsLists();
+                }
+                else if (targetEnemies[0] as Fortress)
+                {
+                    Fortress targetFortress = (Fortress)targetEnemies[0];
+
+                    if (owner == Owner.player)
+                    {
+                        targetFortress.owner = Owner.player;
+                        targetFortress.Island.owner = Owner.player;
+                    }
+                    else if (owner == Owner.enemy)
+                    {
+                        targetFortress.owner = Owner.enemy;
+                        targetFortress.Island.owner = Owner.enemy;
+                    }
+
+                    targetFortress.Island.UpdateIslandState();
+                    targetFortress.Init();
+                    targetFortress.currentHealth = 1;
+                    targetEnemies.Remove(targetFortress);
 
                     gameController.UpdateSettlementsLists();
                 }
