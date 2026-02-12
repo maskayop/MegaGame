@@ -150,6 +150,10 @@ namespace MegaGame
             {
                 allIslands[i].owner = BaseCharacter.Owner.neutral;
                 allIslands[i].UpdateIslandState();
+
+                if (allIslands[i])
+                    for (int s = 0; s < allIslands[i].settlements.Count; s++)
+                        allIslands[i].settlements[s].ResetHealth();
             }
         }
 

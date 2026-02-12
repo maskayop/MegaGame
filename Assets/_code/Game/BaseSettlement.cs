@@ -42,5 +42,10 @@ namespace MegaGame
             else if (owner == Owner.neutral)
                 neutralVisual.gameObject.SetActive(true);
         }
+
+        public void ResetHealth()
+        {
+            currentHealth = health;
+        }
     }
 }
