@@ -29,6 +29,7 @@ namespace MegaGame.UI
 
         GameController gameController;
         ObjectsManager objectsManager;
+        ResourcesController resourcesController;
 
         int playerMoneyGrowth;
         int enemyMoneyGrowth;
@@ -54,6 +55,7 @@ namespace MegaGame.UI
         {
             gameController = GameController.Instance;
             objectsManager = ObjectsManager.Instance;
+            resourcesController = ResourcesController.Instance;
         }
 
         void Update()
@@ -66,35 +68,35 @@ namespace MegaGame.UI
 
         void UpdateGameCharacteristics()
         {
-            playerMoneyGrowth = gameController.GetPlayerRevenue() - gameController.GetPlayerMaintenance();
+            playerMoneyGrowth = resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerMaintenance();
 
             if (playerMoneyGrowth > 0)
-                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString() + growthColorFormat + " +" + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + growthColorFormat + " +" + playerMoneyGrowth.ToString() + "</color>" + "</size>";
             else if (playerMoneyGrowth == 0)
-                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString();
+                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString();
             else 
-                playerMoneyAmountText.text = gameController.GetPlayerMoney().ToString() + wasteColorFormat + " " + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + wasteColorFormat + " " + playerMoneyGrowth.ToString() + "</color>" + "</size>";
 
             playerShipsAmountText.text = objectsManager.playerShips.Count.ToString();
             playerPortsAmountText.text = gameController.PlayerPortsCount.ToString();
             playerVillagesAmountText.text = gameController.PlayerVillagesCount.ToString();
-            playerRevenueText.text = "+" + gameController.GetPlayerRevenue().ToString();
-            playerMaintenanceText.text = "-" + gameController.GetPlayerMaintenance().ToString();
+            playerRevenueText.text = "+" + resourcesController.GetPlayerRevenue().ToString();
+            playerMaintenanceText.text = "-" + resourcesController.GetPlayerMaintenance().ToString();
 
-            enemyMoneyGrowth = gameController.GetEnemyRevenue() - gameController.GetEnemyMaintenance();
+            enemyMoneyGrowth = resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyMaintenance();
 
             if (enemyMoneyGrowth > 0)
-                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString() + growthColorFormat + " +" + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + growthColorFormat + " +" + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
             else if (enemyMoneyGrowth == 0)
-                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString();
+                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString();
             else
-                enemyMoneyAmountText.text = gameController.GetEnemyMoney().ToString() + wasteColorFormat + " " + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + wasteColorFormat + " " + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
 
             enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
             enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
             enemyVillagesAmountText.text = gameController.EnemyVillagesCount.ToString();
-            enemyRevenueText.text = "+" + gameController.GetEnemyRevenue().ToString();
-            enemyMaintenanceText.text = "-" + gameController.GetEnemyMaintenance().ToString();
+            enemyRevenueText.text = "+" + resourcesController.GetEnemyRevenue().ToString();
+            enemyMaintenanceText.text = "-" + resourcesController.GetEnemyMaintenance().ToString();
         }
     }
 }

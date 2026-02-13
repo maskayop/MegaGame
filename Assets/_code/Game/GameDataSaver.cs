@@ -15,6 +15,7 @@ namespace MegaGame
 
         DataSaveLoad dataSaveLoad;
         GameController gameController;
+        ResourcesController resourcesController;
 
         string islandOwnerFormat = " IO";
         string startPlayerIslandFormat = " SPI";
@@ -46,6 +47,7 @@ namespace MegaGame
         {
             dataSaveLoad = DataSaveLoad.Instance;
             gameController = GameController.Instance;
+            resourcesController = ResourcesController.Instance;
         }
 
         public void SaveGameData()
@@ -62,11 +64,11 @@ namespace MegaGame
                     dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat, (short)2);
             }
 
-            dataSaveLoad.Save(currentAccountNameKey + playerMoneyFormat, gameController.playerMoney);
-            dataSaveLoad.Save(currentAccountNameKey + enemyMoneyFormat, gameController.enemyMoney);
+            dataSaveLoad.Save(currentAccountNameKey + playerMoneyFormat, resourcesController.PlayerMoney);
+            dataSaveLoad.Save(currentAccountNameKey + enemyMoneyFormat, resourcesController.EnemyMoney);
 
-            dataSaveLoad.Save(currentAccountNameKey + "Player Money", Strint.GetInt(gameController.playerMoney));
-            dataSaveLoad.Save(currentAccountNameKey + "Enemy Money", Strint.GetInt(gameController.enemyMoney));
+            dataSaveLoad.Save(currentAccountNameKey + "Player Money", Strint.GetInt(resourcesController.PlayerMoney));
+            dataSaveLoad.Save(currentAccountNameKey + "Enemy Money", Strint.GetInt(resourcesController.EnemyMoney));
 
             dataSaveLoad.Save(currentAccountNameKey + currentDayFormat, GlobalTimeController.Instance.currentDay);
 
@@ -97,11 +99,11 @@ namespace MegaGame
                     gameController.allIslands[i].owner = BaseCharacter.Owner.neutral;
             }
 
-            gameController.playerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
-            gameController.enemyMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + enemyMoneyFormat);
+            resourcesController.PlayerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
+            resourcesController.EnemyMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + enemyMoneyFormat);
 
             GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
-            gameController.CurrentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
+            resourcesController.CurrentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
 
             if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 1)
             {

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6039075397147238773}
   - component: {fileID: 15590748652426754}
   - component: {fileID: 7090913357105979908}
+  - component: {fileID: 2472502709863904070}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -51,8 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameController
   gameState: 0
-  playerMoney: 
-  enemyMoney: 
   currentPlayerPort: {fileID: 0}
   currentEnemyPort: {fileID: 0}
   startGameModelButton: {fileID: 0}
@@ -162,3 +161,15 @@ MonoBehaviour:
   currentAccountId: -1
   currentAccountName: 
   totalAccountsAmount: -1
+--- !u!114 &2472502709863904070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462718075957510001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715ef3172d59330449f96d4ad9b74031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ResourcesController

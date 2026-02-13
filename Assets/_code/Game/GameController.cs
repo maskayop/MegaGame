@@ -1,7 +1,6 @@
 using MegaGame.UI;
 using System.Collections.Generic;
 using UnityEngine;
-using Vopere.Common;
 
 namespace MegaGame
 {
@@ -11,11 +10,6 @@ namespace MegaGame
 
         public enum GameState { world, battle, menu }
         public GameState gameState;
-
-        [HideInInspector]
-        public string playerMoney;
-        [HideInInspector]
-        public string enemyMoney;
 
         [Header("Ports")]
         public Port currentPlayerPort;
@@ -75,22 +69,9 @@ namespace MegaGame
         List<Island> startIslands = new List<Island>();
         List<Island> neutralIslands = new List<Island>();
 
-        ObjectsManager objectsManager;
         CameraController cameraController;
-        GlobalTimeController globalTime;
         GameDataSaver gameDataSaver;
-
-        int currentDay = 0;
-        public int CurrentDay { get { return currentDay; } set { currentDay = value; } }
-
-        short playerRevenue = 0;
-        short playerMaintenance = 0;
-
-        short enemyRevenue = 0;
-        short enemyMaintenance = 0;
-
-        short playerShipsCount = 0;
-        short enemyShipsCount = 0;
+        ResourcesController resourcesController;
 
         short playerStartIslandId;
         public short PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
@@ -121,14 +102,15 @@ namespace MegaGame
                 return;
 
             UpdateGameState();
-            UpdateMoney();
         }
 
         public void Init()
         {
-            globalTime = GlobalTimeController.Instance;
-            objectsManager = ObjectsManager.Instance;
             cameraController = CameraController.Instance;
+
+            resourcesController = ResourcesController.Instance;
+            resourcesController.Init();
+
             gameDataSaver = GameDataSaver.Instance;
             gameDataSaver.Init();
 
@@ -309,9 +291,9 @@ namespace MegaGame
             PlaceStartGameModelButtonBetweenPorts();
             SetGameStateAsWorld();
 
-            UpdatePlayerShips();
-            UpdateEnemyShips();
-            UpdateRevenues();
+            resourcesController.UpdatePlayerMaintenance();
+            resourcesController.UpdateEnemyMaintenance();
+            resourcesController.UpdateRevenues();
 
             startGameModelButton.gameObject.SetActive(true);
 
@@ -423,44 +405,6 @@ namespace MegaGame
                 island.islandData.SetId(maxId + 1);
         }
 
-        public void RemoveMoneyFromPlayer(int value)
-        {
-            if (Strint.Subtraction(playerMoney, Strint.GetString(value)) < 0)
-            {
-                playerMoney = Strint.GetString(0);
-                return;
-            }
-
-            playerMoney = Strint.GetString(Strint.Subtraction(playerMoney, Strint.GetString(value)));
-        }
-
-        public void RemoveMoneyFromEnemy(int value)
-        {
-            if (Strint.Subtraction(enemyMoney, Strint.GetString(value)) < 0)
-            {
-                enemyMoney = Strint.GetString(0);
-                return;
-            }
-
-            enemyMoney = Strint.GetString(Strint.Subtraction(enemyMoney, Strint.GetString(value)));
-        }
-
-        public void AddMoneyToPlayer(int value)
-        {
-            if (int.MaxValue - Strint.GetInt(playerMoney) <= value)
-                playerMoney = Strint.GetString(int.MaxValue);
-            else
-                playerMoney = Strint.GetString(Strint.Summation(playerMoney, Strint.GetString(value)));
-        }
-
-        public void AddMoneyToEnemy(int value)
-        {
-            if (int.MaxValue - Strint.GetInt(enemyMoney) <= value)
-                enemyMoney = Strint.GetString(int.MaxValue);
-            else
-                enemyMoney = Strint.GetString(Strint.Summation(enemyMoney, Strint.GetString(value)));
-        }
-
         void PlaceCameraBetweenPorts()
         {
             if (!currentPlayerPort || !currentEnemyPort || !CameraController.Instance)
@@ -486,96 +430,6 @@ namespace MegaGame
             newPosition.y = 0;
 
             return newPosition;
-        }
-
-        void UpdateMoney()
-        {
-            if (playerShipsCount != objectsManager.playerShips.Count)
-                UpdatePlayerShips();
-
-            if (enemyShipsCount != objectsManager.enemyShips.Count)
-                UpdateEnemyShips();
-
-            if (globalTime.currentDay != currentDay)
-                UpdateRevenues();
-        }
-
-        void UpdatePlayerShips()
-        {
-            playerMaintenance = 0;
-
-            for (int i = 0; i < objectsManager.playerShips.Count; i++)
-                if (objectsManager.playerShips[i])
-                    playerMaintenance += objectsManager.playerShips[i].GetComponent<Warship>().maintenance;
-
-            playerShipsCount = (short)objectsManager.playerShips.Count;
-        }
-
-        void UpdateEnemyShips()
-        {
-            enemyMaintenance = 0;
-
-            for (int i = 0; i < objectsManager.enemyShips.Count; i++)
-                if (objectsManager.enemyShips[i])
-                    enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Warship>().maintenance;
-
-            enemyShipsCount = (short)objectsManager.enemyShips.Count;
-        }
-
-        void UpdateRevenues()
-        {
-            playerRevenue = 0;
-            enemyRevenue = 0;
-
-            for (int i = 0; i < playerPorts.Count; i++)
-                playerRevenue += playerPorts[i].revenue;
-
-            for (int i = 0; i < playerVillages.Count; i++)
-                playerRevenue += playerVillages[i].revenue;
-
-            for (int i = 0; i < enemyPorts.Count; i++)
-                enemyRevenue += enemyPorts[i].revenue;
-
-            for (int i = 0; i < enemyVillages.Count; i++)
-                enemyRevenue += enemyVillages[i].revenue;
-
-            AddMoneyToPlayer(playerRevenue);
-            AddMoneyToEnemy(enemyRevenue);
-
-            RemoveMoneyFromPlayer(playerMaintenance);
-            RemoveMoneyFromEnemy(enemyMaintenance);
-
-            currentDay = globalTime.currentDay;
-        }
-
-        public int GetPlayerMoney()
-        {
-            return Strint.GetInt(playerMoney);
-        }
-
-        public int GetEnemyMoney()
-        {
-            return Strint.GetInt(enemyMoney);
-        }
-
-        public int GetPlayerRevenue()
-        {
-            return playerRevenue;
-        }
-
-        public int GetEnemyRevenue()
-        {
-            return enemyRevenue;
-        }
-
-        public int GetPlayerMaintenance()
-        {
-            return playerMaintenance;
-        }
-
-        public int GetEnemyMaintenance()
-        {
-            return enemyMaintenance;
         }
 
         public void SetGameStateAsWorld()

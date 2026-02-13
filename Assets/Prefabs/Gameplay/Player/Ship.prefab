@@ -130,17 +130,17 @@ MonoBehaviour:
   maintenance: 1
   health: 10
   currentHealth: 10
-  healthRegeneration: 1
+  healthRegeneration: 0
   damage: 1
   attackDelay: 1
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
   neutralHealthWidget: {fileID: 0}
   targetEnemies: []
-  speed: 10
+  speed: 12
   currentSpeed: 1
   speedDrop: 15
-  windSpeedMinMultiplier: 1
+  windSpeedMinMultiplier: 0.3
   FXDestroyPrefab: {fileID: 0}
   FXShot: {fileID: 1309626319987756586}
   visualObject: {fileID: 1021785611154541580}

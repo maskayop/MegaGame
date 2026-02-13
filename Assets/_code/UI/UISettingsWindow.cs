@@ -50,6 +50,12 @@ namespace MegaGame
             Init();
         }
 
+        void Start()
+        {
+            ChangeMusicVolume();
+            ChangeUIVolume();
+        }
+
         public void Init()
         {
             int graphicsLeveId = DataSaveLoad.Instance.GetSavedInt("GraphicsLevel");

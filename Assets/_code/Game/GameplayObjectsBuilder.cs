@@ -15,6 +15,7 @@ namespace MegaGame
 
         GameController gameController;
         ScenePrefabsManager scenePrefabsManager;
+        ResourcesController resourcesController;
 
         void Awake()
         {
@@ -48,6 +49,7 @@ namespace MegaGame
         {
             gameController = GameController.Instance;
             scenePrefabsManager = ScenePrefabsManager.Instance;
+            resourcesController = ResourcesController.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingCost);
         }
@@ -88,20 +90,20 @@ namespace MegaGame
                 return;
             }
 
-            if (Strint.Subtraction(gameController.playerMoney, smallShipCost) < 0)
+            if (Strint.Subtraction(resourcesController.PlayerMoney, smallShipCost) < 0)
                 return;
 
             BuildShip(scenePrefabsManager.GetShipPrefab(true), gameController.currentPlayerPort.transform, targetSettlement);
-            gameController.RemoveMoneyFromPlayer(smallShipBuildingCost);
+            resourcesController.RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
         public void TryCreateEnemyShip(BaseSettlement targetSettlement)
         {
-            if (Strint.Subtraction(gameController.enemyMoney, smallShipCost) < 0)
+            if (Strint.Subtraction(resourcesController.EnemyMoney, smallShipCost) < 0)
                 return;
 
             BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.currentEnemyPort.transform, targetSettlement);
-            gameController.RemoveMoneyFromEnemy(smallShipBuildingCost);
+            resourcesController.RemoveMoneyFromEnemy(smallShipBuildingCost);
         }
 
         public void BuildShip(GameObject shipOwner, Transform buildingPosition, BaseSettlement targetSettlement)
