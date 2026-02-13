@@ -1,3 +1,4 @@
+using MegaGame.UI;
 using UnityEngine;
 using Vopere.Common;
 
@@ -63,23 +64,30 @@ namespace MegaGame
 
                     if (port && port.owner == BaseCharacter.Owner.enemy)
                         if (port == gameController.currentEnemyPort)
-                            CreatePlayerShip(gameController.currentEnemyPort);
+                            TryCreatePlayerShip(gameController.currentEnemyPort);
 
                     Village village = hit.collider.GetComponentInParent<Village>();
 
                     if (village && village.owner != BaseCharacter.Owner.player)
-                        CreatePlayerShip(village);
+                        TryCreatePlayerShip(village);
 
                     Fortress fortress = hit.collider.GetComponentInParent<Fortress>();
 
                     if (fortress && fortress.owner != BaseCharacter.Owner.player)
-                        CreatePlayerShip(fortress);
+                        TryCreatePlayerShip(fortress);
                 }
             }
         }
 
-        public void CreatePlayerShip(BaseSettlement targetSettlement)
+        public void TryCreatePlayerShip(BaseSettlement targetSettlement)
         {
+            if (Vector3.Distance(gameController.currentPlayerPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
+            {
+                scenePrefabsManager.SpawnAsTargetReject(targetSettlement.transform.position);
+                UIMainCanvas.Instance.SpawnTooFarFromPortMessage();
+                return;
+            }
+
             if (Strint.Subtraction(gameController.playerMoney, smallShipCost) < 0)
                 return;
 
@@ -87,7 +95,7 @@ namespace MegaGame
             gameController.RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
-        public void CreateEnemyShip(BaseSettlement targetSettlement)
+        public void TryCreateEnemyShip(BaseSettlement targetSettlement)
         {
             if (Strint.Subtraction(gameController.enemyMoney, smallShipCost) < 0)
                 return;
@@ -103,9 +111,9 @@ namespace MegaGame
             character.SetDestinationPosition(targetSettlement);
 
             if (character.owner == BaseCharacter.Owner.player)
-                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetSettlement.transform.position, true);
+                scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, true);
             else if (character.owner == BaseCharacter.Owner.enemy)
-                ScenePrefabsManager.Instance.SpawnPortAsTargetFX(targetSettlement.transform.position, false);
+                scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, false);
         }
     }
 }

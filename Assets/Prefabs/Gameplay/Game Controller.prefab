@@ -60,12 +60,15 @@ MonoBehaviour:
   allIslands: []
   allPorts: []
   allVillages: []
+  allFortresses: []
   playerPorts: []
   playerVillages: []
+  playerFortresses: []
   enemyPorts: []
   enemyVillages: []
+  enemyFortresses: []
   allPossibleTargetPorts: []
-  distanceForEnemyPossibleTargets: 150
+  distanceForPossibleTargets: 150
   possibleTargetVillagesForEnemy: []
 --- !u!114 &8288885944846870642
 MonoBehaviour:
@@ -129,6 +132,7 @@ MonoBehaviour:
   shipPlayerPrefab: {fileID: 2693174518542573683, guid: 4a56d9afcbf7cdc4b993da2ba54ac42f, type: 3}
   shipEnemyPrefab: {fileID: 2693174518542573683, guid: 89157ea0f050ab540914402dcc0c3173, type: 3}
   FXTargetEnemy: {fileID: 8761975602101030722, guid: 5e35a2487a5cee645b84205aa1d50df4, type: 3}
+  FXTargetEnemyReject: {fileID: 8761975602101030722, guid: d977f821f161d6e42871245a86a00bb9, type: 3}
   FXTargetPlayer: {fileID: 8907093577828947285, guid: 64e26d34465644d479b58a7964ba0c95, type: 3}
 --- !u!114 &15590748652426754
 MonoBehaviour:

@@ -63,9 +63,9 @@ namespace MegaGame
                 r = -1;
 
             if (r == 0)
-                gameplayObjectsBuilder.CreateEnemyShip(GetRandomPossibleVillage());
+                gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleVillage());
             else
-                gameplayObjectsBuilder.CreateEnemyShip(gameController.currentPlayerPort);
+                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.currentPlayerPort);
         }
 
         Village GetRandomPossibleVillage()

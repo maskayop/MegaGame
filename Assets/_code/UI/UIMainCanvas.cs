@@ -38,6 +38,9 @@ namespace MegaGame.UI
         [SerializeField] float cameraZoomMultiplier = 2.0f;
         [SerializeField] GameObject cameraZoomButtons;
 
+        [Header("Messages")]
+        [SerializeField] UIMessagePanel messagePanel;
+
         int currentDay = 0;
 
         GlobalTimeController globalTime;
@@ -205,6 +208,16 @@ namespace MegaGame.UI
         {
             mainMenu.Open();
             HideEndCampaignWindow();
+        }
+
+        public void SpawnMessage()
+        {
+            messagePanel.SpawnMessage();
+        }
+
+        public void SpawnTooFarFromPortMessage()
+        {
+            messagePanel.SpawnTooFarFromPortMessage();
         }
     }
 }

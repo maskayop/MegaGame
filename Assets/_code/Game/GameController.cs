@@ -42,8 +42,10 @@ namespace MegaGame
 
         public List<Port> allPossibleTargetPorts = new List<Port>();
 
+        [Header("Distances")]
+        public short distanceForPossibleTargets = 100;
+
         [Header("Enemy's Targets")]
-        public short distanceForEnemyPossibleTargets = 100;
         public List<Village> possibleTargetVillagesForEnemy = new List<Village>();
 
         short playerPortsCount;
@@ -245,7 +247,7 @@ namespace MegaGame
             {
                 for (int i = 0; i < allVillages.Count; i++)
                     if (allVillages[i].owner != BaseCharacter.Owner.enemy)
-                        if (Vector3.Distance(allVillages[i].transform.position, currentEnemyPort.transform.position) <= distanceForEnemyPossibleTargets)
+                        if (Vector3.Distance(allVillages[i].transform.position, currentEnemyPort.transform.position) <= distanceForPossibleTargets)
                             possibleTargetVillagesForEnemy.Add(allVillages[i]);
             }
         }

@@ -12,6 +12,7 @@ namespace MegaGame
 
         [Header("FX")]
         [SerializeField] GameObject FXTargetEnemy;
+        [SerializeField] GameObject FXTargetEnemyReject;
         [SerializeField] GameObject FXTargetPlayer;
 
         void Awake()
@@ -26,12 +27,17 @@ namespace MegaGame
             Instance = this;
         }
 
-        public void SpawnPortAsTargetFX(Vector3 position, bool targetIsEnemy)
+        public void SpawnAsTargetFX(Vector3 position, bool targetIsEnemy)
         {
             if (targetIsEnemy)
                 Instantiate(FXTargetEnemy, position, Quaternion.identity);
             else
                 Instantiate(FXTargetPlayer, position, Quaternion.identity);
+        }
+
+        public void SpawnAsTargetReject(Vector3 position)
+        {
+            Instantiate(FXTargetEnemyReject, position, Quaternion.identity);
         }
 
         public GameObject GetShipPrefab(bool isPlayer)
