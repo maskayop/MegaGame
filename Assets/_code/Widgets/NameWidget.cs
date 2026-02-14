@@ -1,58 +1,85 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace MegaGame
 {
-	public class NameWidget : MonoBehaviour
-	{
-		[SerializeField] TextMeshPro text;
-		[SerializeField] float minScale = 0;
-		[SerializeField] bool useLookAt = false;
+    public class NameWidget : MonoBehaviour
+    {
+        [SerializeField] GameObject container;
+        [SerializeField] TextMeshPro text;
 
-		[Header("Inverse")]
-		[SerializeField] bool inverseScaling = false;
-		[SerializeField] float scaleForDisabling = 1;
+        [Header("Island Type Mesh")]
+        [SerializeField] MeshRenderer islandTypeRenderer;
+        [SerializeField] string materialValueName = "_BaseColor";
 
-		[Header("Colors")]
-		[SerializeField] Color playerColor = Color.white;
-		[SerializeField] Color enemyColor = Color.white;
-		[SerializeField] Color neutralColor = Color.white;
+        [Header("Transform")]
+        [SerializeField] float minScale = 0;
+        [SerializeField] bool useLookAt = false;
+
+        [Header("Inverse")]
+        [SerializeField] bool inverseScaling = false;
+        [SerializeField] float scaleForDisabling = 1;
+
+        [Header("Colors")]
+        [SerializeField] Color playerColor = Color.white;
+        [SerializeField] Color enemyColor = Color.white;
+        [SerializeField] Color neutralColor = Color.white;
 
         void Update()
-		{
-			if (transform.localScale.x < scaleForDisabling)
-				text.gameObject.SetActive(false);
-			else
-				text.gameObject.SetActive(true);
+        {
+            if (transform.localScale.x < scaleForDisabling)
+                container.SetActive(false);
+            else
+                container.SetActive(true);
 
-			if (useLookAt)
-				transform.LookAt(CameraController.Instance.mainCamera.transform.position);
-			else
-			{
-				transform.rotation = CameraController.Instance.mainCamera.transform.rotation;
-				transform.Rotate(180, 0, 180);
-			}
+            if (useLookAt)
+                transform.LookAt(CameraController.Instance.mainCamera.transform.position);
+            else
+            {
+                transform.rotation = CameraController.Instance.mainCamera.transform.rotation;
+                transform.Rotate(180, 0, 180);
+            }
 
-			if (!inverseScaling)
-				transform.localScale = Vector3.one * Mathf.Clamp(CameraController.Instance.GetCameraZoom(), minScale, 1);
-			else
-				transform.localScale = Vector3.one * Mathf.Clamp((1 - CameraController.Instance.GetCameraZoom()), 0, minScale);
-		}
-
-		public void SetText(string nameText)
-		{
-            text.text = nameText;
-		}
-
-		public void SetColor(BaseCharacter.Owner owner)
-		{
-			if (owner == BaseCharacter.Owner.player)
-				text.color = playerColor;
-			else if (owner == BaseCharacter.Owner.enemy)
-				text.color = enemyColor;
-			else if (owner == BaseCharacter.Owner.neutral)
-				text.color = neutralColor;
-
+            if (!inverseScaling)
+                transform.localScale = Vector3.one * Mathf.Clamp(CameraController.Instance.GetCameraZoom(), minScale, 1);
+            else
+                transform.localScale = Vector3.one * Mathf.Clamp((1 - CameraController.Instance.GetCameraZoom()), 0, minScale);
         }
-	}
+
+        public void SetText(string nameText)
+        {
+            if (!text)
+                return;
+
+            text.text = nameText;
+        }
+
+        public void SetColor(BaseCharacter.Owner owner)
+        {
+            if (owner == BaseCharacter.Owner.player)
+            {
+                if (text)
+                    text.color = playerColor;
+
+                if (islandTypeRenderer)
+                    islandTypeRenderer.material.SetColor(materialValueName, playerColor);
+            }
+            else if (owner == BaseCharacter.Owner.enemy)
+            {
+                if (text)
+                    text.color = enemyColor;
+
+                if (islandTypeRenderer)
+                    islandTypeRenderer.material.SetColor(materialValueName, enemyColor);
+            }
+            else if (owner == BaseCharacter.Owner.neutral)
+            {
+                if (text)
+                    text.color = neutralColor;
+
+                if (islandTypeRenderer)
+                    islandTypeRenderer.material.SetColor(materialValueName, neutralColor);
+            }
+        }
+    }
 }
