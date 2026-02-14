@@ -59,9 +59,9 @@ namespace MegaGame
             UpdateSpeedByWind();
 
             if (owner == Owner.player && targetSettlement.owner == Owner.player)
-                targetSettlement = gameController.currentEnemyPort;
+                targetSettlement = gameController.playerOpposingPorts.antagonPort;
             else if (owner == Owner.enemy && targetSettlement.owner == Owner.enemy)
-                targetSettlement = gameController.currentPlayerPort;
+                targetSettlement = gameController.enemyOpposingPorts.antagonPort;
             
             destinationPosition = targetSettlement.transform;
             agent.destination = destinationPosition.position;

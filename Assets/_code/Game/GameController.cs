@@ -1,9 +1,17 @@
 using MegaGame.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MegaGame
 {
+    [Serializable]
+    public class OpposingPorts
+    {
+        public Port protagonPort;
+        public Port antagonPort;
+    }
+
     public class GameController : MonoBehaviour
     {
         public static GameController Instance { get; private set; }
@@ -11,11 +19,11 @@ namespace MegaGame
         public enum GameState { world, battle, menu }
         public GameState gameState;
 
-        [Header("Ports")]
-        public Port currentPlayerPort;
-        public Port currentEnemyPort;
+        [Header("Current Fighting Ports")]
+        public OpposingPorts playerOpposingPorts;
+        public OpposingPorts enemyOpposingPorts;
 
-        [Header("3D Model Buttons")]
+        [Header("3D Model Button")]
         [SerializeField] ModelButton startGameModelButton;
         [SerializeField] float offsetY = 0;
 
@@ -76,6 +84,9 @@ namespace MegaGame
         short playerStartIslandId;
         public short PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
 
+        short enemyStartIslandId;
+        public short EnemyStartIslandId { get { return enemyStartIslandId; } set { enemyStartIslandId = value; } }
+
         void Awake()
         {
             if (Instance != null)
@@ -125,20 +136,22 @@ namespace MegaGame
         {
             playerPorts.Clear();
             enemyPorts.Clear();
+            startIslands.Clear();
             allPossibleTargetPorts.Clear();
 
-            currentPlayerPort = null;
-            currentEnemyPort = null;
+            playerOpposingPorts.protagonPort = null;
+            playerOpposingPorts.antagonPort = null;
+
+            enemyOpposingPorts.protagonPort = null;
+            enemyOpposingPorts.antagonPort = null;
 
             for (int i = 0; i < allIslands.Count; i++)
             {
                 allIslands[i].owner = BaseCharacter.Owner.neutral;
                 allIslands[i].UpdateIslandState();
-
-                if (allIslands[i])
-                    for (int s = 0; s < allIslands[i].settlements.Count; s++)
-                        allIslands[i].settlements[s].ResetHealth();
             }
+
+            ResetHealthForAllIslands();
         }
 
         public void StartGame()
@@ -164,13 +177,27 @@ namespace MegaGame
 
             if (playerStartIslandId == -1)
             {
-                short rand = (short)Random.Range(0, startIslands.Count);
+                short rand = (short)UnityEngine.Random.Range(0, startIslands.Count);
                 playerStartIslandId = (short)startIslands[rand].islandData.id;
             }
 
+            if (enemyStartIslandId == -1)
+            {
+                short rand = (short)UnityEngine.Random.Range(0, startIslands.Count);
+
+                if (enemyStartIslandId != playerStartIslandId)
+                    enemyStartIslandId = (short)startIslands[rand].islandData.id;
+                else
+                    enemyStartIslandId = (short)startIslands[0].islandData.id;
+            }
+
             for (int i = 0; i < allPorts.Count; i++)
+            {
                 if (allPorts[i].Island.islandData.id == playerStartIslandId)
                     allPorts[i].owner = BaseCharacter.Owner.player;
+                else if (allPorts[i].Island.islandData.id == enemyStartIslandId)
+                    allPorts[i].owner = BaseCharacter.Owner.enemy;
+            }
 
             UpdateSettlementsLists();
             PrepareNewBattle();
@@ -225,11 +252,11 @@ namespace MegaGame
 
             possibleTargetVillagesForEnemy.Clear();
 
-            if (currentEnemyPort)
+            if (enemyOpposingPorts.protagonPort)
             {
                 for (int i = 0; i < allVillages.Count; i++)
                     if (allVillages[i].owner != BaseCharacter.Owner.enemy)
-                        if (Vector3.Distance(allVillages[i].transform.position, currentEnemyPort.transform.position) <= distanceForPossibleTargets)
+                        if (Vector3.Distance(allVillages[i].transform.position, enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
                             possibleTargetVillagesForEnemy.Add(allVillages[i]);
             }
         }
@@ -267,7 +294,7 @@ namespace MegaGame
 
             CalculateCurrentPorts();
 
-            if (!currentEnemyPort)
+            if (!enemyOpposingPorts.protagonPort)
             {
                 isVictory = true;
                 EndCampaign();
@@ -275,11 +302,11 @@ namespace MegaGame
             }
             else
             {
-                UpdatePortState(currentEnemyPort, BaseCharacter.Owner.enemy);
-                currentEnemyPort.SetVisualAsTarget(true, BaseCharacter.Owner.enemy);
+                UpdatePortState(enemyOpposingPorts.protagonPort, BaseCharacter.Owner.enemy);
+                enemyOpposingPorts.protagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.enemy);
             }
 
-            if (!currentPlayerPort)
+            if (!playerOpposingPorts.protagonPort)
             {
                 isVictory = false;
                 EndCampaign();
@@ -310,22 +337,45 @@ namespace MegaGame
                     if (allIslands[i].islandData.id == playerStartIslandId)
                         currentPlayerIsland = allIslands[i];
 
-                currentPlayerPort = (Port)currentPlayerIsland.settlements[0];
+                playerOpposingPorts.protagonPort = (Port)currentPlayerIsland.settlements[0];
             }
 
-            currentEnemyPort = allPossibleTargetPorts[Random.Range(0, allPossibleTargetPorts.Count)];
+            if (enemyPorts.Count <= 1)
+            {
+                Island currentEnemyIsland = null;
+
+                for (int i = 0; i < allIslands.Count; i++)
+                    if (allIslands[i].islandData.id == enemyStartIslandId)
+                        currentEnemyIsland = allIslands[i];
+
+                enemyOpposingPorts.protagonPort = (Port)currentEnemyIsland.settlements[0];
+            }
+            
+            short rand = (short)UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
+            playerOpposingPorts.antagonPort = allPossibleTargetPorts[rand];
 
             if (playerPorts.Count > 1)
-                currentPlayerPort = FindPossiblePlayerPortToTargetEnemyPort(currentEnemyPort);
+                playerOpposingPorts.protagonPort = FindPossiblePlayerPortToTargetPort(playerOpposingPorts.antagonPort);
 
-            UpdatePortState(currentPlayerPort, BaseCharacter.Owner.player);
-            currentPlayerPort.SetVisualAsTarget(true, BaseCharacter.Owner.player);
+            UpdatePortState(playerOpposingPorts.protagonPort, BaseCharacter.Owner.player);
+            playerOpposingPorts.protagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.player);
+
+            if (playerOpposingPorts.antagonPort.owner == BaseCharacter.Owner.enemy)
+            {
+                UpdatePortState(playerOpposingPorts.antagonPort, BaseCharacter.Owner.enemy);
+                playerOpposingPorts.antagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.enemy);
+            }
+            else if (playerOpposingPorts.antagonPort.owner == BaseCharacter.Owner.neutral)
+            {
+                UpdatePortState(playerOpposingPorts.antagonPort, BaseCharacter.Owner.neutral);
+                playerOpposingPorts.antagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.neutral);
+            }
         }
 
-        Port FindPossiblePlayerPortToTargetEnemyPort(Port target)
+        Port FindPossiblePlayerPortToTargetPort(Port target)
         {
             Port port = null;
-            short rand = (short)Random.Range(0, 2);
+            short rand = (short)UnityEngine.Random.Range(0, 2);
 
             if (rand == 0)
             {
@@ -374,18 +424,18 @@ namespace MegaGame
 
         void UpdateGameState()
         {
-            if (!currentPlayerPort && !currentEnemyPort)
+            if (!playerOpposingPorts.protagonPort && !enemyOpposingPorts.protagonPort)
                 return;
 
-            if (currentPlayerPort.currentHealth <= 0)
+            if (playerOpposingPorts.protagonPort.currentHealth <= 0)
             {
-                UpdatePortState(currentPlayerPort, BaseCharacter.Owner.enemy);
+                UpdatePortState(playerOpposingPorts.protagonPort, BaseCharacter.Owner.enemy);
                 EndBattle();
                 isVictory = false;
             }
-            else if (currentEnemyPort.currentHealth <= 0)
+            else if (playerOpposingPorts.antagonPort.currentHealth <= 0)
             {
-                UpdatePortState(currentEnemyPort, BaseCharacter.Owner.player);
+                UpdatePortState(playerOpposingPorts.antagonPort, BaseCharacter.Owner.player);
                 EndBattle();
                 isVictory = true;
             }
@@ -407,7 +457,10 @@ namespace MegaGame
 
         void PlaceCameraBetweenPorts()
         {
-            if (!currentPlayerPort || !currentEnemyPort || !CameraController.Instance)
+            if (!playerOpposingPorts.protagonPort || !playerOpposingPorts.antagonPort)
+                return;
+
+            if (!CameraController.Instance)
                 return;
 
             CameraController.Instance.transform.position = CalculatePositionBetweenPorts();
@@ -415,7 +468,10 @@ namespace MegaGame
 
         void PlaceStartGameModelButtonBetweenPorts()
         {
-            if (!currentPlayerPort || !currentEnemyPort || !CameraController.Instance || !startGameModelButton)
+            if (!playerOpposingPorts.protagonPort || !playerOpposingPorts.antagonPort)
+                return;
+
+            if (!startGameModelButton)
                 return;
 
             startGameModelButton.transform.position = CalculatePositionBetweenPorts();
@@ -425,7 +481,7 @@ namespace MegaGame
         Vector3 CalculatePositionBetweenPorts()
         {
             Vector3 newPosition = Vector3.zero;
-            newPosition += currentPlayerPort.transform.position + currentEnemyPort.transform.position;
+            newPosition += playerOpposingPorts.protagonPort.transform.position + playerOpposingPorts.antagonPort.transform.position;
             newPosition /= 2;
             newPosition.y = 0;
 
@@ -447,6 +503,15 @@ namespace MegaGame
         public void SetGameStateAsMenu()
         {
             gameState = GameState.menu;
+        }
+
+        void ResetHealthForAllIslands()
+        {
+            for (int i = 0; i < allIslands.Count; i++)
+            {
+                for (int s = 0; s < allIslands[i].settlements.Count; s++)
+                    allIslands[i].settlements[s].ResetHealth();
+            }
         }
     }
 }

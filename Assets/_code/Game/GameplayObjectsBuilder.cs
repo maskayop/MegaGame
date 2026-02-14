@@ -64,9 +64,8 @@ namespace MegaGame
                 {
                     Port port = hit.collider.GetComponentInParent<Port>();
 
-                    if (port && port.owner == BaseCharacter.Owner.enemy)
-                        if (port == gameController.currentEnemyPort)
-                            TryCreatePlayerShip(gameController.currentEnemyPort);
+                    if (port && port == gameController.playerOpposingPorts.antagonPort)
+                        TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort);
 
                     Village village = hit.collider.GetComponentInParent<Village>();
 
@@ -83,7 +82,7 @@ namespace MegaGame
 
         public void TryCreatePlayerShip(BaseSettlement targetSettlement)
         {
-            if (Vector3.Distance(gameController.currentPlayerPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
+            if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
             {
                 scenePrefabsManager.SpawnAsTargetReject(targetSettlement.transform.position);
                 UIMainCanvas.Instance.SpawnTooFarFromPortMessage();
@@ -93,7 +92,7 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.PlayerMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(scenePrefabsManager.GetShipPrefab(true), gameController.currentPlayerPort.transform, targetSettlement);
+            BuildShip(scenePrefabsManager.GetShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
             resourcesController.RemoveMoneyFromPlayer(smallShipBuildingCost);
         }
 
@@ -102,7 +101,7 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.EnemyMoney, smallShipCost) < 0)
                 return;
 
-            BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.currentEnemyPort.transform, targetSettlement);
+            BuildShip(scenePrefabsManager.GetShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
             resourcesController.RemoveMoneyFromEnemy(smallShipBuildingCost);
         }
 

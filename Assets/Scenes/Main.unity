@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 971653822}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 7bd8714ae7295914bb1f530b4e02387f, type: 3}
+      propertyPath: m_text
+      value: "\u0418\u043D\u043D\u0435\u0441-\u0413\u0435\u0439\u043B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 7bd8714ae7295914bb1f530b4e02387f, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 7bd8714ae7295914bb1f530b4e02387f, type: 3}
       propertyPath: islandData
       value: 
@@ -197,6 +205,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 552003642}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 35dc2d3d6f8f7ee4092ed5967554b3c7, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u0438\u043A \u0412\u0438\u0433\u043E\u0440\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 35dc2d3d6f8f7ee4092ed5967554b3c7, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 35dc2d3d6f8f7ee4092ed5967554b3c7, type: 3}
       propertyPath: islandData
       value: 
@@ -408,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d74d72f49b2080242a5d23857f49a9cd, type: 2}
     - target: {fileID: 5584990632501657591, guid: 195c6d6e90f8cba4da361bd2beca7aa3, type: 3}
       propertyPath: possibleTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 195c6d6e90f8cba4da361bd2beca7aa3, type: 3}
       propertyPath: 'possibleTargets.Array.data[0]'
@@ -418,6 +434,14 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[1]'
       value: 
       objectReference: {fileID: 655091758}
+    - target: {fileID: 5584990632501657591, guid: 195c6d6e90f8cba4da361bd2beca7aa3, type: 3}
+      propertyPath: 'possibleTargets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2076455627}
+    - target: {fileID: 5584990632501657591, guid: 195c6d6e90f8cba4da361bd2beca7aa3, type: 3}
+      propertyPath: 'possibleTargets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2001907033}
     - target: {fileID: 7562395311498003035, guid: 195c6d6e90f8cba4da361bd2beca7aa3, type: 3}
       propertyPath: m_text
       value: "\u0422\u0443\u043C\u0430\u043D\u043D\u044B\u0435 \u041E\u0441\u0442\u0440\u043E\u0432\u0430"
@@ -1865,6 +1889,11 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[0]'
       value: 
       objectReference: {fileID: 939155887}
+    - target: {fileID: 8757930070913752548, guid: 4ecba3c4daae9384d83f2f6c2275f511, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u043E\u0440\u043E\u043B\u0435\u0432\u0441\u043A\u0430\u044F
+        \u0413\u0430\u0432\u0430\u043D\u044C"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1897,6 +1926,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 2daa08bcbb3bf3949b38efec856959f8, type: 3}
+      propertyPath: m_text
+      value: "\u0414\u0436\u0430\u0431\u0430\u043B\u044C-\u0425\u0430\u043B\u044F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 2daa08bcbb3bf3949b38efec856959f8, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 2daa08bcbb3bf3949b38efec856959f8, type: 3}
       propertyPath: islandData
       value: 
@@ -2041,6 +2078,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 479349649}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 5b5df9ea1fe5fb94eb5b1f0699e115e3, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u041C\u0430\u043D\u0433\u043E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 5b5df9ea1fe5fb94eb5b1f0699e115e3, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 5b5df9ea1fe5fb94eb5b1f0699e115e3, type: 3}
       propertyPath: islandData
       value: 
@@ -2637,6 +2682,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1055719439}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: a9e6bbbf7801b144db71ffa8792dae2d, type: 3}
+      propertyPath: m_text
+      value: "\u041B\u0430\u0433\u0443\u043D\u0430 \u041C\u0430\u0440\u043B\u043E\u0443"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: a9e6bbbf7801b144db71ffa8792dae2d, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: a9e6bbbf7801b144db71ffa8792dae2d, type: 3}
       propertyPath: islandData
       value: 
@@ -2707,6 +2760,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 479349649}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: d9b87918199a00548a54afb4e22f4932, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0430\u0438-\u0413\u0443\u0430\u0432\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: d9b87918199a00548a54afb4e22f4932, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: d9b87918199a00548a54afb4e22f4932, type: 3}
       propertyPath: m_Name
       value: "\u0412\u0430\u0438-\u0413\u0443\u0430\u0432\u0430 - Fort Island 03"
@@ -2776,6 +2837,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 8f2921b1cc7179a47af239cb3e8d5992, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u0430\u0443\u043D\u0430\u043B\u043E\u0430-\u041B\u043E\u043A\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 8f2921b1cc7179a47af239cb3e8d5992, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 8f2921b1cc7179a47af239cb3e8d5992, type: 3}
       propertyPath: islandData
       value: 
@@ -3068,6 +3137,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 964069290}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 9bae806e9856a834b96ab9ab7a2872a3, type: 3}
+      propertyPath: m_text
+      value: "\u0411\u0435\u0440\u0435\u0433 \u0421\u0438\u0440\u0438\u044D\u043B\u044C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 9bae806e9856a834b96ab9ab7a2872a3, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 9bae806e9856a834b96ab9ab7a2872a3, type: 3}
       propertyPath: islandData
       value: 
@@ -3138,6 +3215,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243094381}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: d4e0d5532c3e4894ab600a41da3a9bd3, type: 3}
+      propertyPath: m_text
+      value: "\u0423\u0442\u0440\u0435\u043D\u043D\u044F\u044F \u0417\u0430\u0440\u044F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: d4e0d5532c3e4894ab600a41da3a9bd3, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: d4e0d5532c3e4894ab600a41da3a9bd3, type: 3}
       propertyPath: islandData
       value: 
@@ -3208,6 +3293,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562839865}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 52481a99d2fab8f47aa715884c1d042f, type: 3}
+      propertyPath: m_text
+      value: "\u0411\u0430\u043D\u0430\u043D\u043E\u0432\u044B\u0435 \u0425\u043E\u043B\u043C\u044B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 52481a99d2fab8f47aa715884c1d042f, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 52481a99d2fab8f47aa715884c1d042f, type: 3}
       propertyPath: islandData
       value: 
@@ -3412,6 +3505,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 971653822}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 0d1361890751c3f48b78732170a415bf, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0443\u043B\u043A\u0430\u043D \u0414\u0443\u0440\u0438\u0430\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 0d1361890751c3f48b78732170a415bf, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 0d1361890751c3f48b78732170a415bf, type: 3}
       propertyPath: islandData
       value: 
@@ -3482,6 +3583,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1608797520}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 860c693fc71ce31438ac9105fa910734, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0430\u0434\u0438-\u0421\u0438\u0434\u0445\u0435"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 860c693fc71ce31438ac9105fa910734, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 860c693fc71ce31438ac9105fa910734, type: 3}
       propertyPath: islandData
       value: 
@@ -3552,6 +3661,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562839865}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: ab0815ec96b061f4caf468a7eaecb759, type: 3}
+      propertyPath: m_text
+      value: "\u0418\u0441\u043B\u0430-\u0434\u0435-\u041E\u0440\u043E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: ab0815ec96b061f4caf468a7eaecb759, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: ab0815ec96b061f4caf468a7eaecb759, type: 3}
       propertyPath: islandData
       value: 
@@ -3788,6 +3905,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1055719439}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: bf9d07e4f82a2f94a912eb15f185d222, type: 3}
+      propertyPath: m_text
+      value: "\u0423\u0442\u0451\u0441 \u0410\u043B\u0438\u0441\u044B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: bf9d07e4f82a2f94a912eb15f185d222, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: bf9d07e4f82a2f94a912eb15f185d222, type: 3}
       propertyPath: islandData
       value: 
@@ -4075,6 +4200,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 961461727}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 55ac4d17cd2f29447834c27dad795445, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u0430\u0440\u0435-\u0434\u0435-\u041B\u0438\u0447\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 55ac4d17cd2f29447834c27dad795445, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 55ac4d17cd2f29447834c27dad795445, type: 3}
       propertyPath: m_Name
       value: "\u041C\u0430\u0440\u0435-\u0434\u0435-\u041B\u0438\u0447\u0438 - Fort
@@ -4181,6 +4314,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1608797520}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: d97b92d97cb6a0e4e83627a26f6fa9af, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0421\u0442\u0440\u0430\u043D\u043D\u0438\u043A\u043E\u0432"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: d97b92d97cb6a0e4e83627a26f6fa9af, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: d97b92d97cb6a0e4e83627a26f6fa9af, type: 3}
       propertyPath: islandData
       value: 
@@ -4251,6 +4392,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1444385820}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 8e8e7eab66ed4754c8ae5d7e018e7eec, type: 3}
+      propertyPath: m_text
+      value: "\u0410\u044D\u043B\u043E\u0440\u043D-\u041A\u0443\u0432\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 8e8e7eab66ed4754c8ae5d7e018e7eec, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 8e8e7eab66ed4754c8ae5d7e018e7eec, type: 3}
       propertyPath: m_Name
       value: "\u0410\u044D\u043B\u043E\u0440\u043D-\u041A\u0443\u0432\u0430 - Fort
@@ -4543,6 +4692,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243094381}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: f13748cf1b28fbd4cb8497e114c1150e, type: 3}
+      propertyPath: m_text
+      value: "\u042E\u043C\u0438-\u043D\u043E-\u041A\u0443\u0432\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: f13748cf1b28fbd4cb8497e114c1150e, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: f13748cf1b28fbd4cb8497e114c1150e, type: 3}
       propertyPath: m_Name
       value: "\u042E\u043C\u0438-\u043D\u043E-\u041A\u0443\u0432\u0430 - Fort Island
@@ -4838,6 +4995,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1444385820}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 244637dadb9d09a488e78ad9a97f3a3b, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0412\u0438\u0434\u044F\u0449\u0435\u0433\u043E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 244637dadb9d09a488e78ad9a97f3a3b, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 244637dadb9d09a488e78ad9a97f3a3b, type: 3}
       propertyPath: islandData
       value: 
@@ -5116,6 +5281,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1444385820}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 9a1c1f68f3fcbeb4783a0adc3c2ee911, type: 3}
+      propertyPath: m_text
+      value: "\u0421\u043A\u0430\u043B\u0430 \u0414\u0440\u0430\u043A\u043E\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 9a1c1f68f3fcbeb4783a0adc3c2ee911, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 9a1c1f68f3fcbeb4783a0adc3c2ee911, type: 3}
       propertyPath: islandData
       value: 
@@ -5463,6 +5636,10 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[0]'
       value: 
       objectReference: {fileID: 1184218287}
+    - target: {fileID: 8757930070913752548, guid: 69df087bca2856745b2dcaea387a0326, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0440\u043B\u0438\u043D\u043E\u0435 \u0413\u043D\u0435\u0437\u0434\u043E"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5495,6 +5672,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665059582}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 562527c0ebf2aba4e94a87a97868c0df, type: 3}
+      propertyPath: m_text
+      value: "\u0421\u044C\u0435\u0440\u0440\u0430-\u0434\u0435\u043B\u044C-\u042E\u043C\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 562527c0ebf2aba4e94a87a97868c0df, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 562527c0ebf2aba4e94a87a97868c0df, type: 3}
       propertyPath: islandData
       value: 
@@ -7108,6 +7293,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: efde79ad37b41404db02701d99208083, type: 3}
+      propertyPath: m_text
+      value: "\u041B\u0430\u0433\u0443\u043D\u0430-\u042D\u0441\u043C\u0435\u0440\u0430\u043B\u044C\u0434\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: efde79ad37b41404db02701d99208083, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: efde79ad37b41404db02701d99208083, type: 3}
       propertyPath: islandData
       value: 
@@ -7240,7 +7433,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 529186f844661c249b0926841ace85ff, type: 2}
     - target: {fileID: 5584990632501657591, guid: c4d44b7af077f96449889a42d49e7a4d, type: 3}
       propertyPath: possibleTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: c4d44b7af077f96449889a42d49e7a4d, type: 3}
       propertyPath: 'possibleTargets.Array.data[0]'
@@ -7250,6 +7443,14 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[1]'
       value: 
       objectReference: {fileID: 1341848060}
+    - target: {fileID: 5584990632501657591, guid: c4d44b7af077f96449889a42d49e7a4d, type: 3}
+      propertyPath: 'possibleTargets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1273598468}
+    - target: {fileID: 5584990632501657591, guid: c4d44b7af077f96449889a42d49e7a4d, type: 3}
+      propertyPath: 'possibleTargets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1801588761}
     - target: {fileID: 7562395311498003035, guid: c4d44b7af077f96449889a42d49e7a4d, type: 3}
       propertyPath: m_text
       value: "\u0425\u0440\u0443\u0441\u0442\u0430\u043B\u044C\u043D\u044B\u0435
@@ -7538,6 +7739,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 479349649}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 05267958bbabf9244b4ffad2ec85969b, type: 3}
+      propertyPath: m_text
+      value: "\u0421\u0435\u0440\u0435\u0431\u0440\u044F\u043D\u044B\u0439 \u0411\u0435\u0440\u0435\u0433"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 05267958bbabf9244b4ffad2ec85969b, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 05267958bbabf9244b4ffad2ec85969b, type: 3}
       propertyPath: islandData
       value: 
@@ -7608,6 +7817,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1444385820}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 5e266401911aab944be6f20e0ed5cb70, type: 3}
+      propertyPath: m_text
+      value: "\u0420\u0438\u0444\u044B \u0421\u0442\u0430\u0440\u043E\u0433\u043E
+        \u041C\u043E\u0440\u0435\u0445\u043E\u0434\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 5e266401911aab944be6f20e0ed5cb70, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 5e266401911aab944be6f20e0ed5cb70, type: 3}
       propertyPath: islandData
       value: 
@@ -7752,6 +7970,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562839865}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0435\u0440\u0448\u0438\u043D\u043D\u044B\u0439 \u041E\u0441\u0442\u0440\u043E\u0432"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: a2e09ad5f98fd6740bf1ceb427f456cb, type: 3}
       propertyPath: islandData
       value: 
@@ -7906,6 +8132,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1055719439}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: b5c1e3b0a17ad8c4289a4339f21f0e9a, type: 3}
+      propertyPath: m_text
+      value: "\u0428\u0438\u043C\u0430-\u0420\u044E\u0433\u0443"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: b5c1e3b0a17ad8c4289a4339f21f0e9a, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: b5c1e3b0a17ad8c4289a4339f21f0e9a, type: 3}
       propertyPath: m_Name
       value: "\u0428\u0438\u043C\u0430-\u0420\u044E\u0433\u0443 - Fort Island 13"
@@ -7975,6 +8209,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 455b1dff9cc4ae74198bda1887cd393b, type: 3}
+      propertyPath: m_text
+      value: "\u041B\u043E\u0445-\u043D-\u0420\u043E\u043D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 455b1dff9cc4ae74198bda1887cd393b, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 455b1dff9cc4ae74198bda1887cd393b, type: 3}
       propertyPath: m_Name
       value: "\u041B\u043E\u0445-\u043D-\u0420\u043E\u043D - Fort Island 08"
@@ -8256,7 +8498,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: a50c700ca2760444d8ba2056bb4ebaf8, type: 2}
     - target: {fileID: 5584990632501657591, guid: 9537540a5d06ab44fa8475e8dda3ebb0, type: 3}
       propertyPath: possibleTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 9537540a5d06ab44fa8475e8dda3ebb0, type: 3}
       propertyPath: 'possibleTargets.Array.data[0]'
@@ -8266,6 +8508,14 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[1]'
       value: 
       objectReference: {fileID: 1529840630}
+    - target: {fileID: 5584990632501657591, guid: 9537540a5d06ab44fa8475e8dda3ebb0, type: 3}
+      propertyPath: 'possibleTargets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2001907033}
+    - target: {fileID: 5584990632501657591, guid: 9537540a5d06ab44fa8475e8dda3ebb0, type: 3}
+      propertyPath: 'possibleTargets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 928538741}
     - target: {fileID: 7562395311498003035, guid: 9537540a5d06ab44fa8475e8dda3ebb0, type: 3}
       propertyPath: m_text
       value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0428\u0435\u043F\u0447\u0443\u0449\u0438\u0445
@@ -8292,6 +8542,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 971653822}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: ef38f4ac09052d443be7adfe2467224d, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0416\u0440\u0438\u0446\u044B
+        \u0410\u043B\u0438\u0440\u044B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: ef38f4ac09052d443be7adfe2467224d, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: ef38f4ac09052d443be7adfe2467224d, type: 3}
       propertyPath: islandData
       value: 
@@ -8729,6 +8988,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 552003642}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 22e2e845b8bbf444a9828d8af7fbf64c, type: 3}
+      propertyPath: m_text
+      value: "\u0411\u0430\u0445\u0440-\u0430\u043B\u044C-\u0425\u0443\u0442"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 22e2e845b8bbf444a9828d8af7fbf64c, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 22e2e845b8bbf444a9828d8af7fbf64c, type: 3}
       propertyPath: m_Name
       value: "\u0411\u0430\u0445\u0440-\u0430\u043B\u044C-\u0425\u0443\u0442 - Fort
@@ -9055,6 +9322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 101a229f4bac72f4e8b267e0a5422986, type: 2}
     - target: {fileID: 6699302268825018440, guid: 0a3dfaea94785b94ab7cc50e8bb06401, type: 3}
+      propertyPath: isStartIsland
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699302268825018440, guid: 0a3dfaea94785b94ab7cc50e8bb06401, type: 3}
       propertyPath: possibleTargets.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -9074,6 +9345,10 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[3]'
       value: 
       objectReference: {fileID: 1225494739}
+    - target: {fileID: 8757930070913752548, guid: 0a3dfaea94785b94ab7cc50e8bb06401, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u041A\u0440\u043E\u043D\u0443\u0441"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9227,6 +9502,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243094381}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 0627b2fdfc9f1834c922d8dad7ce2132, type: 3}
+      propertyPath: m_text
+      value: "\u0417\u0435\u043B\u0451\u043D\u044B\u0439"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 0627b2fdfc9f1834c922d8dad7ce2132, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 0627b2fdfc9f1834c922d8dad7ce2132, type: 3}
       propertyPath: islandData
       value: 
@@ -9296,6 +9579,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 4e56c221ed73e444eb7c5e496e706390, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u043B\u044F\u0442\u0432\u0430 \u041A\u0430\u043F\u0438\u0442\u0430\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 4e56c221ed73e444eb7c5e496e706390, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 4e56c221ed73e444eb7c5e496e706390, type: 3}
       propertyPath: islandData
       value: 
@@ -9377,6 +9668,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 961461727}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 0ae68cab9d80fd84589d856688c3fcf9, type: 3}
+      propertyPath: m_text
+      value: "\u0410\u0442\u043E\u043B\u043B \u041A\u0435\u043B\u0430\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 0ae68cab9d80fd84589d856688c3fcf9, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 0ae68cab9d80fd84589d856688c3fcf9, type: 3}
       propertyPath: islandData
       value: 
@@ -9659,6 +9958,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 11f78eb3a51d9fd45a9efe1097ac17ce, type: 3}
+      propertyPath: m_text
+      value: "\u0411\u0430\u0445\u043E-\u0434\u0435\u043B\u044C-\u041C\u0430\u0440"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 11f78eb3a51d9fd45a9efe1097ac17ce, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 11f78eb3a51d9fd45a9efe1097ac17ce, type: 3}
       propertyPath: islandData
       value: 
@@ -9729,6 +10036,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1608797520}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 05df603446940ad48a5e9aba54374be2, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0422\u0440\u0451\u0445 \u0421\u0432\u044F\u0442\u044B\u0445"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 05df603446940ad48a5e9aba54374be2, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 05df603446940ad48a5e9aba54374be2, type: 3}
       propertyPath: islandData
       value: 
@@ -10124,6 +10439,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1608797520}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 592b1ebea17c5c0478c9fbeb304de479, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u0430\u043F\u0430\u0439\u044F-\u0411\u044D\u0439"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 592b1ebea17c5c0478c9fbeb304de479, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 592b1ebea17c5c0478c9fbeb304de479, type: 3}
       propertyPath: islandData
       value: 
@@ -10403,6 +10726,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d9c5e323478896540be90ad3aaef703c, type: 2}
     - target: {fileID: 6699302268825018440, guid: 68703340812582143887599a85d2dc7d, type: 3}
+      propertyPath: isStartIsland
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699302268825018440, guid: 68703340812582143887599a85d2dc7d, type: 3}
       propertyPath: possibleTargets.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -10422,6 +10749,11 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[3]'
       value: 
       objectReference: {fileID: 1671657739}
+    - target: {fileID: 8757930070913752548, guid: 68703340812582143887599a85d2dc7d, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u041C\u043E\u043B\u0447\u0430\u043B\u0438\u0432\u043E\u0433\u043E
+        \u041A\u043E\u043B\u043E\u043A\u043E\u043B\u0430"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10528,6 +10860,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 4f6def39cfca25540b4dfce02e4fb403, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u043E\u043B\u044F \u0424\u0443\u043C\u0430\u0440\u043E\u043B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 4f6def39cfca25540b4dfce02e4fb403, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 4f6def39cfca25540b4dfce02e4fb403, type: 3}
       propertyPath: islandData
       value: 
@@ -10733,6 +11073,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6ac8dc96e118aa6489faf6f5a50d432b, type: 2}
     - target: {fileID: 6699302268825018440, guid: cc0fb18eedce94f448f930132572334d, type: 3}
+      propertyPath: isStartIsland
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699302268825018440, guid: cc0fb18eedce94f448f930132572334d, type: 3}
       propertyPath: possibleTargets.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -10936,6 +11280,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562839865}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: c3d3a022079879b4783479cd9f8c7420, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u043E\u0442\u0443-\u0420\u0430\u0443"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: c3d3a022079879b4783479cd9f8c7420, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: c3d3a022079879b4783479cd9f8c7420, type: 3}
       propertyPath: islandData
       value: 
@@ -11102,6 +11454,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1608797520}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: f3eec7cd10c3d544293c8493b4516285, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u043E\u043A\u043E-\u0424\u044C\u043E\u0440\u0434"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: f3eec7cd10c3d544293c8493b4516285, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: f3eec7cd10c3d544293c8493b4516285, type: 3}
       propertyPath: m_Name
       value: "\u041A\u043E\u043A\u043E-\u0424\u044C\u043E\u0440\u0434 - Fort Island
@@ -11606,6 +11966,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 0dc35d506164a204798b66f29c2938ed, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u043E\u0442\u0443-\u0422\u0443\u0440\u0442\u043B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 0dc35d506164a204798b66f29c2938ed, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 0dc35d506164a204798b66f29c2938ed, type: 3}
       propertyPath: m_Name
       value: "\u041C\u043E\u0442\u0443-\u0422\u0443\u0440\u0442\u043B - Fort Island
@@ -11676,6 +12044,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665059582}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 4e59bd2e477f2c048a620cb6a5bd9abd, type: 3}
+      propertyPath: m_text
+      value: "\u0420\u0438\u0444\u044B \u041F\u0435\u0432\u0446\u0430 \u041C\u043E\u0440\u0435\u0439
+        \u041B\u0438\u0440\u043E\u0441\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 4e59bd2e477f2c048a620cb6a5bd9abd, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 4e59bd2e477f2c048a620cb6a5bd9abd, type: 3}
       propertyPath: islandData
       value: 
@@ -11831,6 +12208,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 345602540}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 6140d17e6f4165a4a843c70c92ef997e, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u0430\u0441\u043A\u0430\u0434\u0430-\u041F\u0438\u043D\u044C\u044F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 6140d17e6f4165a4a843c70c92ef997e, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 6140d17e6f4165a4a843c70c92ef997e, type: 3}
       propertyPath: m_Name
       value: "\u041A\u0430\u0441\u043A\u0430\u0434\u0430-\u041F\u0438\u043D\u044C\u044F
@@ -12219,6 +12604,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871842224}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 46f1d1698878a08409cca10854b027ae, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u043B\u044F\u0436 \u0412\u0430\u043D\u0438\u043B\u044C\u043D\u044B\u0445
+        \u041E\u0440\u0445\u0438\u0434\u0435\u0439"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 46f1d1698878a08409cca10854b027ae, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 46f1d1698878a08409cca10854b027ae, type: 3}
       propertyPath: islandData
       value: 
@@ -12289,6 +12683,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 552003642}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 8a94ace80c9ba6540a416340c35fe28b, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u043B\u044F\u0436 \u041A\u043E\u043A\u043E\u0441\u043E\u0432"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 8a94ace80c9ba6540a416340c35fe28b, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 8a94ace80c9ba6540a416340c35fe28b, type: 3}
       propertyPath: islandData
       value: 
@@ -12359,6 +12761,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 964069290}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 205e152a955ae91478d0729177c18c16, type: 3}
+      propertyPath: m_text
+      value: "\u0413\u0435\u0439\u0437\u0435\u0440 \u041A\u0430\u044D\u043B\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 205e152a955ae91478d0729177c18c16, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 205e152a955ae91478d0729177c18c16, type: 3}
       propertyPath: islandData
       value: 
@@ -12972,6 +13382,10 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[0]'
       value: 
       objectReference: {fileID: 1100173486}
+    - target: {fileID: 8757930070913752548, guid: 47f065794210a944ea0ce63c52fdf7ee, type: 3}
+      propertyPath: m_text
+      value: "\u0417\u043E\u043B\u043E\u0442\u043E\u0439 \u0411\u0435\u0440\u0435\u0433"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13279,6 +13693,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1444385820}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: d8071b271e37bb54194015178500f294, type: 3}
+      propertyPath: m_text
+      value: "\u041B\u0443\u043D\u043D\u044B\u0439 \u041F\u0440\u0438\u0447\u0430\u043B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: d8071b271e37bb54194015178500f294, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: d8071b271e37bb54194015178500f294, type: 3}
       propertyPath: islandData
       value: 
@@ -13718,6 +14140,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 3d08eb63c2573444b9ba43bcfc843677, type: 2}
     - target: {fileID: 6699302268825018440, guid: 383d9249419e1fb4ea3225face87c624, type: 3}
+      propertyPath: isStartIsland
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699302268825018440, guid: 383d9249419e1fb4ea3225face87c624, type: 3}
       propertyPath: possibleTargets.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -13737,6 +14163,10 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[3]'
       value: 
       objectReference: {fileID: 2015055541}
+    - target: {fileID: 8757930070913752548, guid: 383d9249419e1fb4ea3225face87c624, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0422\u0430\u043B\u043C\u0438\u0440"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13769,6 +14199,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1608797520}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: aeaf4cec1335d3249b3fec54faf0e5b0, type: 3}
+      propertyPath: m_text
+      value: "\u0417\u0430\u0440\u044F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: aeaf4cec1335d3249b3fec54faf0e5b0, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: aeaf4cec1335d3249b3fec54faf0e5b0, type: 3}
       propertyPath: islandData
       value: 
@@ -14096,6 +14534,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 345602540}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 98c44c7b5cf3733458f5136be8424118, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u0430\u043C\u0435\u043D\u044C \u041A\u0430\u0440\u0430\u043C\u0431\u043E\u043B\u044B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 98c44c7b5cf3733458f5136be8424118, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 98c44c7b5cf3733458f5136be8424118, type: 3}
       propertyPath: islandData
       value: 
@@ -14248,6 +14694,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243094381}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 2694c54d3872fc947a6f26cfa0335195, type: 3}
+      propertyPath: m_text
+      value: "\u0420\u043E\u0437\u043E\u0432\u044B\u0435 \u0443\u0442\u0451\u0441\u044B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 2694c54d3872fc947a6f26cfa0335195, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 2694c54d3872fc947a6f26cfa0335195, type: 3}
       propertyPath: islandData
       value: 
@@ -14445,6 +14899,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 345602540}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 50347e16765b81c419521799e7af6edf, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u0440\u0430\u0442\u0435\u0440 \u0412\u0435\u0447\u043D\u043E\u0433\u043E
+        \u041E\u0433\u043D\u044F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 50347e16765b81c419521799e7af6edf, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 50347e16765b81c419521799e7af6edf, type: 3}
       propertyPath: islandData
       value: 
@@ -14588,6 +15051,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 971653822}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 6111b110fe01c844daa77df0a955183a, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0410\u0434\u043C\u0438\u0440\u0430\u043B\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 6111b110fe01c844daa77df0a955183a, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 6111b110fe01c844daa77df0a955183a, type: 3}
       propertyPath: islandData
       value: 
@@ -14658,6 +15129,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665059582}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: e4d663b837ffd6944a3081c70198945d, type: 3}
+      propertyPath: m_text
+      value: "\u0421\u0438\u043B\u044C\u0432\u0430\u0440\u0430-\u041D\u0443\u0440"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: e4d663b837ffd6944a3081c70198945d, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: e4d663b837ffd6944a3081c70198945d, type: 3}
       propertyPath: islandData
       value: 
@@ -14728,6 +15207,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243094381}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 4a0e4bcfe93d2d4469e57be3c7ee0eba, type: 3}
+      propertyPath: m_text
+      value: "\u0422\u0430\u043A\u0438-\u041C\u0438\u0447\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 4a0e4bcfe93d2d4469e57be3c7ee0eba, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 4a0e4bcfe93d2d4469e57be3c7ee0eba, type: 3}
       propertyPath: islandData
       value: 
@@ -14840,6 +15327,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1444385820}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: fd81de5e1848f5b4fa221b8376aba94f, type: 3}
+      propertyPath: m_text
+      value: "\u0411\u0435\u0440\u0435\u0433 \u041B\u0435\u0434\u0438 \u042D\u043B\u0435\u0439\u043D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: fd81de5e1848f5b4fa221b8376aba94f, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: fd81de5e1848f5b4fa221b8376aba94f, type: 3}
       propertyPath: islandData
       value: 
@@ -14910,6 +15405,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562839865}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: d9b9923f88ebf0f4286140ce31856f2a, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u0435\u0447\u0442\u0430 \u042D\u043B\u044C\u0444\u0438\u0434\u044B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: d9b9923f88ebf0f4286140ce31856f2a, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: d9b9923f88ebf0f4286140ce31856f2a, type: 3}
       propertyPath: islandData
       value: 
@@ -15709,6 +16212,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665059582}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: e15c8a57ac2d2ab429c7b63c82482c24, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0433\u043E
+        \u0425\u0440\u0430\u043D\u0438\u0442\u0435\u043B\u044F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: e15c8a57ac2d2ab429c7b63c82482c24, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: e15c8a57ac2d2ab429c7b63c82482c24, type: 3}
       propertyPath: islandData
       value: 
@@ -15955,6 +16467,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 964069290}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 0fe4f93c67904d048b2867d8896dc1eb, type: 3}
+      propertyPath: m_text
+      value: "\u041A\u0430\u0431\u043E-\u041C\u0430\u043D\u0442\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 0fe4f93c67904d048b2867d8896dc1eb, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 0fe4f93c67904d048b2867d8896dc1eb, type: 3}
       propertyPath: m_Name
       value: "\u041A\u0430\u0431\u043E-\u041C\u0430\u043D\u0442\u0430 - Fort Island
@@ -16025,6 +16545,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665059582}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 6dfe9d11a2e9084479ab29d0308381ae, type: 3}
+      propertyPath: m_text
+      value: "\u0418\u0441\u043B\u0430-\u0434\u0435-\u041F\u0443\u044D\u043B\u044C\u043F\u043E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 6dfe9d11a2e9084479ab29d0308381ae, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 6dfe9d11a2e9084479ab29d0308381ae, type: 3}
       propertyPath: m_Name
       value: "\u0418\u0441\u043B\u0430-\u0434\u0435-\u041F\u0443\u044D\u043B\u044C\u043F\u043E
@@ -16095,6 +16623,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562839865}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 1899811aa7725ef43a3fe9c349925a41, type: 3}
+      propertyPath: m_text
+      value: "\u041D\u0443\u0440-\u0428\u0438\u043C\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 1899811aa7725ef43a3fe9c349925a41, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 1899811aa7725ef43a3fe9c349925a41, type: 3}
       propertyPath: m_Name
       value: "\u041D\u0443\u0440-\u0428\u0438\u043C\u0430 - Fort Island 01"
@@ -16214,6 +16750,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bc6eddce66cbfe84daeb9db6c900d8b1, type: 2}
     - target: {fileID: 6699302268825018440, guid: 0c765e31a798cbe48ac7dacca1b6921a, type: 3}
+      propertyPath: isStartIsland
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699302268825018440, guid: 0c765e31a798cbe48ac7dacca1b6921a, type: 3}
       propertyPath: possibleTargets.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -16233,6 +16773,11 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[3]'
       value: 
       objectReference: {fileID: 1122903143}
+    - target: {fileID: 8757930070913752548, guid: 0c765e31a798cbe48ac7dacca1b6921a, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0421\u0442\u0430\u0440\u043E\u0433\u043E
+        \u041A\u043E\u0440\u0430\u0431\u043B\u044F"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16390,7 +16935,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 38e149c995a9ac44199d557bf21f6506, type: 2}
     - target: {fileID: 5584990632501657591, guid: 02a020c00fb010b4ab8c76b390c2e682, type: 3}
       propertyPath: possibleTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 02a020c00fb010b4ab8c76b390c2e682, type: 3}
       propertyPath: 'possibleTargets.Array.data[0]'
@@ -16400,6 +16945,14 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[1]'
       value: 
       objectReference: {fileID: 1916036543}
+    - target: {fileID: 5584990632501657591, guid: 02a020c00fb010b4ab8c76b390c2e682, type: 3}
+      propertyPath: 'possibleTargets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 928538741}
+    - target: {fileID: 5584990632501657591, guid: 02a020c00fb010b4ab8c76b390c2e682, type: 3}
+      propertyPath: 'possibleTargets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2076455627}
     - target: {fileID: 7562395311498003035, guid: 02a020c00fb010b4ab8c76b390c2e682, type: 3}
       propertyPath: m_text
       value: "\u042F\u043D\u0442\u0430\u0440\u043D\u044B\u0435 \u0414\u044E\u043D\u044B"
@@ -17142,6 +17695,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 961461727}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 88a8d4b20bce22149853b40d350517f9, type: 3}
+      propertyPath: m_text
+      value: "\u041C\u044B\u0441 \u041A\u0430\u043F\u0438\u0442\u0430\u043D\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 88a8d4b20bce22149853b40d350517f9, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 88a8d4b20bce22149853b40d350517f9, type: 3}
       propertyPath: islandData
       value: 
@@ -17297,6 +17858,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665059582}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 9a16b0fd9091efb48b9ecb4157f51f8e, type: 3}
+      propertyPath: m_text
+      value: "\u0411\u0435\u0440\u0435\u0433 \u0425\u0440\u0443\u0441\u0442\u0430\u043B\u044C\u043D\u044B\u0445
+        \u0412\u043E\u043B\u043D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 9a16b0fd9091efb48b9ecb4157f51f8e, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 9a16b0fd9091efb48b9ecb4157f51f8e, type: 3}
       propertyPath: islandData
       value: 
@@ -17444,6 +18014,10 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[5]'
       value: 
       objectReference: {fileID: 2075583578}
+    - target: {fileID: 8757930070913752548, guid: 4ac4888e00faba54aba69bc7a54850c6, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u041B\u0443\u043C\u0438\u043D\u0430"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17550,6 +18124,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243094381}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 2cf3fd2c20669ec4eb00caf36a2dd61d, type: 3}
+      propertyPath: m_text
+      value: "\u0421\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u0423\u0442\u0451\u0441"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 2cf3fd2c20669ec4eb00caf36a2dd61d, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 2cf3fd2c20669ec4eb00caf36a2dd61d, type: 3}
       propertyPath: islandData
       value: 
@@ -17874,7 +18456,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c56d95f5607bdbc4b96598830ea137c6, type: 2}
     - target: {fileID: 5584990632501657591, guid: 12170b4bbdb43c547b6e6c3610642299, type: 3}
       propertyPath: possibleTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 12170b4bbdb43c547b6e6c3610642299, type: 3}
       propertyPath: 'possibleTargets.Array.data[0]'
@@ -17884,6 +18466,14 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[1]'
       value: 
       objectReference: {fileID: 816490841}
+    - target: {fileID: 5584990632501657591, guid: 12170b4bbdb43c547b6e6c3610642299, type: 3}
+      propertyPath: 'possibleTargets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2075583578}
+    - target: {fileID: 5584990632501657591, guid: 12170b4bbdb43c547b6e6c3610642299, type: 3}
+      propertyPath: 'possibleTargets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1273598468}
     - target: {fileID: 7562395311498003035, guid: 12170b4bbdb43c547b6e6c3610642299, type: 3}
       propertyPath: m_text
       value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u0421\u0432. \u041A\u0430\u0441\u0441\u0438\u0430\u043D\u0430"
@@ -18175,6 +18765,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 971653822}
     m_Modifications:
+    - target: {fileID: 3182654734947983556, guid: 0064d13463a785e4285b53013e8a4e71, type: 3}
+      propertyPath: m_text
+      value: "\u0414\u0440\u0430\u0443\u0433-\u0421\u0435\u043B\u044C\u0445\u0442\u0443\u0440"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182654734947983556, guid: 0064d13463a785e4285b53013e8a4e71, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5098818419556171914, guid: 0064d13463a785e4285b53013e8a4e71, type: 3}
       propertyPath: m_Name
       value: "\u0414\u0440\u0430\u0443\u0433-\u0421\u0435\u043B\u044C\u0445\u0442\u0443\u0440
@@ -18402,7 +19000,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0f6e51947dd704449abf3902613aa947, type: 2}
     - target: {fileID: 5584990632501657591, guid: 146371b4058f4194db0dbe3d2f0251d4, type: 3}
       propertyPath: possibleTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584990632501657591, guid: 146371b4058f4194db0dbe3d2f0251d4, type: 3}
       propertyPath: 'possibleTargets.Array.data[0]'
@@ -18412,6 +19010,14 @@ PrefabInstance:
       propertyPath: 'possibleTargets.Array.data[1]'
       value: 
       objectReference: {fileID: 1990137587}
+    - target: {fileID: 5584990632501657591, guid: 146371b4058f4194db0dbe3d2f0251d4, type: 3}
+      propertyPath: 'possibleTargets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1801588761}
+    - target: {fileID: 5584990632501657591, guid: 146371b4058f4194db0dbe3d2f0251d4, type: 3}
+      propertyPath: 'possibleTargets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2075583578}
     - target: {fileID: 7562395311498003035, guid: 146371b4058f4194db0dbe3d2f0251d4, type: 3}
       propertyPath: m_text
       value: "\u0426\u0432\u0435\u0442\u0443\u0449\u0438\u0435 \u0412\u043E\u0434\u044B"
@@ -18635,6 +19241,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 971653822}
     m_Modifications:
+    - target: {fileID: 1450607175213577602, guid: 5bdfc37133100fb4e803abc0d8475ad6, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0441\u0442\u0440\u043E\u0432 \u041A\u0438\u0442\u043E\u0432"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450607175213577602, guid: 5bdfc37133100fb4e803abc0d8475ad6, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4791404138563316690, guid: 5bdfc37133100fb4e803abc0d8475ad6, type: 3}
       propertyPath: islandData
       value: 

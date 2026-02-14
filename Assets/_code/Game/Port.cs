@@ -7,6 +7,7 @@ namespace MegaGame
         [Header("Target Visual")]
         [SerializeField] GameObject playerTarget;
         [SerializeField] GameObject enemyTarget;
+        [SerializeField] GameObject neutralTarget;
 
         [Header("FX")]
         [SerializeField] ParticleSystem FXShot;
@@ -21,6 +22,7 @@ namespace MegaGame
         {
             playerTarget.SetActive(false);
             enemyTarget.SetActive(false);
+            neutralTarget.SetActive(false);
 
             if (!isTarget)
                 return;
@@ -29,6 +31,8 @@ namespace MegaGame
                 playerTarget.SetActive(true);
             else if (targetOwner == Owner.enemy)
                 enemyTarget.SetActive(true);
+            else if (targetOwner == Owner.neutral)
+                neutralTarget.SetActive(true);
         }
     }
 }

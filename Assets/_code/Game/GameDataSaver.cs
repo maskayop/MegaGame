@@ -19,6 +19,7 @@ namespace MegaGame
 
         string islandOwnerFormat = " IO";
         string startPlayerIslandFormat = " SPI";
+        string startEnemyIslandFormat = " SEI";
 
         string playerMoneyFormat = "PP";
         string enemyMoneyFormat = "EP";
@@ -53,6 +54,7 @@ namespace MegaGame
         public void SaveGameData()
         {
             dataSaveLoad.Save(currentAccountNameKey + startPlayerIslandFormat, gameController.PlayerStartIslandId);
+            dataSaveLoad.Save(currentAccountNameKey + startEnemyIslandFormat, gameController.EnemyStartIslandId);
 
             for (int i = 0; i < gameController.allIslands.Count; i++)
             {
@@ -88,6 +90,7 @@ namespace MegaGame
         public void LoadGameData()
         {
             gameController.PlayerStartIslandId = dataSaveLoad.GetSavedShort(currentAccountNameKey + startPlayerIslandFormat);
+            gameController.EnemyStartIslandId = dataSaveLoad.GetSavedShort(currentAccountNameKey + startEnemyIslandFormat);
 
             for (int i = 0; i < gameController.allIslands.Count; i++)
             {
