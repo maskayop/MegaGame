@@ -74,6 +74,7 @@ MonoBehaviour:
   allPossibleEnemyTargetPorts: []
   distanceForPossibleTargets: 150
   possibleTargetVillagesForEnemy: []
+  possibleTargetFortressesForEnemy: []
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,8 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
   timeForDecision: 0.3
-  shipSpawnChance: 15
-  villageTargetChance: 2
+  shipSpawnChance: 12
 --- !u!114 &6039075397147238773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,3 +179,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715ef3172d59330449f96d4ad9b74031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ResourcesController
+  startMoneyForEnemy: 500

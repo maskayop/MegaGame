@@ -6,7 +6,6 @@ namespace MegaGame
     {
         [SerializeField] float timeForDecision = 1.0f;
         [SerializeField] short shipSpawnChance = 1;
-        [SerializeField] short villageTargetChance = 1;
 
         Port currentPort;
 
@@ -45,11 +44,9 @@ namespace MegaGame
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();
-                else if (gameController.enemyOpposingPorts.antagonPort.currentHealth / gameController.enemyOpposingPorts.antagonPort.health < 0.5f)
-                    SpawnShip();
                 else
                 {
-                    int r = Random.Range(0, shipSpawnChance);
+                    short r = (short)Random.Range(0, shipSpawnChance);
 
                     if (r == 0)
                         SpawnShip();
@@ -59,20 +56,40 @@ namespace MegaGame
 
         void SpawnShip()
         {
-            int r = Random.Range(0, villageTargetChance);
+            short r = (short)Random.Range(0, gameController.possibleTargetVillagesForEnemy.Count
+                + gameController.possibleTargetFortressesForEnemy.Count + 1);
 
-            if (gameController.possibleTargetVillagesForEnemy.Count == 0)
-                r = -1;
+            if (r != 0)
+            {
+                short s = (short)Random.Range(0, 2);
 
-            if (r == 0)
-                gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleVillage());
+                if (s == 0)
+                    gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleVillage());
+                else if (s == 1)
+                    gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleFortress());
+            }
             else
                 gameplayObjectsBuilder.TryCreateEnemyShip(gameController.enemyOpposingPorts.antagonPort);
         }
 
         Village GetRandomPossibleVillage()
         {
-            return gameController.possibleTargetVillagesForEnemy[Random.Range(0, gameController.possibleTargetVillagesForEnemy.Count)];
+            short r = (short)Random.Range(0, gameController.possibleTargetVillagesForEnemy.Count);
+
+            if (gameController.possibleTargetVillagesForEnemy.Count != 0)
+                return gameController.possibleTargetVillagesForEnemy[r];
+            else
+                return null;
+        }
+
+        Fortress GetRandomPossibleFortress()
+        {
+            short r = (short)Random.Range(0, gameController.possibleTargetFortressesForEnemy.Count);
+
+            if (gameController.possibleTargetFortressesForEnemy.Count != 0)
+                return gameController.possibleTargetFortressesForEnemy[r];
+            else
+                return null;
         }
     }
 }

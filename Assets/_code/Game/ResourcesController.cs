@@ -7,6 +7,8 @@ namespace MegaGame
     {
         public static ResourcesController Instance { get; private set; }
 
+        [SerializeField] short startMoneyForEnemy;
+
         string playerMoney;
         public string PlayerMoney { get { return playerMoney; } set { playerMoney = value; } }
 
@@ -43,6 +45,9 @@ namespace MegaGame
 
         void Update()
         {
+            if (gameController.gameState != GameController.GameState.battle)
+                return;
+
             UpdateMoney();
         }
 
@@ -132,7 +137,7 @@ namespace MegaGame
         public short GetShipsBureaucracyMaintenance(short shipsCount)
         {
             short value = 0;
-            
+
             if (shipsCount >= 0 && shipsCount <= 5)
                 value = 0;
             else if (shipsCount > 5 && shipsCount <= 10)
@@ -233,6 +238,12 @@ namespace MegaGame
         public int GetEnemyMaintenance()
         {
             return enemyMaintenance;
+        }
+
+        public void AddStartMoneyToEnemy()
+        {
+            AddMoneyToEnemy(startMoneyForEnemy);
+            GameDataSaver.Instance.SaveStartMoneyAddedForEnemy();
         }
     }
 }

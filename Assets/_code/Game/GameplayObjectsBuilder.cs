@@ -99,6 +99,9 @@ namespace MegaGame
 
         public void TryCreateEnemyShip(BaseSettlement targetSettlement)
         {
+            if (!targetSettlement)
+                return;
+
             if (Strint.Subtraction(resourcesController.EnemyMoney, smallShipCost) < 0)
                 return;
 

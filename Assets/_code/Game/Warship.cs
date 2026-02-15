@@ -31,7 +31,7 @@ namespace MegaGame
 
             agent = GetComponent<NavMeshAgent>();
         }
-        
+
         protected override void OnUpdate()
         {
             if (gameController.gameState == GameController.GameState.menu)
@@ -62,7 +62,7 @@ namespace MegaGame
                 targetSettlement = gameController.playerOpposingPorts.antagonPort;
             else if (owner == Owner.enemy && targetSettlement.owner == Owner.enemy)
                 targetSettlement = gameController.enemyOpposingPorts.antagonPort;
-            
+
             destinationPosition = targetSettlement.transform;
             agent.destination = destinationPosition.position;
             agent.speed = currentSpeed;
@@ -148,6 +148,9 @@ namespace MegaGame
 
         protected override void OnKilled()
         {
+            if (!gameObject)
+                return;
+
             Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
             ObjectsManager.Instance.allCharacters.Remove(gameObject);
