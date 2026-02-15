@@ -85,6 +85,7 @@ namespace MegaGame
             if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
             {
                 scenePrefabsManager.SpawnAsTargetReject(targetSettlement.transform.position);
+                scenePrefabsManager.SpawnDistanceCircle(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.distanceForPossibleTargets);
                 UIMainCanvas.Instance.SpawnTooFarFromPortMessage();
                 return;
             }

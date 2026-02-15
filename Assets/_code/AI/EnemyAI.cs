@@ -45,7 +45,7 @@ namespace MegaGame
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();
-                else if (gameController.playerOpposingPorts.protagonPort.currentHealth / gameController.playerOpposingPorts.protagonPort.health < 0.5f)
+                else if (gameController.enemyOpposingPorts.antagonPort.currentHealth / gameController.enemyOpposingPorts.antagonPort.health < 0.5f)
                     SpawnShip();
                 else
                 {
@@ -67,7 +67,7 @@ namespace MegaGame
             if (r == 0)
                 gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleVillage());
             else
-                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.playerOpposingPorts.protagonPort);
+                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.enemyOpposingPorts.antagonPort);
         }
 
         Village GetRandomPossibleVillage()

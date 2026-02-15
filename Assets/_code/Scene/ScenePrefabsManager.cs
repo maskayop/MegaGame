@@ -15,6 +15,9 @@ namespace MegaGame
         [SerializeField] GameObject FXTargetEnemyReject;
         [SerializeField] GameObject FXTargetPlayer;
 
+        [Header("Widgets")]
+        [SerializeField] GameObject distanceCircle;
+
         void Awake()
         {
             if (Instance != null)
@@ -46,6 +49,12 @@ namespace MegaGame
                 return shipPlayerPrefab;
             else
                 return shipEnemyPrefab;
+        }
+
+        public void SpawnDistanceCircle(Vector3 position, short radius)
+        {
+            GameObject circle = Instantiate(distanceCircle, position, Quaternion.identity);
+            circle.transform.localScale = Vector3.one * radius;
         }
     }
 }

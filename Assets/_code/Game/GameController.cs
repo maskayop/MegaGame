@@ -42,7 +42,8 @@ namespace MegaGame
         public List<Village> enemyVillages = new List<Village>();
         public List<Fortress> enemyFortresses = new List<Fortress>();
 
-        public List<Port> allPossibleTargetPorts = new List<Port>();
+        public List<Port> allPossiblePlayerTargetPorts = new List<Port>();
+        public List<Port> allPossibleEnemyTargetPorts = new List<Port>();
 
         [Header("Distances")]
         public short distanceForPossibleTargets = 100;
@@ -137,7 +138,8 @@ namespace MegaGame
             playerPorts.Clear();
             enemyPorts.Clear();
             startIslands.Clear();
-            allPossibleTargetPorts.Clear();
+            allPossiblePlayerTargetPorts.Clear();
+            allPossibleEnemyTargetPorts.Clear();
 
             playerOpposingPorts.protagonPort = null;
             playerOpposingPorts.antagonPort = null;
@@ -209,7 +211,8 @@ namespace MegaGame
         {
             playerPorts.Clear();
             enemyPorts.Clear();
-            allPossibleTargetPorts.Clear();
+            allPossiblePlayerTargetPorts.Clear();
+            allPossibleEnemyTargetPorts.Clear();
 
             for (int i = 0; i < allPorts.Count; i++)
                 if (allPorts[i].owner == BaseCharacter.Owner.player)
@@ -224,7 +227,13 @@ namespace MegaGame
                 for (int p = 0; p < playerPorts[i].Island.possibleTargets.Count; p++)
                     if (playerPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.player)
                         if (playerPorts[i].Island.possibleTargets[p].settlements[0] as Port)
-                            allPossibleTargetPorts.Add((Port)playerPorts[i].Island.possibleTargets[p].settlements[0]);
+                            allPossiblePlayerTargetPorts.Add((Port)playerPorts[i].Island.possibleTargets[p].settlements[0]);
+
+            for (int i = 0; i < enemyPorts.Count; i++)
+                for (int p = 0; p < enemyPorts[i].Island.possibleTargets.Count; p++)
+                    if (enemyPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.enemy)
+                        if (enemyPorts[i].Island.possibleTargets[p].settlements[0] as Port)
+                            allPossibleEnemyTargetPorts.Add((Port)enemyPorts[i].Island.possibleTargets[p].settlements[0]);
 
             playerVillages.Clear();
             enemyVillages.Clear();
@@ -285,7 +294,7 @@ namespace MegaGame
                     neutralIslands.Add(allIslands[i]);
             }
 
-            if (allPossibleTargetPorts.Count == 0)
+            if (allPossiblePlayerTargetPorts.Count == 0)
             {
                 isVictory = false;
                 EndCampaign();
@@ -329,47 +338,54 @@ namespace MegaGame
 
         void CalculateCurrentPorts()
         {
-            if (playerPorts.Count <= 1)
+            CalculateOpposingPorts(playerOpposingPorts);
+            CalculateOpposingPorts(enemyOpposingPorts);
+        }
+
+        void CalculateOpposingPorts(OpposingPorts fraction)
+        {
+            short portsCount = 0;
+            short startIslandId = 0;
+            List<Port> allPossibleTargetPorts = new List<Port>();
+            BaseCharacter.Owner owner = BaseCharacter.Owner.neutral;
+
+            if (fraction == playerOpposingPorts)
             {
-                Island currentPlayerIsland = null;
-
-                for (int i = 0; i < allIslands.Count; i++)
-                    if (allIslands[i].islandData.id == playerStartIslandId)
-                        currentPlayerIsland = allIslands[i];
-
-                playerOpposingPorts.protagonPort = (Port)currentPlayerIsland.settlements[0];
+                portsCount = (short)playerPorts.Count;
+                startIslandId = playerStartIslandId;
+                allPossibleTargetPorts = allPossiblePlayerTargetPorts;
+                owner = BaseCharacter.Owner.player;
+            }
+            else if (fraction == enemyOpposingPorts)
+            {
+                portsCount = (short)enemyPorts.Count;
+                startIslandId = enemyStartIslandId;
+                allPossibleTargetPorts = allPossibleEnemyTargetPorts;
+                owner = BaseCharacter.Owner.enemy;
             }
 
-            if (enemyPorts.Count <= 1)
+            if (portsCount <= 1)
             {
-                Island currentEnemyIsland = null;
+                Island currentIsland = null;
 
                 for (int i = 0; i < allIslands.Count; i++)
-                    if (allIslands[i].islandData.id == enemyStartIslandId)
-                        currentEnemyIsland = allIslands[i];
+                    if (allIslands[i].islandData.id == startIslandId)
+                        currentIsland = allIslands[i];
 
-                enemyOpposingPorts.protagonPort = (Port)currentEnemyIsland.settlements[0];
+                fraction.protagonPort = (Port)currentIsland.settlements[0];
             }
-            
+
             short rand = (short)UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
-            playerOpposingPorts.antagonPort = allPossibleTargetPorts[rand];
+            fraction.antagonPort = allPossibleTargetPorts[rand];
 
-            if (playerPorts.Count > 1)
-                playerOpposingPorts.protagonPort = FindPossiblePlayerPortToTargetPort(playerOpposingPorts.antagonPort);
+            if (portsCount > 1)
+                fraction.protagonPort = FindPossiblePlayerPortToTargetPort(playerOpposingPorts.antagonPort);
 
-            UpdatePortState(playerOpposingPorts.protagonPort, BaseCharacter.Owner.player);
-            playerOpposingPorts.protagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.player);
+            fraction.protagonPort.owner = owner;
 
-            if (playerOpposingPorts.antagonPort.owner == BaseCharacter.Owner.enemy)
-            {
-                UpdatePortState(playerOpposingPorts.antagonPort, BaseCharacter.Owner.enemy);
-                playerOpposingPorts.antagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.enemy);
-            }
-            else if (playerOpposingPorts.antagonPort.owner == BaseCharacter.Owner.neutral)
-            {
-                UpdatePortState(playerOpposingPorts.antagonPort, BaseCharacter.Owner.neutral);
-                playerOpposingPorts.antagonPort.SetVisualAsTarget(true, BaseCharacter.Owner.neutral);
-            }
+            UpdatePortState(fraction.protagonPort, fraction.protagonPort.owner);
+            fraction.protagonPort.SetVisualAsTarget(true, fraction.protagonPort.owner);
+            fraction.antagonPort.SetVisualAsTarget(true, fraction.antagonPort.owner);
         }
 
         Port FindPossiblePlayerPortToTargetPort(Port target)

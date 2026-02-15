@@ -67,14 +67,14 @@ namespace MegaGame
 
             for (int i = 0; i < settlements.Count; i++)
             {
-                UpdateSettlementState(settlements[i], i);
+                UpdateSettlementState(settlements[i]);
 
                 if (settlements[i] as Port)
                     settlements[i].GetComponent<Port>().SetVisualAsTarget(false, owner);
             }
         }
 
-        void UpdateSettlementState(BaseSettlement settlement, int id)
+        void UpdateSettlementState(BaseSettlement settlement)
         {
             settlement.owner = owner;
             settlement.SetVisual();
@@ -88,7 +88,7 @@ namespace MegaGame
             else if (settlement as Fortress)
                 settlementType = " Fortress ";
 
-            settlement.gameObject.name = islandData.islandName.GetLocalizedString() + settlementType + id.ToString();
+            settlement.gameObject.name = islandData.islandName.GetLocalizedString() + settlementType.ToString();
         }
     }
 }
