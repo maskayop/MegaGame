@@ -125,6 +125,10 @@ PrefabInstance:
       value: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0430\u043A\u043A\u0430\u0443\u043D\u0442
         \u0441 \u0438\u043C\u0435\u043D\u0435\u043C \u0442\u0430\u043A\u0438\u043C-\u0442\u043E"
       objectReference: {fileID: 0}
+    - target: {fileID: 3971339482399130223, guid: 5e1e4fc6fbec0d144ac657dd4d793459, type: 3}
+      propertyPath: m_fontSize
+      value: 27.45
+      objectReference: {fileID: 0}
     - target: {fileID: 4370364221044590280, guid: 5e1e4fc6fbec0d144ac657dd4d793459, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -138,7 +142,9 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4370364221044590280, guid: 5e1e4fc6fbec0d144ac657dd4d793459, type: 3}
+    - {fileID: 2590232617292351852, guid: 5e1e4fc6fbec0d144ac657dd4d793459, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5058622548285892628, guid: 5e1e4fc6fbec0d144ac657dd4d793459, type: 3}

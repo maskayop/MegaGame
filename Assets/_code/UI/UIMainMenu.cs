@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame.UI
 {
@@ -89,7 +90,7 @@ namespace MegaGame.UI
         {
             accountManagerWindow.SetActive(true);
             accountNameInputField.text = gameDataSaver.GetCurrentAccountName();
-            GetAccountsNames();
+            CreateAccountsButtons();
         }
 
         public void CloseAccountManagerWindow()
@@ -109,7 +110,7 @@ namespace MegaGame.UI
             Init();
         }
 
-        void GetAccountsNames()
+        void CreateAccountsButtons()
         {
             foreach (Transform t in accountButtonsContainer)
                 Destroy(t.gameObject);
@@ -127,6 +128,18 @@ namespace MegaGame.UI
         {
             gameDataSaver.LoadAccount(targetAccountName);
             gameDataSaver.SetAccountName(targetAccountName);
+            Init();
+        }
+
+        public void DeletePlayerPrefs()
+        {
+            DataSaveLoad.Instance.DeletePlayerPrefs();
+
+            foreach (Transform t in accountButtonsContainer)
+                Destroy(t.gameObject);
+
+            gameDataSaver.LoadLastAccount();
+
             Init();
         }
     }

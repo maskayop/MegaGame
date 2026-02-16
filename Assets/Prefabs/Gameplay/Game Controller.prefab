@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
   timeForDecision: 0.3
-  shipSpawnChance: 12
+  shipSpawnChance: 7
+  onLowMoneySpawnChanceMultiplier: 4
 --- !u!114 &6039075397147238773
 MonoBehaviour:
   m_ObjectHideFlags: 0

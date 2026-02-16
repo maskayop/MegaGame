@@ -49,8 +49,7 @@ namespace MegaGame
         public short distanceForPossibleTargets = 100;
 
         [Header("Enemy's Targets")]
-        public List<Village> possibleTargetVillagesForEnemy = new List<Village>();
-        public List<Fortress> possibleTargetFortressesForEnemy = new List<Fortress>();
+        public List<BaseSettlement> possibleTargetSettlementForEnemy = new List<BaseSettlement>();
 
         short playerPortsCount;
         public short PlayerPortsCount { get { return playerPortsCount; } }
@@ -263,7 +262,7 @@ namespace MegaGame
             playerFortressesCount = (short)playerFortresses.Count;
             enemyFortressesCount = (short)enemyFortresses.Count;
 
-            possibleTargetVillagesForEnemy.Clear();
+            possibleTargetSettlementForEnemy.Clear();
 
             if (enemyOpposingPorts.protagonPort)
             {
@@ -271,10 +270,8 @@ namespace MegaGame
                     if (allVillages[i].owner != BaseCharacter.Owner.enemy)
                         if (Vector3.Distance(allVillages[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
-                                possibleTargetVillagesForEnemy.Add(allVillages[i]);
+                                possibleTargetSettlementForEnemy.Add(allVillages[i]);
             }
-
-            possibleTargetFortressesForEnemy.Clear();
 
             if (enemyOpposingPorts.protagonPort)
             {
@@ -282,7 +279,7 @@ namespace MegaGame
                     if (allFortresses[i].owner != BaseCharacter.Owner.enemy)
                         if (Vector3.Distance(allFortresses[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
-                                possibleTargetFortressesForEnemy.Add(allFortresses[i]);
+                                possibleTargetSettlementForEnemy.Add(allFortresses[i]);
             }
         }
 
@@ -349,6 +346,15 @@ namespace MegaGame
         void CalculateCurrentPorts()
         {
             CalculateOpposingPorts(playerOpposingPorts);
+
+            if (playerOpposingPorts.antagonPort.owner == BaseCharacter.Owner.enemy)
+            {
+                enemyOpposingPorts.protagonPort = playerOpposingPorts.antagonPort;
+                enemyOpposingPorts.antagonPort = playerOpposingPorts.protagonPort;
+
+                return;
+            }
+
             CalculateOpposingPorts(enemyOpposingPorts);
         }
 
@@ -411,16 +417,24 @@ namespace MegaGame
             if (rand == 0)
             {
                 for (int i = 0; i < target.Island.possibleTargets.Count; i++)
+                {
+                    BaseSettlement settlement = target.Island.possibleTargets[i].settlements[0];
+
                     if (target.Island.possibleTargets[i].owner == owner)
-                        if (target.Island.possibleTargets[i].settlements[0] as Port)
-                            return (Port)target.Island.possibleTargets[i].settlements[0];
+                        if (settlement as Port)
+                            return (Port)settlement;
+                }
             }
             else
             {
                 for (int i = target.Island.possibleTargets.Count - 1; i >= 0; i--)
+                {
+                    BaseSettlement settlement = target.Island.possibleTargets[i].settlements[0];
+
                     if (target.Island.possibleTargets[i].owner == owner)
-                        if (target.Island.possibleTargets[i].settlements[0] as Port)
-                            return (Port)target.Island.possibleTargets[i].settlements[0];
+                        if (settlement as Port)
+                            return (Port)settlement;
+                }
             }
 
             return port;
