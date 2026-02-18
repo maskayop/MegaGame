@@ -6,9 +6,13 @@ namespace MegaGame
     {
         public static ScenePrefabsManager Instance { get; private set; }
 
-        [Header("Ships")]
+        [Header("Attacking Ships")]
         [SerializeField] GameObject shipPlayerPrefab;
         [SerializeField] GameObject shipEnemyPrefab;
+
+        [Header("Defender Ships")]
+        [SerializeField] GameObject defenderShipPlayerPrefab;
+        [SerializeField] GameObject defenderShipEnemyPrefab;
 
         [Header("FX")]
         [SerializeField] GameObject FXTargetEnemy;
@@ -43,12 +47,20 @@ namespace MegaGame
             Instantiate(FXTargetEnemyReject, position, Quaternion.identity);
         }
 
-        public GameObject GetShipPrefab(bool isPlayer)
+        public GameObject GetAttackingShipPrefab(bool isPlayer)
         {
             if (isPlayer)
                 return shipPlayerPrefab;
             else
                 return shipEnemyPrefab;
+        }
+
+        public GameObject GetDefenderShipPrefab(bool isPlayer)
+        {
+            if (isPlayer)
+                return defenderShipPlayerPrefab;
+            else
+                return defenderShipEnemyPrefab;
         }
 
         public void SpawnDistanceCircle(Vector3 position, short radius)

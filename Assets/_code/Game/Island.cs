@@ -16,7 +16,15 @@ namespace MegaGame
         public bool isStartIsland = false;
         public List<Island> possibleTargets = new List<Island>();
 
+        [Header("Defend")]
+        public List<Transform> defendingPoints = new List<Transform>();
+
         GameController gameController;
+
+        DefenderShip defenderShip;
+        public DefenderShip DefenderShip { get { return defenderShip; } set { defenderShip = value; } }
+
+        bool isDefenderShip;
 
         void Awake()
         {
@@ -26,6 +34,20 @@ namespace MegaGame
         void Start()
         {
             Init();
+        }
+
+        void Update()
+        {
+            if (gameController.gameState != GameController.GameState.battle)
+                return;
+
+            if (isDefenderShip == defenderShip)
+                return;
+
+            nameWidget.SetDefenderShip(defenderShip);
+            nameWidget.SetColor(owner);
+
+            isDefenderShip = defenderShip;
         }
 
         void Init()
@@ -49,6 +71,8 @@ namespace MegaGame
             }
 
             UpdateIslandState();
+
+            isDefenderShip = true;
         }
 
         void SetThisIslandToSettlements()

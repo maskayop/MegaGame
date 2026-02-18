@@ -6017,6 +6017,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 139947632975964282, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 139947632975964282, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6245,6 +6249,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1576109174373572285, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576109174373572285, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6469,6 +6477,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2377861494362907255, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377861494362907255, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6509,6 +6521,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2951839058150992736, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951839058150992736, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6697,6 +6713,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4174224277727635172, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174224277727635172, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6969,6 +6989,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6500486476908867336, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500486476908867336, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6986,6 +7010,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6844629717560754313, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844629717560754313, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844629717560754313, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
@@ -7186,6 +7214,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8325508717024322719, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325508717024322719, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8325508717024322719, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
@@ -14682,7 +14714,7 @@ MonoBehaviour:
   m_OverrideTileSize: 1
   m_TileSize: 128
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
+  m_VoxelSize: 0.4
   m_MinRegionArea: 4
   m_NavMeshData: {fileID: 23800000, guid: ccaee079cfe96d14caa9c9626e18fef1, type: 2}
   m_BuildHeightMesh: 0

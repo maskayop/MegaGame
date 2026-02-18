@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MegaGame
@@ -7,6 +8,10 @@ namespace MegaGame
         [SerializeField] float timeForDecision = 1.0f;
         [SerializeField] short shipSpawnChance = 1;
         [SerializeField] short onLowMoneySpawnChanceMultiplier = 1;
+
+        public List<Village> unsafeVillagesInRadius = new List<Village>();
+
+        short villagesCount;
 
         Port currentPort;
 
@@ -35,6 +40,12 @@ namespace MegaGame
             if (currentDecisionTime <= 0)
             {
                 currentDecisionTime = timeForDecision;
+
+                if (villagesCount != gameController.EnemyVillagesCount)
+                    UpdateUnsafeVillagesInRadius();
+
+                villagesCount = gameController.EnemyVillagesCount;
+
                 MakeDecision();
             }
         }
@@ -54,7 +65,6 @@ namespace MegaGame
                     else
                         r = (short)Random.Range(0, shipSpawnChance * onLowMoneySpawnChanceMultiplier);
 
-
                     if (r == 0)
                         SpawnShip();
                 }
@@ -63,12 +73,21 @@ namespace MegaGame
 
         void SpawnShip()
         {
+            short villageR = (short)Random.Range(0, 2);
+
+            if (villageR == 0 && unsafeVillagesInRadius.Count != 0)
+            {
+                gameplayObjectsBuilder.TryCreateEnemyShip(unsafeVillagesInRadius[0], 1);
+                UpdateUnsafeVillagesInRadius();
+                return;
+            }
+
             short r = (short)Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count + 1);
 
             if (r != 0)
-                gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleSettlement());
+                gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleSettlement(), 0);
             else
-                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.enemyOpposingPorts.antagonPort);
+                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.enemyOpposingPorts.antagonPort, 0);
         }
 
         BaseSettlement GetRandomPossibleSettlement()
@@ -79,6 +98,20 @@ namespace MegaGame
                 return gameController.possibleTargetSettlementForEnemy[r];
             else
                 return null;
+        }
+
+        void UpdateUnsafeVillagesInRadius()
+        {
+            unsafeVillagesInRadius.Clear();
+            float distance = 0;
+
+            for (int i = 0; i < gameController.enemyVillages.Count; i++)
+            {
+                distance = Vector3.Distance(gameController.enemyVillages[i].transform.position, gameController.enemyOpposingPorts.protagonPort.transform.position);
+
+                if (distance <= gameController.distanceForPossibleTargets && gameController.enemyVillages[i].Island.DefenderShip == null)
+                    unsafeVillagesInRadius.Add(gameController.enemyVillages[i]);
+            }
         }
     }
 }

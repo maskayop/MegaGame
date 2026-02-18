@@ -18,9 +18,9 @@ namespace MegaGame
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
 
-        NavMeshAgent agent;
-        Transform destinationPosition;
-        BaseSettlement targetSettlement;
+        protected NavMeshAgent agent;
+        protected Transform destinationPosition;
+        protected BaseSettlement targetSettlement;
 
         float cos = 0;
 
@@ -57,15 +57,20 @@ namespace MegaGame
                 currentSpeed = speed;
 
             UpdateSpeedByWind();
+            OnUpdateTargetSettlementState();
+            
+            agent.destination = destinationPosition.position;
+            agent.speed = currentSpeed;
+        }
 
+        protected virtual void OnUpdateTargetSettlementState()
+        {
             if (owner == Owner.player && targetSettlement.owner == Owner.player)
                 targetSettlement = gameController.playerOpposingPorts.antagonPort;
             else if (owner == Owner.enemy && targetSettlement.owner == Owner.enemy)
                 targetSettlement = gameController.enemyOpposingPorts.antagonPort;
 
             destinationPosition = targetSettlement.transform;
-            agent.destination = destinationPosition.position;
-            agent.speed = currentSpeed;
         }
 
         protected override bool CanAddTargetToList(BaseCharacter targetCharacter)
