@@ -7,9 +7,9 @@ namespace MegaGame
         [SerializeField] float distanceToPointToChange = 1;
 
         [Header("Info")]
-        [SerializeField] short currentDefendingPoint = 0;
-        [SerializeField] float distance;
-        [SerializeField] Transform currentTarget;
+        short currentDefendingPoint = 0;
+        float distance;
+        Transform currentTarget;
 
         protected override void OnUpdateTargetSettlementState()
         {

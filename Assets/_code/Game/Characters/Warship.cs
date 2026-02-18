@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Vopere.Common;
 
 namespace MegaGame
 {
@@ -17,6 +18,10 @@ namespace MegaGame
 
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
+        [SerializeField] AnimationBehavior animationBehavior;
+
+        [Header("Other")]
+        [SerializeField] DestroyAfterTime destroyAfterTime;
 
         protected NavMeshAgent agent;
         protected Transform destinationPosition;
@@ -58,7 +63,7 @@ namespace MegaGame
 
             UpdateSpeedByWind();
             OnUpdateTargetSettlementState();
-            
+
             agent.destination = destinationPosition.position;
             agent.speed = currentSpeed;
         }
@@ -156,8 +161,23 @@ namespace MegaGame
             if (!gameObject)
                 return;
 
-            Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
-            Destroy(gameObject);
+            if (FXDestroyPrefab)
+                Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
+
+            if (destroyAfterTime)
+            {
+                Destroy(this);
+
+                destroyAfterTime.DestroyGameObject();
+
+                if (animationBehavior)
+                    animationBehavior.Animate();
+
+                GetCurrentHealthWidget().gameObject.SetActive(false);
+            }
+            else
+                Destroy(gameObject);
+
             ObjectsManager.Instance.allCharacters.Remove(gameObject);
         }
 

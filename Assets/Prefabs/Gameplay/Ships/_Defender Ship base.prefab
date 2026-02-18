@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4071703617432491922}
+  - component: {fileID: 6257853652041858601}
   m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
@@ -34,6 +35,28 @@ Transform:
   - {fileID: 4359474551608597149}
   m_Father: {fileID: 9138028168887617915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &6257853652041858601
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021785611154541580}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ef563c1664244c489285536c3e34fa6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5330536564953207849
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,6 +69,8 @@ GameObject:
   - component: {fileID: 7502759269924817115}
   - component: {fileID: 1168766165841433426}
   - component: {fileID: 7697146234952713426}
+  - component: {fileID: -3230663631609051132}
+  - component: {fileID: -1080902903418761957}
   m_Layer: 3
   m_Name: _Defender Ship base
   m_TagString: Untagged
@@ -141,13 +166,44 @@ MonoBehaviour:
   currentSpeed: 1
   speedDrop: 15
   windSpeedMinMultiplier: 0.35
-  FXDestroyPrefab: {fileID: 0}
+  FXDestroyPrefab: {fileID: 5910495002063247550, guid: cedd626daa06a5d4c8fc7939e0d52ec4, type: 3}
   FXShot: {fileID: 1309626319987756586}
   visualObject: {fileID: 1021785611154541580}
+  animationBehavior: {fileID: -3230663631609051132}
+  destroyAfterTime: {fileID: -1080902903418761957}
   distanceToPointToChange: 5
-  currentDefendingPoint: 0
-  distance: 0
-  currentTarget: {fileID: 0}
+--- !u!114 &-3230663631609051132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5330536564953207849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3b0ce09274a9f419e1bbf8b26b34c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AnimationBehavior
+  animator: {fileID: 6257853652041858601}
+  animStates:
+  - Ship Destroy 1
+  - Ship Destroy 2
+  - Ship Destroy 3
+  - Ship Destroy 4
+--- !u!114 &-1080902903418761957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5330536564953207849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 816f0751f34cd6844ab271272f80430c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DestroyAfterTime
+  time: 1.5
+  destroyAtStart: 0
 --- !u!1 &8229156860201081542
 GameObject:
   m_ObjectHideFlags: 0

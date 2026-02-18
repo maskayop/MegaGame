@@ -148,7 +148,7 @@ namespace MegaGame
                 GetCurrentHealthWidget().gameObject.SetActive(false);
         }
 
-        HealthIndicatorWidget GetCurrentHealthWidget()
+        protected HealthIndicatorWidget GetCurrentHealthWidget()
         {
             if (owner == Owner.player && playerHealthWidget)
                 return playerHealthWidget;
