@@ -104,6 +104,8 @@ namespace MegaGame
             {
                 if (!targetSettlement.Island.DefenderShip)
                     BuildShip(scenePrefabsManager.GetDefenderShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
+                else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == BaseCharacter.Owner.enemy)
+                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
                 else
                     return;
             }
@@ -125,6 +127,8 @@ namespace MegaGame
             {
                 if (!targetSettlement.Island.DefenderShip)
                     BuildShip(scenePrefabsManager.GetDefenderShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
+                else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == BaseCharacter.Owner.player)
+                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
                 else
                     return;
             }

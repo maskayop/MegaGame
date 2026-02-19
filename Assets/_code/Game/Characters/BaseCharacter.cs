@@ -182,6 +182,9 @@ namespace MegaGame
 
         void Kill()
         {
+            if (!gameObject)
+                return;
+
             currentHealth = 0;
             UpdateHealthWidget();
             OnKilled();

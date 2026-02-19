@@ -32,8 +32,6 @@ namespace MegaGame
         string currentAccountNameKey = "";
         string totalAccountsAmountFormat = "TAC";
 
-        string startMoneyAddedForEnemyFormat = "SMAFE";
-
         void Awake()
         {
             if (Instance != null)
@@ -206,19 +204,6 @@ namespace MegaGame
             dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
 
             LoadLastAccount();
-        }
-
-        public bool IsStartMoneyAddedForEnemy()
-        {
-            if (dataSaveLoad.GetSavedShort(currentAccountNameKey + startMoneyAddedForEnemyFormat) == -1)
-                return false;
-            else
-                return true;
-        }
-
-        public void SaveStartMoneyAddedForEnemy()
-        {
-            dataSaveLoad.Save(currentAccountNameKey + startMoneyAddedForEnemyFormat, 0);
         }
     }
 }

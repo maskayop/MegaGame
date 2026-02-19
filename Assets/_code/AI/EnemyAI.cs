@@ -109,8 +109,9 @@ namespace MegaGame
             {
                 distance = Vector3.Distance(gameController.enemyVillages[i].transform.position, gameController.enemyOpposingPorts.protagonPort.transform.position);
 
-                if (distance <= gameController.distanceForPossibleTargets && gameController.enemyVillages[i].Island.DefenderShip == null)
-                    unsafeVillagesInRadius.Add(gameController.enemyVillages[i]);
+                if (distance <= gameController.distanceForPossibleTargets)
+                    if (!gameController.enemyVillages[i].Island.DefenderShip || gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
+                        unsafeVillagesInRadius.Add(gameController.enemyVillages[i]);
             }
         }
     }

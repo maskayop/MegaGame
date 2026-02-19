@@ -72,9 +72,6 @@ namespace MegaGame
 
                 if (islandTypeRenderer)
                     islandTypeRenderer.material.SetColor(materialValueName, playerColor);
-
-                if (defenderShipRenderer)
-                    defenderShipRenderer.material.SetColor(materialValueName, playerColor);
             }
             else if (owner == BaseCharacter.Owner.enemy)
             {
@@ -83,9 +80,6 @@ namespace MegaGame
 
                 if (islandTypeRenderer)
                     islandTypeRenderer.material.SetColor(materialValueName, enemyColor);
-
-                if (defenderShipRenderer)
-                    defenderShipRenderer.material.SetColor(materialValueName, enemyColor);
             }
             else if (owner == BaseCharacter.Owner.neutral)
             {
@@ -94,7 +88,26 @@ namespace MegaGame
 
                 if (islandTypeRenderer)
                     islandTypeRenderer.material.SetColor(materialValueName, neutralColor);
+            }
+        }
 
+        public void SetDefenderShipColor(BaseCharacter.Owner owner)
+        {
+            if (!defenderShipRenderer)
+                return;
+
+            if (owner == BaseCharacter.Owner.player)
+            {
+                if (defenderShipRenderer)
+                    defenderShipRenderer.material.SetColor(materialValueName, playerColor);
+            }
+            else if (owner == BaseCharacter.Owner.enemy)
+            {
+                if (defenderShipRenderer)
+                    defenderShipRenderer.material.SetColor(materialValueName, enemyColor);
+            }
+            else if (owner == BaseCharacter.Owner.neutral)
+            {
                 if (defenderShipRenderer)
                     defenderShipRenderer.material.SetColor(materialValueName, neutralColor);
             }

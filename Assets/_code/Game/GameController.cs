@@ -163,9 +163,6 @@ namespace MegaGame
             gameDataSaver.LoadLastAccount();
             gameDataSaver.LoadGameData();
 
-            if (!gameDataSaver.IsStartMoneyAddedForEnemy())
-                resourcesController.AddStartMoneyToEnemy();
-
             if (campaignIsEnded)
             {
                 EndCampaign();
@@ -445,6 +442,7 @@ namespace MegaGame
             UpdateSettlementsLists();
             SetGameStateAsBattle();
             resourcesController.UpdateRevenues();
+            resourcesController.AddBattleStartMoneyToEnemy();
 
             PlaceCameraBetweenPorts();
             startGameModelButton.gameObject.SetActive(false);

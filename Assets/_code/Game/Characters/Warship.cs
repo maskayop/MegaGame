@@ -70,10 +70,32 @@ namespace MegaGame
 
         protected virtual void OnUpdateTargetSettlementState()
         {
-            if (owner == Owner.player && targetSettlement.owner == Owner.player)
-                targetSettlement = gameController.playerOpposingPorts.antagonPort;
-            else if (owner == Owner.enemy && targetSettlement.owner == Owner.enemy)
-                targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+            if (owner == Owner.player)
+            {
+                if (targetSettlement.owner == Owner.player)
+                {
+                    if (targetSettlement.Island.DefenderShip)
+                    {
+                        if (targetSettlement.Island.DefenderShip.owner == Owner.player)
+                            targetSettlement = gameController.playerOpposingPorts.antagonPort;
+                    }
+                    else if (!targetSettlement.Island.DefenderShip)
+                        targetSettlement = gameController.playerOpposingPorts.antagonPort;
+                }
+            }
+            else if (owner == Owner.enemy)
+            {
+                if (targetSettlement.owner == Owner.enemy)
+                {
+                    if (targetSettlement.Island.DefenderShip)
+                    {
+                        if (targetSettlement.Island.DefenderShip.owner == Owner.enemy)
+                            targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+                    }
+                    else if (!targetSettlement.Island.DefenderShip)
+                        targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+                }
+            }
 
             destinationPosition = targetSettlement.transform;
         }

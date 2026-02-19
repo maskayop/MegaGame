@@ -240,10 +240,9 @@ namespace MegaGame
             return enemyMaintenance;
         }
 
-        public void AddStartMoneyToEnemy()
+        public void AddBattleStartMoneyToEnemy()
         {
             AddMoneyToEnemy(startMoneyForEnemy);
-            GameDataSaver.Instance.SaveStartMoneyAddedForEnemy();
         }
     }
 }

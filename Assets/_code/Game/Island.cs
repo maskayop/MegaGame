@@ -45,7 +45,9 @@ namespace MegaGame
                 return;
 
             nameWidget.SetDefenderShip(defenderShip);
-            nameWidget.SetColor(owner);
+
+            if (defenderShip)
+                nameWidget.SetDefenderShipColor(defenderShip.owner);
 
             isDefenderShip = defenderShip;
         }
