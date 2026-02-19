@@ -7,8 +7,14 @@ namespace MegaGame
         public static ScenePrefabsManager Instance { get; private set; }
 
         [Header("Attacking Ships")]
-        [SerializeField] GameObject shipPlayerPrefab;
-        [SerializeField] GameObject shipEnemyPrefab;
+        [SerializeField] GameObject smallShipPlayerPrefab;
+        [SerializeField] GameObject smallShipEnemyPrefab;
+
+        [SerializeField] GameObject mediumShipPlayerPrefab;
+        [SerializeField] GameObject mediumShipEnemyPrefab;
+
+        [SerializeField] GameObject bigShipPlayerPrefab;
+        [SerializeField] GameObject bigShipEnemyPrefab;
 
         [Header("Defender Ships")]
         [SerializeField] GameObject defenderShipPlayerPrefab;
@@ -47,12 +53,28 @@ namespace MegaGame
             Instantiate(FXTargetEnemyReject, position, Quaternion.identity);
         }
 
-        public GameObject GetAttackingShipPrefab(bool isPlayer)
+        public GameObject GetAttackingShipPrefab(bool isPlayer, short shipLevel)
         {
             if (isPlayer)
-                return shipPlayerPrefab;
+            {
+                if (shipLevel == 1)
+                    return smallShipPlayerPrefab;
+                else if (shipLevel == 2)
+                    return mediumShipPlayerPrefab;
+                else if (shipLevel == 3)
+                    return bigShipPlayerPrefab;
+            }
             else
-                return shipEnemyPrefab;
+            {
+                if (shipLevel == 1)
+                    return smallShipEnemyPrefab;
+                else if (shipLevel == 2)
+                    return mediumShipEnemyPrefab;
+                else if (shipLevel == 3)
+                    return bigShipEnemyPrefab;
+            }
+
+            return null;
         }
 
         public GameObject GetDefenderShipPrefab(bool isPlayer)

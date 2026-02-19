@@ -10,8 +10,12 @@ namespace MegaGame
 
         [Header("Prices")]
         public short smallShipBuildingCost = 10;
+        public short mediumShipBuildingCost = 20;
+        public short bigShipBuildingCost = 50;
 
         string smallShipCost;
+        string mediumShipCost;
+        string bigShipCost;
 
         GameController gameController;
         ScenePrefabsManager scenePrefabsManager;
@@ -52,6 +56,8 @@ namespace MegaGame
             resourcesController = ResourcesController.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingCost);
+            mediumShipCost = Strint.GetString(mediumShipBuildingCost);
+            bigShipCost = Strint.GetString(bigShipBuildingCost);
         }
 
         void SelectObject()
@@ -85,7 +91,7 @@ namespace MegaGame
             }
         }
 
-        public void TryCreatePlayerShip(BaseSettlement targetSettlement, int shipType)
+        public void TryCreatePlayerShip(BaseSettlement targetSettlement, short shipType)
         {
             if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
             {
@@ -98,22 +104,24 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.PlayerMoney, smallShipCost) < 0)
                 return;
 
+            short shipLevel = GetBuildingShipLevel(resourcesController.PlayerMoney, false);
+
             if (shipType == 0) // Attacking Ship
-                BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
+                BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true, shipLevel), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
             else if (shipType == 1) // Defender Ship
             {
                 if (!targetSettlement.Island.DefenderShip)
                     BuildShip(scenePrefabsManager.GetDefenderShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
                 else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == BaseCharacter.Owner.enemy)
-                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
+                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true, shipLevel), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
                 else
                     return;
             }
 
-            resourcesController.RemoveMoneyFromPlayer(smallShipBuildingCost);
+            resourcesController.RemoveMoneyFromPlayer(GetCurrentBuildingShipCost(shipLevel));
         }
 
-        public void TryCreateEnemyShip(BaseSettlement targetSettlement, int shipType)
+        public void TryCreateEnemyShip(BaseSettlement targetSettlement, short shipType)
         {
             if (!targetSettlement)
                 return;
@@ -121,19 +129,21 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.EnemyMoney, smallShipCost) < 0)
                 return;
 
+            short shipLevel = GetBuildingShipLevel(resourcesController.EnemyMoney, true);
+
             if (shipType == 0) // Attacking Ship
-                BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
+                BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, shipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
             else if (shipType == 1) // Defender Ship
             {
                 if (!targetSettlement.Island.DefenderShip)
                     BuildShip(scenePrefabsManager.GetDefenderShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
                 else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == BaseCharacter.Owner.player)
-                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
+                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, shipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
                 else
                     return;
             }
 
-            resourcesController.RemoveMoneyFromEnemy(smallShipBuildingCost);
+            resourcesController.RemoveMoneyFromEnemy(GetCurrentBuildingShipCost(shipLevel));
         }
 
         public void BuildShip(GameObject shipObject, Transform buildingPosition, BaseSettlement targetSettlement)
@@ -151,6 +161,38 @@ namespace MegaGame
 
             if (character as DefenderShip)
                 targetSettlement.Island.DefenderShip = character as DefenderShip;
+        }
+
+        short GetBuildingShipLevel(string money, bool isRandom)
+        {
+            short maxValue = 0;
+
+            if (Strint.GetInt(money) >= Strint.GetInt(smallShipCost) && Strint.GetInt(money) < Strint.GetInt(mediumShipCost))
+                maxValue = 1;
+            else if (Strint.GetInt(money) >= Strint.GetInt(mediumShipCost) && Strint.GetInt(money) < Strint.GetInt(bigShipCost))
+                maxValue = 2;
+            else if (Strint.GetInt(money) >= Strint.GetInt(bigShipCost))
+                maxValue = 3;
+
+            if (isRandom)
+            {
+                short r = (short)Random.Range(1, maxValue + 1);
+                return r;
+            }
+            else
+                return maxValue;
+        }
+
+        int GetCurrentBuildingShipCost(int shipLevel)
+        {
+            if (shipLevel == 1)
+                return Strint.GetInt(smallShipCost);
+            else if (shipLevel == 2)
+                return Strint.GetInt(mediumShipCost);
+            else if (shipLevel == 3)
+                return Strint.GetInt(bigShipCost);
+            else
+                return 0;
         }
     }
 }

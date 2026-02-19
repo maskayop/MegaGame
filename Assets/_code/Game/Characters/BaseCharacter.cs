@@ -27,6 +27,7 @@ namespace MegaGame
         [SerializeField] protected HealthIndicatorWidget neutralHealthWidget;
 
         [Header("Info")]
+        public float timeForTargetsUpdate = 3;
         public List<BaseCharacter> targetEnemies = new List<BaseCharacter>();
 
         protected GameController gameController;
@@ -40,6 +41,9 @@ namespace MegaGame
         public Island Island { get { return island; } set { island = value; } }
 
         float currentAttackTime = 0;
+        float currentTargetsUpdateTime = 0;
+
+        Collider coll;
 
         void Awake()
         {
@@ -60,6 +64,17 @@ namespace MegaGame
 
             if (currentHealth <= 0)
                 return;
+
+            currentTargetsUpdateTime -= Time.deltaTime;
+
+            if (currentTargetsUpdateTime < 0)
+            {
+                coll.enabled = false;
+                targetEnemies.Clear();
+                coll.enabled = true;
+
+                currentTargetsUpdateTime = timeForTargetsUpdate;
+            }
 
             for (int i = 0; i < targetEnemies.Count; i++)
             {
@@ -93,6 +108,8 @@ namespace MegaGame
 
             if (GameController.Instance)
                 gameController = GameController.Instance;
+
+            coll = GetComponent<Collider>();
 
             OnInit();
         }

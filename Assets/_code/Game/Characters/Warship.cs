@@ -7,9 +7,9 @@ namespace MegaGame
     public class Warship : BaseCharacter
     {
         [Header("Speed")]
-        public float speed = 1;
+        public short speed = 1;
         public float currentSpeed = 1;
-        public float speedDrop = 5;
+        public short speedDrop = 5;
         public float windSpeedMinMultiplier = 1;
 
         [Header("FX")]

@@ -353,6 +353,12 @@ namespace MegaGame
             }
 
             CalculateOpposingPorts(enemyOpposingPorts);
+
+            if (enemyOpposingPorts.antagonPort.owner == BaseCharacter.Owner.player)
+            {
+                playerOpposingPorts.protagonPort = enemyOpposingPorts.antagonPort;
+                playerOpposingPorts.antagonPort = enemyOpposingPorts.protagonPort;
+            }
         }
 
         void CalculateOpposingPorts(OpposingPorts fraction)
@@ -442,7 +448,9 @@ namespace MegaGame
             UpdateSettlementsLists();
             SetGameStateAsBattle();
             resourcesController.UpdateRevenues();
-            resourcesController.AddBattleStartMoneyToEnemy();
+
+            if (playerPortsCount >= enemyPortsCount)
+                resourcesController.AddBattleStartMoneyToEnemy();
 
             PlaceCameraBetweenPorts();
             startGameModelButton.gameObject.SetActive(false);

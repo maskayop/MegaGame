@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7041463173072179091}
   - component: {fileID: 1548826260406002269}
   m_Layer: 0
-  m_Name: FX Ship Shot
+  m_Name: _FX Ship Shot Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5875,8 +5875,8 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 200
-        minScalar: 100
+        scalar: 120
+        minScalar: 80
         maxCurve:
           serializedVersion: 2
           m_Curve:
