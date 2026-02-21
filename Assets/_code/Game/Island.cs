@@ -8,9 +8,10 @@ namespace MegaGame
         public BaseCharacter.Owner owner;
         public Data_Island islandData;
 
-        [SerializeField] NameWidget nameWidget;
+        public BaseSettlement settlement;
 
-        public List<BaseSettlement> settlements = new List<BaseSettlement>();
+        [Header("Widgets")]
+        [SerializeField] NameWidget nameWidget;
 
         [Header("Battle")]
         public bool isStartIsland = false;
@@ -62,15 +63,12 @@ namespace MegaGame
 
             gameController.allIslands.Add(this);
 
-            for (int i = 0; i < settlements.Count; i++)
-            {
-                if (settlements[i] as Port)
-                    gameController.allPorts.Add((Port)settlements[i]);
-                else if (settlements[i] as Village)
-                    gameController.allVillages.Add((Village)settlements[i]);
-                else if (settlements[i] as Fortress)
-                    gameController.allFortresses.Add((Fortress)settlements[i]);
-            }
+            if (settlement as Port)
+                gameController.allPorts.Add((Port)settlement);
+            else if (settlement as Village)
+                gameController.allVillages.Add((Village)settlement);
+            else if (settlement as Fortress)
+                gameController.allFortresses.Add((Fortress)settlement);
 
             UpdateIslandState();
 
@@ -79,8 +77,10 @@ namespace MegaGame
 
         void SetThisIslandToSettlements()
         {
-            for (int i = 0; i < settlements.Count; i++)
-                settlements[i].Island = this;
+            if (!settlement)
+                return;
+
+            settlement.Island = this;
         }
 
         public void UpdateIslandState()
@@ -91,30 +91,30 @@ namespace MegaGame
                 nameWidget.SetColor(owner);
             }
 
-            for (int i = 0; i < settlements.Count; i++)
-            {
-                UpdateSettlementState(settlements[i]);
+            if (!settlement)
+                return;
 
-                if (settlements[i] as Port)
-                    settlements[i].GetComponent<Port>().SetVisualAsTarget(false, owner);
-            }
+            UpdateSettlementState(settlement);
+
+            if (settlement as Port)
+                settlement.GetComponent<Port>().SetVisualAsTarget(false, owner);
         }
 
-        void UpdateSettlementState(BaseSettlement settlement)
+        void UpdateSettlementState(BaseSettlement INsettlement)
         {
-            settlement.owner = owner;
-            settlement.SetVisual();
+            INsettlement.owner = owner;
+            INsettlement.SetVisual();
 
             string settlementType = "";
 
-            if (settlement as Port)
+            if (INsettlement as Port)
                 settlementType = " Port ";
-            else if (settlement as Village)
+            else if (INsettlement as Village)
                 settlementType = " Village ";
-            else if (settlement as Fortress)
+            else if (INsettlement as Fortress)
                 settlementType = " Fortress ";
 
-            settlement.gameObject.name = islandData.islandName.GetLocalizedString() + settlementType.ToString();
+            INsettlement.gameObject.name = islandData.islandName.GetLocalizedString() + settlementType.ToString();
         }
     }
 }

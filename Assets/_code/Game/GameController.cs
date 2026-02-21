@@ -152,8 +152,6 @@ namespace MegaGame
                 allIslands[i].owner = BaseCharacter.Owner.neutral;
                 allIslands[i].UpdateIslandState();
             }
-
-            ResetHealthForAllIslands();
         }
 
         public void StartGame()
@@ -226,14 +224,14 @@ namespace MegaGame
             for (int i = 0; i < playerPorts.Count; i++)
                 for (int p = 0; p < playerPorts[i].Island.possibleTargets.Count; p++)
                     if (playerPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.player)
-                        if (playerPorts[i].Island.possibleTargets[p].settlements[0] as Port)
-                            allPossiblePlayerTargetPorts.Add((Port)playerPorts[i].Island.possibleTargets[p].settlements[0]);
+                        if (playerPorts[i].Island.possibleTargets[p].settlement as Port)
+                            allPossiblePlayerTargetPorts.Add((Port)playerPorts[i].Island.possibleTargets[p].settlement);
 
             for (int i = 0; i < enemyPorts.Count; i++)
                 for (int p = 0; p < enemyPorts[i].Island.possibleTargets.Count; p++)
                     if (enemyPorts[i].Island.possibleTargets[p].owner != BaseCharacter.Owner.enemy)
-                        if (enemyPorts[i].Island.possibleTargets[p].settlements[0] as Port)
-                            allPossibleEnemyTargetPorts.Add((Port)enemyPorts[i].Island.possibleTargets[p].settlements[0]);
+                        if (enemyPorts[i].Island.possibleTargets[p].settlement as Port)
+                            allPossibleEnemyTargetPorts.Add((Port)enemyPorts[i].Island.possibleTargets[p].settlement);
 
             playerVillages.Clear();
             enemyVillages.Clear();
@@ -267,7 +265,7 @@ namespace MegaGame
                     if (allVillages[i].owner != BaseCharacter.Owner.enemy)
                         if (Vector3.Distance(allVillages[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
-                                possibleTargetSettlementForEnemy.Add(allVillages[i]);
+                            possibleTargetSettlementForEnemy.Add(allVillages[i]);
             }
 
             if (enemyOpposingPorts.protagonPort)
@@ -276,7 +274,7 @@ namespace MegaGame
                     if (allFortresses[i].owner != BaseCharacter.Owner.enemy)
                         if (Vector3.Distance(allFortresses[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
-                                possibleTargetSettlementForEnemy.Add(allFortresses[i]);
+                            possibleTargetSettlementForEnemy.Add(allFortresses[i]);
             }
         }
 
@@ -391,7 +389,7 @@ namespace MegaGame
                     if (allIslands[i].islandData.id == startIslandId)
                         currentIsland = allIslands[i];
 
-                fraction.protagonPort = (Port)currentIsland.settlements[0];
+                fraction.protagonPort = (Port)currentIsland.settlement;
             }
 
             short rand = (short)UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
@@ -421,7 +419,7 @@ namespace MegaGame
             {
                 for (int i = 0; i < target.Island.possibleTargets.Count; i++)
                 {
-                    BaseSettlement settlement = target.Island.possibleTargets[i].settlements[0];
+                    BaseSettlement settlement = target.Island.possibleTargets[i].settlement;
 
                     if (target.Island.possibleTargets[i].owner == owner)
                         if (settlement as Port)
@@ -432,7 +430,7 @@ namespace MegaGame
             {
                 for (int i = target.Island.possibleTargets.Count - 1; i >= 0; i--)
                 {
-                    BaseSettlement settlement = target.Island.possibleTargets[i].settlements[0];
+                    BaseSettlement settlement = target.Island.possibleTargets[i].settlement;
 
                     if (target.Island.possibleTargets[i].owner == owner)
                         if (settlement as Port)
@@ -563,15 +561,6 @@ namespace MegaGame
         public void SetGameStateAsMenu()
         {
             gameState = GameState.menu;
-        }
-
-        void ResetHealthForAllIslands()
-        {
-            for (int i = 0; i < allIslands.Count; i++)
-            {
-                for (int s = 0; s < allIslands[i].settlements.Count; s++)
-                    allIslands[i].settlements[s].ResetHealth();
-            }
         }
     }
 }
