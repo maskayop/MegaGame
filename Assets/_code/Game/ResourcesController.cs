@@ -178,8 +178,16 @@ namespace MegaGame
                 value = 171; // 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18
             else if (shipsCount > 95 && shipsCount <= 100)
                 value = 190; // 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19
-            else if (shipsCount > 100)
+            else if (shipsCount > 100 && shipsCount <= 150)
                 value = 250;
+            else if (shipsCount > 150 && shipsCount <= 200)
+                value = 300;
+            else if (shipsCount > 200 && shipsCount <= 250)
+                value = 400;
+            else if (shipsCount > 250)
+                value = 500;
+            else if (shipsCount > 300)
+                value = 1000;
 
             return value;
         }

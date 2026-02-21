@@ -75,58 +75,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6059687761804649416}
     m_Modifications:
-    - target: {fileID: 5017467629293527332, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
-      propertyPath: m_Name
-      value: Ship Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+    - target: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2051508341072736230, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
+      propertyPath: m_Name
+      value: Ship Pinta Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
---- !u!4 &7879820801307529856 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
+--- !u!4 &3783996253021445186 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1671885886634358108, guid: ac1e5ef45e9d8984196f2a9f527bc729, type: 3}
   m_PrefabInstance: {fileID: 2571783880379263262}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7825511467659654234
@@ -203,15 +203,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
-    - {fileID: 8415700449823858773, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
     - {fileID: 2419203355870664967, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
+    - {fileID: 6071377245050627910, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9138028168887617915, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8211491084185402697}
     - targetCorrespondingSourceObject: {fileID: 4071703617432491922, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7879820801307529856}
+      addedObject: {fileID: 3783996253021445186}
     - targetCorrespondingSourceObject: {fileID: 4071703617432491922, guid: d6b2d96a4400b7d43abeff0dfce03486, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1248507418855444576}
@@ -241,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053883114254406227, guid: a59081a86d04b2b41b18d85535e0f45b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1053883114254406227, guid: a59081a86d04b2b41b18d85535e0f45b, type: 3}
       propertyPath: m_LocalPosition.z
