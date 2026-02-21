@@ -248,9 +248,9 @@ namespace MegaGame
             return enemyMaintenance;
         }
 
-        public void AddBattleStartMoneyToEnemy()
+        public void AddBattleStartMoneyToEnemy(short multiplier)
         {
-            AddMoneyToEnemy(startMoneyForEnemy);
+            AddMoneyToEnemy(startMoneyForEnemy * multiplier);
         }
     }
 }

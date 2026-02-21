@@ -450,7 +450,7 @@ namespace MegaGame
             resourcesController.UpdateRevenues();
 
             if (playerPortsCount >= enemyPortsCount)
-                resourcesController.AddBattleStartMoneyToEnemy();
+                resourcesController.AddBattleStartMoneyToEnemy((short)(playerPortsCount - enemyPortsCount + 1));
 
             PlaceCameraBetweenPorts();
             startGameModelButton.gameObject.SetActive(false);
