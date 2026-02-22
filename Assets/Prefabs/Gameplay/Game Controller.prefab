@@ -58,7 +58,6 @@ MonoBehaviour:
   enemyOpposingPorts:
     protagonPort: {fileID: 0}
     antagonPort: {fileID: 0}
-  startGameModelButton: {fileID: 0}
   offsetY: 30
   allIslands: []
   allPorts: []
@@ -120,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
   timeForDecision: 0.3
   shipSpawnChance: 6
-  onLowMoneySpawnChanceMultiplier: 4
+  onLowMoneySpawnChanceMultiplier: 5
   unsafeVillagesInRadius: []
 --- !u!114 &6039075397147238773
 MonoBehaviour:

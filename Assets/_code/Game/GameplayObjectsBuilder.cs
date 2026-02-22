@@ -47,6 +47,14 @@ namespace MegaGame
                 return;
 
             SelectObject();
+
+            if (Input.GetMouseButtonDown(2))
+            {
+                if (gameController.playerOpposingPorts.protagonPort)
+                    CameraController.Instance.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
+                else
+                    CameraController.Instance.transform.position = Vector3.zero;
+            }
         }
 
         public void Init()

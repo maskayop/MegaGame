@@ -24,8 +24,9 @@ namespace MegaGame
         public OpposingPorts enemyOpposingPorts;
 
         [Header("3D Model Button")]
-        [SerializeField] ModelButton startGameModelButton;
         [SerializeField] float offsetY = 0;
+
+        ModelButton startGameModelButton;
 
         [Header("Islands and Settlements")]
         public List<Island> allIslands = new List<Island>();
@@ -107,6 +108,9 @@ namespace MegaGame
 
         void Update()
         {
+            if (gameState == GameState.menu)
+                startGameModelButton.gameObject.SetActive(false);
+
             if (campaignIsEnded)
                 return;
 

@@ -112,9 +112,6 @@ namespace MegaGame
 
 			if (Input.GetMouseButtonUp(0))
 				startCameraPosition = transform.position;
-
-			if (Input.GetMouseButtonDown(2))
-				transform.position = Vector3.zero;
 		}
 
 		void SetCamera()

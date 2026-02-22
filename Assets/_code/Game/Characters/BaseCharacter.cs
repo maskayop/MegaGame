@@ -33,7 +33,8 @@ namespace MegaGame
         protected GameController gameController;
         protected GlobalTimeController globalTime;
 
-        float currentHealthNormalized;
+        public float currentHealthNormalized;
+        public float CurrentHealthNormalized { get { return currentHealthNormalized; } }
 
         protected int currentDay = 0;
 

@@ -289,15 +289,17 @@ MonoBehaviour:
   owner: 2
   revenue: 0
   maintenance: 0
-  health: 30
-  currentHealth: 30
+  health: 40
+  currentHealth: 40
   healthRegeneration: 0.5
   damage: 3
   attackDelay: 1
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   neutralHealthWidget: {fileID: 3601601711594763890}
+  timeForTargetsUpdate: 3
   targetEnemies: []
+  currentHealthNormalized: 0
   playerVisual: {fileID: 2166336572211561684}
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}

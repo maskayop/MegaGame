@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static MegaGame.GameController;
 
 namespace MegaGame.UI
 {
@@ -47,7 +48,7 @@ namespace MegaGame.UI
         GameController gameController;
         GameDataSaver gameDataSaver;
 
-        GameController.GameState currentGameState;
+        GameState currentGameState;
 
         void Awake()
         {
@@ -89,9 +90,9 @@ namespace MegaGame.UI
 
             UpdateClockAndWind();
 
-            if (gameController.gameState != currentGameState && currentGameState != GameController.GameState.menu)
+            if (gameController.gameState != currentGameState && currentGameState != GameState.menu)
             {
-                if (gameController.gameState == GameController.GameState.battle)
+                if (gameController.gameState == GameState.battle)
                     HideStartGameWindow();
                 else
                     ShowEndGameWindow();

@@ -66,10 +66,12 @@ namespace MegaGame
                     dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat, (short)1);
                 else if (gameController.allIslands[i].owner == BaseCharacter.Owner.neutral)
                     dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat, (short)2);
-                /*
+                
                 if (gameController.allIslands[i].settlement)
-                    dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat, gameController.allIslands[i].settlement.currentHealth);
-                */
+                {
+                    int currentHealth = Mathf.CeilToInt(gameController.allIslands[i].settlement.currentHealth);
+                    dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat, currentHealth);
+                }
             }
 
             dataSaveLoad.Save(currentAccountNameKey + playerMoneyFormat, resourcesController.PlayerMoney);
@@ -106,17 +108,16 @@ namespace MegaGame
                     gameController.allIslands[i].owner = BaseCharacter.Owner.enemy;
                 else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat) == 2)
                     gameController.allIslands[i].owner = BaseCharacter.Owner.neutral;
-                /*
+                
                 if (gameController.allIslands[i].settlement)
                 {
-                    float currentHealth = dataSaveLoad.GetSavedFloat(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat);
+                    int currentHealth = dataSaveLoad.GetSavedInt(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat);
 
                     if (currentHealth == -1)
                         gameController.allIslands[i].settlement.currentHealth = gameController.allIslands[i].settlement.health;
                     else
                         gameController.allIslands[i].settlement.currentHealth = currentHealth;
                 }
-                */
             }
 
             resourcesController.PlayerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
