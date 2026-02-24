@@ -11,6 +11,9 @@ namespace MegaGame
         GameplayObjectsBuilder gameplayObjectsBuilder;
         CameraController cameraController;
 
+        Port currentSelectedPort;
+        public Port CurrentSelectedPort { get { return currentSelectedPort; } }
+
         void Awake()
         {
             if (Instance != null)
@@ -70,6 +73,11 @@ namespace MegaGame
                             gameplayObjectsBuilder.TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, 0);
                         else if (port.owner != BaseCharacter.Owner.player)
                             gameplayObjectsBuilder.SpawnWrongTargetPortMessage(gameController.playerOpposingPorts.antagonPort, port);
+                        else if (port.owner == BaseCharacter.Owner.player)
+                        {
+                            currentSelectedPort = port;
+                            UISettlementPanel.Instance.Open(port.Island);
+                        }
 
                         return;
                     }

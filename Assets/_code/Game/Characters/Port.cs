@@ -4,6 +4,9 @@ namespace MegaGame
 {
     public class Port : BaseSettlement
     {
+        [Space(20)]
+        public bool isBigPort;
+
         [Header("Target Visual")]
         [SerializeField] GameObject playerTarget;
         [SerializeField] GameObject enemyTarget;
