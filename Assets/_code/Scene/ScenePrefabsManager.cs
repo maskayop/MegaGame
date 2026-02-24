@@ -27,6 +27,7 @@ namespace MegaGame
 
         [Header("Widgets")]
         [SerializeField] GameObject distanceCircle;
+        [SerializeField] GameObject rightTargetCircle;
 
         void Awake()
         {
@@ -89,6 +90,11 @@ namespace MegaGame
         {
             GameObject circle = Instantiate(distanceCircle, position, Quaternion.identity);
             circle.transform.localScale = Vector3.one * radius;
+        }
+
+        public void SpawnRightTargetCircle(Vector3 position)
+        {
+            GameObject circle = Instantiate(rightTargetCircle, position, Quaternion.identity);
         }
     }
 }

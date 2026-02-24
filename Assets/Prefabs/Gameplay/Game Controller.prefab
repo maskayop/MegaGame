@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 15590748652426754}
   - component: {fileID: 7090913357105979908}
   - component: {fileID: 2472502709863904070}
+  - component: {fileID: 1907761513824449833}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -145,6 +146,7 @@ MonoBehaviour:
   FXTargetEnemyReject: {fileID: 8761975602101030722, guid: d977f821f161d6e42871245a86a00bb9, type: 3}
   FXTargetPlayer: {fileID: 8907093577828947285, guid: 64e26d34465644d479b58a7964ba0c95, type: 3}
   distanceCircle: {fileID: 6874639579808131834, guid: 34f97d21f4d17a947b49d89d99016076, type: 3}
+  rightTargetCircle: {fileID: 6874639579808131834, guid: 573e7d2b545c7f44d880267b10062b44, type: 3}
 --- !u!114 &15590748652426754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,9 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameplayObjectsBuilder
   smallShipBuildingCost: 10
-  mediumShipBuildingCost: 25
-  bigShipBuildingCost: 50
-  maxBuildingShip: 0
+  mediumShipBuildingCost: 30
+  bigShipBuildingCost: 60
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +190,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ResourcesController
   startMoneyForEnemy: 100
+--- !u!114 &1907761513824449833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462718075957510001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4c0ce35a43c634b94f5c91ce06a383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameInputsController

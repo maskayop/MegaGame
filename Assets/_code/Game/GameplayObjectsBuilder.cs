@@ -21,7 +21,7 @@ namespace MegaGame
         ScenePrefabsManager scenePrefabsManager;
         ResourcesController resourcesController;
 
-        public short maxBuildingShip = 0;
+        short maxBuildingShip = 0;
 
         void Awake()
         {
@@ -40,25 +40,6 @@ namespace MegaGame
             Init();
         }
 
-        void Update()
-        {
-            if (gameController.CampaignIsEnded)
-                return;
-
-            if (gameController.gameState != GameController.GameState.battle)
-                return;
-
-            SelectObject();
-
-            if (Input.GetMouseButtonDown(2))
-            {
-                if (gameController.playerOpposingPorts.protagonPort)
-                    CameraController.Instance.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
-                else
-                    CameraController.Instance.transform.position = Vector3.zero;
-            }
-        }
-
         public void Init()
         {
             gameController = GameController.Instance;
@@ -70,44 +51,11 @@ namespace MegaGame
             bigShipCost = Strint.GetString(bigShipBuildingCost);
         }
 
-        void SelectObject()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = CameraController.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out RaycastHit hit, 1000000, 1 << 9))
-                {
-                    Port port = hit.collider.GetComponent<Port>();
-
-                    if (port && port == gameController.playerOpposingPorts.antagonPort)
-                        TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, 0);
-
-                    Village village = hit.collider.GetComponent<Village>();
-
-                    if (village)
-                    {
-                        if (village.owner != BaseCharacter.Owner.player)
-                            TryCreatePlayerShip(village, 0);
-                        else
-                            TryCreatePlayerShip(village, 1);
-                    }
-
-                    Fortress fortress = hit.collider.GetComponent<Fortress>();
-
-                    if (fortress && fortress.owner != BaseCharacter.Owner.player)
-                        TryCreatePlayerShip(fortress, 0);
-                }
-            }
-        }
-
         public void TryCreatePlayerShip(BaseSettlement targetSettlement, short shipType)
         {
             if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
             {
-                scenePrefabsManager.SpawnAsTargetReject(targetSettlement.transform.position);
-                scenePrefabsManager.SpawnDistanceCircle(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.distanceForPossibleTargets);
-                UIMainCanvas.Instance.SpawnTooFarFromPortMessage();
+                SpawnTooFarFromPortMessage(targetSettlement);
                 return;
             }
 
@@ -211,6 +159,20 @@ namespace MegaGame
         public void SetMaxBuildingShip(short id)
         {
             maxBuildingShip = (short)(id + 1);
+        }
+
+        void SpawnTooFarFromPortMessage(BaseSettlement targetSettlement)
+        {
+            scenePrefabsManager.SpawnAsTargetReject(targetSettlement.transform.position);
+            scenePrefabsManager.SpawnDistanceCircle(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.distanceForPossibleTargets);
+            UIMainCanvas.Instance.SpawnTooFarFromPortMessage();
+        }
+
+        public void SpawnWrongTargetPortMessage(BaseSettlement rightTargetSettlement, BaseSettlement wrongTargetSettlement)
+        {
+            scenePrefabsManager.SpawnAsTargetReject(wrongTargetSettlement.transform.position);
+            scenePrefabsManager.SpawnRightTargetCircle(gameController.playerOpposingPorts.antagonPort.transform.position);
+            UIMainCanvas.Instance.SpawnWrongTargetPortMessage(rightTargetSettlement.Island);
         }
     }
 }

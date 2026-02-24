@@ -126,7 +126,7 @@ namespace MegaGame.UI
             enemyTargetTransform.offsetMax = Vector2.zero;
         }
 
-        Color GetTextOwnerColor(Owner targetOwner)
+        public Color GetTextOwnerColor(Owner targetOwner)
         {
             if (targetOwner == Owner.player)
                 return playerColor;

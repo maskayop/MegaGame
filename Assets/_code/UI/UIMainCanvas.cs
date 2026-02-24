@@ -211,14 +211,14 @@ namespace MegaGame.UI
             HideEndCampaignWindow();
         }
 
-        public void SpawnMessage()
-        {
-            messagePanel.SpawnMessage();
-        }
-
         public void SpawnTooFarFromPortMessage()
         {
             messagePanel.SpawnTooFarFromPortMessage();
+        }
+
+        public void SpawnWrongTargetPortMessage(Island rightTarget)
+        {
+            messagePanel.SpawnWrongTargetPortMessage(rightTarget);
         }
     }
 }
