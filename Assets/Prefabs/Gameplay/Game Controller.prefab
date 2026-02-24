@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GlobalTimeController
   currentDay: 0
-  dayLenght: 3
+  dayLenght: 5
   currentTime: 0
   useTimeDeceleration: 0
   multiplier: 0.01
@@ -160,6 +160,7 @@ MonoBehaviour:
   smallShipBuildingCost: 10
   mediumShipBuildingCost: 25
   bigShipBuildingCost: 50
+  maxBuildingShip: 0
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0

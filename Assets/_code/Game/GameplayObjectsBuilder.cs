@@ -21,6 +21,8 @@ namespace MegaGame
         ScenePrefabsManager scenePrefabsManager;
         ResourcesController resourcesController;
 
+        public short maxBuildingShip = 0;
+
         void Awake()
         {
             if (Instance != null)
@@ -112,7 +114,7 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.PlayerMoney, smallShipCost) < 0)
                 return;
 
-            short shipLevel = GetBuildingShipLevel(resourcesController.PlayerMoney, false);
+            short shipLevel = GetBuildingShipLevel(resourcesController.PlayerMoney, false, maxBuildingShip);
 
             if (shipType == 0) // Attacking Ship
                 BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true, shipLevel), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
@@ -137,7 +139,7 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.EnemyMoney, smallShipCost) < 0)
                 return;
 
-            short shipLevel = GetBuildingShipLevel(resourcesController.EnemyMoney, true);
+            short shipLevel = GetBuildingShipLevel(resourcesController.EnemyMoney, true, 3);
 
             if (shipType == 0) // Attacking Ship
                 BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, shipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
@@ -171,7 +173,7 @@ namespace MegaGame
                 targetSettlement.Island.DefenderShip = character as DefenderShip;
         }
 
-        short GetBuildingShipLevel(string money, bool isRandom)
+        short GetBuildingShipLevel(string money, bool isRandom, short maxShipLevel)
         {
             short maxValue = 0;
 
@@ -181,6 +183,9 @@ namespace MegaGame
                 maxValue = 2;
             else if (Strint.GetInt(money) >= Strint.GetInt(bigShipCost))
                 maxValue = 3;
+
+            if (maxValue > maxShipLevel)
+                maxValue = maxShipLevel;
 
             if (isRandom)
             {
@@ -201,6 +206,11 @@ namespace MegaGame
                 return Strint.GetInt(bigShipCost);
             else
                 return 0;
+        }
+
+        public void SetMaxBuildingShip(short id)
+        {
+            maxBuildingShip = (short)(id + 1);
         }
     }
 }
