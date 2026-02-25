@@ -649,6 +649,7 @@ GameObject:
   - component: {fileID: 8010022857067643393}
   - component: {fileID: 4826161218504423443}
   - component: {fileID: 1992513328948351594}
+  - component: {fileID: 5822547378662338544}
   m_Layer: 9
   m_Name: Port
   m_TagString: Untagged
@@ -747,14 +748,35 @@ MonoBehaviour:
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   neutralHealthWidget: {fileID: 3601601711594763890}
+  timeForTargetsUpdate: 3
   targetEnemies: []
+  currentHealthNormalized: 0
   playerVisual: {fileID: 2166336572211561684}
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}
+  isBigPort: 0
   playerTarget: {fileID: 4413830501173259178}
   enemyTarget: {fileID: 1541563184610802140}
   neutralTarget: {fileID: 8999780478482188849}
   FXShot: {fileID: 3860106786867524571}
+--- !u!114 &5822547378662338544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902065961005520750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9147bda130c4b4a8a08aff4ea0cf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.SettlementConstructions
+  fortIsBuilt: 0
+  tradeIsBuilt: 0
+  additionalHealth: 150
+  additionalDamage: 2
+  fortBuildingCost: 500
+  tradeBuildingCost: 500
 --- !u!1 &8143654446351510362
 GameObject:
   m_ObjectHideFlags: 0

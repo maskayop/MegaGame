@@ -17,9 +17,15 @@ namespace MegaGame
         public float currentHealth = 10;
         public float healthRegeneration = 1;
 
+        float maxHealth;
+        public float MaxHealth{ get { return maxHealth; } set { maxHealth = value; } }
+
         [Header("Damage")]
         public float damage = 1.0f;
         public float attackDelay = 1.0f;
+
+        float maxDamage;
+        public float MaxDamage { get { return maxDamage; } set { maxDamage = value; } }
 
         [Header("Widgets")]
         [SerializeField] protected HealthIndicatorWidget playerHealthWidget;
@@ -58,12 +64,9 @@ namespace MegaGame
 
         void Update()
         {
-            if (health != 0)
-                currentHealthNormalized = currentHealth / health;
-            else
-                return;
-
-            if (currentHealth <= 0)
+            if (maxHealth != 0)
+                currentHealthNormalized = currentHealth / maxHealth;
+            else if (currentHealth <= 0)
                 return;
 
             currentTargetsUpdateTime -= Time.deltaTime;
@@ -100,7 +103,10 @@ namespace MegaGame
 
         public void Init()
         {
-            currentHealth = health;
+            maxHealth = health;
+            currentHealth = maxHealth;
+
+            maxDamage = damage;
 
             if (GlobalTimeController.Instance)
                 globalTime = GlobalTimeController.Instance;
@@ -153,7 +159,7 @@ namespace MegaGame
             if (GetCurrentHealthWidget() == null)
                 return;
 
-            if (currentHealth != health)
+            if (currentHealth != maxHealth)
             {
                 if (currentHealth <= 0)
                     GetCurrentHealthWidget().SetValue(0);
@@ -183,7 +189,7 @@ namespace MegaGame
             if (globalTime.currentDay != currentDay)
             {
                 currentHealth += healthRegeneration;
-                currentHealth = Mathf.Clamp(currentHealth, 0, health);
+                currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
                 currentDay = globalTime.currentDay;
             }
@@ -213,7 +219,7 @@ namespace MegaGame
         void Attack()
         {
             if (targetEnemies.Count != 0)
-                targetEnemies[0].DealDamage(damage, this);
+                targetEnemies[0].DealDamage(maxDamage, this);
 
             currentAttackTime = attackDelay;
 

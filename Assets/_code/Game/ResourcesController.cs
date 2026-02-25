@@ -7,6 +7,7 @@ namespace MegaGame
     {
         public static ResourcesController Instance { get; private set; }
 
+        [SerializeField] short startMoneyForPlayer;
         [SerializeField] short startMoneyForEnemy;
 
         string playerMoney;
@@ -246,6 +247,11 @@ namespace MegaGame
         public int GetEnemyMaintenance()
         {
             return enemyMaintenance;
+        }
+
+        public void AddBattleStartMoneyToPlayer(short multiplier)
+        {
+            AddMoneyToEnemy(startMoneyForPlayer * multiplier);
         }
 
         public void AddBattleStartMoneyToEnemy(short multiplier)

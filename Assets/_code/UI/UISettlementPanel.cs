@@ -47,6 +47,11 @@ namespace MegaGame.UI
         [SerializeField] Animator animator;
         [SerializeField] string startAnimationState;
 
+        [Header("Characteristics")]
+        [SerializeField] TextMeshProUGUI maxDamageText;
+        [SerializeField] TextMeshProUGUI maxHealthText;
+        [SerializeField] TextMeshProUGUI currentHealthText;
+
         GameController gameController;
 
         short settlementId;
@@ -54,6 +59,8 @@ namespace MegaGame.UI
 
         bool isOpen;
         public bool IsOpen { get { return isOpen; } }
+
+        Island currentIsland;
 
         void Awake()
         {
@@ -79,6 +86,9 @@ namespace MegaGame.UI
                 Close();
                 return;
             }
+
+            if (currentIsland && currentIsland.settlement)
+                currentHealthText.text = currentIsland.settlement.currentHealth.ToString();
         }
 
         public void Init()
@@ -93,25 +103,33 @@ namespace MegaGame.UI
 
         public void Open(Island island)
         {
+            isOpen = true;
+
+            currentIsland = island;
+
             settlementPanel.gameObject.SetActive(true);
             islandNameText.text = island.islandData.islandName.GetLocalizedString();
 
             if (island.settlement && island.settlement as Port)
+            {
                 OnPortSelected(island.settlement.GetComponent<Port>().isBigPort);
+
+                maxDamageText.text = currentIsland.settlement.MaxDamage.ToString();
+                maxHealthText.text = currentIsland.settlement.MaxHealth.ToString();
+            }
 
             animator.Play(startAnimationState);
 
             buildQuestionPanel.gameObject.SetActive(false);
             EnableAllConstructionButtons(true);
-
-            isOpen = true;
+            EnableAllConstructionImages(false);
         }
 
         public void Close()
         {
-            settlementPanel.gameObject.SetActive(false);
-
             isOpen = false;
+
+            settlementPanel.gameObject.SetActive(false);
         }
 
         void CloseAllSettlements()
@@ -143,6 +161,11 @@ namespace MegaGame.UI
             buildQuestionPanelTransform.position = GetCurrentConstructionTransform().position;
 
             EnableAllConstructionButtons(false);
+
+            if (constructionId == 0)
+                settlements[settlementId].fortImage.SetActive(true);
+            else if (constructionId == 1)
+                settlements[settlementId].tradeImage.SetActive(true);
         }
 
         void EnableAllConstructionButtons(bool state)
@@ -154,9 +177,19 @@ namespace MegaGame.UI
             }
         }
 
+        void EnableAllConstructionImages(bool state)
+        {
+            for (int i = 0; i < settlements.Count; i++)
+            {
+                settlements[i].fortImage.SetActive(state);
+                settlements[i].tradeImage.SetActive(state);
+            }
+        }
+
         public void OnBuildQuestionPanelClosed()
         {
             EnableAllConstructionButtons(true);
+            EnableAllConstructionImages(false);
         }
 
         RectTransform GetCurrentConstructionTransform()

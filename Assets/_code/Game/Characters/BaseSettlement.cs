@@ -11,10 +11,15 @@ namespace MegaGame
 
         protected bool isCaptured = false;
 
+        protected SettlementConstructions settlementConstructions;
+
         protected override void OnInit()
         {
             isCaptured = false;
             SetVisual();
+
+            settlementConstructions = GetComponent<SettlementConstructions>();
+            UpgradeCharacteristics();
         }
 
         protected override void OnUpdate()
@@ -43,9 +48,16 @@ namespace MegaGame
                 neutralVisual.gameObject.SetActive(true);
         }
 
-        public void ResetHealth()
+        public void UpgradeCharacteristics()
         {
-            currentHealth = health;
+            if (!settlementConstructions)
+                return;
+
+            if (settlementConstructions.fortIsBuilt)
+            {
+                MaxHealth = health + settlementConstructions.additionalHealth;
+                MaxDamage = damage + settlementConstructions.additionalDamage;
+            }
         }
     }
 }

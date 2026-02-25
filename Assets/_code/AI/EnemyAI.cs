@@ -73,13 +73,19 @@ namespace MegaGame
 
         void SpawnShip()
         {
-            short villageR = (short)Random.Range(0, 2);
+            float distanceBetweenProtagonPorts =
+                Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.enemyOpposingPorts.protagonPort.transform.position);
 
-            if (villageR == 0 && unsafeVillagesInRadius.Count != 0)
+            if (distanceBetweenProtagonPorts <= gameController.distanceForPossibleTargets)
             {
-                gameplayObjectsBuilder.TryCreateEnemyShip(unsafeVillagesInRadius[0], 1);
-                UpdateUnsafeVillagesInRadius();
-                return;
+                short villageR = (short)Random.Range(0, 2);
+
+                if (villageR == 0 && unsafeVillagesInRadius.Count != 0)
+                {
+                    gameplayObjectsBuilder.TryCreateEnemyShip(unsafeVillagesInRadius[0], 1);
+                    UpdateUnsafeVillagesInRadius();
+                    return;
+                }
             }
 
             short r = (short)Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count + 1);

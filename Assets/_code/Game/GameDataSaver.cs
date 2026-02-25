@@ -114,7 +114,7 @@ namespace MegaGame
                     int currentHealth = dataSaveLoad.GetSavedInt(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat);
 
                     if (currentHealth == -1)
-                        gameController.allIslands[i].settlement.currentHealth = gameController.allIslands[i].settlement.health;
+                        gameController.allIslands[i].settlement.currentHealth = gameController.allIslands[i].settlement.MaxHealth;
                     else
                         gameController.allIslands[i].settlement.currentHealth = currentHealth;
                 }

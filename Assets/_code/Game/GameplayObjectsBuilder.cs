@@ -13,16 +13,9 @@ namespace MegaGame
         public short mediumShipBuildingCost = 20;
         public short bigShipBuildingCost = 50;
 
-        [Header("Ships Prices")]
-        public short fortBuildingCost = 1000;
-        public short tradeBuildingCost = 500;
-
         string smallShipCost;
         string mediumShipCost;
         string bigShipCost;
-
-        string fortCost;
-        string tradeCost;
 
         GameController gameController;
         ScenePrefabsManager scenePrefabsManager;
@@ -56,9 +49,6 @@ namespace MegaGame
             smallShipCost = Strint.GetString(smallShipBuildingCost);
             mediumShipCost = Strint.GetString(mediumShipBuildingCost);
             bigShipCost = Strint.GetString(bigShipBuildingCost);
-
-            fortCost = Strint.GetString(fortBuildingCost);
-            tradeCost = Strint.GetString(tradeBuildingCost);
         }
 
         public void TryCreatePlayerShip(BaseSettlement targetSettlement, short shipType)
