@@ -34,6 +34,13 @@ namespace MegaGame
         string currentAccountNameKey = "";
         string totalAccountsAmountFormat = "TAC";
 
+        string settlementConstructionsStateFormat = " SCS";
+
+        const int FORT_BIT = 0;
+        const int TRADE_BIT = 1;
+
+        int buildingStateForSave = 0;
+
         void Awake()
         {
             if (Instance != null)
@@ -66,11 +73,19 @@ namespace MegaGame
                     dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat, (short)1);
                 else if (gameController.allIslands[i].owner == BaseCharacter.Owner.neutral)
                     dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat, (short)2);
-                
+
                 if (gameController.allIslands[i].settlement)
                 {
                     int currentHealth = Mathf.CeilToInt(gameController.allIslands[i].settlement.currentHealth);
                     dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat, currentHealth);
+
+                    if (gameController.allIslands[i].settlement.GetSettlementConstructions())
+                    {
+                        SetBuildingState(FORT_BIT, gameController.allIslands[i].settlement.GetSettlementConstructions().fortIsBuilt);
+                        SetBuildingState(TRADE_BIT, gameController.allIslands[i].settlement.GetSettlementConstructions().tradeIsBuilt);
+
+                        dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + settlementConstructionsStateFormat, buildingStateForSave);
+                    }
                 }
             }
 
@@ -108,17 +123,28 @@ namespace MegaGame
                     gameController.allIslands[i].owner = BaseCharacter.Owner.enemy;
                 else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandOwnerFormat) == 2)
                     gameController.allIslands[i].owner = BaseCharacter.Owner.neutral;
-                
+
                 if (gameController.allIslands[i].settlement)
                 {
-                    int currentHealth = dataSaveLoad.GetSavedInt(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat);
+                    if (gameController.allIslands[i].settlement.GetSettlementConstructions())
+                    {
+                        int buildingState = dataSaveLoad.GetSavedInt(currentAccountNameKey + gameController.allIslands[i].islandData.id + settlementConstructionsStateFormat);
 
-                    if (currentHealth == -1)
-                        gameController.allIslands[i].settlement.currentHealth = gameController.allIslands[i].settlement.MaxHealth;
-                    else
-                        gameController.allIslands[i].settlement.currentHealth = currentHealth;
+                        if (buildingState == -1)
+                        {
+                            gameController.allIslands[i].settlement.GetSettlementConstructions().fortIsBuilt = false;
+                            gameController.allIslands[i].settlement.GetSettlementConstructions().tradeIsBuilt = false;
+                        }
+                        else
+                        {
+                            gameController.allIslands[i].settlement.GetSettlementConstructions().fortIsBuilt = GetBuildingState(FORT_BIT, buildingState);
+                            gameController.allIslands[i].settlement.GetSettlementConstructions().tradeIsBuilt = GetBuildingState(TRADE_BIT, buildingState);
+                        }
+                    }
                 }
             }
+
+            LoadAllIslandsCurrentHealth();
 
             resourcesController.PlayerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
             resourcesController.EnemyMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + enemyMoneyFormat);
@@ -138,6 +164,22 @@ namespace MegaGame
             }
             else
                 gameController.CampaignIsEnded = false;
+        }
+
+        public void LoadAllIslandsCurrentHealth()
+        {
+            for (int i = 0; i < gameController.allIslands.Count; i++)
+            {
+                if (gameController.allIslands[i].settlement)
+                {
+                    int currentHealth = dataSaveLoad.GetSavedInt(currentAccountNameKey + gameController.allIslands[i].islandData.id + islandHealthFormat);
+
+                    if (currentHealth == -1)
+                        gameController.allIslands[i].settlement.currentHealth = gameController.allIslands[i].settlement.MaxHealth;
+                    else
+                        gameController.allIslands[i].settlement.currentHealth = currentHealth;
+                }
+            }
         }
 
         public void LoadLastAccount()
@@ -222,6 +264,19 @@ namespace MegaGame
             dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
 
             LoadLastAccount();
+        }
+
+        void SetBuildingState(int bitIndex, bool isBuilt)
+        {
+            if (isBuilt)
+                buildingStateForSave |= (1 << bitIndex);
+            else
+                buildingStateForSave &= ~(1 << bitIndex);
+        }
+
+        bool GetBuildingState(int bitIndex, int buildingState)
+        {
+            return ((buildingState >> bitIndex) & 1) == 1;
         }
     }
 }

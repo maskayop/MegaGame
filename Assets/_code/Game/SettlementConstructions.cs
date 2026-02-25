@@ -54,7 +54,7 @@ namespace MegaGame
             fortIsBuilt = true;
 
             resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
-            settlement.UpgradeCharacteristics();
+            settlement.UpdateCharacteristics();
         }
 
         public void TryBuildTrade()
@@ -68,7 +68,7 @@ namespace MegaGame
             tradeIsBuilt = true;
 
             resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
-            settlement.UpgradeCharacteristics();
+            settlement.UpdateCharacteristics();
         }
     }
 }

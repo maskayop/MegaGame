@@ -19,7 +19,7 @@ namespace MegaGame
             SetVisual();
 
             settlementConstructions = GetComponent<SettlementConstructions>();
-            UpgradeCharacteristics();
+            UpdateCharacteristics();
         }
 
         protected override void OnUpdate()
@@ -48,7 +48,7 @@ namespace MegaGame
                 neutralVisual.gameObject.SetActive(true);
         }
 
-        public void UpgradeCharacteristics()
+        public void UpdateCharacteristics()
         {
             if (!settlementConstructions)
                 return;
@@ -57,6 +57,11 @@ namespace MegaGame
             {
                 MaxHealth = health + settlementConstructions.additionalHealth;
                 MaxDamage = damage + settlementConstructions.additionalDamage;
+            }
+            else
+            {
+                MaxHealth = health;
+                MaxDamage = damage;
             }
         }
 

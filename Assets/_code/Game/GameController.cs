@@ -163,7 +163,7 @@ namespace MegaGame
             InitializeScene();
 
             gameDataSaver.LoadLastAccount();
-            gameDataSaver.LoadGameData();
+            gameDataSaver.LoadGameData();            
 
             if (campaignIsEnded)
             {
@@ -339,6 +339,7 @@ namespace MegaGame
 
             startGameModelButton.gameObject.SetActive(true);
 
+            gameDataSaver.LoadAllIslandsCurrentHealth();
             gameDataSaver.SaveGameData();
         }
 
@@ -450,10 +451,10 @@ namespace MegaGame
             UpdateSettlementsLists();
             SetGameStateAsBattle();
             resourcesController.UpdateRevenues();
-
+            
             if (playerPortsCount < enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToPlayer((short)(enemyPortsCount - playerPortsCount));
-
+            
             if (playerPortsCount >= enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToEnemy((short)(playerPortsCount - enemyPortsCount + 1));
 

@@ -251,7 +251,7 @@ namespace MegaGame
 
         public void AddBattleStartMoneyToPlayer(short multiplier)
         {
-            AddMoneyToEnemy(startMoneyForPlayer * multiplier);
+            AddMoneyToPlayer(startMoneyForPlayer * multiplier);
         }
 
         public void AddBattleStartMoneyToEnemy(short multiplier)
