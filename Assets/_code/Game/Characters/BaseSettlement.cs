@@ -59,5 +59,10 @@ namespace MegaGame
                 MaxDamage = damage + settlementConstructions.additionalDamage;
             }
         }
+
+        public SettlementConstructions GetSettlementConstructions()
+        {
+            return settlementConstructions;
+        }
     }
 }

@@ -61,6 +61,7 @@ namespace MegaGame.UI
         public bool IsOpen { get { return isOpen; } }
 
         Island currentIsland;
+        SettlementConstructions currentSettlementConstructions;
 
         void Awake()
         {
@@ -106,6 +107,7 @@ namespace MegaGame.UI
             isOpen = true;
 
             currentIsland = island;
+            currentSettlementConstructions = currentIsland.settlement.GetSettlementConstructions();
 
             settlementPanel.gameObject.SetActive(true);
             islandNameText.text = island.islandData.islandName.GetLocalizedString();
@@ -113,16 +115,20 @@ namespace MegaGame.UI
             if (island.settlement && island.settlement as Port)
             {
                 OnPortSelected(island.settlement.GetComponent<Port>().isBigPort);
-
-                maxDamageText.text = currentIsland.settlement.MaxDamage.ToString();
-                maxHealthText.text = currentIsland.settlement.MaxHealth.ToString();
+                UpdateTexts();
             }
 
             animator.Play(startAnimationState);
 
             buildQuestionPanel.gameObject.SetActive(false);
-            EnableAllConstructionButtons(true);
-            EnableAllConstructionImages(false);
+            EnableConstructionButtons(true);
+            EnableConstructionImages(false);
+        }
+
+        void UpdateTexts()
+        {
+            maxDamageText.text = currentIsland.settlement.MaxDamage.ToString();
+            maxHealthText.text = currentIsland.settlement.MaxHealth.ToString();
         }
 
         public void Close()
@@ -160,7 +166,10 @@ namespace MegaGame.UI
             buildQuestionPanel.gameObject.SetActive(true);
             buildQuestionPanelTransform.position = GetCurrentConstructionTransform().position;
 
-            EnableAllConstructionButtons(false);
+            if (currentIsland && currentIsland.settlement)
+                buildQuestionPanel.SetPrices(currentIsland.settlement.GetSettlementConstructions(), id);
+
+            EnableConstructionButtons(false);
 
             if (constructionId == 0)
                 settlements[settlementId].fortImage.SetActive(true);
@@ -168,28 +177,46 @@ namespace MegaGame.UI
                 settlements[settlementId].tradeImage.SetActive(true);
         }
 
-        void EnableAllConstructionButtons(bool state)
+        void EnableConstructionButtons(bool state)
         {
+            if (!currentIsland || currentIsland && !currentIsland.settlement)
+                return;
+
             for (int i = 0; i < settlements.Count; i++)
             {
                 settlements[i].fortButton.SetActive(state);
                 settlements[i].tradeButton.SetActive(state);
+
+                if (currentSettlementConstructions.fortIsBuilt)
+                    settlements[i].fortButton.SetActive(false);
+
+                if (currentSettlementConstructions.tradeIsBuilt)
+                    settlements[i].tradeButton.SetActive(false);
             }
         }
 
-        void EnableAllConstructionImages(bool state)
+        void EnableConstructionImages(bool state)
         {
+            if (!currentIsland || currentIsland && !currentIsland.settlement)
+                return;
+
             for (int i = 0; i < settlements.Count; i++)
             {
                 settlements[i].fortImage.SetActive(state);
                 settlements[i].tradeImage.SetActive(state);
+
+                if (currentSettlementConstructions.fortIsBuilt)
+                    settlements[i].fortImage.SetActive(true);
+
+                if (currentSettlementConstructions.tradeIsBuilt)
+                    settlements[i].tradeImage.SetActive(true);
             }
         }
 
         public void OnBuildQuestionPanelClosed()
         {
-            EnableAllConstructionButtons(true);
-            EnableAllConstructionImages(false);
+            EnableConstructionButtons(true);
+            EnableConstructionImages(false);
         }
 
         RectTransform GetCurrentConstructionTransform()
@@ -200,6 +227,23 @@ namespace MegaGame.UI
                 return settlements[settlementId].tradeButton.GetComponent<RectTransform>();
             else
                 return null;
+        }
+
+        public void TryBuildConstruction()
+        {
+            buildQuestionPanel.Close();
+
+            if (!currentIsland || currentIsland && !currentIsland.settlement)
+                return;
+
+            SettlementConstructions settlementConstructions = currentIsland.settlement.GetSettlementConstructions();
+
+            if (constructionId == 0)
+                settlementConstructions.TryBuildFort();
+            else if (constructionId == 1)
+                settlementConstructions.TryBuildTrade();
+
+            UpdateTexts();
         }
     }
 }

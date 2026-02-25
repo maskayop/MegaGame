@@ -1,3 +1,4 @@
+using MegaGame.UI;
 using UnityEngine;
 using Vopere.Common;
 
@@ -17,10 +18,15 @@ namespace MegaGame
         public short tradeBuildingCost = 500;
 
         string fortCost;
+        public string FortCost { get { return fortCost; } }
+
         string tradeCost;
+        public string TradeCost { get { return tradeCost; } }
 
         BaseSettlement settlement;
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }
+
+        ResourcesController resourcesController;
 
         void Start()
         {
@@ -29,8 +35,40 @@ namespace MegaGame
 
         public void Init()
         {
+            resourcesController = ResourcesController.Instance;
+
+            settlement = GetComponent<BaseSettlement>();
+
             fortCost = Strint.GetString(fortBuildingCost);
             tradeCost = Strint.GetString(tradeBuildingCost);
+        }
+
+        public void TryBuildFort()
+        {
+            if (fortIsBuilt)
+                return;
+
+            if (Strint.Subtraction(resourcesController.PlayerMoney, fortCost) < 0)
+                return;
+
+            fortIsBuilt = true;
+
+            resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
+            settlement.UpgradeCharacteristics();
+        }
+
+        public void TryBuildTrade()
+        {
+            if (tradeIsBuilt)
+                return;
+
+            if (Strint.Subtraction(resourcesController.PlayerMoney, tradeCost) < 0)
+                return;
+
+            tradeIsBuilt = true;
+
+            resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
+            settlement.UpgradeCharacteristics();
         }
     }
 }

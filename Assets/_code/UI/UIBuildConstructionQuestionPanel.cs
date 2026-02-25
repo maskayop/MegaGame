@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame.UI
 {
@@ -15,7 +16,16 @@ namespace MegaGame.UI
 
         public void BuildConstruction()
         {
+            UISettlementPanel.Instance.TryBuildConstruction();
+            Close();
+        }
 
+        public void SetPrices(SettlementConstructions settlementConstructions, int id)
+        {
+            if (id == 0)
+                priceText.text = Strint.GetInt(settlementConstructions.FortCost).ToString();
+            else if (id == 1)
+                priceText.text = Strint.GetInt(settlementConstructions.TradeCost).ToString();
         }
     }
 }

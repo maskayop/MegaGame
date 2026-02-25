@@ -17,14 +17,14 @@ namespace MegaGame
         public float currentHealth = 10;
         public float healthRegeneration = 1;
 
-        float maxHealth;
+        public float maxHealth;
         public float MaxHealth{ get { return maxHealth; } set { maxHealth = value; } }
 
         [Header("Damage")]
         public float damage = 1.0f;
         public float attackDelay = 1.0f;
 
-        float maxDamage;
+        public float maxDamage;
         public float MaxDamage { get { return maxDamage; } set { maxDamage = value; } }
 
         [Header("Widgets")]
