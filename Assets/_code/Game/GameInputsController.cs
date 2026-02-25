@@ -39,8 +39,6 @@ namespace MegaGame
             if (gameController.gameState != GameController.GameState.battle)
                 return;
 
-            SelectObject();
-
             if (Input.GetMouseButtonDown(2))
             {
                 if (gameController.playerOpposingPorts.protagonPort)
@@ -48,6 +46,9 @@ namespace MegaGame
                 else
                     cameraController.transform.position = Vector3.zero;
             }
+
+            if (!UISettlementPanel.Instance.IsOpen)
+                SelectObject();
         }
 
         public void Init()
