@@ -48,20 +48,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1934635460965810185, guid: c3f1321191487114ea5e134a40078aed, type: 3}
-      propertyPath: m_fontSize
-      value: 72
-      objectReference: {fileID: 0}
-    - target: {fileID: 1934635460965810185, guid: c3f1321191487114ea5e134a40078aed, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 65
-      objectReference: {fileID: 0}
     - target: {fileID: 7583905973909534045, guid: c3f1321191487114ea5e134a40078aed, type: 3}
       propertyPath: inverseScaling
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7583905973909534045, guid: c3f1321191487114ea5e134a40078aed, type: 3}
       propertyPath: islandTypeRenderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583905973909534045, guid: c3f1321191487114ea5e134a40078aed, type: 3}
+      propertyPath: defenceFortRenderer
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7583905973909534045, guid: c3f1321191487114ea5e134a40078aed, type: 3}
@@ -76,6 +72,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 7166952718890553912, guid: c3f1321191487114ea5e134a40078aed, type: 3}
     - {fileID: 4650280466409780913, guid: c3f1321191487114ea5e134a40078aed, type: 3}
+    - {fileID: 7711009893616376515, guid: c3f1321191487114ea5e134a40078aed, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3f1321191487114ea5e134a40078aed, type: 3}

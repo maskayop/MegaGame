@@ -162,8 +162,6 @@ MonoBehaviour:
   smallShipBuildingCost: 10
   mediumShipBuildingCost: 30
   bigShipBuildingCost: 60
-  fortBuildingCost: 1000
-  tradeBuildingCost: 500
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715ef3172d59330449f96d4ad9b74031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ResourcesController
-  startMoneyForPlayer: 10
+  startMoneyForPlayer: 50
   startMoneyForEnemy: 100
 --- !u!114 &1907761513824449833
 MonoBehaviour:

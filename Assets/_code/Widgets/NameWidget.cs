@@ -11,6 +11,8 @@ namespace MegaGame
         [Header("Island Type Mesh")]
         [SerializeField] MeshRenderer islandTypeRenderer;
         [SerializeField] MeshRenderer defenderShipRenderer;
+        [SerializeField] MeshRenderer defenceFortRenderer;
+
         [SerializeField] string materialValueName = "_BaseColor";
 
         [Header("Transform")]
@@ -63,6 +65,14 @@ namespace MegaGame
             defenderShipRenderer.gameObject.SetActive(state);
         }
 
+        public void SetDefenceFort(bool state)
+        {
+            if (!defenceFortRenderer)
+                return;
+
+            defenceFortRenderer.gameObject.SetActive(state);
+        }
+
         public void SetColor(BaseCharacter.Owner owner)
         {
             if (owner == BaseCharacter.Owner.player)
@@ -72,6 +82,9 @@ namespace MegaGame
 
                 if (islandTypeRenderer)
                     islandTypeRenderer.material.SetColor(materialValueName, playerColor);
+
+                if (defenceFortRenderer)
+                    defenceFortRenderer.material.SetColor(materialValueName, playerColor);
             }
             else if (owner == BaseCharacter.Owner.enemy)
             {
@@ -80,6 +93,9 @@ namespace MegaGame
 
                 if (islandTypeRenderer)
                     islandTypeRenderer.material.SetColor(materialValueName, enemyColor);
+
+                if (defenceFortRenderer)
+                    defenceFortRenderer.material.SetColor(materialValueName, enemyColor);
             }
             else if (owner == BaseCharacter.Owner.neutral)
             {
@@ -88,6 +104,9 @@ namespace MegaGame
 
                 if (islandTypeRenderer)
                     islandTypeRenderer.material.SetColor(materialValueName, neutralColor);
+
+                if (defenceFortRenderer)
+                    defenceFortRenderer.material.SetColor(materialValueName, neutralColor);
             }
         }
 

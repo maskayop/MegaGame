@@ -27,6 +27,7 @@ namespace MegaGame
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }
 
         ResourcesController resourcesController;
+        NameWidget nameWidget;
 
         void Start()
         {
@@ -55,6 +56,7 @@ namespace MegaGame
 
             resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
             settlement.UpdateCharacteristics();
+            settlement.Island.UpdateIslandState();
         }
 
         public void TryBuildTrade()
@@ -69,6 +71,7 @@ namespace MegaGame
 
             resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
             settlement.UpdateCharacteristics();
+            settlement.Island.UpdateIslandState();
         }
     }
 }
