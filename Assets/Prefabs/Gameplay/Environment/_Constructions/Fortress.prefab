@@ -245,8 +245,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12, y: 6, z: 10}
-  m_Center: {x: 0, y: 2, z: 2}
+  m_Size: {x: 12, y: 6, z: 12}
+  m_Center: {x: 0, y: 2, z: 3}
 --- !u!54 &4826161218504423443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -292,8 +292,10 @@ MonoBehaviour:
   health: 40
   currentHealth: 40
   healthRegeneration: 0.5
-  damage: 3
-  attackDelay: 1
+  maxHealth: 0
+  damage: 4
+  attackDelay: 0.75
+  maxDamage: 0
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   neutralHealthWidget: {fileID: 3601601711594763890}
