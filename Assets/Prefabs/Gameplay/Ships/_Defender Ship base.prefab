@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &264556899720219751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5485477152731249140}
+  m_Layer: 3
+  m_Name: FX Target Transform Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5485477152731249140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264556899720219751}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4071703617432491922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1021785611154541580
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,8 +62,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2167658606063665959}
-  - {fileID: 7505590910985807790}
   - {fileID: 4359474551608597149}
+  - {fileID: 8381416780346227113}
+  - {fileID: 5485477152731249140}
   m_Father: {fileID: 9138028168887617915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6257853652041858601
@@ -155,20 +187,26 @@ MonoBehaviour:
   maintenance: 1
   health: 15
   currentHealth: 15
-  healthRegeneration: 0.25
+  healthRegeneration: 0.5
+  maxHealth: 0
   damage: 2
-  attackDelay: 1.25
+  attackDelay: 1.2
+  maxDamage: 0
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
   neutralHealthWidget: {fileID: 0}
   timeForTargetsUpdate: 3
   targetEnemies: []
+  currentHealthNormalized: 0
   speed: 10
   currentSpeed: 1
   speedDrop: 5
   windSpeedMinMultiplier: 0.35
   FXDestroyPrefab: {fileID: 5910495002063247550, guid: cedd626daa06a5d4c8fc7939e0d52ec4, type: 3}
-  FXShot: {fileID: 4458136106130649055}
+  FXShotLeft: {fileID: 0}
+  FXShotRight: {fileID: 0}
+  FXTargetTransformLeft: {fileID: 8381416780346227113}
+  FXTargetTransformRight: {fileID: 5485477152731249140}
   visualObject: {fileID: 1021785611154541580}
   animationBehavior: {fileID: -3230663631609051132}
   destroyAfterTime: {fileID: -1080902903418761957}
@@ -205,6 +243,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DestroyAfterTime
   time: 1.5
   destroyAtStart: 0
+--- !u!1 &6547488149139174407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8381416780346227113}
+  m_Layer: 3
+  m_Name: FX Target Transform Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8381416780346227113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6547488149139174407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4071703617432491922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8229156860201081542
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,71 +480,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6099073529447137649, guid: ad7f6eb969e1c544aa713ac64ddc1d67, type: 3}
   m_PrefabInstance: {fileID: 5382172141482476118}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8328553473195442617
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4071703617432491922}
-    m_Modifications:
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076031962747926859, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-      propertyPath: m_Name
-      value: FX Small Ship Shot
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 07e553bc30b9c65448479556f507030e, type: 3}
---- !u!198 &4458136106130649055 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5641475873500278374, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-  m_PrefabInstance: {fileID: 8328553473195442617}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7505590910985807790 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1998965375686714903, guid: 07e553bc30b9c65448479556f507030e, type: 3}
-  m_PrefabInstance: {fileID: 8328553473195442617}
   m_PrefabAsset: {fileID: 0}

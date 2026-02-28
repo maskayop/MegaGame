@@ -50,7 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5910495002063247550, guid: 7ffd194a23996a249bfb1cda71941e18, type: 3}
       propertyPath: m_Name
-      value: FX Ship Shot
+      value: FX Small Ship Shot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7041463173072179091, guid: 7ffd194a23996a249bfb1cda71941e18, type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7041463173072179091, guid: 7ffd194a23996a249bfb1cda71941e18, type: 3}
+      propertyPath: ShapeModule.radius.spread
+      value: 0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

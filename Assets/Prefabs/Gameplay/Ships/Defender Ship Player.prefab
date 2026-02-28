@@ -114,6 +114,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7697146234952713426, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
+      propertyPath: FXShotLeft
+      value: 
+      objectReference: {fileID: 1537515022224467005}
+    - target: {fileID: 7697146234952713426, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
+      propertyPath: FXShotRight
+      value: 
+      objectReference: {fileID: 2447503606691922657}
+    - target: {fileID: 7697146234952713426, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
       propertyPath: playerHealthWidget
       value: 
       objectReference: {fileID: 2989792535373711157}
@@ -167,6 +175,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4071703617432491922, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1794702442929554975}
+    - targetCorrespondingSourceObject: {fileID: 4071703617432491922, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4657027428088228940}
+    - targetCorrespondingSourceObject: {fileID: 4071703617432491922, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8358693629281897104}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
 --- !u!4 &234684396450765581 stripped
@@ -178,6 +192,148 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 9138028168887617915, guid: 2d16f0682487fe54db5c299b38888a70, type: 3}
   m_PrefabInstance: {fileID: 4305543399957253279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6565357302389377627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 234684396450765581}
+    m_Modifications:
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641475873500278374, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641475873500278374, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076031962747926859, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_Name
+      value: FX Medium Ship Shot Left
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+--- !u!198 &1537515022224467005 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5641475873500278374, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+  m_PrefabInstance: {fileID: 6565357302389377627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4657027428088228940 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+  m_PrefabInstance: {fileID: 6565357302389377627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8051815987163933831
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 234684396450765581}
+    m_Modifications:
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076031962747926859, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+      propertyPath: m_Name
+      value: FX Medium Ship Shot Right
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+--- !u!198 &2447503606691922657 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5641475873500278374, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+  m_PrefabInstance: {fileID: 8051815987163933831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8358693629281897104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1998965375686714903, guid: c45c5d7839dede148a57dea83a2983bc, type: 3}
+  m_PrefabInstance: {fileID: 8051815987163933831}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8319670004153571392
 PrefabInstance:

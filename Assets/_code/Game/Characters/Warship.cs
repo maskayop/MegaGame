@@ -14,7 +14,12 @@ namespace MegaGame
 
         [Header("FX")]
         [SerializeField] GameObject FXDestroyPrefab;
-        [SerializeField] ParticleSystem FXShot;
+        [SerializeField] ParticleSystem FXShotLeft;
+        [SerializeField] ParticleSystem FXShotRight;
+
+        [Space(10)]
+        [SerializeField] Transform FXTargetTransformLeft;
+        [SerializeField] Transform FXTargetTransformRight;
 
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
@@ -174,8 +179,7 @@ namespace MegaGame
                 }
             }
 
-            if (FXShot)
-                FXShot.Play();
+            PlayShotFX();
         }
 
         protected override void OnKilled()
@@ -223,6 +227,26 @@ namespace MegaGame
         {
             targetSettlement = destinationSettlement;
             destinationPosition = targetSettlement.transform;
+        }
+
+        void PlayShotFX()
+        {
+            if (targetEnemies.Count == 0)
+                return;
+
+            if (!targetEnemies[0])
+                return;
+
+            if (Vector3.Distance(targetEnemies[0].transform.position, FXTargetTransformLeft.position) < Vector3.Distance(targetEnemies[0].transform.position, FXTargetTransformRight.position))
+            {
+                if (FXShotLeft)
+                    FXShotLeft.Play();
+            }
+            else
+            {
+                if (FXShotRight)
+                    FXShotRight.Play();
+            }
         }
     }
 }
