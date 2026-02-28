@@ -34,6 +34,9 @@ namespace MegaGame
 
         float cos = 0;
 
+        bool killedByNekark = false;
+        public bool KilledByNekark { get { return killedByNekark; } set { killedByNekark = value; } }
+
         protected override void OnAwake()
         {
             if (ObjectsManager.Instance)
@@ -187,22 +190,28 @@ namespace MegaGame
             if (!gameObject)
                 return;
 
-            if (FXDestroyPrefab)
+            if (FXDestroyPrefab && !KilledByNekark)
                 Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
 
-            if (destroyAfterTime)
+            if (destroyAfterTime && !KilledByNekark)
             {
-                Destroy(this);
-
                 destroyAfterTime.DestroyGameObject();
 
                 if (animationBehavior)
                     animationBehavior.Animate();
+            }
+            else if (destroyAfterTime && KilledByNekark)
+            {
+                destroyAfterTime.DestroyGameObjectAfterTime(animationBehavior.timeForDestroy);
 
-                GetCurrentHealthWidget().gameObject.SetActive(false);
+                if (animationBehavior)
+                    animationBehavior.AnimateNekark();
             }
             else
                 Destroy(gameObject);
+
+            Destroy(this);
+            GetCurrentHealthWidget().gameObject.SetActive(false);
 
             ObjectsManager.Instance.allCharacters.Remove(gameObject);
         }
@@ -247,6 +256,11 @@ namespace MegaGame
                 if (FXShotRight)
                     FXShotRight.Play();
             }
+        }
+
+        public Transform GetVisualObjectTransform()
+        {
+            return visualObject.transform;
         }
     }
 }

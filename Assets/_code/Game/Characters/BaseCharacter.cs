@@ -18,7 +18,7 @@ namespace MegaGame
         public float healthRegeneration = 1;
 
         public float maxHealth;
-        public float MaxHealth{ get { return maxHealth; } set { maxHealth = value; } }
+        public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
 
         [Header("Damage")]
         public float damage = 1.0f;
@@ -204,7 +204,7 @@ namespace MegaGame
             }
         }
 
-        void Kill()
+        public void Kill()
         {
             if (!gameObject)
                 return;
@@ -237,10 +237,7 @@ namespace MegaGame
             currentHealth -= INdamage;
 
             if (currentHealth <= 0)
-            {
-                UpdateHealthWidget();
                 Kill();
-            }
         }
 
         protected virtual bool CanAddTargetToList(BaseCharacter targetCharacter) { return true; }
