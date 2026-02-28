@@ -262,5 +262,15 @@ namespace MegaGame
         {
             return visualObject.transform;
         }
+
+        public AnimationBehavior GetAnimationBehavior()
+        {
+            return animationBehavior;
+        }
+
+        public NavMeshAgent GetNavMeshAgent()
+        {
+            return agent;
+        }
     }
 }

@@ -29,6 +29,9 @@ namespace MegaGame
 
         public void AnimateNekark()
         {
+            if (!nekarkPrefab)
+                return;
+
             animator.Play(sinkingState);
             Instantiate(nekarkPrefab, ship.GetVisualObjectTransform());
         }
