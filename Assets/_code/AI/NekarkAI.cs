@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MegaGame
@@ -7,8 +6,6 @@ namespace MegaGame
     {
         [SerializeField] float timeForDecision = 1.0f;
         [SerializeField] short speedDrop = 2;
-
-        public List<BaseCharacter> targetEnemies = new List<BaseCharacter>();
 
         float currentDecisionTime = 0;
 
@@ -35,25 +32,6 @@ namespace MegaGame
                 currentDecisionTime = timeForDecision;
                 MakeDecision();
             }
-        }
-
-        void OnTriggerEnter(Collider coll)
-        {
-            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
-
-            if (targetCharacter)
-            {
-                if (targetCharacter as Warship || targetCharacter as DefenderShip)
-                    targetEnemies.Add(targetCharacter);
-            }
-        }
-
-        void OnTriggerExit(Collider coll)
-        {
-            BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
-
-            if (targetCharacter)
-                targetEnemies.Remove(targetCharacter);
         }
 
         void MakeDecision()
