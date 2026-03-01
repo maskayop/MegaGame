@@ -5,6 +5,7 @@ namespace MegaGame
     public class NekarkAI : MonoBehaviour
     {
         [SerializeField] float timeForDecision = 1.0f;
+        [SerializeField] float portsChanceMultiplier = 2.0f;
         [SerializeField] short speedDrop = 2;
 
         float currentDecisionTime = 0;
@@ -36,23 +37,42 @@ namespace MegaGame
 
         void MakeDecision()
         {
-            if (objectsManager.playerShips.Count == 0 || objectsManager.enemyShips.Count == 0)
-                return;
-
             short owner = (short)Random.Range(0, 2);
 
             if (owner != 0)
             {
                 short r = (short)Random.Range(0, objectsManager.playerShips.Count);
-                currentVictim = objectsManager.playerShips[r].GetComponent<Warship>();
+
+                if (objectsManager.playerShips.Count != 0)
+                {
+                    float portsCounts = (gameController.allPorts.Count - gameController.PlayerPortsCount) / portsChanceMultiplier;
+                    int chance = Random.Range(0, Mathf.FloorToInt(portsCounts));
+
+                    if (chance == 0)
+                        currentVictim = objectsManager.playerShips[r].GetComponent<Warship>();
+                    else
+                        return;
+                }
+                else
+                    return;
             }
             else
             {
                 short r = (short)Random.Range(0, objectsManager.enemyShips.Count);
-                currentVictim = objectsManager.enemyShips[r].GetComponent<Warship>();
-            }
 
-            transform.position = currentVictim.transform.position;
+                if (objectsManager.enemyShips.Count != 0)
+                {
+                    float portsCounts = (gameController.allPorts.Count - gameController.EnemyPortsCount) / portsChanceMultiplier;
+                    int chance = Random.Range(0, Mathf.FloorToInt(portsCounts));
+
+                    if (chance == 0)
+                        currentVictim = objectsManager.enemyShips[r].GetComponent<Warship>();
+                    else
+                        return;
+                }
+                else
+                    return;
+            }
 
             ReleaseTheNekark();
         }
