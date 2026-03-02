@@ -43,7 +43,7 @@ namespace MegaGame.UI
             gameController = GameController.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
 
-            shipSelectionButtons[3].gameObject.SetActive(false);
+            //shipSelectionButtons[3].gameObject.SetActive(false);
 
             SetMaxBuildingShip(2);
         }

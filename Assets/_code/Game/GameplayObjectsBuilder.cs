@@ -10,12 +10,14 @@ namespace MegaGame
 
         [Header("Ships Prices")]
         public short smallShipBuildingCost = 10;
-        public short mediumShipBuildingCost = 20;
-        public short bigShipBuildingCost = 50;
+        public short mediumShipBuildingCost = 30;
+        public short bigShipBuildingCost = 60;
+        public short megaShipBuildingCost = 100;
 
         string smallShipCost;
         string mediumShipCost;
         string bigShipCost;
+        string megaShipCost;
 
         GameController gameController;
         ScenePrefabsManager scenePrefabsManager;
@@ -49,6 +51,7 @@ namespace MegaGame
             smallShipCost = Strint.GetString(smallShipBuildingCost);
             mediumShipCost = Strint.GetString(mediumShipBuildingCost);
             bigShipCost = Strint.GetString(bigShipBuildingCost);
+            megaShipCost = Strint.GetString(megaShipBuildingCost);
         }
 
         public void TryCreatePlayerShip(BaseSettlement targetSettlement, short shipType)
@@ -129,8 +132,10 @@ namespace MegaGame
                 maxValue = 1;
             else if (Strint.GetInt(money) >= Strint.GetInt(mediumShipCost) && Strint.GetInt(money) < Strint.GetInt(bigShipCost))
                 maxValue = 2;
-            else if (Strint.GetInt(money) >= Strint.GetInt(bigShipCost))
+            else if (Strint.GetInt(money) >= Strint.GetInt(bigShipCost) && Strint.GetInt(money) < Strint.GetInt(megaShipCost))
                 maxValue = 3;
+            else if (Strint.GetInt(money) >= Strint.GetInt(megaShipCost))
+                maxValue = 4;
 
             if (maxValue > maxShipLevel)
                 maxValue = maxShipLevel;
@@ -152,6 +157,8 @@ namespace MegaGame
                 return Strint.GetInt(mediumShipCost);
             else if (shipLevel == 3)
                 return Strint.GetInt(bigShipCost);
+            else if (shipLevel == 4)
+                return Strint.GetInt(megaShipCost);
             else
                 return 0;
         }

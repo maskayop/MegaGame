@@ -140,6 +140,8 @@ MonoBehaviour:
   mediumShipEnemyPrefab: {fileID: 2693174518542573683, guid: 6d2efcdc774133f449fe7c902a13737e, type: 3}
   bigShipPlayerPrefab: {fileID: 2693174518542573683, guid: 26f35a0e17c600e4ea07938fc3b6d44e, type: 3}
   bigShipEnemyPrefab: {fileID: 2693174518542573683, guid: a772252021d193d40907ffd47385273f, type: 3}
+  megaShipPlayerPrefab: {fileID: 2693174518542573683, guid: a8337c648660f804a8045328866a805f, type: 3}
+  megaShipEnemyPrefab: {fileID: 2693174518542573683, guid: 207c235705c919140b9ac5ce7891d86f, type: 3}
   defenderShipPlayerPrefab: {fileID: 8230752912628684982, guid: 0a31fc02cb08ee740b016ea5fa2fee13, type: 3}
   defenderShipEnemyPrefab: {fileID: 8230752912628684982, guid: ab4501cdb3506bb47bf567d309cc0b4a, type: 3}
   FXTargetEnemy: {fileID: 8761975602101030722, guid: 5e35a2487a5cee645b84205aa1d50df4, type: 3}
@@ -162,6 +164,7 @@ MonoBehaviour:
   smallShipBuildingCost: 10
   mediumShipBuildingCost: 30
   bigShipBuildingCost: 60
+  megaShipBuildingCost: 100
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0

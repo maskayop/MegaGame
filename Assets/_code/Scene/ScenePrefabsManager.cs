@@ -16,6 +16,9 @@ namespace MegaGame
         [SerializeField] GameObject bigShipPlayerPrefab;
         [SerializeField] GameObject bigShipEnemyPrefab;
 
+        [SerializeField] GameObject megaShipPlayerPrefab;
+        [SerializeField] GameObject megaShipEnemyPrefab;
+
         [Header("Defender Ships")]
         [SerializeField] GameObject defenderShipPlayerPrefab;
         [SerializeField] GameObject defenderShipEnemyPrefab;
@@ -64,6 +67,8 @@ namespace MegaGame
                     return mediumShipPlayerPrefab;
                 else if (shipLevel == 3)
                     return bigShipPlayerPrefab;
+                else if (shipLevel == 4)
+                    return megaShipPlayerPrefab;
             }
             else
             {
@@ -73,6 +78,8 @@ namespace MegaGame
                     return mediumShipEnemyPrefab;
                 else if (shipLevel == 3)
                     return bigShipEnemyPrefab;
+                else if (shipLevel == 4)
+                    return megaShipEnemyPrefab;
             }
 
             return null;
