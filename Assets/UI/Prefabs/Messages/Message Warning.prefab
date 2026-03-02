@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 841354625048642617, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: time
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3129731068523030697, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -102,6 +106,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3129731068523030697, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129731068523030697, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3129731068523030697, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
@@ -122,6 +130,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4543191507715508539, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543191507715508539, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4543191507715508539, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
@@ -134,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6608867680850881583, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_Name
-      value: HUD Message Warning
+      value: Message Warning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

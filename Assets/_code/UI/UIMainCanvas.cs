@@ -220,5 +220,10 @@ namespace MegaGame.UI
         {
             messagePanel.SpawnWrongTargetPortMessage(rightTarget);
         }
+
+        public void SpawnNekarkMessage()
+        {
+            messagePanel.SpawnNekarkMessage();
+        }
     }
 }

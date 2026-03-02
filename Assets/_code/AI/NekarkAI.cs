@@ -1,3 +1,4 @@
+using MegaGame.UI;
 using UnityEngine;
 
 namespace MegaGame
@@ -92,6 +93,9 @@ namespace MegaGame
             currentVictim.speed = droppedSpeed;
 
             currentVictim.Kill();
+
+            if (currentVictim.owner == BaseCharacter.Owner.player)
+                UIMainCanvas.Instance.SpawnNekarkMessage();
         }
     }
 }

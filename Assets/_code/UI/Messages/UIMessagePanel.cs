@@ -5,12 +5,16 @@ namespace MegaGame.UI
 {
     public class UIMessagePanel : MonoBehaviour
     {
-        [SerializeField] GameObject warningMessagePrefab;
         [SerializeField] RectTransform container;
+
+        [Header("Message Prefabs")]
+        [SerializeField] GameObject warningMessagePrefab;
+        [SerializeField] GameObject nekarkMessagePrefab;
 
         [Header("Messages")]
         [SerializeField] Data_Message tooFarFromPort;
         [SerializeField] Data_Message wrongTargetPort;
+        [SerializeField] Data_Message nekark;
 
         [Header("Enemy")]
         [SerializeField] string playerColorFormat = "<color=green>";
@@ -38,6 +42,12 @@ namespace MegaGame.UI
         {
             GameObject messo = Instantiate(warningMessagePrefab, container);
             messo.GetComponent<UIMessageObject>().SetText(wrongTargetPort.GetMessageText() + GetTextOwnerColorFormat(target.owner) + target.islandData.islandName.GetLocalizedString());
+        }
+
+        public void SpawnNekarkMessage()
+        {
+            GameObject messo = Instantiate(nekarkMessagePrefab, container);
+            messo.GetComponent<UIMessageObject>().SetText(nekark.GetMessageText());
         }
 
         string GetTextOwnerColorFormat(Owner targetOwner)

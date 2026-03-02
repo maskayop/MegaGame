@@ -1,106 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1732939815139567052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7701745464199163896}
-  m_Layer: 5
-  m_Name: Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7701745464199163896
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732939815139567052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2351775922165626726}
-  m_Father: {fileID: 5941280451766997998}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2821442690587182564
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5941280451766997998}
-  - component: {fileID: 6135216583525125030}
-  m_Layer: 5
-  m_Name: Message Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5941280451766997998
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821442690587182564}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7701745464199163896}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6135216583525125030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821442690587182564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a808f50a419e3644f86b1c62d09f387b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIMessagePanel
-  container: {fileID: 7701745464199163896}
-  warningMessagePrefab: {fileID: 5079589086622412942, guid: fe39f7ff7f242a14e97550c06a41c6dc, type: 3}
-  nekarkMessagePrefab: {fileID: 5079589086622412942, guid: 4910997c9166ebb4da60b3614b74bc50, type: 3}
-  tooFarFromPort: {fileID: 11400000, guid: 4495cae95cb7bf24e82ee8ef9387f05b, type: 2}
-  wrongTargetPort: {fileID: 11400000, guid: 297797e808eeebd479b434e133ecab56, type: 2}
-  nekark: {fileID: 11400000, guid: 8c254055609477643ba6bf2f9c9f107a, type: 2}
-  playerColorFormat: <color=#FF6B4C>
-  enemyColorFormat: <color=#4CA4FF>
-  neutralColorFormat: <color=#FFD34C>
---- !u!1001 &2435065755106278965
+--- !u!1001 &2146309917151681697
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7701745464199163896}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 101393503626217811, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_Pivot.x
@@ -128,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 101393503626217811, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 600
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 101393503626217811, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -186,6 +92,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bdabda3100d927e4ea28f5b2d117d4e6, type: 3}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8333335
+      objectReference: {fileID: 0}
+    - target: {fileID: 841354625048642617, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652995406427887129, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_MinWidth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652995406427887129, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 3129731068523030697, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -210,6 +144,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4056484545174272385, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 258f329207ca2824c8b435ab2045ca75, type: 2}
     - target: {fileID: 4543191507715508539, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -236,15 +174,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6608867680850881583, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_Name
-      value: HUD Message
+      value: Message Nekark
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
---- !u!224 &2351775922165626726 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 101393503626217811, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
-  m_PrefabInstance: {fileID: 2435065755106278965}
-  m_PrefabAsset: {fileID: 0}

@@ -34,6 +34,7 @@ namespace MegaGame
 
         float cos = 0;
 
+        bool isKilled = false;
         bool killedByNekark = false;
         public bool KilledByNekark { get { return killedByNekark; } set { killedByNekark = value; } }
 
@@ -47,6 +48,9 @@ namespace MegaGame
 
         protected override void OnUpdate()
         {
+            if (isKilled)
+                return;
+
             if (gameController.gameState == GameController.GameState.menu)
             {
                 Destroy(gameObject);
@@ -187,6 +191,9 @@ namespace MegaGame
 
         protected override void OnKilled()
         {
+            if (isKilled)
+                return;
+
             if (!gameObject)
                 return;
 
@@ -214,6 +221,8 @@ namespace MegaGame
             GetCurrentHealthWidget().gameObject.SetActive(false);
 
             ObjectsManager.Instance.allCharacters.Remove(gameObject);
+
+            isKilled = true;
         }
 
         void UpdateSpeedByWind()
