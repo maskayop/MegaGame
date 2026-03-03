@@ -51,6 +51,7 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI maxDamageText;
         [SerializeField] TextMeshProUGUI maxHealthText;
         [SerializeField] TextMeshProUGUI currentHealthText;
+        [SerializeField] TextMeshProUGUI maxHealthRegenerationText;
 
         GameController gameController;
 
@@ -129,6 +130,7 @@ namespace MegaGame.UI
         {
             maxDamageText.text = currentIsland.settlement.MaxDamage.ToString();
             maxHealthText.text = currentIsland.settlement.MaxHealth.ToString();
+            maxHealthRegenerationText.text = currentIsland.settlement.MaxRegeneration.ToString();
         }
 
         public void Close()

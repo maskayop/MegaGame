@@ -9,8 +9,8 @@ namespace MegaGame
         public bool tradeIsBuilt = false;
 
         [Header("Fort Modificators")]
-        public float additionalHealth = 10;
         public float additionalDamage = 1f;
+        public float additionalHealth = 10;
         public float additionalHealthRegeneration = 1f;
 
         [Header("Constructions Prices")]

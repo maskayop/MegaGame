@@ -17,11 +17,11 @@ namespace MegaGame
         public float currentHealth = 10;
         public float healthRegeneration = 1;
 
-        public float maxHealthRegeneration;
-        public float MaxHealthRegeneration { get { return maxHealthRegeneration; } set { maxHealthRegeneration = value; } }
-
         public float maxHealth;
         public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
+
+        public float maxRegeneration;
+        public float MaxRegeneration { get { return maxRegeneration; } set { maxRegeneration = value; } }
 
         [Header("Damage")]
         public float damage = 1.0f;
@@ -108,7 +108,7 @@ namespace MegaGame
         {
             maxHealth = health;
             currentHealth = maxHealth;
-
+            maxRegeneration = healthRegeneration;
             maxDamage = damage;
 
             if (GlobalTimeController.Instance)
@@ -191,7 +191,7 @@ namespace MegaGame
         {
             if (globalTime.currentDay != currentDay)
             {
-                currentHealth += healthRegeneration;
+                currentHealth += maxRegeneration;
                 currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
                 currentDay = globalTime.currentDay;

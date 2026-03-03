@@ -31,6 +31,7 @@ namespace MegaGame
         [Header("Widgets")]
         [SerializeField] GameObject distanceCircle;
         [SerializeField] GameObject rightTargetCircle;
+        [SerializeField] GameObject nekarkWarningCircle;
 
         void Awake()
         {
@@ -102,6 +103,11 @@ namespace MegaGame
         public void SpawnRightTargetCircle(Vector3 position)
         {
             GameObject circle = Instantiate(rightTargetCircle, position, Quaternion.identity);
+        }
+
+        public void SpawnNekarkWarningCircle(Vector3 position)
+        {
+            GameObject circle = Instantiate(nekarkWarningCircle, position, Quaternion.identity);
         }
     }
 }

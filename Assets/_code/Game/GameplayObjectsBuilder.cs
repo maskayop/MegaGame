@@ -181,5 +181,11 @@ namespace MegaGame
             scenePrefabsManager.SpawnRightTargetCircle(gameController.playerOpposingPorts.antagonPort.transform.position);
             UIMainCanvas.Instance.SpawnWrongTargetPortMessage(rightTargetSettlement.Island);
         }
+
+        public void SpawnNekarkWarningCircle(Warship ship)
+        {
+            scenePrefabsManager.SpawnNekarkWarningCircle(ship.transform.position);
+            UIMainCanvas.Instance.SpawnNekarkMessage();
+        }
     }
 }

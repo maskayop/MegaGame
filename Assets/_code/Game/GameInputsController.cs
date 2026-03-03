@@ -40,12 +40,7 @@ namespace MegaGame
                 return;
 
             if (Input.GetMouseButtonDown(2))
-            {
-                if (gameController.playerOpposingPorts.protagonPort)
-                    cameraController.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
-                else
-                    cameraController.transform.position = Vector3.zero;
-            }
+                PlaceCameraToCurrentPort();
 
             if (!UISettlementPanel.Instance.IsOpen)
                 SelectObject();
@@ -104,6 +99,14 @@ namespace MegaGame
                     }
                 }
             }
+        }
+
+        public void PlaceCameraToCurrentPort()
+        {
+            if (gameController.playerOpposingPorts.protagonPort)
+                cameraController.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
+            else
+                cameraController.transform.position = Vector3.zero;
         }
     }
 }

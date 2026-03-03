@@ -225,5 +225,14 @@ namespace MegaGame.UI
         {
             messagePanel.SpawnNekarkMessage();
         }
+
+        public void PlaceCameraToCurrentPort()
+        {
+            if (gameController.gameState != GameState.battle)
+                return;
+
+            if (GameInputsController.Instance)
+                GameInputsController.Instance.PlaceCameraToCurrentPort();
+        }
     }
 }

@@ -55,13 +55,15 @@ namespace MegaGame
 
             if (settlementConstructions.fortIsBuilt)
             {
-                MaxHealth = health + settlementConstructions.additionalHealth;
                 MaxDamage = damage + settlementConstructions.additionalDamage;
+                MaxHealth = health + settlementConstructions.additionalHealth;
+                MaxRegeneration = healthRegeneration + settlementConstructions.additionalHealthRegeneration;
             }
             else
             {
-                MaxHealth = health;
                 MaxDamage = damage;
+                MaxHealth = health;
+                MaxRegeneration = maxRegeneration;
             }
         }
 
