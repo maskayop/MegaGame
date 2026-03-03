@@ -1,4 +1,3 @@
-using MegaGame.UI;
 using UnityEngine;
 using Vopere.Common;
 
@@ -12,6 +11,7 @@ namespace MegaGame
         [Header("Fort Modificators")]
         public float additionalHealth = 10;
         public float additionalDamage = 1f;
+        public float additionalHealthRegeneration = 1f;
 
         [Header("Constructions Prices")]
         public short fortBuildingCost = 1000;
@@ -27,7 +27,6 @@ namespace MegaGame
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }
 
         ResourcesController resourcesController;
-        NameWidget nameWidget;
 
         void Start()
         {

@@ -90,7 +90,10 @@ namespace MegaGame
                 nameWidget.SetText(islandData.islandName.GetLocalizedString());
 
                 if (settlement && settlement.GetSettlementConstructions())
+                {
                     nameWidget.SetDefenceFort(settlement.GetSettlementConstructions().fortIsBuilt);
+                    nameWidget.SetTrade(settlement.GetSettlementConstructions().tradeIsBuilt);
+                }
 
                 nameWidget.SetColor(owner);
             }

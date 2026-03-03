@@ -8,10 +8,11 @@ namespace MegaGame
         [SerializeField] GameObject container;
         [SerializeField] TextMeshPro text;
 
-        [Header("Island Type Mesh")]
+        [Header("Mesh Randerers")]
         [SerializeField] MeshRenderer islandTypeRenderer;
         [SerializeField] MeshRenderer defenderShipRenderer;
         [SerializeField] MeshRenderer defenceFortRenderer;
+        [SerializeField] MeshRenderer tradeRenderer;
 
         [SerializeField] string materialValueName = "_BaseColor";
 
@@ -73,6 +74,14 @@ namespace MegaGame
             defenceFortRenderer.gameObject.SetActive(state);
         }
 
+        public void SetTrade(bool state)
+        {
+            if (!tradeRenderer)
+                return;
+
+            tradeRenderer.gameObject.SetActive(state);
+        }
+
         public void SetColor(BaseCharacter.Owner owner)
         {
             if (owner == BaseCharacter.Owner.player)
@@ -80,33 +89,27 @@ namespace MegaGame
                 if (text)
                     text.color = playerColor;
 
-                if (islandTypeRenderer)
-                    islandTypeRenderer.material.SetColor(materialValueName, playerColor);
-
-                if (defenceFortRenderer)
-                    defenceFortRenderer.material.SetColor(materialValueName, playerColor);
+                SetMeshRendererColor(islandTypeRenderer, materialValueName, playerColor);
+                SetMeshRendererColor(defenceFortRenderer, materialValueName, playerColor);
+                SetMeshRendererColor(tradeRenderer, materialValueName, playerColor);
             }
             else if (owner == BaseCharacter.Owner.enemy)
             {
                 if (text)
                     text.color = enemyColor;
 
-                if (islandTypeRenderer)
-                    islandTypeRenderer.material.SetColor(materialValueName, enemyColor);
-
-                if (defenceFortRenderer)
-                    defenceFortRenderer.material.SetColor(materialValueName, enemyColor);
+                SetMeshRendererColor(islandTypeRenderer, materialValueName, enemyColor);
+                SetMeshRendererColor(defenceFortRenderer, materialValueName, enemyColor);
+                SetMeshRendererColor(tradeRenderer, materialValueName, enemyColor);
             }
             else if (owner == BaseCharacter.Owner.neutral)
             {
                 if (text)
                     text.color = neutralColor;
 
-                if (islandTypeRenderer)
-                    islandTypeRenderer.material.SetColor(materialValueName, neutralColor);
-
-                if (defenceFortRenderer)
-                    defenceFortRenderer.material.SetColor(materialValueName, neutralColor);
+                SetMeshRendererColor(islandTypeRenderer, materialValueName, neutralColor);
+                SetMeshRendererColor(defenceFortRenderer, materialValueName, neutralColor);
+                SetMeshRendererColor(tradeRenderer, materialValueName, neutralColor);
             }
         }
 
@@ -116,20 +119,19 @@ namespace MegaGame
                 return;
 
             if (owner == BaseCharacter.Owner.player)
-            {
-                if (defenderShipRenderer)
-                    defenderShipRenderer.material.SetColor(materialValueName, playerColor);
-            }
+                SetMeshRendererColor(defenderShipRenderer, materialValueName, playerColor);
             else if (owner == BaseCharacter.Owner.enemy)
-            {
-                if (defenderShipRenderer)
-                    defenderShipRenderer.material.SetColor(materialValueName, enemyColor);
-            }
+                SetMeshRendererColor(defenderShipRenderer, materialValueName, enemyColor);
             else if (owner == BaseCharacter.Owner.neutral)
-            {
-                if (defenderShipRenderer)
-                    defenderShipRenderer.material.SetColor(materialValueName, neutralColor);
-            }
+                SetMeshRendererColor(defenderShipRenderer, materialValueName, neutralColor);
+        }
+
+        void SetMeshRendererColor(MeshRenderer INrenderer, string INvalueName, Color INcolor)
+        {
+            if (!INrenderer)
+                return;
+
+            INrenderer.material.SetColor(INvalueName, INcolor);
         }
     }
 }

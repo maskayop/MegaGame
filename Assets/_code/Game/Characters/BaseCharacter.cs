@@ -17,6 +17,9 @@ namespace MegaGame
         public float currentHealth = 10;
         public float healthRegeneration = 1;
 
+        public float maxHealthRegeneration;
+        public float MaxHealthRegeneration { get { return maxHealthRegeneration; } set { maxHealthRegeneration = value; } }
+
         public float maxHealth;
         public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
 
