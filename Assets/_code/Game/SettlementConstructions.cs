@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Vopere.Common;
 
@@ -26,13 +27,16 @@ namespace MegaGame
         BaseSettlement settlement;
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }
 
+        public List<Island> tradeTargets = new List<Island>();
+
         ResourcesController resourcesController;
         GameController gameController;
         GlobalTimeController globalTime;
+        GameplayObjectsBuilder gameplayObjectsBuilder;
 
         int currentDay = 0;
 
-        TraderShip traderShip;
+        public TraderShip traderShip;
 
         void Start()
         {
@@ -62,6 +66,7 @@ namespace MegaGame
             resourcesController = ResourcesController.Instance;
             gameController = GameController.Instance;
             globalTime = GlobalTimeController.Instance;
+            gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
 
             settlement = GetComponent<BaseSettlement>();
 
@@ -101,8 +106,52 @@ namespace MegaGame
 
         void TryBuildTraderShip()
         {
-            if (traderShip || traderShip.gameObject)
+            if (!tradeIsBuilt)
                 return;
+
+            if (traderShip)
+                return;
+
+            UpdateTradeTargets();
+
+            if (tradeTargets.Count <= 1)
+                return;
+
+            if (settlement.owner == BaseCharacter.Owner.player)
+                gameplayObjectsBuilder.TryCreatePlayerTraderShip(settlement.transform, out traderShip);
+            else if (settlement.owner == BaseCharacter.Owner.enemy)
+                gameplayObjectsBuilder.TryCreateEnemyTraderShip(settlement.transform, out traderShip);
+
+            traderShip.HomeTradeCompany = this;
+        }
+
+        void UpdateTradeTargets()
+        {
+            tradeTargets.Clear();
+            tradeTargets.Add(settlement.Island);
+
+            for (int i = 0; i < settlement.Island.possibleTargets.Count; i++)
+            {
+                if (settlement.Island.possibleTargets[i].owner == settlement.owner)
+                    tradeTargets.Add(settlement.Island.possibleTargets[i]);
+            }
+        }
+
+        public Island GetRandomTradeTarget(BaseSettlement currentSettlement)
+        {
+            UpdateTradeTargets();
+
+            short r = (short)Random.Range(0, tradeTargets.Count);
+
+            if (tradeTargets[r].settlement == currentSettlement)
+            {
+                if (r + 1 < tradeTargets.Count)
+                    return tradeTargets[r + 1];
+                else
+                    r = 0;
+            }
+
+            return tradeTargets[r];
         }
     }
 }

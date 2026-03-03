@@ -36,6 +36,7 @@ namespace MegaGame
         [SerializeField] GameObject distanceCircle;
         [SerializeField] GameObject rightTargetCircle;
         [SerializeField] GameObject nekarkWarningCircle;
+        [SerializeField] GameObject traderProfitWidget;
 
         void Awake()
         {
@@ -98,6 +99,14 @@ namespace MegaGame
                 return defenderShipEnemyPrefab;
         }
 
+        public GameObject GetTraderShipPrefab(bool isPlayer)
+        {
+            if (isPlayer)
+                return traderShipPlayerPrefab;
+            else
+                return traderShipEnemyPrefab;
+        }
+
         public void SpawnDistanceCircle(Vector3 position, short radius)
         {
             GameObject circle = Instantiate(distanceCircle, position, Quaternion.identity);
@@ -112,6 +121,12 @@ namespace MegaGame
         public void SpawnNekarkWarningCircle(Vector3 position)
         {
             GameObject circle = Instantiate(nekarkWarningCircle, position, Quaternion.identity);
+        }
+
+        public void SpawnTraderProfitWidget(Vector3 position, short value)
+        {
+            GameObject widget = Instantiate(traderProfitWidget, position, Quaternion.identity);
+            widget.GetComponent<ValueWidget>().SetText("+ " + value.ToString());
         }
     }
 }

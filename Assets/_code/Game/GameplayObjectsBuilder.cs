@@ -72,7 +72,13 @@ namespace MegaGame
             else if (shipType == 1) // Defender Ship
             {
                 if (!targetSettlement.Island.DefenderShip)
+                {
+                    if (Strint.Subtraction(resourcesController.PlayerMoney, mediumShipCost) < 0)
+                        return;
+
+                    shipLevel = 2;
                     BuildShip(scenePrefabsManager.GetDefenderShipPrefab(true), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
+                }
                 else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == BaseCharacter.Owner.enemy)
                     BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true, shipLevel), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
                 else
@@ -97,13 +103,19 @@ namespace MegaGame
             else if (shipType == 1) // Defender Ship
             {
                 if (!targetSettlement.Island.DefenderShip)
+                {
+                    if (Strint.Subtraction(resourcesController.EnemyMoney, mediumShipCost) < 0)
+                        return;
+
+                    shipLevel = 2;
                     BuildShip(scenePrefabsManager.GetDefenderShipPrefab(false), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
+                }
                 else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == BaseCharacter.Owner.player)
                     BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, shipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
                 else
                     return;
             }
-
+            
             resourcesController.RemoveMoneyFromEnemy(GetCurrentBuildingShipCost(shipLevel));
         }
 
@@ -122,6 +134,18 @@ namespace MegaGame
 
             if (character as DefenderShip)
                 targetSettlement.Island.DefenderShip = character as DefenderShip;
+        }
+
+        public void TryCreatePlayerTraderShip(Transform buildingPosition, out TraderShip outShip)
+        {
+            GameObject ship = Instantiate(scenePrefabsManager.GetTraderShipPrefab(true), buildingPosition.position, buildingPosition.rotation);
+            outShip = ship.GetComponent<TraderShip>();
+        }
+
+        public void TryCreateEnemyTraderShip(Transform buildingPosition, out TraderShip outShip)
+        {
+            GameObject ship = Instantiate(scenePrefabsManager.GetTraderShipPrefab(false), buildingPosition.position, buildingPosition.rotation);
+            outShip = ship.GetComponent<TraderShip>();
         }
 
         short GetBuildingShipLevel(string money, bool isRandom, short maxShipLevel)
@@ -149,7 +173,7 @@ namespace MegaGame
                 return maxValue;
         }
 
-        int GetCurrentBuildingShipCost(int shipLevel)
+        int GetCurrentBuildingShipCost(short shipLevel)
         {
             if (shipLevel == 1)
                 return Strint.GetInt(smallShipCost);

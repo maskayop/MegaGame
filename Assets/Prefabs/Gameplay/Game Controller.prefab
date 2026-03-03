@@ -152,6 +152,7 @@ MonoBehaviour:
   distanceCircle: {fileID: 6874639579808131834, guid: 34f97d21f4d17a947b49d89d99016076, type: 3}
   rightTargetCircle: {fileID: 6874639579808131834, guid: 573e7d2b545c7f44d880267b10062b44, type: 3}
   nekarkWarningCircle: {fileID: 6874639579808131834, guid: 6a32aba1f31dc1a4b9789ba09ce37676, type: 3}
+  traderProfitWidget: {fileID: 4355659799799374417, guid: 9c5c225a6726239428bd3b8c17fe1617, type: 3}
 --- !u!114 &15590748652426754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ResourcesController
   startMoneyForPlayer: 50
   startMoneyForEnemy: 100
+  traderProfit: {x: 10, y: 50}
 --- !u!114 &1907761513824449833
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.TraderShip
   owner: 2
   revenue: 0
-  maintenance: 0
+  maintenance: 1
   health: 20
   currentHealth: 20
   healthRegeneration: 0
@@ -207,7 +207,9 @@ MonoBehaviour:
   visualObject: {fileID: 1021785611154541580}
   animationBehavior: {fileID: -3230663631609051132}
   destroyAfterTime: {fileID: -1080902903418761957}
-  distanceToPointToChange: 2
+  distanceToPointToChange: 5
+  distance: 0
+  currentTarget: {fileID: 0}
 --- !u!114 &-3230663631609051132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +229,7 @@ MonoBehaviour:
   - Ship Destroy 3
   - Ship Destroy 4
   sinkingState: Ship Nekark Sinking
-  nekarkPrefab: {fileID: 0}
+  nekarkPrefab: {fileID: 1753394103763631242, guid: 074bdcf80fb850e46a89fdacd4ba5409, type: 3}
   timeForDestroy: 4
 --- !u!114 &-1080902903418761957
 MonoBehaviour:
