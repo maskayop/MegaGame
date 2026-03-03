@@ -27,15 +27,41 @@ namespace MegaGame
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }
 
         ResourcesController resourcesController;
+        GameController gameController;
+        GlobalTimeController globalTime;
+
+        int currentDay = 0;
+
+        TraderShip traderShip;
 
         void Start()
         {
             Init();
         }
 
+        void Update()
+        {
+            if (!gameController)
+                return;
+
+            if (gameController.CampaignIsEnded)
+                return;
+
+            if (gameController.gameState != GameController.GameState.battle)
+                return;
+
+            if (globalTime.currentDay != currentDay)
+            {
+                TryBuildTraderShip();
+                currentDay = globalTime.currentDay;
+            }
+        }
+
         public void Init()
         {
             resourcesController = ResourcesController.Instance;
+            gameController = GameController.Instance;
+            globalTime = GlobalTimeController.Instance;
 
             settlement = GetComponent<BaseSettlement>();
 
@@ -71,6 +97,12 @@ namespace MegaGame
             resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
             settlement.UpdateCharacteristics();
             settlement.Island.UpdateIslandState();
+        }
+
+        void TryBuildTraderShip()
+        {
+            if (traderShip || traderShip.gameObject)
+                return;
         }
     }
 }

@@ -23,6 +23,10 @@ namespace MegaGame
         [SerializeField] GameObject defenderShipPlayerPrefab;
         [SerializeField] GameObject defenderShipEnemyPrefab;
 
+        [Header("Trader Ships")]
+        [SerializeField] GameObject traderShipPlayerPrefab;
+        [SerializeField] GameObject traderShipEnemyPrefab;
+
         [Header("FX")]
         [SerializeField] GameObject FXTargetEnemy;
         [SerializeField] GameObject FXTargetEnemyReject;

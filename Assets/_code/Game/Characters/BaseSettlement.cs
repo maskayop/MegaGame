@@ -63,7 +63,7 @@ namespace MegaGame
             {
                 MaxDamage = damage;
                 MaxHealth = health;
-                MaxRegeneration = maxRegeneration;
+                MaxRegeneration = healthRegeneration;
             }
         }
 

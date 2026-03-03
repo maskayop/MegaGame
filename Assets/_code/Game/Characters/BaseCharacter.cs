@@ -17,17 +17,17 @@ namespace MegaGame
         public float currentHealth = 10;
         public float healthRegeneration = 1;
 
-        public float maxHealth;
+        float maxHealth;
         public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
 
-        public float maxRegeneration;
+        float maxRegeneration;
         public float MaxRegeneration { get { return maxRegeneration; } set { maxRegeneration = value; } }
 
         [Header("Damage")]
         public float damage = 1.0f;
         public float attackDelay = 1.0f;
 
-        public float maxDamage;
+        float maxDamage;
         public float MaxDamage { get { return maxDamage; } set { maxDamage = value; } }
 
         [Header("Widgets")]
@@ -42,7 +42,7 @@ namespace MegaGame
         protected GameController gameController;
         protected GlobalTimeController globalTime;
 
-        public float currentHealthNormalized;
+        float currentHealthNormalized;
         public float CurrentHealthNormalized { get { return currentHealthNormalized; } }
 
         protected int currentDay = 0;
