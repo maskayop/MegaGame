@@ -233,6 +233,9 @@ namespace MegaGame
 
         public void DealDamage(float INdamage, BaseCharacter character)
         {
+            if (!character)
+                return;
+
             if (owner == Owner.neutral && CanAddTargetToList(character))
                 if (targetEnemies.Count == 0 || targetEnemies[0] != character)
                     targetEnemies.Add(character);
