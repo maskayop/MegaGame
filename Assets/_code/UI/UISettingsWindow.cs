@@ -33,6 +33,9 @@ namespace MegaGame
         [SerializeField] Slider zoomSensitivitySlider;
         [SerializeField] TextMeshProUGUI zoomSensitivityValueText;
 
+        [Header("Sensitivity")]
+        [SerializeField] TextMeshProUGUI appVersionText;
+
         bool isOpen = false;
         public bool IsOpen { get { return isOpen; } set { isOpen = value; } }
 
@@ -64,7 +67,7 @@ namespace MegaGame
                 graphicsLevelToggles[graphicsLeveId].isOn = true;
             else
                 ChangeGraphicsLevel(defaultGraphicsLevel);
-            
+
             SetSliderLoadedValue("MusicVolume", musicSlider, musicValueText, musicSlider.maxValue / 2);
             SetSliderLoadedValue("UIVolume", UIAudioSlider, UIAudioValueText, UIAudioSlider.maxValue / 2);
 
@@ -72,6 +75,9 @@ namespace MegaGame
             SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, zoomSensitivitySlider.maxValue / 2);
 
             SetScreenResolutionSettings();
+
+            if (appVersionText)
+                appVersionText.text = Application.version;
 
             Close();
         }
