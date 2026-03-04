@@ -125,6 +125,9 @@ namespace MegaGame
 
         public void SpawnTraderProfitWidget(Vector3 position, short value)
         {
+            if (value == 0)
+                return;
+
             GameObject widget = Instantiate(traderProfitWidget, position, Quaternion.identity);
             widget.GetComponent<ValueWidget>().SetText("+ " + value.ToString());
         }

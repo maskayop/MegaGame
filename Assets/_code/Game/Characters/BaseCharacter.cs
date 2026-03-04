@@ -209,7 +209,7 @@ namespace MegaGame
 
         public void Kill()
         {
-            if (!gameObject)
+            if (gameObject == null || GetComponent<Transform>() == null)
                 return;
 
             currentHealth = 0;

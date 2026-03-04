@@ -163,7 +163,7 @@ namespace MegaGame
             InitializeScene();
 
             gameDataSaver.LoadLastAccount();
-            gameDataSaver.LoadGameData();            
+            gameDataSaver.LoadGameData();
 
             if (campaignIsEnded)
             {
@@ -181,18 +181,11 @@ namespace MegaGame
 
             if (playerStartIslandId == -1)
             {
-                short rand = (short)UnityEngine.Random.Range(0, startIslands.Count);
-                playerStartIslandId = (short)startIslands[rand].islandData.id;
-            }
+                short randPlayer = (short)UnityEngine.Random.Range(0, startIslands.Count);
+                playerStartIslandId = (short)startIslands[randPlayer].islandData.id;
 
-            if (enemyStartIslandId == -1)
-            {
-                short rand = (short)UnityEngine.Random.Range(0, startIslands.Count);
-
-                if (enemyStartIslandId != playerStartIslandId)
-                    enemyStartIslandId = (short)startIslands[rand].islandData.id;
-                else
-                    enemyStartIslandId = (short)startIslands[0].islandData.id;
+                short randEnemy = (short)UnityEngine.Random.Range(0, startIslands[randPlayer].possibleEnemyStartIsland.Count);
+                enemyStartIslandId = (short)startIslands[randPlayer].possibleEnemyStartIsland[randEnemy].islandData.id;
             }
 
             for (int i = 0; i < allPorts.Count; i++)
@@ -451,10 +444,10 @@ namespace MegaGame
             UpdateSettlementsLists();
             SetGameStateAsBattle();
             resourcesController.UpdateRevenues();
-            
+
             if (playerPortsCount < enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToPlayer((short)(enemyPortsCount - playerPortsCount));
-            
+
             if (playerPortsCount >= enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToEnemy((short)(playerPortsCount - enemyPortsCount + 1));
 

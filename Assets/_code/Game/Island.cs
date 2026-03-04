@@ -15,6 +15,7 @@ namespace MegaGame
 
         [Header("Battle")]
         public bool isStartIsland = false;
+        public List<Island> possibleEnemyStartIsland = new List<Island>();
         public List<Island> possibleTargets = new List<Island>();
 
         [Header("Defend")]

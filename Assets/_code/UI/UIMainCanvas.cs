@@ -14,6 +14,7 @@ namespace MegaGame.UI
 
         [Header("Main Menu")]
         [SerializeField] UIMainMenu mainMenu;
+        [SerializeField] GameObject goToMainMenuQuestionWindow;
 
         [Header("Game")]
         [SerializeField] GameObject startGameWindow;
@@ -209,6 +210,7 @@ namespace MegaGame.UI
         {
             mainMenu.Open();
             HideEndCampaignWindow();
+            CloseGoToMainMenuQuestionWindow();
         }
 
         public void SpawnTooFarFromPortMessage()
@@ -233,6 +235,16 @@ namespace MegaGame.UI
 
             if (GameInputsController.Instance)
                 GameInputsController.Instance.PlaceCameraToCurrentPort();
+        }
+
+        public void OpenGoToMainMenuQuestionWindow()
+        {
+            goToMainMenuQuestionWindow.SetActive(true);
+        }
+
+        public void CloseGoToMainMenuQuestionWindow()
+        {
+            goToMainMenuQuestionWindow.SetActive(false);
         }
     }
 }
