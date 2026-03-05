@@ -748,16 +748,13 @@ MonoBehaviour:
   health: 100
   currentHealth: 100
   healthRegeneration: 1
-  maxHealth: 0
   damage: 2
-  attackDelay: 1
-  maxDamage: 0
+  attackDelay: 0.9
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   neutralHealthWidget: {fileID: 3601601711594763890}
   timeForTargetsUpdate: 3
   targetEnemies: []
-  currentHealthNormalized: 0
   playerVisual: {fileID: 2166336572211561684}
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}
@@ -780,10 +777,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.SettlementConstructions
   fortIsBuilt: 0
   tradeIsBuilt: 0
-  additionalHealth: 150
   additionalDamage: 2
+  additionalHealth: 150
+  additionalHealthRegeneration: 1
   fortBuildingCost: 700
   tradeBuildingCost: 500
+  tradeTargets: []
+  traderShip: {fileID: 0}
 --- !u!1 &8143654446351510362
 GameObject:
   m_ObjectHideFlags: 0
