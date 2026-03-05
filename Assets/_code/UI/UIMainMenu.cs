@@ -11,6 +11,9 @@ namespace MegaGame.UI
 
         [Header("Windows")]
         [SerializeField] GameObject mainWindow;
+        [SerializeField] GameObject menuButtons;
+
+        [SerializeField] GameObject exitAppWindow;
 
         [Header("Accounts")]
         [SerializeField] GameObject accountManagerWindow;
@@ -141,6 +144,26 @@ namespace MegaGame.UI
             gameDataSaver.LoadLastAccount();
 
             Init();
+        }
+
+        public void OpenCloseMenuButtons()
+        {
+            menuButtons.SetActive(!menuButtons.activeSelf);
+        }
+
+        public void Exit()
+        {
+            App.Instance.ExitGame();
+        }
+
+        public void OpenExitAppWindow()
+        {
+            exitAppWindow.SetActive(true);
+        }
+
+        public void CloseExitAppWindow()
+        {
+            exitAppWindow.SetActive(false);
         }
     }
 }

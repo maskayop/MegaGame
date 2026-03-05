@@ -46,6 +46,8 @@ namespace MegaGame
         public List<Port> allPossiblePlayerTargetPorts = new List<Port>();
         public List<Port> allPossibleEnemyTargetPorts = new List<Port>();
 
+        //public List<Port> allNeutralPorts = new List<Port>();
+
         [Header("Distances")]
         public short distanceForPossibleTargets = 100;
 
