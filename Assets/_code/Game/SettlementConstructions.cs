@@ -76,36 +76,55 @@ namespace MegaGame
 
         public void TryBuildFort()
         {
+            if (!settlement)
+                return;
+
             if (fortIsBuilt)
                 return;
 
-            if (Strint.Subtraction(resourcesController.PlayerMoney, fortCost) < 0)
-                return;
+            if (settlement.owner == BaseCharacter.Owner.player)
+            {
+                if (Strint.Subtraction(resourcesController.PlayerMoney, fortCost) < 0)
+                    return;
+            }
 
             fortIsBuilt = true;
 
-            resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
             settlement.UpdateCharacteristics();
             settlement.Island.UpdateIslandState();
+
+            if (settlement.owner == BaseCharacter.Owner.player)
+                resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
         }
 
         public void TryBuildTrade()
         {
+            if (!settlement)
+                return;
+
             if (tradeIsBuilt)
                 return;
 
-            if (Strint.Subtraction(resourcesController.PlayerMoney, tradeCost) < 0)
-                return;
+            if (settlement.owner == BaseCharacter.Owner.player)
+            {
+                if (Strint.Subtraction(resourcesController.PlayerMoney, tradeCost) < 0)
+                    return;
+            }
 
             tradeIsBuilt = true;
 
-            resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
             settlement.UpdateCharacteristics();
             settlement.Island.UpdateIslandState();
+
+            if (settlement.owner == BaseCharacter.Owner.player)
+                resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
         }
 
         void TryBuildTraderShip()
         {
+            if (!settlement)
+                return;
+
             if (!tradeIsBuilt)
                 return;
 
