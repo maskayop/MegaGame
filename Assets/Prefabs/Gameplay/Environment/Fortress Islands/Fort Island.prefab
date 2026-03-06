@@ -69,11 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.Island
   owner: 2
   islandData: {fileID: 0}
-  nameWidget: {fileID: 4586152267107796039}
-  settlements:
-  - {fileID: 4650115328933473917}
   settlement: {fileID: 4650115328933473917}
+  nameWidget: {fileID: 4586152267107796039}
   isStartIsland: 0
+  possibleEnemyStartIsland: []
   possibleTargets: []
   defendingPoints: []
 --- !u!1001 &3093023349336668182
@@ -90,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7399325778846517509, guid: 60ae14c1f1fc0264eb8c7553dc8841a4, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7962397893877922218, guid: 60ae14c1f1fc0264eb8c7553dc8841a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -167,7 +166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1219924178703769635, guid: 499c732f465a99040b8cb1581e0ef8a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1219924178703769635, guid: 499c732f465a99040b8cb1581e0ef8a7, type: 3}
       propertyPath: m_LocalPosition.z

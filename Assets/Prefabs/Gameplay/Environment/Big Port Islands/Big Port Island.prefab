@@ -72,6 +72,7 @@ MonoBehaviour:
   settlement: {fileID: 5723791626995265530}
   nameWidget: {fileID: 4211345175774475087}
   isStartIsland: 0
+  possibleEnemyStartIsland: []
   possibleTargets: []
   defendingPoints: []
 --- !u!1001 &3402572282306285342
@@ -161,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1219924178703769635, guid: 031172ded6cb74e46a820738b6df1527, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1219924178703769635, guid: 031172ded6cb74e46a820738b6df1527, type: 3}
       propertyPath: m_LocalPosition.z
