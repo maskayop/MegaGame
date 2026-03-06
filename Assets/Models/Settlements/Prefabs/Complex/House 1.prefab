@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5129962609998242778}
+  - {fileID: 3442103799086945025}
   - {fileID: 1844856049880947471}
   - {fileID: 2582944760383383887}
   - {fileID: 6673548914361130410}
@@ -43,7 +44,6 @@ Transform:
   - {fileID: 3855505407588661974}
   - {fileID: 3492596668562988428}
   - {fileID: 7948024376707065743}
-  - {fileID: 3442103799086945025}
   - {fileID: 8686843561110810317}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -430,7 +430,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -180
       objectReference: {fileID: 0}
-    - target: {fileID: 2350388, guid: e10330cd20753a243bc0950bdfe1921c, type: 3}
+    - target: {fileID: 1431106810644841331, guid: e10330cd20753a243bc0950bdfe1921c, type: 3}
+      propertyPath: m_ProbeAnchor
+      value: 
+      objectReference: {fileID: 5129962609998242778}
+    - target: {fileID: 3406340432353590178, guid: e10330cd20753a243bc0950bdfe1921c, type: 3}
       propertyPath: m_ProbeAnchor
       value: 
       objectReference: {fileID: 5129962609998242778}
