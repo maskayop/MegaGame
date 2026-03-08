@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 6335642772775495467}
   - component: {fileID: 4826161218504423443}
   - component: {fileID: 9052676554982617028}
+  - component: {fileID: 8105532551895774037}
   m_Layer: 9
   m_Name: Fortress
   m_TagString: Untagged
@@ -268,6 +269,21 @@ MonoBehaviour:
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}
   FXShot: {fileID: 3860106786867524571}
+--- !u!114 &8105532551895774037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902065961005520750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cfc2ed1a646584fadf5959dd712385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.SettlementVisual
+  playerVisual: {fileID: 2166336572211561684}
+  enemyVisual: {fileID: 4968616874187129814}
+  neutralVisual: {fileID: 8296940048202839377}
 --- !u!1 &8296940048202839377
 GameObject:
   m_ObjectHideFlags: 0

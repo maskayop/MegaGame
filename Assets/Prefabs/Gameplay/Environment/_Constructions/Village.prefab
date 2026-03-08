@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 6151746265658938994}
   - component: {fileID: 4826161218504423443}
   - component: {fileID: 9018592706176067264}
+  - component: {fileID: 2787025189278622259}
   m_Layer: 9
   m_Name: Village
   m_TagString: Untagged
@@ -297,9 +298,22 @@ MonoBehaviour:
   neutralHealthWidget: {fileID: 5765612038147303655}
   timeForTargetsUpdate: 3
   targetEnemies: []
+--- !u!114 &2787025189278622259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902065961005520750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cfc2ed1a646584fadf5959dd712385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.SettlementVisual
   playerVisual: {fileID: 2166336572211561684}
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}
+  fortVisual: {fileID: 0}
 --- !u!1 &8296940048202839377
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7996846584081516298, guid: f09c1a3357737894a985fe6e86f69130, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5420003
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: 7996846584081516298, guid: f09c1a3357737894a985fe6e86f69130, type: 3}
       propertyPath: m_LocalPosition.z
@@ -804,7 +818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7996846584081516298, guid: 54af81d39d8432a4986c86085796f7f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5420003
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: 7996846584081516298, guid: 54af81d39d8432a4986c86085796f7f4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -976,7 +990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7996846584081516298, guid: b0e9ad7fdaa489a4f8f05ed92fb3ab41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5420003
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: 7996846584081516298, guid: b0e9ad7fdaa489a4f8f05ed92fb3ab41, type: 3}
       propertyPath: m_LocalPosition.z

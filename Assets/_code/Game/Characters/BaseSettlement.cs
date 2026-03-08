@@ -1,17 +1,11 @@
-using UnityEngine;
-
 namespace MegaGame
 {
     public class BaseSettlement : BaseCharacter
     {
-        [Header("Visual")]
-        [SerializeField] GameObject playerVisual;
-        [SerializeField] GameObject enemyVisual;
-        [SerializeField] GameObject neutralVisual;
-
         protected bool isCaptured = false;
 
         protected SettlementConstructions settlementConstructions;
+        protected SettlementVisual settlementVisual;
 
         protected override void OnInit()
         {
@@ -19,6 +13,8 @@ namespace MegaGame
             SetVisual();
 
             settlementConstructions = GetComponent<SettlementConstructions>();
+            settlementVisual = GetComponent<SettlementVisual>();
+
             UpdateCharacteristics();
         }
 
@@ -36,16 +32,10 @@ namespace MegaGame
 
         public void SetVisual()
         {
-            playerVisual.gameObject.SetActive(false);
-            enemyVisual.gameObject.SetActive(false);
-            neutralVisual.gameObject.SetActive(false);
+            if (!settlementVisual)
+                return;
 
-            if (owner == Owner.player)
-                playerVisual.gameObject.SetActive(true);
-            else if (owner == Owner.enemy)
-                enemyVisual.gameObject.SetActive(true);
-            else if (owner == Owner.neutral)
-                neutralVisual.gameObject.SetActive(true);
+            settlementVisual.SetVisual();
         }
 
         public void UpdateCharacteristics()

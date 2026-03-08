@@ -105,7 +105,17 @@ namespace MegaGame
             UpdateSettlementState();
 
             if (settlement as Port)
-                settlement.GetComponent<Port>().SetVisualAsTarget(false, owner);
+            {
+                Port p = (Port)settlement;
+
+                if (gameController.playerOpposingPorts.protagonPort == p ||
+                    gameController.playerOpposingPorts.antagonPort == p ||
+                    gameController.enemyOpposingPorts.protagonPort == p ||
+                    gameController.enemyOpposingPorts.antagonPort == p)
+                    p.SetVisualAsTarget(true, owner);
+                else
+                    p.SetVisualAsTarget(false, owner);
+            }
         }
 
         void UpdateSettlementState()

@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8676771271874481085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8449914619811301913}
+  m_Layer: 0
+  m_Name: Big Port Fort Construction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8449914619811301913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8676771271874481085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 987110047743438825}
+  - {fileID: 7414794060032415533}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1164085346567582609
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8449914619811301913}
+    m_Modifications:
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500999749954594866, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_Name
+      value: Big Fort Building L
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+--- !u!4 &987110047743438825 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+  m_PrefabInstance: {fileID: 1164085346567582609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8895701932886854485
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8449914619811301913}
+    m_Modifications:
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500999749954594866, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+      propertyPath: m_Name
+      value: Big Fort Building R
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+--- !u!4 &7414794060032415533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2131682769461484664, guid: b6344c610f9ec4142a30b3cb7e3347d4, type: 3}
+  m_PrefabInstance: {fileID: 8895701932886854485}
+  m_PrefabAsset: {fileID: 0}
