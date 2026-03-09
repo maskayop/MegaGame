@@ -6,6 +6,7 @@ namespace MegaGame
     {
         [SerializeField] float timeForDecision = 1.0f;
         [SerializeField] float portsChanceMultiplier = 2.0f;
+        [SerializeField] short playerChance = 2;
         [SerializeField] short speedDrop = 2;
 
         float currentDecisionTime = 0;
@@ -37,7 +38,7 @@ namespace MegaGame
 
         void MakeDecision()
         {
-            short owner = (short)Random.Range(0, 2);
+            short owner = (short)Random.Range(0, playerChance);
 
             if (owner != 0)
             {

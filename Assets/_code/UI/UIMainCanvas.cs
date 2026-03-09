@@ -228,13 +228,13 @@ namespace MegaGame.UI
             messagePanel.SpawnNekarkMessage();
         }
 
-        public void PlaceCameraToCurrentPort()
+        public void PlaceCamera()
         {
-            if (gameController.gameState != GameState.battle)
+            if (gameController.gameState == GameState.menu)
                 return;
 
             if (GameInputsController.Instance)
-                GameInputsController.Instance.PlaceCameraToCurrentPort();
+                GameInputsController.Instance.PlaceCamera();
         }
 
         public void OpenGoToMainMenuQuestionWindow()

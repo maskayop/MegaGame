@@ -36,11 +36,14 @@ namespace MegaGame
             if (gameController.CampaignIsEnded)
                 return;
 
-            if (gameController.gameState != GameController.GameState.battle)
+            if (gameController.gameState == GameController.GameState.menu)
                 return;
 
             if (Input.GetMouseButtonDown(2))
-                PlaceCameraToCurrentPort();
+                PlaceCamera();
+
+            if (gameController.gameState != GameController.GameState.battle)
+                return;
 
             if (!UISettlementPanel.Instance.IsOpen)
                 SelectObject();
@@ -101,12 +104,20 @@ namespace MegaGame
             }
         }
 
-        public void PlaceCameraToCurrentPort()
+        void PlaceCameraToCurrentPort()
         {
             if (gameController.playerOpposingPorts.protagonPort)
                 cameraController.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
             else
                 cameraController.transform.position = Vector3.zero;
+        }
+
+        public void PlaceCamera()
+        {
+            if (gameController.gameState == GameController.GameState.battle)
+                PlaceCameraToCurrentPort();
+            else if (gameController.gameState == GameController.GameState.world)
+                gameController.PlaceCameraBetweenPorts();
         }
     }
 }

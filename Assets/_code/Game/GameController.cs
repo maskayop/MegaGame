@@ -403,6 +403,9 @@ namespace MegaGame
             fraction.protagonPort.owner = owner;
 
             UpdatePortState(fraction.protagonPort, fraction.protagonPort.owner);
+
+            fraction.protagonPort.SetVisualAsTarget(true, fraction.protagonPort.owner);
+            fraction.antagonPort.SetVisualAsTarget(true, fraction.antagonPort.owner);
         }
 
         Port FindPossibleProtagonPortToTargetPort(Port target, Owner owner)
@@ -511,7 +514,7 @@ namespace MegaGame
                 island.islandData.SetId(maxId + 1);
         }
 
-        void PlaceCameraBetweenPorts()
+        public void PlaceCameraBetweenPorts()
         {
             if (!playerOpposingPorts.protagonPort || !playerOpposingPorts.antagonPort)
                 return;

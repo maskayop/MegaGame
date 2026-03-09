@@ -12,13 +12,19 @@ namespace MegaGame
         [SerializeField] GameObject enemyTarget;
         [SerializeField] GameObject neutralTarget;
 
-        [Header("FX")]
-        [SerializeField] ParticleSystem FXShot;
+        SettlementFX settlementFX;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+
+            settlementFX = GetComponent<SettlementFX>();
+        }
 
         protected override void OnAttack()
         {
-            if (FXShot)
-                FXShot.Play();
+            if (settlementFX)
+                settlementFX.PlayShotFX(targetEnemies[0].transform.position);
         }
 
         public void SetVisualAsTarget(bool isTarget, Owner targetOwner)
