@@ -8635,7 +8635,6 @@ RectTransform:
   - {fileID: 6628728468226426873}
   - {fileID: 573490165357849549}
   - {fileID: 5614478522938533533}
-  - {fileID: 3581984981047697509}
   - {fileID: 8565068796526445393}
   m_Father: {fileID: 1364461209342828980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13931,6 +13930,7 @@ GameObject:
   - component: {fileID: 3968495235688771329}
   - component: {fileID: 8189066898086787943}
   - component: {fileID: 2258267045089477589}
+  - component: {fileID: 4515207280104651730}
   m_Layer: 5
   m_Name: Game Canvas
   m_TagString: Untagged
@@ -13954,6 +13954,7 @@ RectTransform:
   - {fileID: 6647520972076287651}
   - {fileID: 381896566554513981}
   - {fileID: 1797982473079708219}
+  - {fileID: 3581984981047697509}
   - {fileID: 7334328712248030690}
   - {fileID: 5778803694188981990}
   - {fileID: 8087264527928416172}
@@ -14084,8 +14085,6 @@ MonoBehaviour:
   enemyVillagesAmountText: {fileID: 32044199604983204}
   enemyRevenueText: {fileID: 5790833941156335223}
   enemyMaintenanceText: {fileID: 1159303092206169042}
-  growthColorFormat: <size=20><color=#33FF33>
-  wasteColorFormat: <size=20><color=#FF5433>
 --- !u!114 &3968495235688771329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14107,9 +14106,6 @@ MonoBehaviour:
   enemyPortImage: {fileID: 3584810572792605700}
   enemyTargetText: {fileID: 1329822291879599773}
   enemyTargetImage: {fileID: 4546937646621237279}
-  playerColor: {r: 1, g: 0.41895428, b: 0.3, a: 1}
-  enemyColor: {r: 0.3, g: 0.6431374, b: 1, a: 1}
-  neutralColor: {r: 1, g: 0.82614374, b: 0.3, a: 1}
 --- !u!114 &8189066898086787943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14165,6 +14161,27 @@ MonoBehaviour:
   currentHealthText: {fileID: 1200554894814980430}
   maxHealthRegenerationText: {fileID: 539847208304440139}
   revenueText: {fileID: 477083185146666162}
+--- !u!114 &4515207280104651730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550202891944635508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7483c9cc411154d439d9c45d07f6bcf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIColors
+  defaultColorFormat: <color=white>
+  moneyGrowthColorFormat: <size=20><color=#33FF33>
+  moneyWasteColorFormat: <size=20><color=#FF5433>
+  playerColorFormat: <color=#FF6B4C>
+  enemyColorFormat: <color=#4CA4FF>
+  neutralColorFormat: <color=#FFD34C>
+  playerColor: {r: 1, g: 0.3372549, b: 0.2, a: 1}
+  enemyColor: {r: 0.2, g: 0.5921569, b: 1, a: 1}
+  neutralColor: {r: 1, g: 0.8039216, b: 0.2, a: 1}
 --- !u!1 &7658819822254510056
 GameObject:
   m_ObjectHideFlags: 0
@@ -21028,7 +21045,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6647520972076287651}
+    m_TransformParent: {fileID: 1364461209342828980}
     m_Modifications:
     - target: {fileID: 766771596009559708, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -21136,15 +21153,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5941280451766997998, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5941280451766997998, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5941280451766997998, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5941280451766997998, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -21152,7 +21169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5941280451766997998, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -250
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 5941280451766997998, guid: fc54e6764657c074884588c9abd9193c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

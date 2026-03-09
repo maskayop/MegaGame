@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static MegaGame.BaseCharacter;
 using static MegaGame.GameController;
 
 namespace MegaGame.UI
@@ -26,11 +25,6 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI enemyTargetText;
         [SerializeField] Image enemyTargetImage;
 
-        [Header("Colors")]
-        [SerializeField] Color playerColor = Color.red;
-        [SerializeField] Color enemyColor = Color.blue;
-        [SerializeField] Color neutralColor = Color.yellow;
-
         GameController gameController;
         GameState currentGameState;
 
@@ -39,6 +33,8 @@ namespace MegaGame.UI
 
         RectTransform enemyPortTransform;
         RectTransform enemyTargetTransform;
+
+        UIColors uiColors;
 
         void Awake()
         {
@@ -60,6 +56,7 @@ namespace MegaGame.UI
         public void Init()
         {
             gameController = GameController.Instance;
+            uiColors = UIColors.Instance;
 
             targetsPanel.SetActive(false);
 
@@ -97,45 +94,33 @@ namespace MegaGame.UI
             playerPortText.text = gameController.playerOpposingPorts.protagonPort.Island.islandData.islandName.GetLocalizedString();
             playerTargetText.text = gameController.playerOpposingPorts.antagonPort.Island.islandData.islandName.GetLocalizedString();
 
-            playerPortText.color = GetTextOwnerColor(gameController.playerOpposingPorts.protagonPort.Island.owner);
-            playerTargetText.color = GetTextOwnerColor(gameController.playerOpposingPorts.antagonPort.Island.owner);
+            playerPortText.color = uiColors.GetTextOwnerColor(gameController.playerOpposingPorts.protagonPort.Island.owner);
+            playerTargetText.color = uiColors.GetTextOwnerColor(gameController.playerOpposingPorts.antagonPort.Island.owner);
 
             enemyPortText.text = gameController.enemyOpposingPorts.protagonPort.Island.islandData.islandName.GetLocalizedString();
             enemyTargetText.text = gameController.enemyOpposingPorts.antagonPort.Island.islandData.islandName.GetLocalizedString();
 
-            enemyPortText.color = GetTextOwnerColor(gameController.enemyOpposingPorts.protagonPort.Island.owner);
-            enemyTargetText.color = GetTextOwnerColor(gameController.enemyOpposingPorts.antagonPort.Island.owner);
+            enemyPortText.color = uiColors.GetTextOwnerColor(gameController.enemyOpposingPorts.protagonPort.Island.owner);
+            enemyTargetText.color = uiColors.GetTextOwnerColor(gameController.enemyOpposingPorts.antagonPort.Island.owner);
         }
 
         void UpdateTargetsFills()
         {
-            playerPortImage.color = GetTextOwnerColor(gameController.playerOpposingPorts.protagonPort.Island.owner);
-            playerTargetImage.color = GetTextOwnerColor(gameController.playerOpposingPorts.antagonPort.Island.owner);
+            playerPortImage.color = uiColors.GetTextOwnerColor(gameController.playerOpposingPorts.protagonPort.Island.owner);
+            playerTargetImage.color = uiColors.GetTextOwnerColor(gameController.playerOpposingPorts.antagonPort.Island.owner);
 
             playerPortTransform.anchorMax = new Vector2(gameController.playerOpposingPorts.protagonPort.Island.settlement.CurrentHealthNormalized, 1);
             playerPortTransform.offsetMax = Vector2.zero;
             playerTargetTransform.anchorMax = new Vector2(gameController.playerOpposingPorts.antagonPort.Island.settlement.CurrentHealthNormalized, 1);
             playerTargetTransform.offsetMax = Vector2.zero;
 
-            enemyPortImage.color = GetTextOwnerColor(gameController.enemyOpposingPorts.protagonPort.Island.owner);
-            enemyTargetImage.color = GetTextOwnerColor(gameController.enemyOpposingPorts.antagonPort.Island.owner);
+            enemyPortImage.color = uiColors.GetTextOwnerColor(gameController.enemyOpposingPorts.protagonPort.Island.owner);
+            enemyTargetImage.color = uiColors.GetTextOwnerColor(gameController.enemyOpposingPorts.antagonPort.Island.owner);
 
             enemyPortTransform.anchorMax = new Vector2(gameController.enemyOpposingPorts.protagonPort.Island.settlement.CurrentHealthNormalized, 1);
             enemyPortTransform.offsetMax = Vector2.zero;
             enemyTargetTransform.anchorMax = new Vector2(gameController.enemyOpposingPorts.antagonPort.Island.settlement.CurrentHealthNormalized, 1);
             enemyTargetTransform.offsetMax = Vector2.zero;
-        }
-
-        public Color GetTextOwnerColor(Owner targetOwner)
-        {
-            if (targetOwner == Owner.player)
-                return playerColor;
-            else if (targetOwner == Owner.enemy)
-                return enemyColor;
-            else if (targetOwner == Owner.neutral)
-                return neutralColor;
-            else
-                return Color.white;
         }
     }
 }

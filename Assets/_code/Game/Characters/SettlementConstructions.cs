@@ -1,3 +1,4 @@
+using MegaGame.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using Vopere.Common;
@@ -95,6 +96,10 @@ namespace MegaGame
 
             if (settlement.owner == BaseCharacter.Owner.player)
                 resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
+            else if (settlement.owner == BaseCharacter.Owner.enemy)
+                resourcesController.RemoveMoneyFromEnemy(fortBuildingCost);
+
+            UIMainCanvas.Instance.SpawnFortConstructionMessage(settlement as Port);
         }
 
         public void TryBuildTrade()
@@ -118,6 +123,10 @@ namespace MegaGame
 
             if (settlement.owner == BaseCharacter.Owner.player)
                 resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
+            else if (settlement.owner == BaseCharacter.Owner.enemy)
+                resourcesController.RemoveMoneyFromEnemy(tradeBuildingCost);
+
+            UIMainCanvas.Instance.SpawnTraderConstructionMessage(settlement as Port);
         }
 
         void TryBuildTraderShip()

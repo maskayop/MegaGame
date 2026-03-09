@@ -188,17 +188,13 @@ MonoBehaviour:
   health: 15
   currentHealth: 15
   healthRegeneration: 0.5
-  maxHealth: 0
-  maxRegeneration: 0
   damage: 2
-  attackDelay: 1.2
-  maxDamage: 0
+  attackDelay: 1.1
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
   neutralHealthWidget: {fileID: 0}
   timeForTargetsUpdate: 3
   targetEnemies: []
-  currentHealthNormalized: 0
   speed: 10
   currentSpeed: 1
   speedDrop: 5

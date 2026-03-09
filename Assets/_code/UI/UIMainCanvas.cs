@@ -228,6 +228,16 @@ namespace MegaGame.UI
             messagePanel.SpawnNekarkMessage();
         }
 
+        public void SpawnFortConstructionMessage(Port port)
+        {
+            messagePanel.SpawnFortConstructionMessage(port);
+        }
+
+        public void SpawnTraderConstructionMessage(Port port)
+        {
+            messagePanel.SpawnTraderConstructionMessage(port);
+        }
+
         public void PlaceCamera()
         {
             if (gameController.gameState == GameState.menu)

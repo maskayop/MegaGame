@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace MegaGame.UI
 {
@@ -23,13 +23,10 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI enemyRevenueText;
         [SerializeField] TextMeshProUGUI enemyMaintenanceText;
 
-        [Header("Enemy")]
-        [SerializeField] string growthColorFormat = "<color=green>";
-        [SerializeField] string wasteColorFormat = "<color=red>";
-
         GameController gameController;
         ObjectsManager objectsManager;
         ResourcesController resourcesController;
+        UIColors uiColors;
 
         int playerMoneyGrowth;
         int enemyMoneyGrowth;
@@ -56,6 +53,7 @@ namespace MegaGame.UI
             gameController = GameController.Instance;
             objectsManager = ObjectsManager.Instance;
             resourcesController = ResourcesController.Instance;
+            uiColors = UIColors.Instance;
         }
 
         void Update()
@@ -71,11 +69,13 @@ namespace MegaGame.UI
             playerMoneyGrowth = resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerMaintenance();
 
             if (playerMoneyGrowth > 0)
-                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + growthColorFormat + " +" + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + uiColors.GetMoneyGrowthColorString()
+                    + " +" + playerMoneyGrowth.ToString() + "</color></size>";
             else if (playerMoneyGrowth == 0)
                 playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString();
-            else 
-                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + wasteColorFormat + " " + playerMoneyGrowth.ToString() + "</color>" + "</size>";
+            else
+                playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + uiColors.GetMoneyWasteColorString()
+                    + " " + playerMoneyGrowth.ToString() + "</color></size>";
 
             playerShipsAmountText.text = objectsManager.playerShips.Count.ToString();
             playerPortsAmountText.text = gameController.PlayerPortsCount.ToString();
@@ -86,11 +86,13 @@ namespace MegaGame.UI
             enemyMoneyGrowth = resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyMaintenance();
 
             if (enemyMoneyGrowth > 0)
-                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + growthColorFormat + " +" + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyGrowthColorString()
+                    + " +" + enemyMoneyGrowth.ToString() + "</color></size>";
             else if (enemyMoneyGrowth == 0)
                 enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString();
             else
-                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + wasteColorFormat + " " + enemyMoneyGrowth.ToString() + "</color>" + "</size>";
+                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyWasteColorString()
+                    + " " + enemyMoneyGrowth.ToString() + "</color></size>";
 
             enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
             enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
