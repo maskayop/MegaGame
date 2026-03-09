@@ -82,7 +82,7 @@ namespace MegaGame
                     if (gameController.allIslands[i].settlement.GetSettlementConstructions())
                     {
                         SetBuildingState(FORT_BIT, gameController.allIslands[i].settlement.GetSettlementConstructions().fortIsBuilt);
-                        SetBuildingState(TRADE_BIT, gameController.allIslands[i].settlement.GetSettlementConstructions().tradeIsBuilt);
+                        SetBuildingState(TRADE_BIT, gameController.allIslands[i].settlement.GetSettlementConstructions().traderIsBuilt);
 
                         dataSaveLoad.Save(currentAccountNameKey + gameController.allIslands[i].islandData.id + settlementConstructionsStateFormat, buildingStateForSave);
                     }
@@ -133,12 +133,12 @@ namespace MegaGame
                         if (buildingState == -1)
                         {
                             gameController.allIslands[i].settlement.GetSettlementConstructions().fortIsBuilt = false;
-                            gameController.allIslands[i].settlement.GetSettlementConstructions().tradeIsBuilt = false;
+                            gameController.allIslands[i].settlement.GetSettlementConstructions().traderIsBuilt = false;
                         }
                         else
                         {
                             gameController.allIslands[i].settlement.GetSettlementConstructions().fortIsBuilt = GetBuildingState(FORT_BIT, buildingState);
-                            gameController.allIslands[i].settlement.GetSettlementConstructions().tradeIsBuilt = GetBuildingState(TRADE_BIT, buildingState);
+                            gameController.allIslands[i].settlement.GetSettlementConstructions().traderIsBuilt = GetBuildingState(TRADE_BIT, buildingState);
                         }
                     }
                 }

@@ -441,6 +441,9 @@ namespace MegaGame
 
         public void StartBattle()
         {
+            for (int i = 0; i < allIslands.Count; i++)
+                allIslands[i].UpdateIslandState();
+
             UpdateSettlementsLists();
             SetGameStateAsBattle();
             resourcesController.UpdateRevenues();

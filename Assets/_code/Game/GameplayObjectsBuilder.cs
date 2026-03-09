@@ -9,15 +9,24 @@ namespace MegaGame
         public static GameplayObjectsBuilder Instance { get; private set; }
 
         [Header("Ships Prices")]
-        public short smallShipBuildingCost = 10;
-        public short mediumShipBuildingCost = 30;
-        public short bigShipBuildingCost = 60;
-        public short megaShipBuildingCost = 100;
+        public short smallShipBuildingPrice = 10;
+        public short mediumShipBuildingPrice = 30;
+        public short bigShipBuildingPrice = 60;
+        public short megaShipBuildingPrice = 100;
+
+        [Header("Buildings Prices")]
+        public short traderPrice = 500;
+        public short smallPortFortressPrice = 700;
+        public short bigPortFortressPrice = 1000;
 
         string smallShipCost;
         string mediumShipCost;
         string bigShipCost;
         string megaShipCost;
+
+        string traderCost;
+        string smallPortFortressCost;
+        string bigPortFortressCost;
 
         GameController gameController;
         ScenePrefabsManager scenePrefabsManager;
@@ -48,10 +57,14 @@ namespace MegaGame
             scenePrefabsManager = ScenePrefabsManager.Instance;
             resourcesController = ResourcesController.Instance;
 
-            smallShipCost = Strint.GetString(smallShipBuildingCost);
-            mediumShipCost = Strint.GetString(mediumShipBuildingCost);
-            bigShipCost = Strint.GetString(bigShipBuildingCost);
-            megaShipCost = Strint.GetString(megaShipBuildingCost);
+            smallShipCost = Strint.GetString(smallShipBuildingPrice);
+            mediumShipCost = Strint.GetString(mediumShipBuildingPrice);
+            bigShipCost = Strint.GetString(bigShipBuildingPrice);
+            megaShipCost = Strint.GetString(megaShipBuildingPrice);
+
+            traderCost = Strint.GetString(traderPrice);
+            smallPortFortressCost = Strint.GetString(smallPortFortressPrice);
+            bigPortFortressCost = Strint.GetString(bigPortFortressPrice);
         }
 
         public void TryCreatePlayerShip(BaseSettlement targetSettlement, short shipType)
@@ -115,7 +128,7 @@ namespace MegaGame
                 else
                     return;
             }
-            
+
             resourcesController.RemoveMoneyFromEnemy(GetCurrentBuildingShipCost(shipLevel));
         }
 
@@ -185,6 +198,18 @@ namespace MegaGame
                 return Strint.GetInt(megaShipCost);
             else
                 return 0;
+        }
+
+        public string GetSettlementBuildingCost(short id)
+        {
+            if (id == 1)
+                return traderCost;
+            else if (id == 2)
+                return smallPortFortressCost;
+            else if (id == 3)
+                return bigPortFortressCost;
+            else
+                return "";
         }
 
         public void SetMaxBuildingShip(short id)

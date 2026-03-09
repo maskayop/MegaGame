@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame
 {
@@ -10,6 +11,9 @@ namespace MegaGame
         [SerializeField] short onLowMoneySpawnChanceMultiplier = 1;
 
         public List<Village> unsafeVillagesInRadius = new List<Village>();
+
+        List<Port> portsWithoutFort = new List<Port>();
+        List<Port> portsWithoutTrader = new List<Port>();
 
         short villagesCount;
 
@@ -52,7 +56,36 @@ namespace MegaGame
 
         void MakeDecision()
         {
-            if (resourcesController.GetEnemyMoney() >= gameplayObjectsBuilder.smallShipBuildingCost)
+            short buildRandom = (short)Random.Range(0, 2);
+
+            if (buildRandom == 0)
+            {
+                if (Strint.Subtraction(resourcesController.EnemyMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(1)) >= 0)
+                {
+                    for (short i = 0; i < gameController.enemyPorts.Count; i++)
+                    {
+                        if (gameController.enemyPorts[i].GetSettlementConstructions())
+                        {
+                            if (!gameController.enemyPorts[i].GetSettlementConstructions().fortIsBuilt)
+                                portsWithoutFort.Add(gameController.enemyPorts[i]);
+
+                            if (!gameController.enemyPorts[i].GetSettlementConstructions().traderIsBuilt)
+                                portsWithoutTrader.Add(gameController.enemyPorts[i]);
+                        }
+                    }
+
+                    short buildType = (short)Random.Range(0, 2);
+
+                    if (buildRandom == 0)
+                        TryBuildFort();
+                    else
+                        TryBuildTrader();
+
+                    return;
+                }
+            }
+
+            if (resourcesController.GetEnemyMoney() >= gameplayObjectsBuilder.smallShipBuildingPrice)
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();
@@ -119,6 +152,18 @@ namespace MegaGame
                     if (!gameController.enemyVillages[i].Island.DefenderShip || gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
                         unsafeVillagesInRadius.Add(gameController.enemyVillages[i]);
             }
+        }
+
+        void TryBuildFort()
+        {
+            short r = (short)Random.Range(0, portsWithoutFort.Count);
+            portsWithoutFort[r].GetSettlementConstructions().TryBuildFort();
+        }
+
+        void TryBuildTrader()
+        {
+            short r = (short)Random.Range(0, portsWithoutFort.Count);
+            portsWithoutTrader[r].GetSettlementConstructions().TryBuildTrader();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace MegaGame
                 if (settlement && settlement.GetSettlementConstructions())
                 {
                     nameWidget.SetDefenceFort(settlement.GetSettlementConstructions().fortIsBuilt);
-                    nameWidget.SetTrade(settlement.GetSettlementConstructions().tradeIsBuilt);
+                    nameWidget.SetTrade(settlement.GetSettlementConstructions().traderIsBuilt);
                 }
 
                 nameWidget.SetColor(owner);

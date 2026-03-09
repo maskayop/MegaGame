@@ -194,7 +194,7 @@ namespace MegaGame.UI
                 if (currentSettlementConstructions.fortIsBuilt)
                     settlements[i].fortButton.SetActive(false);
 
-                if (currentSettlementConstructions.tradeIsBuilt)
+                if (currentSettlementConstructions.traderIsBuilt)
                     settlements[i].tradeButton.SetActive(false);
             }
         }
@@ -212,7 +212,7 @@ namespace MegaGame.UI
                 if (currentSettlementConstructions.fortIsBuilt)
                     settlements[i].fortImage.SetActive(true);
 
-                if (currentSettlementConstructions.tradeIsBuilt)
+                if (currentSettlementConstructions.traderIsBuilt)
                     settlements[i].tradeImage.SetActive(true);
             }
         }
@@ -245,7 +245,7 @@ namespace MegaGame.UI
             if (constructionId == 0)
                 settlementConstructions.TryBuildFort();
             else if (constructionId == 1)
-                settlementConstructions.TryBuildTrade();
+                settlementConstructions.TryBuildTrader();
 
             UpdateTexts();
         }

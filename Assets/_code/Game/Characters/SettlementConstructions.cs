@@ -8,27 +8,17 @@ namespace MegaGame
     public class SettlementConstructions : MonoBehaviour
     {
         public bool fortIsBuilt = false;
-        public bool tradeIsBuilt = false;
+        public bool traderIsBuilt = false;
 
         [Header("Fort Modificators")]
         public float additionalDamage = 1f;
         public float additionalHealth = 10;
         public float additionalHealthRegeneration = 1f;
 
-        [Header("Constructions Prices")]
-        public short fortBuildingCost = 1000;
-        public short tradeBuildingCost = 500;
-
-        string fortCost;
-        public string FortCost { get { return fortCost; } }
-
-        string tradeCost;
-        public string TradeCost { get { return tradeCost; } }
-
         BaseSettlement settlement;
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }
 
-        public List<Island> tradeTargets = new List<Island>();
+        List<Island> traderTargets = new List<Island>();
 
         ResourcesController resourcesController;
         GameController gameController;
@@ -37,7 +27,7 @@ namespace MegaGame
 
         int currentDay = 0;
 
-        public TraderShip traderShip;
+        TraderShip traderShip;
 
         void Start()
         {
@@ -70,9 +60,6 @@ namespace MegaGame
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
 
             settlement = GetComponent<BaseSettlement>();
-
-            fortCost = Strint.GetString(fortBuildingCost);
-            tradeCost = Strint.GetString(tradeBuildingCost);
         }
 
         public void TryBuildFort()
@@ -85,8 +72,35 @@ namespace MegaGame
 
             if (settlement.owner == BaseCharacter.Owner.player)
             {
-                if (Strint.Subtraction(resourcesController.PlayerMoney, fortCost) < 0)
-                    return;
+                if (settlement as Port)
+                {
+                    if (settlement.GetComponent<Port>().isBigPort)
+                    {
+                        if (Strint.Subtraction(resourcesController.PlayerMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(3)) < 0)
+                            return;
+                    }
+                    else
+                    {
+                        if (Strint.Subtraction(resourcesController.PlayerMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(2)) < 0)
+                            return;
+                    }
+                }
+            }
+            else if (settlement.owner == BaseCharacter.Owner.enemy)
+            {
+                if (settlement as Port)
+                {
+                    if (settlement.GetComponent<Port>().isBigPort)
+                    {
+                        if (Strint.Subtraction(resourcesController.EnemyMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(3)) < 0)
+                            return;
+                    }
+                    else
+                    {
+                        if (Strint.Subtraction(resourcesController.EnemyMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(2)) < 0)
+                            return;
+                    }
+                }
             }
 
             fortIsBuilt = true;
@@ -95,36 +109,63 @@ namespace MegaGame
             settlement.Island.UpdateIslandState();
 
             if (settlement.owner == BaseCharacter.Owner.player)
-                resourcesController.RemoveMoneyFromPlayer(fortBuildingCost);
+            {
+                if (settlement as Port)
+                {
+                    if (settlement.GetComponent<Port>().isBigPort)
+                        resourcesController.RemoveMoneyFromPlayer(GetSettlementBuildingCost(3));
+                    else
+                        resourcesController.RemoveMoneyFromPlayer(GetSettlementBuildingCost(2));
+                }
+            }
             else if (settlement.owner == BaseCharacter.Owner.enemy)
-                resourcesController.RemoveMoneyFromEnemy(fortBuildingCost);
+            {
+                if (settlement as Port)
+                {
+                    if (settlement.GetComponent<Port>().isBigPort)
+                        resourcesController.RemoveMoneyFromEnemy(GetSettlementBuildingCost(3));
+                    else
+                        resourcesController.RemoveMoneyFromEnemy(GetSettlementBuildingCost(2));
+                }
+            }
 
             UIMainCanvas.Instance.SpawnFortConstructionMessage(settlement as Port);
         }
 
-        public void TryBuildTrade()
+        public void TryBuildTrader()
         {
             if (!settlement)
                 return;
 
-            if (tradeIsBuilt)
+            if (traderIsBuilt)
                 return;
 
             if (settlement.owner == BaseCharacter.Owner.player)
             {
-                if (Strint.Subtraction(resourcesController.PlayerMoney, tradeCost) < 0)
-                    return;
+                if (settlement as Port)
+                {
+                    if (Strint.Subtraction(resourcesController.PlayerMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(1)) < 0)
+                        return;
+                }
+            }
+            else if (settlement.owner == BaseCharacter.Owner.enemy)
+            {
+                if (settlement as Port)
+                {
+                    if (Strint.Subtraction(resourcesController.EnemyMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(1)) < 0)
+                        return;
+                }
             }
 
-            tradeIsBuilt = true;
+            traderIsBuilt = true;
 
             settlement.UpdateCharacteristics();
             settlement.Island.UpdateIslandState();
 
             if (settlement.owner == BaseCharacter.Owner.player)
-                resourcesController.RemoveMoneyFromPlayer(tradeBuildingCost);
+                resourcesController.RemoveMoneyFromPlayer(GetSettlementBuildingCost(1));
             else if (settlement.owner == BaseCharacter.Owner.enemy)
-                resourcesController.RemoveMoneyFromEnemy(tradeBuildingCost);
+                resourcesController.RemoveMoneyFromEnemy(GetSettlementBuildingCost(1));
 
             UIMainCanvas.Instance.SpawnTraderConstructionMessage(settlement as Port);
         }
@@ -134,7 +175,7 @@ namespace MegaGame
             if (!settlement)
                 return;
 
-            if (!tradeIsBuilt)
+            if (!traderIsBuilt)
                 return;
 
             if (traderShip)
@@ -142,7 +183,7 @@ namespace MegaGame
 
             UpdateTradeTargets();
 
-            if (tradeTargets.Count <= 1)
+            if (traderTargets.Count <= 1)
                 return;
 
             if (settlement.owner == BaseCharacter.Owner.player)
@@ -155,13 +196,13 @@ namespace MegaGame
 
         void UpdateTradeTargets()
         {
-            tradeTargets.Clear();
-            tradeTargets.Add(settlement.Island);
+            traderTargets.Clear();
+            traderTargets.Add(settlement.Island);
 
             for (int i = 0; i < settlement.Island.possibleTargets.Count; i++)
             {
                 if (settlement.Island.possibleTargets[i].owner == settlement.owner)
-                    tradeTargets.Add(settlement.Island.possibleTargets[i]);
+                    traderTargets.Add(settlement.Island.possibleTargets[i]);
             }
         }
 
@@ -169,17 +210,29 @@ namespace MegaGame
         {
             UpdateTradeTargets();
 
-            short r = (short)Random.Range(0, tradeTargets.Count);
+            short r = (short)Random.Range(0, traderTargets.Count);
 
-            if (tradeTargets[r].settlement == currentSettlement)
+            if (traderTargets[r].settlement == currentSettlement)
             {
-                if (r + 1 < tradeTargets.Count)
-                    return tradeTargets[r + 1];
+                if (r + 1 < traderTargets.Count)
+                    return traderTargets[r + 1];
                 else
                     r = 0;
             }
 
-            return tradeTargets[r];
+            return traderTargets[r];
+        }
+
+        public int GetSettlementBuildingCost(short id)
+        {
+            if (id == 1)
+                return Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(1));
+            else if (id == 2)
+                return Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(2));
+            else if (id == 3)
+                return Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(3));
+            else
+                return 0;
         }
     }
 }
