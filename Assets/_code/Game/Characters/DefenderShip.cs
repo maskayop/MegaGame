@@ -6,7 +6,6 @@ namespace MegaGame
     {
         [SerializeField] float distanceToPointToChange = 1;
 
-        [Header("Info")]
         short currentDefendingPoint = 0;
         float distance;
         Transform currentTarget;

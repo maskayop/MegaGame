@@ -8,11 +8,13 @@ namespace MegaGame
         [SerializeField] float portsChanceMultiplier = 2.0f;
         [SerializeField] short playerChance = 2;
         [SerializeField] short speedDrop = 2;
+        [SerializeField] short minDay = 100;
 
         float currentDecisionTime = 0;
 
         GameController gameController;
         ObjectsManager objectsManager;
+        GlobalTimeController globalTime;
 
         Warship currentVictim;
 
@@ -20,11 +22,15 @@ namespace MegaGame
         {
             gameController = GameController.Instance;
             objectsManager = ObjectsManager.Instance;
+            globalTime = GlobalTimeController.Instance;
         }
 
         void Update()
         {
             if (gameController.gameState != GameController.GameState.battle)
+                return;
+
+            if (globalTime.currentDay < minDay)
                 return;
 
             currentDecisionTime -= Time.deltaTime;
@@ -81,6 +87,9 @@ namespace MegaGame
         void ReleaseTheNekark()
         {
             if (!currentVictim)
+                return;
+
+            if (!currentVictim.GetAnimationBehavior())
                 return;
 
             if (!currentVictim.GetAnimationBehavior().CanBeAnimatedByNekark())

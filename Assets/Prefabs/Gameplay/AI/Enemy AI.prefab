@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138764606573348715}
-  - component: {fileID: 2517842447101488795}
+  - component: {fileID: 8201651848477398452}
   m_Layer: 3
-  m_Name: Nekark
+  m_Name: Enemy AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2517842447101488795
+--- !u!114 &8201651848477398452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5382378032625419388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c51b67a314e9ba4781c7792aae31e97, type: 3}
+  m_Script: {fileID: 11500000, guid: 000012ab7728a5341b806c40fc7889ef, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NekarkAI
-  timeForDecision: 6
-  portsChanceMultiplier: 2
-  playerChance: 3
-  speedDrop: 8
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
+  timeForDecision: 0.3
+  shipSpawnChance: 7
+  onLowMoneySpawnChanceMultiplier: 5
+  unsafeVillagesInRadius: []

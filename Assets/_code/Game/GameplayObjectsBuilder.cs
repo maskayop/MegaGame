@@ -138,7 +138,7 @@ namespace MegaGame
 
             Warship character = ship.GetComponent<Warship>();
 
-            character.SetDestinationPosition(targetSettlement);
+            character.SetDestinationSettlementPosition(targetSettlement);
 
             if (character.owner == BaseCharacter.Owner.player)
                 scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, true);
@@ -159,6 +159,11 @@ namespace MegaGame
         {
             GameObject ship = Instantiate(scenePrefabsManager.GetTraderShipPrefab(false), buildingPosition.position, buildingPosition.rotation);
             outShip = ship.GetComponent<TraderShip>();
+        }
+
+        public void TryCreatePirateShip(Transform buildingPosition)
+        {
+            GameObject ship = Instantiate(scenePrefabsManager.GetRandomPirateShipPrefab(), buildingPosition.position, buildingPosition.rotation);
         }
 
         short GetBuildingShipLevel(string money, bool isRandom, short maxShipLevel)

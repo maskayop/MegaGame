@@ -5,15 +5,22 @@ namespace MegaGame
 {
     public class NeutralAI : MonoBehaviour
     {
-        [SerializeField] int daysForBuildingDecision = 100;
+        [Header("Building")]
+        [SerializeField] short daysForBuildingDecision = 100;
+
+        [Header("Pirates")]
+        [SerializeField] short maxPirateShips = 10;
+        [SerializeField] short portsCountSubtractor = 10;
 
         List<Port> allNeutralPorts = new List<Port>();
         List<Port> portsWithoutFort = new List<Port>();
 
-        int currentDecisionDay = 0;
+        short currentDecisionDay = 0;
 
         GameController gameController;
         GlobalTimeController globalTime;
+        ObjectsManager objectsManager;
+        GameplayObjectsBuilder gameplayObjectsBuilder;
 
         int currentDay = 0;
 
@@ -21,6 +28,8 @@ namespace MegaGame
         {
             gameController = GameController.Instance;
             globalTime = GlobalTimeController.Instance;
+            objectsManager = ObjectsManager.Instance;
+            gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
 
             Init();
         }
@@ -34,6 +43,8 @@ namespace MegaGame
             {
                 currentDay = globalTime.currentDay;
                 currentDecisionDay--;
+
+                TryBuildPirateShip();
             }
 
             if (currentDecisionDay <= 0)
@@ -61,6 +72,8 @@ namespace MegaGame
                     allNeutralPorts.Add(gameController.allPorts[i]);
             }
 
+            portsWithoutFort.Clear();
+
             for (short i = 0; i < allNeutralPorts.Count; i++)
             {
                 if (allNeutralPorts[i].GetSettlementConstructions() && !allNeutralPorts[i].GetSettlementConstructions().fortIsBuilt)
@@ -72,6 +85,24 @@ namespace MegaGame
         {
             short r = (short)Random.Range(0, portsWithoutFort.Count);
             portsWithoutFort[r].GetSettlementConstructions().TryBuildFort();
+        }
+
+        void TryBuildPirateShip()
+        {
+            if (gameController.PlayerVillagesCount == 0 && gameController.EnemyVillagesCount == 0)
+                return;
+
+            if (gameController.PlayerPortsCount + gameController.EnemyPortsCount - portsCountSubtractor >= 0)
+                if (objectsManager.pirateShips.Count < maxPirateShips)
+                    gameplayObjectsBuilder.TryCreatePirateShip(GetPirateShipHomePosition());
+        }
+
+        Transform GetPirateShipHomePosition()
+        {
+            UpdateAllNeutralPorts();
+
+            short r = (short)Random.Range(0, allNeutralPorts.Count);
+            return allNeutralPorts[r].transform;
         }
     }
 }

@@ -15,6 +15,9 @@ namespace MegaGame
         List<Port> portsWithoutFort = new List<Port>();
         List<Port> portsWithoutTrader = new List<Port>();
 
+        [Header("Debug")]
+        [SerializeField] bool canBuildShips = true;
+
         short villagesCount;
 
         Port currentPort;
@@ -62,6 +65,9 @@ namespace MegaGame
             {
                 if (Strint.Subtraction(resourcesController.EnemyMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(1)) >= 0)
                 {
+                    portsWithoutFort.Clear();
+                    portsWithoutTrader.Clear();
+
                     for (short i = 0; i < gameController.enemyPorts.Count; i++)
                     {
                         if (gameController.enemyPorts[i].GetSettlementConstructions())
@@ -76,7 +82,7 @@ namespace MegaGame
 
                     short buildType = (short)Random.Range(0, 2);
 
-                    if (buildRandom == 0)
+                    if (buildType == 0)
                         TryBuildFort();
                     else
                         TryBuildTrader();
@@ -84,6 +90,9 @@ namespace MegaGame
                     return;
                 }
             }
+
+            if (!canBuildShips)
+                return;
 
             if (resourcesController.GetEnemyMoney() >= gameplayObjectsBuilder.smallShipBuildingPrice)
             {
@@ -149,20 +158,27 @@ namespace MegaGame
                 distance = Vector3.Distance(gameController.enemyVillages[i].transform.position, gameController.enemyOpposingPorts.protagonPort.transform.position);
 
                 if (distance <= gameController.distanceForPossibleTargets)
-                    if (!gameController.enemyVillages[i].Island.DefenderShip || gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
+                    if (!gameController.enemyVillages[i].Island.DefenderShip ||
+                        gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
                         unsafeVillagesInRadius.Add(gameController.enemyVillages[i]);
             }
         }
 
         void TryBuildFort()
         {
+            if (portsWithoutFort.Count == 0)
+                return;
+
             short r = (short)Random.Range(0, portsWithoutFort.Count);
             portsWithoutFort[r].GetSettlementConstructions().TryBuildFort();
         }
 
         void TryBuildTrader()
         {
-            short r = (short)Random.Range(0, portsWithoutFort.Count);
+            if (portsWithoutTrader.Count == 0)
+                return;
+
+            short r = (short)Random.Range(0, portsWithoutTrader.Count);
             portsWithoutTrader[r].GetSettlementConstructions().TryBuildTrader();
         }
     }

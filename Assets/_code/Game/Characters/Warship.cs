@@ -23,18 +23,20 @@ namespace MegaGame
 
         [Header("Visual")]
         [SerializeField] GameObject visualObject;
-        [SerializeField] AnimationBehavior animationBehavior;
-
-        [Header("Other")]
-        [SerializeField] DestroyAfterTime destroyAfterTime;
 
         protected NavMeshAgent agent;
         protected Transform destinationPosition;
-        protected BaseSettlement targetSettlement;
+        public BaseSettlement targetSettlement;
+        //protected BaseSettlement targetSettlement;
+
+        AnimationBehavior animationBehavior;
+        DestroyAfterTime destroyAfterTime;
 
         float cos = 0;
 
         bool isKilled = false;
+        public bool IsKilled { get { return isKilled; } }
+
         bool killedByNekark = false;
         public bool KilledByNekark { get { return killedByNekark; } set { killedByNekark = value; } }
 
@@ -44,6 +46,12 @@ namespace MegaGame
                 ObjectsManager.Instance.allCharacters.Add(gameObject);
 
             agent = GetComponent<NavMeshAgent>();
+        }
+
+        protected override void OnInit()
+        {
+            animationBehavior = GetComponent<AnimationBehavior>();
+            destroyAfterTime = GetComponent<DestroyAfterTime>();
         }
 
         protected override void OnUpdate()
@@ -108,6 +116,8 @@ namespace MegaGame
                         targetSettlement = gameController.enemyOpposingPorts.antagonPort;
                 }
             }
+            else if (owner == Owner.neutral)
+                return;
 
             destinationPosition = targetSettlement.transform;
         }
@@ -133,55 +143,31 @@ namespace MegaGame
         {
             if (targetEnemies[0].currentHealth <= 0)
             {
-                if (targetEnemies[0] as Village)
+                if (targetEnemies[0] as Village || targetEnemies[0] as Fortress)
                 {
-                    Village targetVillage = (Village)targetEnemies[0];
+                    BaseSettlement target = (BaseSettlement)targetEnemies[0];
 
                     if (owner == Owner.player)
                     {
-                        targetVillage.owner = Owner.player;
-                        targetVillage.Island.owner = Owner.player;
+                        target.owner = Owner.player;
+                        target.Island.owner = Owner.player;
                     }
                     else if (owner == Owner.enemy)
                     {
-                        targetVillage.owner = Owner.enemy;
-                        targetVillage.Island.owner = Owner.enemy;
+                        target.owner = Owner.enemy;
+                        target.Island.owner = Owner.enemy;
                     }
 
-                    targetVillage.Island.UpdateIslandState();
-                    targetVillage.Init();
-                    targetVillage.currentHealth = 1;
-                    targetEnemies.Remove(targetVillage);
-
-                    gameController.UpdateSettlementsLists();
-                }
-                else if (targetEnemies[0] as Fortress)
-                {
-                    Fortress targetFortress = (Fortress)targetEnemies[0];
-
-                    if (owner == Owner.player)
-                    {
-                        targetFortress.owner = Owner.player;
-                        targetFortress.Island.owner = Owner.player;
-                    }
-                    else if (owner == Owner.enemy)
-                    {
-                        targetFortress.owner = Owner.enemy;
-                        targetFortress.Island.owner = Owner.enemy;
-                    }
-
-                    targetFortress.Island.UpdateIslandState();
-                    targetFortress.Init();
-                    targetFortress.currentHealth = 1;
-                    targetEnemies.Remove(targetFortress);
+                    target.Island.UpdateIslandState();
+                    target.Init();
+                    target.currentHealth = 1;
+                    targetEnemies.Remove(target);
 
                     gameController.UpdateSettlementsLists();
                 }
                 else if (targetEnemies[0] as Port)
                 {
-                    Port port = (Port)targetEnemies[0];
-
-                    if (port != targetSettlement)
+                    if ((Port)targetEnemies[0] != targetSettlement)
                         return;
                 }
             }
@@ -241,7 +227,7 @@ namespace MegaGame
             currentSpeed *= WindController.Instance.currentStrength;
         }
 
-        public void SetDestinationPosition(BaseSettlement destinationSettlement)
+        public void SetDestinationSettlementPosition(BaseSettlement destinationSettlement)
         {
             targetSettlement = destinationSettlement;
             destinationPosition = targetSettlement.transform;
@@ -255,7 +241,8 @@ namespace MegaGame
             if (!targetEnemies[0])
                 return;
 
-            if (Vector3.Distance(targetEnemies[0].transform.position, FXTargetTransformLeft.position) < Vector3.Distance(targetEnemies[0].transform.position, FXTargetTransformRight.position))
+            if (Vector3.Distance(targetEnemies[0].transform.position, FXTargetTransformLeft.position) <
+                Vector3.Distance(targetEnemies[0].transform.position, FXTargetTransformRight.position))
             {
                 if (FXShotLeft)
                     FXShotLeft.Play();

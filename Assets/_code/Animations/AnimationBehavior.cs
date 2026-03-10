@@ -6,7 +6,9 @@ namespace MegaGame
     public class AnimationBehavior : MonoBehaviour
     {
         [SerializeField] Animator animator;
-        [SerializeField] List<string> animStates = new List<string>();
+
+        [Space(20)]
+        [SerializeField] List<string> destroyAnimStates = new List<string>();
 
         [Header("Nekark")]
         [SerializeField] string sinkingState;
@@ -23,8 +25,8 @@ namespace MegaGame
 
         public void Animate()
         {
-            short r = (short)Random.Range(0, animStates.Count);
-            animator.Play(animStates[r]);
+            short r = (short)Random.Range(0, destroyAnimStates.Count);
+            animator.Play(destroyAnimStates[r]);
         }
 
         public void AnimateNekark()

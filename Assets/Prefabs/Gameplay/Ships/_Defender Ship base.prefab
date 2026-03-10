@@ -205,8 +205,6 @@ MonoBehaviour:
   FXTargetTransformLeft: {fileID: 8381416780346227113}
   FXTargetTransformRight: {fileID: 5485477152731249140}
   visualObject: {fileID: 1021785611154541580}
-  animationBehavior: {fileID: -3230663631609051132}
-  destroyAfterTime: {fileID: -1080902903418761957}
   distanceToPointToChange: 6
 --- !u!114 &-3230663631609051132
 MonoBehaviour:
@@ -221,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AnimationBehavior
   animator: {fileID: 6257853652041858601}
-  animStates:
+  destroyAnimStates:
   - Ship Destroy 1
   - Ship Destroy 2
   - Ship Destroy 3

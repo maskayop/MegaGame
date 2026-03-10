@@ -404,6 +404,9 @@ namespace MegaGame
 
             UpdatePortState(fraction.protagonPort, fraction.protagonPort.owner);
 
+            for (int i = 0; i < allIslands.Count; i++)
+                allIslands[i].UpdateIslandState();
+
             fraction.protagonPort.SetVisualAsTarget(true, fraction.protagonPort.owner);
             fraction.antagonPort.SetVisualAsTarget(true, fraction.antagonPort.owner);
         }
@@ -485,14 +488,14 @@ namespace MegaGame
             if (playerOpposingPorts.protagonPort.currentHealth <= 0)
             {
                 UpdatePortState(playerOpposingPorts.protagonPort, Owner.enemy);
-                EndBattle();
                 isVictory = false;
+                EndBattle();
             }
             else if (playerOpposingPorts.antagonPort.currentHealth <= 0)
             {
                 UpdatePortState(playerOpposingPorts.antagonPort, Owner.player);
-                EndBattle();
                 isVictory = true;
+                EndBattle();
             }
 
             if (enemyOpposingPorts.antagonPort.currentHealth <= 0)

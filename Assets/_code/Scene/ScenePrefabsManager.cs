@@ -27,6 +27,11 @@ namespace MegaGame
         [SerializeField] GameObject traderShipPlayerPrefab;
         [SerializeField] GameObject traderShipEnemyPrefab;
 
+        [Header("Pirate Ships")]
+        [SerializeField] GameObject smallPirateShipPrefab;
+        [SerializeField] GameObject mediumPirateShipPrefab;
+        [SerializeField] GameObject bigPirateShipPrefab;
+
         [Header("FX")]
         [SerializeField] GameObject FXTargetEnemy;
         [SerializeField] GameObject FXTargetEnemyReject;
@@ -105,6 +110,20 @@ namespace MegaGame
                 return traderShipPlayerPrefab;
             else
                 return traderShipEnemyPrefab;
+        }
+
+        public GameObject GetRandomPirateShipPrefab()
+        {
+            short r = (short)Random.Range(0, 3);
+
+            if (r == 0)
+                return smallPirateShipPrefab;
+            else if (r == 1)
+                return mediumPirateShipPrefab;
+            else if (r == 2)
+                return bigPirateShipPrefab;
+            else
+                return null;
         }
 
         public void SpawnDistanceCircle(Vector3 position, short radius)

@@ -25,6 +25,7 @@ namespace MegaGame
 
         [Header("Damage")]
         public float damage = 1.0f;
+        public float neutralDamageDivider = 2.0f;
         public float attackDelay = 1.0f;
 
         float maxDamage;
@@ -109,7 +110,11 @@ namespace MegaGame
             maxHealth = health;
             currentHealth = maxHealth;
             maxRegeneration = healthRegeneration;
-            maxDamage = damage;
+
+            if (owner == Owner.neutral)
+                maxDamage = damage / neutralDamageDivider;
+            else
+                maxDamage = damage;
 
             if (GlobalTimeController.Instance)
                 globalTime = GlobalTimeController.Instance;
@@ -144,6 +149,11 @@ namespace MegaGame
                 else if (owner == Owner.enemy)
                 {
                     if (targetCharacter.owner != Owner.enemy && CanAddTargetToList(targetCharacter))
+                        targetEnemies.Add(targetCharacter);
+                }
+                else if (owner == Owner.neutral)
+                {
+                    if (targetCharacter.owner != Owner.neutral && CanAddTargetToList(targetCharacter))
                         targetEnemies.Add(targetCharacter);
                 }
             }
@@ -225,7 +235,8 @@ namespace MegaGame
         void Attack()
         {
             if (targetEnemies.Count != 0)
-                targetEnemies[0].DealDamage(maxDamage, this);
+                if (targetEnemies[0])
+                    targetEnemies[0].DealDamage(maxDamage, this);
 
             currentAttackTime = attackDelay;
 

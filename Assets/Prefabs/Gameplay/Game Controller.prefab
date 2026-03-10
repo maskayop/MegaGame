@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 7810778071157569871}
   - component: {fileID: 8288885944846870642}
   - component: {fileID: 8204411319204542549}
-  - component: {fileID: 3272045349617746637}
-  - component: {fileID: 1102663737280377423}
   - component: {fileID: 6039075397147238773}
   - component: {fileID: 15590748652426754}
   - component: {fileID: 7090913357105979908}
@@ -107,35 +105,7 @@ MonoBehaviour:
   allCharacters: []
   playerShips: []
   enemyShips: []
---- !u!114 &3272045349617746637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462718075957510001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000012ab7728a5341b806c40fc7889ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.EnemyAI
-  timeForDecision: 0.3
-  shipSpawnChance: 7
-  onLowMoneySpawnChanceMultiplier: 5
-  unsafeVillagesInRadius: []
---- !u!114 &1102663737280377423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462718075957510001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fabd06cecdcb59b429a919e928138387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.NeutralAI
-  daysForBuildingDecision: 50
+  pirateShips: []
 --- !u!114 &6039075397147238773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +130,9 @@ MonoBehaviour:
   defenderShipEnemyPrefab: {fileID: 8230752912628684982, guid: ab4501cdb3506bb47bf567d309cc0b4a, type: 3}
   traderShipPlayerPrefab: {fileID: 2745952079172208726, guid: efe06493e7bc91d4abf0dc817f090a6b, type: 3}
   traderShipEnemyPrefab: {fileID: 2745952079172208726, guid: 1356ac0447777a04f8ada99c7058b086, type: 3}
+  smallPirateShipPrefab: {fileID: 7707943739992795045, guid: e06768178050a304daaa2252debdf028, type: 3}
+  mediumPirateShipPrefab: {fileID: 7707943739992795045, guid: 0cd68f185ed5cb54da1f915aca928fa4, type: 3}
+  bigPirateShipPrefab: {fileID: 7707943739992795045, guid: 64bbf1dc6aa513b468c70e424f481ea0, type: 3}
   FXTargetEnemy: {fileID: 8761975602101030722, guid: 5e35a2487a5cee645b84205aa1d50df4, type: 3}
   FXTargetEnemyReject: {fileID: 8761975602101030722, guid: d977f821f161d6e42871245a86a00bb9, type: 3}
   FXTargetPlayer: {fileID: 8907093577828947285, guid: 64e26d34465644d479b58a7964ba0c95, type: 3}
@@ -179,10 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04871b59d59e895479d2fff9d6076810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameplayObjectsBuilder
-  smallShipBuildingCost: 10
-  mediumShipBuildingCost: 30
-  bigShipBuildingCost: 60
-  megaShipBuildingCost: 100
+  smallShipBuildingPrice: 10
+  mediumShipBuildingPrice: 30
+  bigShipBuildingPrice: 60
+  megaShipBuildingPrice: 100
+  traderPrice: 500
+  smallPortFortressPrice: 700
+  bigPortFortressPrice: 1000
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0

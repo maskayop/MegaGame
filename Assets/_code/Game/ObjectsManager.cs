@@ -10,6 +10,7 @@ namespace MegaGame
         public List<GameObject> allCharacters = new List<GameObject>();
         public List<GameObject> playerShips = new List<GameObject>();
         public List<GameObject> enemyShips = new List<GameObject>();
+        public List<GameObject> pirateShips = new List<GameObject>();
 
         short allCharactersCount = 0;
 
@@ -36,6 +37,7 @@ namespace MegaGame
             {
                 playerShips.Clear();
                 enemyShips.Clear();
+                pirateShips.Clear();
 
                 for (int i = 0; i < allCharacters.Count; i++)
                 {
@@ -43,6 +45,8 @@ namespace MegaGame
                         playerShips.Add(allCharacters[i]);
                     else if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.enemy)
                         enemyShips.Add(allCharacters[i]);
+                    else if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.neutral)
+                        pirateShips.Add(allCharacters[i]);
                 }
             }
 

@@ -31,9 +31,9 @@ namespace MegaGame
 
             if (distance <= distanceToPointToChange)
             {
-                UpdateCurrentTarget();
-
                 profit = resourcesController.GetRandomTraderProfit();
+
+                UpdateCurrentTarget();
 
                 if (owner == Owner.player)
                     resourcesController.AddMoneyToPlayer(profit);

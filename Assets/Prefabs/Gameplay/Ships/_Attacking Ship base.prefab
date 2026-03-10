@@ -188,17 +188,13 @@ MonoBehaviour:
   health: 10
   currentHealth: 10
   healthRegeneration: 0
-  maxHealth: 0
-  maxRegeneration: 0
   damage: 1
   attackDelay: 1
-  maxDamage: 0
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
   neutralHealthWidget: {fileID: 0}
   timeForTargetsUpdate: 3
   targetEnemies: []
-  currentHealthNormalized: 0
   speed: 12
   currentSpeed: 1
   speedDrop: 3
@@ -209,8 +205,6 @@ MonoBehaviour:
   FXTargetTransformLeft: {fileID: 4019870465532275647}
   FXTargetTransformRight: {fileID: 9175700842187690059}
   visualObject: {fileID: 1021785611154541580}
-  animationBehavior: {fileID: 8555959806781133849}
-  destroyAfterTime: {fileID: 4790220612501439390}
 --- !u!114 &8555959806781133849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AnimationBehavior
   animator: {fileID: 7118697868404253922}
-  animStates:
+  destroyAnimStates:
   - Ship Destroy 1
   - Ship Destroy 2
   - Ship Destroy 3
