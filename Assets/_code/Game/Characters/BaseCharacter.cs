@@ -137,6 +137,9 @@ namespace MegaGame
 
         protected virtual void OnTriggerEnter(Collider coll)
         {
+            if (coll.gameObject.layer == 11)
+                return;
+
             BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
 
             if (targetCharacter)

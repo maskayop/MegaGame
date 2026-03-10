@@ -307,21 +307,14 @@ namespace MegaGame
                 return;
             }
 
-            CalculateCurrentPorts();
-
-            if (!enemyOpposingPorts.protagonPort)
+            if (allPossibleEnemyTargetPorts.Count == 0)
             {
                 isVictory = true;
                 EndCampaign();
                 return;
             }
 
-            if (!playerOpposingPorts.protagonPort)
-            {
-                isVictory = false;
-                EndCampaign();
-                return;
-            }
+            CalculateCurrentPorts();
 
             UpdateSettlementsLists();
             PlaceCameraBetweenPorts();
@@ -395,6 +388,10 @@ namespace MegaGame
             }
 
             short rand = (short)UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
+
+            if (rand == 0)
+                return;
+
             fraction.antagonPort = allPossibleTargetPorts[rand];
 
             if (portsCount > 1)

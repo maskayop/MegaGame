@@ -22,7 +22,7 @@ namespace MegaGame
         [SerializeField] Transform FXTargetTransformRight;
 
         [Header("Visual")]
-        [SerializeField] GameObject visualObject;
+        [SerializeField] protected GameObject visualObject;
 
         protected NavMeshAgent agent;
         protected Transform destinationPosition;

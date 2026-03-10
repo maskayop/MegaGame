@@ -7,7 +7,6 @@ namespace MegaGame
     {
         [SerializeField] short distanceToHomeToChange = 5;
         [SerializeField] short distanceForPossibleTarget = 200;
-        //[SerializeField] float distanceToPointToAppear = 20;
 
         Transform homePosition;
         public Transform HomePosition { get { return homePosition; } set { homePosition = value; } }

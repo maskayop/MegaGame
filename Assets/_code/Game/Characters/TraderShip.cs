@@ -12,6 +12,8 @@ namespace MegaGame
         float distance;
         short profit;
 
+        bool isStart = true;
+
         BaseSettlement currentTarget;
 
         ResourcesController resourcesController;
@@ -21,6 +23,7 @@ namespace MegaGame
             base.OnInit();
 
             resourcesController = ResourcesController.Instance;
+            isStart = true;
 
             UpdateCurrentTarget();
         }
@@ -31,6 +34,12 @@ namespace MegaGame
 
             if (distance <= distanceToPointToChange)
             {
+                if (isStart)
+                {
+                    isStart = false;
+                    return;
+                }
+
                 profit = resourcesController.GetRandomTraderProfit();
 
                 UpdateCurrentTarget();
@@ -44,9 +53,15 @@ namespace MegaGame
 
         void UpdateCurrentTarget()
         {
-            currentTarget = homeTradeCompany.GetRandomTradeTarget(currentTarget).settlement;
+            if (isStart)
+                currentTarget = homeTradeCompany.GetRandomTradeTarget(homeTradeCompany.Settlement).settlement;
+            else
+                currentTarget = homeTradeCompany.GetRandomTradeTarget(currentTarget).settlement;
+
             destinationPosition = currentTarget.transform;
-            ScenePrefabsManager.Instance.SpawnTraderProfitWidget(transform.position, profit);
+
+            if (!isStart)
+                ScenePrefabsManager.Instance.SpawnTraderProfitWidget(transform.position, profit);
         }
     }
 }
