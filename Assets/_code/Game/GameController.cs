@@ -300,14 +300,14 @@ namespace MegaGame
                     neutralIslands.Add(allIslands[i]);
             }
 
-            if (allPossiblePlayerTargetPorts.Count == 0)
+            if (PlayerPortsCount == 0)
             {
                 isVictory = false;
                 EndCampaign();
                 return;
             }
 
-            if (allPossibleEnemyTargetPorts.Count == 0)
+            if (enemyPortsCount == 0)
             {
                 isVictory = true;
                 EndCampaign();
@@ -389,7 +389,7 @@ namespace MegaGame
 
             short rand = (short)UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
 
-            if (rand == 0)
+            if (allPossibleTargetPorts.Count == 0)
                 return;
 
             fraction.antagonPort = allPossibleTargetPorts[rand];

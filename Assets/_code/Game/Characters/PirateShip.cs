@@ -5,6 +5,7 @@ namespace MegaGame
 {
     public class PirateShip : Warship
     {
+        [Header("Distances")]
         [SerializeField] short distanceToHomeToChange = 5;
         [SerializeField] short distanceForPossibleTarget = 200;
 
