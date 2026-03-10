@@ -76,7 +76,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: health
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: speedDrop
@@ -96,12 +96,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: currentHealth
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: neutralHealthWidget
       value: 
       objectReference: {fileID: 4667177963507246988}
+    - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
+      propertyPath: distanceForPossibleTarget
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 1168766165841433426, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: m_Radius
       value: 1.2

@@ -189,6 +189,7 @@ MonoBehaviour:
   currentHealth: 10
   healthRegeneration: 0
   damage: 1
+  neutralDamageDivider: 1
   attackDelay: 1
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
@@ -205,7 +206,7 @@ MonoBehaviour:
   FXTargetTransformLeft: {fileID: 4019870465532275647}
   FXTargetTransformRight: {fileID: 9175700842187690059}
   visualObject: {fileID: 1021785611154541580}
-  distanceToPointToAppear: 20
+  targetSettlement: {fileID: 0}
 --- !u!114 &8555959806781133849
 MonoBehaviour:
   m_ObjectHideFlags: 0

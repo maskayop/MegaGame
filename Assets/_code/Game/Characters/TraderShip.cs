@@ -7,19 +7,19 @@ namespace MegaGame
         SettlementConstructions homeTradeCompany;
         public SettlementConstructions HomeTradeCompany { get { return homeTradeCompany; } set { homeTradeCompany = value; } }
 
-        [SerializeField] float distanceToPointToChange = 1;
+        [SerializeField] short distanceToPointToChange = 1;
 
-        [Header("Info")]
-        public float distance;
+        float distance;
+        short profit;
 
-        public BaseSettlement currentTarget;
+        BaseSettlement currentTarget;
 
         ResourcesController resourcesController;
 
-        short profit;
-
         protected override void OnInit()
         {
+            base.OnInit();
+
             resourcesController = ResourcesController.Instance;
 
             UpdateCurrentTarget();

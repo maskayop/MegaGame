@@ -14,6 +14,7 @@ namespace MegaGame
         [SerializeField] string sinkingState;
         [SerializeField] GameObject nekarkPrefab;
 
+        [Header("Destroy")]
         public float timeForDestroy;
 
         Warship ship;

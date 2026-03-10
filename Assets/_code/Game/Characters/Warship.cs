@@ -26,8 +26,7 @@ namespace MegaGame
 
         protected NavMeshAgent agent;
         protected Transform destinationPosition;
-        public BaseSettlement targetSettlement;
-        //protected BaseSettlement targetSettlement;
+        protected BaseSettlement targetSettlement;
 
         AnimationBehavior animationBehavior;
         DestroyAfterTime destroyAfterTime;
@@ -84,7 +83,11 @@ namespace MegaGame
             UpdateSpeedByWind();
             OnUpdateTargetSettlementState();
 
-            agent.destination = destinationPosition.position;
+            if (destinationPosition)
+                agent.destination = destinationPosition.position;
+            else
+                agent.destination = Vector3.zero;
+
             agent.speed = currentSpeed;
         }
 
@@ -147,17 +150,8 @@ namespace MegaGame
                 {
                     BaseSettlement target = (BaseSettlement)targetEnemies[0];
 
-                    if (owner == Owner.player)
-                    {
-                        target.owner = Owner.player;
-                        target.Island.owner = Owner.player;
-                    }
-                    else if (owner == Owner.enemy)
-                    {
-                        target.owner = Owner.enemy;
-                        target.Island.owner = Owner.enemy;
-                    }
-
+                    target.owner = owner;
+                    target.Island.owner = owner;
                     target.Island.UpdateIslandState();
                     target.Init();
                     target.currentHealth = 1;

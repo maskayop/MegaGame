@@ -13,6 +13,12 @@ namespace MegaGame
 
         protected override void OnAttack()
         {
+            if (targetEnemies.Count == 0)
+                return;
+
+            if (!targetEnemies[0])
+                return;
+
             if (settlementFX)
                 settlementFX.PlayShotFX(targetEnemies[0].transform.position);
         }

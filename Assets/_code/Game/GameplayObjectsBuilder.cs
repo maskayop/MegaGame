@@ -164,6 +164,7 @@ namespace MegaGame
         public void TryCreatePirateShip(Transform buildingPosition)
         {
             GameObject ship = Instantiate(scenePrefabsManager.GetRandomPirateShipPrefab(), buildingPosition.position, buildingPosition.rotation);
+            ship.GetComponent<PirateShip>().HomePosition = buildingPosition;
         }
 
         short GetBuildingShipLevel(string money, bool isRandom, short maxShipLevel)

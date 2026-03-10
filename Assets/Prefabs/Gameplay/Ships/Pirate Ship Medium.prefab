@@ -107,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: health
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: speedDrop
@@ -127,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: currentHealth
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: neutralHealthWidget
@@ -136,6 +136,10 @@ PrefabInstance:
     - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: windSpeedMinMultiplier
       value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: -383260172863227797, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
+      propertyPath: distanceForPossibleTarget
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1168766165841433426, guid: 612f7afa6f5249e4f977947b5c4ba9f6, type: 3}
       propertyPath: m_Radius

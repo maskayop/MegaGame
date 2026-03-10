@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4071703617432491922}
+  m_Father: {fileID: 9138028168887617915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1021785611154541580
 GameObject:
@@ -63,8 +63,6 @@ Transform:
   m_Children:
   - {fileID: 1345209864713690276}
   - {fileID: 4359474551608597149}
-  - {fileID: 8381416780346227113}
-  - {fileID: 5485477152731249140}
   m_Father: {fileID: 9138028168887617915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6257853652041858601
@@ -125,6 +123,8 @@ Transform:
   m_Children:
   - {fileID: 4986987191360299429}
   - {fileID: 4071703617432491922}
+  - {fileID: 8381416780346227113}
+  - {fileID: 5485477152731249140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7502759269924817115
@@ -189,6 +189,7 @@ MonoBehaviour:
   currentHealth: 20
   healthRegeneration: 0
   damage: 1
+  neutralDamageDivider: 2
   attackDelay: 1.5
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
@@ -206,8 +207,6 @@ MonoBehaviour:
   FXTargetTransformRight: {fileID: 5485477152731249140}
   visualObject: {fileID: 1021785611154541580}
   distanceToPointToChange: 6
-  distance: 0
-  currentTarget: {fileID: 0}
 --- !u!114 &-3230663631609051132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +271,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4071703617432491922}
+  m_Father: {fileID: 9138028168887617915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8229156860201081542
 GameObject:
