@@ -2972,6 +2972,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6534830019749251577, guid: c5981341a4cc63c419d53bdba7dddea6, type: 3}
   m_PrefabInstance: {fileID: 406236084}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &413128204
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1020544449}
+    m_Modifications:
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 302.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548599278136379266, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+      propertyPath: m_Name
+      value: _Trader Ship high
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+--- !u!4 &413128205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7172496565840813368, guid: eaabefdef58507440ae6a24eac25e7a2, type: 3}
+  m_PrefabInstance: {fileID: 413128204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &415524779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3084,7 +3146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 867743799047220488, guid: bbf85af71020cc148970f89cabf63d0d, type: 3}
       propertyPath: m_Name
-      value: Ship
+      value: Trader Ship
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4795,7 +4857,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5017467629293527332, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_Name
-      value: Ship Enemy
+      value: Trader Ship Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5686481265813863326, guid: 9218341d64a0e894681654ffc267efdb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5860,6 +5922,7 @@ Transform:
   - {fileID: 815793975}
   - {fileID: 1703405903}
   - {fileID: 1056947712}
+  - {fileID: 413128205}
   - {fileID: 421626014}
   - {fileID: 1399898185}
   - {fileID: 1671889055}
@@ -6405,7 +6468,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5017467629293527332, guid: e2e658f2347797049a3a94418be966b5, type: 3}
       propertyPath: m_Name
-      value: Ship Player
+      value: Trader Ship Player
       objectReference: {fileID: 0}
     - target: {fileID: 5686481265813863326, guid: e2e658f2347797049a3a94418be966b5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8577,7 +8640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 867743799047220488, guid: bbf85af71020cc148970f89cabf63d0d, type: 3}
       propertyPath: m_Name
-      value: Ship
+      value: Trader Ship
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
