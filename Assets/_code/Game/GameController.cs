@@ -31,19 +31,23 @@ namespace MegaGame
 
         [Header("Islands and Settlements")]
         public List<Island> allIslands = new List<Island>();
+        public List<Island> allEmptyIslands = new List<Island>();
 
         public List<Port> allPorts = new List<Port>();
         public List<Village> allVillages = new List<Village>();
         public List<Fortress> allFortresses = new List<Fortress>();
 
+        [Header("Player Settlements")]
         public List<Port> playerPorts = new List<Port>();
         public List<Village> playerVillages = new List<Village>();
         public List<Fortress> playerFortresses = new List<Fortress>();
 
+        [Header("Enemy Settlements")]
         public List<Port> enemyPorts = new List<Port>();
         public List<Village> enemyVillages = new List<Village>();
         public List<Fortress> enemyFortresses = new List<Fortress>();
 
+        [Header("Targets")]
         public List<Port> allPossiblePlayerTargetPorts = new List<Port>();
         public List<Port> allPossibleEnemyTargetPorts = new List<Port>();
 
@@ -140,6 +144,8 @@ namespace MegaGame
 
         void InitializeScene()
         {
+            allEmptyIslands.Clear();
+
             playerPorts.Clear();
             enemyPorts.Clear();
             startIslands.Clear();
@@ -156,6 +162,9 @@ namespace MegaGame
             {
                 allIslands[i].owner = Owner.neutral;
                 allIslands[i].UpdateIslandState();
+
+                if (!allIslands[i].settlement)
+                    allEmptyIslands.Add(allIslands[i]);
             }
         }
 

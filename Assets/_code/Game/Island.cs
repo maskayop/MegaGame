@@ -21,6 +21,10 @@ namespace MegaGame
         [Header("Defend")]
         public List<Transform> defendingPoints = new List<Transform>();
 
+        [Header("Exploring")]
+        [SerializeField] GameObject exploringCircle;
+        [SerializeField] GameObject pirateLair;
+
         GameController gameController;
 
         DefenderShip defenderShip;
@@ -74,6 +78,12 @@ namespace MegaGame
             UpdateIslandState();
 
             isDefenderShip = true;
+
+            if (exploringCircle)
+                EnableExploringCircle(false);
+
+            if (pirateLair)
+                ShowPirateLair(false);
         }
 
         void SetThisIslandToSettlements()
@@ -134,6 +144,16 @@ namespace MegaGame
 
             settlement.gameObject.name = islandData.islandName.GetLocalizedString() + settlementType.ToString();
             settlement.UpdateCharacteristics();
+        }
+
+        public void EnableExploringCircle(bool state)
+        {
+            exploringCircle.SetActive(state);
+        }
+
+        public void ShowPirateLair(bool state)
+        {
+            pirateLair.SetActive(state);
         }
     }
 }
