@@ -83,6 +83,9 @@ namespace MegaGame
 
         void TryBuildFort()
         {
+            if (portsWithoutFort.Count == 0)
+                return;
+
             short r = (short)Random.Range(0, portsWithoutFort.Count);
             portsWithoutFort[r].GetSettlementConstructions().TryBuildFort();
         }
