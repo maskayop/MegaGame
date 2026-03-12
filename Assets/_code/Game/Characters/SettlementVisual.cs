@@ -30,18 +30,61 @@ namespace MegaGame
 
         public void SetVisual()
         {
-            playerVisual.gameObject.SetActive(false);
-            enemyVisual.gameObject.SetActive(false);
-            neutralVisual.gameObject.SetActive(false);
+            if (settlement as PirateLair)
+                return;
+
+            if (playerVisual)
+                playerVisual.gameObject.SetActive(false);
+
+            if (enemyVisual)
+                enemyVisual.gameObject.SetActive(false);
+
+            if (neutralVisual)
+                neutralVisual.gameObject.SetActive(false);
 
             if (settlement.owner == Owner.player)
-                playerVisual.gameObject.SetActive(true);
+            {
+                if (playerVisual)
+                    playerVisual.gameObject.SetActive(true);
+            }
             else if (settlement.owner == Owner.enemy)
-                enemyVisual.gameObject.SetActive(true);
+            {
+                if (enemyVisual)
+                    enemyVisual.gameObject.SetActive(true);
+            }
             else if (settlement.owner == Owner.neutral)
-                neutralVisual.gameObject.SetActive(true);
+            {
+                if (neutralVisual)
+                    neutralVisual.gameObject.SetActive(true);
+            }
 
             SetFortVisual();
+        }
+
+        public GameObject GetVisualObject()
+        {
+            if (settlement)
+            {
+                if (settlement.owner == Owner.player)
+                {
+                    if (playerVisual)
+                        return playerVisual.gameObject;
+                }
+                else if (settlement.owner == Owner.enemy)
+                {
+                    if (enemyVisual)
+                        return enemyVisual.gameObject;
+                }
+                else if (settlement.owner == Owner.neutral)
+                {
+                    if (neutralVisual)
+                        return neutralVisual.gameObject;
+                }
+            }
+            else if (neutralVisual)
+                return neutralVisual.gameObject;
+
+            return null;
         }
 
         public void SetFortVisual()

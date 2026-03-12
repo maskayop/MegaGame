@@ -77,7 +77,7 @@ MonoBehaviour:
   possibleTargets: []
   defendingPoints: []
   exploringCircle: {fileID: 1945383105466063846}
-  pirateLair: {fileID: 5778929834346438764}
+  pirateLair: {fileID: 8341637934129069481}
 --- !u!1001 &1151780747471550210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,11 +140,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1219924178703769635, guid: b867c58ff9d82cf41ac92bfa2aab5556, type: 3}
   m_PrefabInstance: {fileID: 1151780747471550210}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5778929834346438764 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6902065961005520750, guid: b867c58ff9d82cf41ac92bfa2aab5556, type: 3}
+--- !u!114 &8341637934129069481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8951047185651419819, guid: b867c58ff9d82cf41ac92bfa2aab5556, type: 3}
   m_PrefabInstance: {fileID: 1151780747471550210}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1b7dca24e2053459087ec9e54bad27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.PirateLair
 --- !u!1001 &3093023349336668182
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1219924178703769635}
   - component: {fileID: 6151746265658938994}
   - component: {fileID: 4826161218504423443}
-  - component: {fileID: 9018592706176067264}
+  - component: {fileID: 8951047185651419819}
   - component: {fileID: 2787025189278622259}
   m_Layer: 9
   m_Name: Pirate Lair
@@ -203,7 +203,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9018592706176067264
+--- !u!114 &8951047185651419819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,18 +212,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6902065961005520750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 034dfdd07123c7444a09db10354c268e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b1b7dca24e2053459087ec9e54bad27, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.Village
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.PirateLair
   owner: 2
-  revenue: 1
+  revenue: 0
   maintenance: 0
   health: 20
   currentHealth: 20
   healthRegeneration: 1
-  damage: 0
-  neutralDamageDivider: 2
-  attackDelay: 1
+  damage: 1
+  neutralDamageDivider: 1
+  attackDelay: 2
   playerHealthWidget: {fileID: 0}
   enemyHealthWidget: {fileID: 0}
   neutralHealthWidget: {fileID: 5765612038147303655}

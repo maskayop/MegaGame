@@ -36,6 +36,9 @@ namespace MegaGame
         bool isKilled = false;
         public bool IsKilled { get { return isKilled; } }
 
+        bool killedOnStart = false;
+        public bool KilledOnStart { get { return killedOnStart; } set { killedOnStart = value; } }
+
         bool killedByNekark = false;
         public bool KilledByNekark { get { return killedByNekark; } set { killedByNekark = value; } }
 
@@ -180,10 +183,10 @@ namespace MegaGame
             if (!gameObject)
                 return;
 
-            if (FXDestroyPrefab && !KilledByNekark && !killedByNafaivel)
+            if (FXDestroyPrefab && !KilledByNekark && !killedByNafaivel && !KilledOnStart)
                 Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
 
-            if (destroyAfterTime && !KilledByNekark && !killedByNafaivel)
+            if (destroyAfterTime && !KilledByNekark && !killedByNafaivel && !KilledOnStart)
             {
                 destroyAfterTime.DestroyGameObject();
 

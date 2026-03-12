@@ -63,7 +63,10 @@ namespace MegaGame
             }
 
             if (!targetShip && !targetSettlement)
+            {
+                KilledOnStart = true;
                 Kill();
+            }
         }
 
         protected override bool CanAddTargetToList(BaseCharacter targetCharacter)

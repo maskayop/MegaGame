@@ -3,6 +3,7 @@ namespace MegaGame
     public class BaseSettlement : BaseCharacter
     {
         protected bool isCaptured = false;
+        public bool IsCaptured { get { return isCaptured; } }
 
         protected SettlementConstructions settlementConstructions;
         protected SettlementVisual settlementVisual;

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Vopere.Common;
+using static MegaGame.GameController;
 
 namespace MegaGame
 {
@@ -9,11 +11,14 @@ namespace MegaGame
         [SerializeField] short daysForBuildingDecision = 100;
 
         [Header("Pirates")]
+        [SerializeField] short pirateIslandsCount = 5;
         [SerializeField] short maxPirateShips = 10;
         [SerializeField] short portsCountSubtractor = 10;
 
         List<Port> allNeutralPorts = new List<Port>();
         List<Port> portsWithoutFort = new List<Port>();
+
+        public List<PirateLair> pirateLairs = new List<PirateLair>();
 
         short currentDecisionDay = 0;
 
@@ -23,6 +28,8 @@ namespace MegaGame
         GameplayObjectsBuilder gameplayObjectsBuilder;
 
         int currentDay = 0;
+
+        GameState currentGameState;
 
         void Start()
         {
@@ -36,7 +43,15 @@ namespace MegaGame
 
         void Update()
         {
-            if (gameController.gameState != GameController.GameState.battle)
+            if (currentGameState != gameController.gameState)
+            {
+                if (gameController.gameState == GameState.battle)
+                    UpdatePirateIslands();
+            }
+
+            currentGameState = gameController.gameState;
+
+            if (gameController.gameState != GameState.battle)
                 return;
 
             if (globalTime.currentDay != currentDay)
@@ -95,17 +110,33 @@ namespace MegaGame
             if (gameController.PlayerVillagesCount == 0 && gameController.EnemyVillagesCount == 0)
                 return;
 
-            if (gameController.PlayerPortsCount + gameController.EnemyPortsCount - portsCountSubtractor >= 0)
-                if (objectsManager.pirateShips.Count < maxPirateShips)
+            short portsCountDependence = (short)(gameController.PlayerPortsCount + gameController.EnemyPortsCount - portsCountSubtractor);
+
+            if (portsCountDependence >= 0)
+                if (objectsManager.pirateShips.Count < portsCountDependence && objectsManager.pirateShips.Count < maxPirateShips)
                     gameplayObjectsBuilder.TryCreatePirateShip(GetPirateShipHomePosition());
         }
 
         Transform GetPirateShipHomePosition()
         {
-            UpdateAllNeutralPorts();
+            short r = (short)Random.Range(0, pirateLairs.Count);
+            return pirateLairs[r].transform;
+        }
 
-            short r = (short)Random.Range(0, allNeutralPorts.Count);
-            return allNeutralPorts[r].transform;
+        void UpdatePirateIslands()
+        {
+            pirateLairs.Clear();
+
+            gameController.allEmptyIslands.Shuffle();
+
+            for (int i = 0; i < gameController.allEmptyIslands.Count; i++)
+                gameController.allEmptyIslands[i].ShowPirateLair(false);
+
+            for (int i = 0; i < pirateIslandsCount; i++)
+                pirateLairs.Add(gameController.allEmptyIslands[i].pirateLair);
+
+            for (int i = 0; i < pirateLairs.Count; i++)
+                pirateLairs[i].Init();
         }
     }
 }

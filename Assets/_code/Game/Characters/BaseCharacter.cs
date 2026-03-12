@@ -137,9 +137,6 @@ namespace MegaGame
 
         protected virtual void OnTriggerEnter(Collider coll)
         {
-            if (coll.gameObject.layer == 11)
-                return;
-
             BaseCharacter targetCharacter = coll.GetComponentInParent<BaseCharacter>();
 
             if (targetCharacter)
@@ -160,7 +157,11 @@ namespace MegaGame
                         targetEnemies.Add(targetCharacter);
                 }
             }
+
+            OnTriggerEnterUpdate();
         }
+
+        protected virtual void OnTriggerEnterUpdate() { }
 
         protected virtual void OnTriggerExit(Collider coll)
         {
@@ -168,7 +169,11 @@ namespace MegaGame
 
             if (targetCharacter)
                 targetEnemies.Remove(targetCharacter);
+
+            OnTriggerExitUpdate();
         }
+
+        protected virtual void OnTriggerExitUpdate() { }
 
         protected void UpdateHealthWidget()
         {

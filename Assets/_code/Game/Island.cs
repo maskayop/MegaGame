@@ -23,7 +23,7 @@ namespace MegaGame
 
         [Header("Exploring")]
         [SerializeField] GameObject exploringCircle;
-        [SerializeField] GameObject pirateLair;
+        public PirateLair pirateLair;
 
         GameController gameController;
 
@@ -68,12 +68,15 @@ namespace MegaGame
 
             gameController.allIslands.Add(this);
 
-            if (settlement as Port)
-                gameController.allPorts.Add((Port)settlement);
-            else if (settlement as Village)
-                gameController.allVillages.Add((Village)settlement);
-            else if (settlement as Fortress)
-                gameController.allFortresses.Add((Fortress)settlement);
+            if (settlement)
+            {
+                if (settlement as Port)
+                    gameController.allPorts.Add((Port)settlement);
+                else if (settlement as Village)
+                    gameController.allVillages.Add((Village)settlement);
+                else if (settlement as Fortress)
+                    gameController.allFortresses.Add((Fortress)settlement);
+            }
 
             UpdateIslandState();
 
@@ -88,10 +91,17 @@ namespace MegaGame
 
         void SetThisIslandToSettlements()
         {
-            if (!settlement)
+            if (!settlement && !pirateLair)
                 return;
 
-            settlement.Island = this;
+            if (settlement)
+                settlement.Island = this;
+
+            if (pirateLair)
+            {
+                pirateLair.Island = this;
+                UpdatePirateLairState();
+            }
         }
 
         public void UpdateIslandState()
@@ -146,6 +156,11 @@ namespace MegaGame
             settlement.UpdateCharacteristics();
         }
 
+        void UpdatePirateLairState()
+        {
+            pirateLair.gameObject.name = islandData.islandName.GetLocalizedString() + " - Pirate Lair";
+        }
+
         public void EnableExploringCircle(bool state)
         {
             exploringCircle.SetActive(state);
@@ -153,7 +168,7 @@ namespace MegaGame
 
         public void ShowPirateLair(bool state)
         {
-            pirateLair.SetActive(state);
+            pirateLair.ShowPirateLair(state);
         }
     }
 }
