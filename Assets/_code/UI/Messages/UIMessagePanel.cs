@@ -9,6 +9,7 @@ namespace MegaGame.UI
         [Header("Message Prefabs")]
         [SerializeField] GameObject warningMessagePrefab;
         [SerializeField] GameObject nekarkMessagePrefab;
+        [SerializeField] GameObject nafaivelMessagePrefab;
         [SerializeField] GameObject fortConstructionMessagePrefab;
         [SerializeField] GameObject traderConstructionMessagePrefab;
 
@@ -16,6 +17,7 @@ namespace MegaGame.UI
         [SerializeField] Data_Message tooFarFromPort;
         [SerializeField] Data_Message wrongTargetPort;
         [SerializeField] Data_Message nekark;
+        [SerializeField] Data_Message nafaivel;
         [SerializeField] Data_Message fortConstruction;
         [SerializeField] Data_Message traderConstruction;
 
@@ -51,6 +53,12 @@ namespace MegaGame.UI
         {
             GameObject messo = Instantiate(nekarkMessagePrefab, container);
             messo.GetComponent<UIMessageObject>().SetText(nekark.GetMessageText());
+        }
+
+        public void SpawnNafaivelMessage()
+        {
+            GameObject messo = Instantiate(nafaivelMessagePrefab, container);
+            messo.GetComponent<UIMessageObject>().SetText(nafaivel.GetMessageText());
         }
 
         public void SpawnFortConstructionMessage(Port port)

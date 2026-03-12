@@ -11,8 +11,12 @@ namespace MegaGame
         [SerializeField] List<string> destroyAnimStates = new List<string>();
 
         [Header("Nekark")]
-        [SerializeField] string sinkingState;
+        [SerializeField] string nekarkSinkingState;
         [SerializeField] GameObject nekarkPrefab;
+
+        [Header("Nekark")]
+        [SerializeField] string nafaivelSinkingState;
+        [SerializeField] GameObject nafaivelPrefab;
 
         [Header("Destroy")]
         public float timeForDestroy;
@@ -35,13 +39,30 @@ namespace MegaGame
             if (!nekarkPrefab)
                 return;
 
-            animator.Play(sinkingState);
+            animator.Play(nekarkSinkingState);
             Instantiate(nekarkPrefab, ship.GetVisualObjectTransform());
+        }
+
+        public void AnimateNafaivel()
+        {
+            if (!nafaivelPrefab)
+                return;
+
+            animator.Play(nafaivelSinkingState);
+            Instantiate(nafaivelPrefab, ship.GetVisualObjectTransform().position, ship.GetVisualObjectTransform().rotation);
         }
 
         public bool CanBeAnimatedByNekark()
         {
             if (nekarkPrefab)
+                return true;
+            else
+                return false;
+        }
+
+        public bool CanBeAnimatedByNafaivel()
+        {
+            if (nafaivelPrefab)
                 return true;
             else
                 return false;

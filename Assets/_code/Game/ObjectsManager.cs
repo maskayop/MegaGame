@@ -7,7 +7,7 @@ namespace MegaGame
     {
         public static ObjectsManager Instance { get; private set; }
 
-        public List<GameObject> allCharacters = new List<GameObject>();
+        public List<GameObject> allShips = new List<GameObject>();
         public List<GameObject> playerShips = new List<GameObject>();
         public List<GameObject> enemyShips = new List<GameObject>();
         public List<GameObject> pirateShips = new List<GameObject>();
@@ -33,32 +33,32 @@ namespace MegaGame
 
         void Update()
         {
-            if (allCharacters.Count != allCharactersCount)
+            if (allShips.Count != allCharactersCount)
             {
                 playerShips.Clear();
                 enemyShips.Clear();
                 pirateShips.Clear();
 
-                for (int i = 0; i < allCharacters.Count; i++)
+                for (int i = 0; i < allShips.Count; i++)
                 {
-                    if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.player)
-                        playerShips.Add(allCharacters[i]);
-                    else if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.enemy)
-                        enemyShips.Add(allCharacters[i]);
-                    else if (allCharacters[i].GetComponent<Warship>().owner == BaseCharacter.Owner.neutral)
-                        pirateShips.Add(allCharacters[i]);
+                    if (allShips[i].GetComponent<Warship>().owner == BaseCharacter.Owner.player)
+                        playerShips.Add(allShips[i]);
+                    else if (allShips[i].GetComponent<Warship>().owner == BaseCharacter.Owner.enemy)
+                        enemyShips.Add(allShips[i]);
+                    else if (allShips[i].GetComponent<Warship>().owner == BaseCharacter.Owner.neutral)
+                        pirateShips.Add(allShips[i]);
                 }
             }
 
-            allCharactersCount = (short)allCharacters.Count;
+            allCharactersCount = (short)allShips.Count;
         }
 
         public void Init()
         {
-            for (int i = 0; i < allCharacters.Count; i++)
-                Destroy(allCharacters[i].gameObject);
+            for (int i = 0; i < allShips.Count; i++)
+                Destroy(allShips[i].gameObject);
 
-            allCharacters.Clear();
+            allShips.Clear();
         }
     }
 }

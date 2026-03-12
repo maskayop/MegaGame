@@ -60,6 +60,7 @@ MonoBehaviour:
     antagonPort: {fileID: 0}
   offsetY: 30
   allIslands: []
+  allEmptyIslands: []
   allPorts: []
   allVillages: []
   allFortresses: []
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85082bba25e5a44199643e8975d1668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.ObjectsManager
-  allCharacters: []
+  allShips: []
   playerShips: []
   enemyShips: []
   pirateShips: []
@@ -139,6 +140,7 @@ MonoBehaviour:
   distanceCircle: {fileID: 6874639579808131834, guid: 34f97d21f4d17a947b49d89d99016076, type: 3}
   rightTargetCircle: {fileID: 6874639579808131834, guid: 573e7d2b545c7f44d880267b10062b44, type: 3}
   nekarkWarningCircle: {fileID: 6874639579808131834, guid: 6a32aba1f31dc1a4b9789ba09ce37676, type: 3}
+  nafaivelWarningCircle: {fileID: 6874639579808131834, guid: 27311473fe0897347925d9bd491f5f88, type: 3}
   traderProfitWidget: {fileID: 4355659799799374417, guid: 9c5c225a6726239428bd3b8c17fe1617, type: 3}
 --- !u!114 &15590748652426754
 MonoBehaviour:

@@ -39,10 +39,13 @@ namespace MegaGame
         bool killedByNekark = false;
         public bool KilledByNekark { get { return killedByNekark; } set { killedByNekark = value; } }
 
+        bool killedByNafaivel = false;
+        public bool KilledByNafaivel { get { return killedByNafaivel; } set { killedByNafaivel = value; } }
+
         protected override void OnAwake()
         {
             if (ObjectsManager.Instance)
-                ObjectsManager.Instance.allCharacters.Add(gameObject);
+                ObjectsManager.Instance.allShips.Add(gameObject);
 
             agent = GetComponent<NavMeshAgent>();
         }
@@ -177,10 +180,10 @@ namespace MegaGame
             if (!gameObject)
                 return;
 
-            if (FXDestroyPrefab && !KilledByNekark)
+            if (FXDestroyPrefab && !KilledByNekark && !killedByNafaivel)
                 Instantiate(FXDestroyPrefab, transform.position, transform.rotation);
 
-            if (destroyAfterTime && !KilledByNekark)
+            if (destroyAfterTime && !KilledByNekark && !killedByNafaivel)
             {
                 destroyAfterTime.DestroyGameObject();
 
@@ -194,13 +197,20 @@ namespace MegaGame
                 if (animationBehavior)
                     animationBehavior.AnimateNekark();
             }
+            else if (destroyAfterTime && killedByNafaivel)
+            {
+                destroyAfterTime.DestroyGameObjectAfterTime(animationBehavior.timeForDestroy);
+
+                if (animationBehavior)
+                    animationBehavior.AnimateNafaivel();
+            }
             else
                 Destroy(gameObject);
 
             Destroy(this);
             GetCurrentHealthWidget().gameObject.SetActive(false);
 
-            ObjectsManager.Instance.allCharacters.Remove(gameObject);
+            ObjectsManager.Instance.allShips.Remove(gameObject);
 
             isKilled = true;
         }

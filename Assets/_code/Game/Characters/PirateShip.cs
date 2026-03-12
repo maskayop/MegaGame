@@ -87,9 +87,9 @@ namespace MegaGame
 
             allPossibleTargets.Clear();
 
-            for (int i = 0; i < objectsManager.allCharacters.Count; i++)
+            for (int i = 0; i < objectsManager.allShips.Count; i++)
             {
-                TraderShip trader = objectsManager.allCharacters[i].GetComponent<TraderShip>();
+                TraderShip trader = objectsManager.allShips[i].GetComponent<TraderShip>();
 
                 if (trader)
                     if (Vector3.Distance(homePosition.position, trader.transform.position) <= distanceForPossibleTarget)

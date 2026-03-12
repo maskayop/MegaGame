@@ -242,5 +242,11 @@ namespace MegaGame
             scenePrefabsManager.SpawnNekarkWarningCircle(ship.transform.position);
             UIMainCanvas.Instance.SpawnNekarkMessage();
         }
+
+        public void SpawnNafaivelWarningCircle(Warship ship)
+        {
+            scenePrefabsManager.SpawnNafaivelWarningCircle(ship.transform.position);
+            UIMainCanvas.Instance.SpawnNafaivelMessage();
+        }
     }
 }

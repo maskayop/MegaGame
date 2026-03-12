@@ -157,7 +157,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5330536564953207849}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.4
+  m_Radius: 1.5
   m_Speed: 1
   m_Acceleration: 10
   avoidancePriority: 1
@@ -225,8 +225,10 @@ MonoBehaviour:
   - Ship Destroy 2
   - Ship Destroy 3
   - Ship Destroy 4
-  sinkingState: Ship Nekark Sinking
+  nekarkSinkingState: Ship Nekark Sinking
   nekarkPrefab: {fileID: 0}
+  nafaivelSinkingState: Ship Nafa-Ivel Sinking
+  nafaivelPrefab: {fileID: 1089175551590319829, guid: 71dfc05b2c5835d4585f4acb862eafda, type: 3}
   timeForDestroy: 4
 --- !u!114 &-1080902903418761957
 MonoBehaviour:

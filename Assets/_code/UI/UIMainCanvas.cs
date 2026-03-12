@@ -228,6 +228,11 @@ namespace MegaGame.UI
             messagePanel.SpawnNekarkMessage();
         }
 
+        public void SpawnNafaivelMessage()
+        {
+            messagePanel.SpawnNafaivelMessage();
+        }
+
         public void SpawnFortConstructionMessage(Port port)
         {
             messagePanel.SpawnFortConstructionMessage(port);

@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c51b67a314e9ba4781c7792aae31e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NekarkAI
+  monsterType: 0
   timeForDecision: 5
-  portsChanceMultiplier: 2
-  playerChance: 4
   speedDrop: 10
+  navMeshAgentRadiusMultiplier: 1.5
   minDay: 100
+  playerChance: 2
+  enemyChance: 4
