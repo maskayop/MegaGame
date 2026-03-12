@@ -114,16 +114,21 @@ namespace MegaGame
 
             if (portsCountDependence >= 0)
                 if (objectsManager.pirateShips.Count < portsCountDependence && objectsManager.pirateShips.Count < maxPirateShips)
-                    gameplayObjectsBuilder.TryCreatePirateShip(GetPirateShipHomePosition());
+                    if (GetHomePirateLaire())
+                        if (!GetHomePirateLaire().IsCaptured)
+                            gameplayObjectsBuilder.TryCreatePirateShip(GetHomePirateLaire().transform);
         }
 
-        Transform GetPirateShipHomePosition()
+        PirateLair GetHomePirateLaire()
         {
+            if (pirateLairs.Count == 0)
+                return null;
+
             short r = (short)Random.Range(0, pirateLairs.Count);
-            return pirateLairs[r].transform;
+            return pirateLairs[r];
         }
 
-        void UpdatePirateIslands()
+        public void UpdatePirateIslands()
         {
             pirateLairs.Clear();
 
@@ -136,7 +141,10 @@ namespace MegaGame
             }
 
             for (int i = 0; i < pirateIslandsCount; i++)
-                pirateLairs.Add(gameController.allEmptyIslands[i].pirateLair);
+            {
+                if (!gameController.allEmptyIslands[i].pirateLair.IsCaptured)
+                    pirateLairs.Add(gameController.allEmptyIslands[i].pirateLair);
+            }
 
             for (int i = 0; i < pirateLairs.Count; i++)
             {

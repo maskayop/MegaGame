@@ -11,6 +11,7 @@ namespace MegaGame
         public float currentSpeed = 1;
         public short speedDrop = 5;
         public float windSpeedMinMultiplier = 1;
+        public float distanceForPirateLair = 5;
 
         [Header("FX")]
         [SerializeField] GameObject FXDestroyPrefab;
@@ -111,6 +112,16 @@ namespace MegaGame
                     else if (!targetSettlement.Island.DefenderShip)
                         targetSettlement = gameController.playerOpposingPorts.antagonPort;
                 }
+                else if (targetSettlement.owner == Owner.neutral)
+                {
+                    if (targetSettlement as PirateLair)
+                    {
+                        if (targetSettlement.IsCaptured)
+                            targetSettlement = gameController.playerOpposingPorts.antagonPort;
+                        else if (Vector3.Distance(transform.position, targetSettlement.transform.position) <= distanceForPirateLair)
+                            targetSettlement = gameController.playerOpposingPorts.antagonPort;
+                    }
+                }
             }
             else if (owner == Owner.enemy)
             {
@@ -123,6 +134,16 @@ namespace MegaGame
                     }
                     else if (!targetSettlement.Island.DefenderShip)
                         targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+                }
+                else if (targetSettlement.owner == Owner.neutral)
+                {
+                    if (targetSettlement as PirateLair)
+                    {
+                        if (targetSettlement.IsCaptured)
+                            targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+                        else if (Vector3.Distance(transform.position, targetSettlement.transform.position) <= distanceForPirateLair)
+                            targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+                    }
                 }
             }
             else if (owner == Owner.neutral)
@@ -145,6 +166,10 @@ namespace MegaGame
                 if (targetCharacter != targetSettlement)
                     return false;
 
+            if (targetCharacter as PirateLair)
+                if (targetCharacter.GetComponent<PirateLair>().IsCaptured)
+                    return false;
+
             return true;
         }
 
@@ -164,6 +189,13 @@ namespace MegaGame
                     targetEnemies.Remove(target);
 
                     gameController.UpdateSettlementsLists();
+                }
+                else if (targetEnemies[0] as PirateLair)
+                {
+                    PirateLair target = (PirateLair)targetEnemies[0];
+
+                    target.Kill();
+                    targetEnemies.Remove(target);
                 }
                 else if (targetEnemies[0] as Port)
                 {

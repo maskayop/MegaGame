@@ -168,7 +168,7 @@ namespace MegaGame
                 allIslands[i].owner = Owner.neutral;
                 allIslands[i].UpdateIslandState();
 
-                if (!allIslands[i].settlement)
+                if (!allIslands[i].settlement && allIslands[i].pirateLair)
                     allEmptyIslands.Add(allIslands[i]);
             }
         }
@@ -590,7 +590,7 @@ namespace MegaGame
                 islandsForExploring.Clear();
 
                 for (int i = 0; i < allEmptyIslands.Count; i++)
-                    if (Vector3.Distance(allEmptyIslands[i].transform.position, playerOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                    if (Vector3.Distance(allEmptyIslands[i].pirateLair.transform.position, playerOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
                         islandsForExploring.Add(allEmptyIslands[i]);
 
                 for (int i = 0; i < islandsForExploring.Count; i++)

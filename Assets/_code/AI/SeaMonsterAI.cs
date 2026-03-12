@@ -14,6 +14,9 @@ namespace MegaGame
         [SerializeField] short playerChance = 2;
         [SerializeField] short enemyChance = 2;
 
+        [Header("Debug")]
+        [SerializeField] bool sleep = false;
+
         float currentDecisionTime = 0;
         short randomChance = 0;
 
@@ -50,6 +53,9 @@ namespace MegaGame
 
         void MakeDecision()
         {
+            if (sleep)
+                return;
+
             if (objectsManager.allShips.Count == 0)
                 return;
 

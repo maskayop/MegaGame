@@ -17,10 +17,10 @@ namespace MegaGame
         public float currentHealth = 10;
         public float healthRegeneration = 1;
 
-        float maxHealth;
+        protected float maxHealth;
         public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
 
-        float maxRegeneration;
+        protected float maxRegeneration;
         public float MaxRegeneration { get { return maxRegeneration; } set { maxRegeneration = value; } }
 
         [Header("Damage")]
@@ -28,7 +28,7 @@ namespace MegaGame
         public float neutralDamageDivider = 2.0f;
         public float attackDelay = 1.0f;
 
-        float maxDamage;
+        protected float maxDamage;
         public float MaxDamage { get { return maxDamage; } set { maxDamage = value; } }
 
         [Header("Widgets")]
@@ -183,7 +183,10 @@ namespace MegaGame
             if (currentHealth != maxHealth)
             {
                 if (currentHealth <= 0)
+                {
                     GetCurrentHealthWidget().SetValue(0);
+                    GetCurrentHealthWidget().gameObject.SetActive(false);
+                }
                 else
                     GetCurrentHealthWidget().SetValue(currentHealthNormalized);
 
@@ -205,7 +208,7 @@ namespace MegaGame
                 return null;
         }
 
-        void UpdateProperties()
+        protected virtual void UpdateProperties()
         {
             if (globalTime.currentDay != currentDay)
             {
