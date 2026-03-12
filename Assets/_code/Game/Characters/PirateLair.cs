@@ -8,7 +8,7 @@ namespace MegaGame
             {
                 if (targetEnemies[i].owner != Owner.neutral)
                 {
-                    //ShowPirateLair(true);
+                    ShowPirateLair(true);
                     return;
                 }
             }

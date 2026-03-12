@@ -57,6 +57,9 @@ namespace MegaGame
         [Header("Enemy's Targets")]
         public List<BaseSettlement> possibleTargetSettlementForEnemy = new List<BaseSettlement>();
 
+        [Header("Game Modes")]
+        public bool isExploringMode = false;
+
         short playerPortsCount;
         public short PlayerPortsCount { get { return playerPortsCount; } }
 
@@ -83,6 +86,8 @@ namespace MegaGame
 
         List<Island> startIslands = new List<Island>();
         List<Island> neutralIslands = new List<Island>();
+
+        List<Island> islandsForExploring = new List<Island>();
 
         CameraController cameraController;
         GameDataSaver gameDataSaver;
@@ -574,6 +579,28 @@ namespace MegaGame
         public void SetGameStateAsMenu()
         {
             gameState = GameState.menu;
+        }
+
+        public void SetGameModeAsExploring(bool state)
+        {
+            isExploringMode = state;
+
+            if (isExploringMode)
+            {
+                islandsForExploring.Clear();
+
+                for (int i = 0; i < allEmptyIslands.Count; i++)
+                    if (Vector3.Distance(allEmptyIslands[i].transform.position, playerOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                        islandsForExploring.Add(allEmptyIslands[i]);
+
+                for (int i = 0; i < islandsForExploring.Count; i++)
+                    islandsForExploring[i].EnableExploringCircle(true);
+            }
+            else
+            {
+                for (int i = 0; i < islandsForExploring.Count; i++)
+                    islandsForExploring[i].EnableExploringCircle(false);
+            }
         }
     }
 }

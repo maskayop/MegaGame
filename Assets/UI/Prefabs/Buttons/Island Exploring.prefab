@@ -351,6 +351,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7380446105747222152}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Switch
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MegaGame.UI.UIExploringButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_Name
       value: Island Exploring
@@ -418,10 +446,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2480552912141046126}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7380446105747222152}
   m_SourcePrefab: {fileID: 100100000, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
 --- !u!224 &554207667466993395 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+  m_PrefabInstance: {fileID: 78433528729893212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3811494529818487077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+  m_PrefabInstance: {fileID: 78433528729893212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7380446105747222152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811494529818487077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ebf18413b16375418a9d82ab5088e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIExploringButton
+  imageOff: {fileID: 5611895947632930408}
+  imageOn: {fileID: 8120551522676394587}
+--- !u!1 &5611895947632930408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5546133743891224372, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
   m_PrefabInstance: {fileID: 78433528729893212}
   m_PrefabAsset: {fileID: 0}

@@ -54,7 +54,7 @@ namespace MegaGame
         float currentAttackTime = 0;
         float currentTargetsUpdateTime = 0;
 
-        Collider coll;
+        protected Collider coll;
 
         void Awake()
         {

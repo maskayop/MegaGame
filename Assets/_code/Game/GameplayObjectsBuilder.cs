@@ -141,7 +141,12 @@ namespace MegaGame
             character.SetDestinationSettlementPosition(targetSettlement);
 
             if (character.owner == BaseCharacter.Owner.player)
-                scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, true);
+            {
+                if (targetSettlement as PirateLair)
+                    scenePrefabsManager.SpawnAsTargetFX(targetSettlement.Island.transform.position, true);
+                else
+                    scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, true);
+            }
             else if (character.owner == BaseCharacter.Owner.enemy)
                 scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, false);
 

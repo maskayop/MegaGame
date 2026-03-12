@@ -32,8 +32,12 @@ namespace MegaGame
 
         bool isDefenderShip;
 
+        Collider coll;
+
         void Awake()
         {
+            coll = GetComponent<Collider>();
+
             SetThisIslandToSettlements();
         }
 
@@ -164,6 +168,7 @@ namespace MegaGame
         public void EnableExploringCircle(bool state)
         {
             exploringCircle.SetActive(state);
+            coll.enabled = state;
         }
 
         public void ShowPirateLair(bool state)

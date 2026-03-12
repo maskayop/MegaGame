@@ -100,6 +100,14 @@ namespace MegaGame
                         gameplayObjectsBuilder.TryCreatePlayerShip(fortress, 0);
                         return;
                     }
+
+                    Island island = hit.collider.GetComponent<Island>();
+
+                    if (island && island.owner != BaseCharacter.Owner.player)
+                    {
+                        gameplayObjectsBuilder.TryCreatePlayerShip(island.pirateLair, 0);
+                        return;
+                    }
                 }
             }
         }

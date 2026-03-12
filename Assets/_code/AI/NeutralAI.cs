@@ -130,13 +130,19 @@ namespace MegaGame
             gameController.allEmptyIslands.Shuffle();
 
             for (int i = 0; i < gameController.allEmptyIslands.Count; i++)
+            {
+                gameController.allEmptyIslands[i].pirateLair.gameObject.SetActive(false);
                 gameController.allEmptyIslands[i].ShowPirateLair(false);
+            }
 
             for (int i = 0; i < pirateIslandsCount; i++)
                 pirateLairs.Add(gameController.allEmptyIslands[i].pirateLair);
 
             for (int i = 0; i < pirateLairs.Count; i++)
+            {
+                pirateLairs[i].gameObject.SetActive(true);
                 pirateLairs[i].Init();
+            }
         }
     }
 }
