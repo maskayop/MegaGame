@@ -169,7 +169,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.4
   m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &7350032617565165418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   currentSpeed: 1
   speedDrop: 8
   windSpeedMinMultiplier: 0.4
+  distanceForPirateLair: 8
   FXDestroyPrefab: {fileID: 5910495002063247550, guid: cedd626daa06a5d4c8fc7939e0d52ec4, type: 3}
   FXShotLeft: {fileID: 0}
   FXShotRight: {fileID: 0}

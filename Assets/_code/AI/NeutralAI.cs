@@ -138,6 +138,7 @@ namespace MegaGame
             {
                 gameController.allEmptyIslands[i].pirateLair.gameObject.SetActive(false);
                 gameController.allEmptyIslands[i].ShowPirateLair(false);
+                gameController.allEmptyIslands[i].pirateLair.isActive = false;
             }
 
             for (int i = 0; i < pirateIslandsCount; i++)
@@ -149,6 +150,7 @@ namespace MegaGame
             for (int i = 0; i < pirateLairs.Count; i++)
             {
                 pirateLairs[i].gameObject.SetActive(true);
+                pirateLairs[i].isActive = true;
                 pirateLairs[i].Init();
             }
         }

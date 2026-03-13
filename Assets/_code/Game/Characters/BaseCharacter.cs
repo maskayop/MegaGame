@@ -51,8 +51,8 @@ namespace MegaGame
         Island island;
         public Island Island { get { return island; } set { island = value; } }
 
-        float currentAttackTime = 0;
-        float currentTargetsUpdateTime = 0;
+        protected float currentAttackTime = 0;
+        protected float currentTargetsUpdateTime = 0;
 
         protected Collider coll;
 
@@ -243,7 +243,7 @@ namespace MegaGame
 
         protected virtual void OnKilled() { }
 
-        void Attack()
+        protected virtual void Attack()
         {
             if (targetEnemies.Count != 0)
                 if (targetEnemies[0])

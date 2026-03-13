@@ -6,7 +6,6 @@ namespace MegaGame
     public class PirateShip : Warship
     {
         [Header("Distances")]
-        [SerializeField] short distanceToHomeToChange = 5;
         [SerializeField] short distanceForPossibleTarget = 200;
 
         Transform homePosition;
@@ -46,7 +45,7 @@ namespace MegaGame
 
             if (isGoingHome)
             {
-                if (Vector3.Distance(transform.position, homePosition.position) >= distanceToHomeToChange)
+                if (Vector3.Distance(transform.position, homePosition.position) >= distanceForPirateLair)
                     return;
                 else
                 {

@@ -4,6 +4,8 @@ namespace MegaGame
 {
     public class PirateLair : BaseSettlement
     {
+        public bool isActive;
+
         [SerializeField] GameObject capturedFX;
 
         protected override void OnUpdate()
@@ -12,9 +14,18 @@ namespace MegaGame
 
             if (isCaptured)
             {
+                isActive = false;
                 GetCurrentHealthWidget().SetValue(0);
                 GetCurrentHealthWidget().gameObject.SetActive(false);
             }
+        }
+
+        protected override void Attack()
+        {
+            if (isActive)
+                base.Attack();
+            else
+                return;
         }
 
         protected override void OnTriggerEnterUpdate()
@@ -62,6 +73,8 @@ namespace MegaGame
 
             if (!isCaptured)
                 capturedFX.SetActive(false);
+            else
+                isActive = true;
         }
     }
 }

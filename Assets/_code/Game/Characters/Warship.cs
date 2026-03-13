@@ -11,7 +11,8 @@ namespace MegaGame
         public float currentSpeed = 1;
         public short speedDrop = 5;
         public float windSpeedMinMultiplier = 1;
-        public float distanceForPirateLair = 5;
+
+        [SerializeField] protected float distanceForPirateLair = 5;
 
         [Header("FX")]
         [SerializeField] GameObject FXDestroyPrefab;

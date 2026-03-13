@@ -2,11 +2,12 @@ namespace MegaGame
 {
     public class BaseSettlement : BaseCharacter
     {
-        protected bool isCaptured = false;
+        public bool isCaptured = false;
         public bool IsCaptured { get { return isCaptured; } }
 
         protected SettlementConstructions settlementConstructions;
         protected SettlementVisual settlementVisual;
+        protected SettlementFX settlementFX;
 
         protected override void OnInit()
         {
@@ -15,6 +16,7 @@ namespace MegaGame
 
             settlementConstructions = GetComponent<SettlementConstructions>();
             settlementVisual = GetComponent<SettlementVisual>();
+            settlementFX = GetComponent<SettlementFX>();
 
             UpdateCharacteristics();
         }
@@ -23,6 +25,35 @@ namespace MegaGame
         {
             if (isCaptured)
                 return;
+        }
+
+        protected override void Attack()
+        {
+            if (isCaptured)
+                return;
+
+            if (targetEnemies.Count != 0)
+                if (targetEnemies[0])
+                    targetEnemies[0].DealDamage(maxDamage, this);
+
+            currentAttackTime = attackDelay;
+
+            OnAttack();
+        }
+
+        protected override void OnAttack()
+        {
+            if (isCaptured)
+                return;
+
+            if (targetEnemies.Count == 0)
+                return;
+
+            if (!targetEnemies[0])
+                return;
+
+            if (settlementFX)
+                settlementFX.PlayShotFX(targetEnemies[0].transform.position);
         }
 
         protected override void OnKilled()
