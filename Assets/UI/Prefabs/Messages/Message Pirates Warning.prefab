@@ -92,9 +92,33 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 60f5b4abf06b850459f19d7f75bd24d9, type: 3}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 659529719769530228, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 841354625048642617, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: time
-      value: 1.5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652995406427887129, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_MinWidth
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652995406427887129, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3129731068523030697, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -120,6 +144,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4056484545174272385, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 258f329207ca2824c8b435ab2045ca75, type: 2}
     - target: {fileID: 4543191507715508539, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -146,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6608867680850881583, guid: ee08a72f704197f4f9ab1972796433e4, type: 3}
       propertyPath: m_Name
-      value: Message Warning
+      value: Message Pirates Warning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

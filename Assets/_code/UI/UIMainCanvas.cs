@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using static MegaGame.GameController;
 
 namespace MegaGame.UI
@@ -27,25 +26,15 @@ namespace MegaGame.UI
         [SerializeField] GameObject campaignVictoryPanel;
         [SerializeField] GameObject campaignDefeatPanel;
 
-        [Header("Clock")]
-        [SerializeField] TextMeshProUGUI currentDayText;
-        [SerializeField] Image clockFill;
-
-        [Header("Wind")]
-        [SerializeField] RectTransform windArrow;
-        [SerializeField] Image windStrengthFillLeft;
-        [SerializeField] Image windStrengthFillRight;
-
-        [Header("Camera")]
+        [Header("HUD")]
         [SerializeField] float cameraZoomMultiplier = 2.0f;
         [SerializeField] GameObject cameraZoomButtons;
+
+        [SerializeField] UIExploringButton exploringButton;
 
         [Header("Messages")]
         [SerializeField] UIMessagePanel messagePanel;
 
-        int currentDay = 0;
-
-        GlobalTimeController globalTime;
         GameController gameController;
         GameDataSaver gameDataSaver;
 
@@ -65,9 +54,7 @@ namespace MegaGame.UI
 
         void Start()
         {
-            globalTime = GlobalTimeController.Instance;
             gameController = GameController.Instance;
-            currentDayText.text = currentDay.ToString();
             gameDataSaver = GameDataSaver.Instance;
 
             ShowStartGameWindow();
@@ -85,11 +72,9 @@ namespace MegaGame.UI
 
             if (mainMenu.isOpen)
             {
-                currentGameState = gameController.gameState;
+                currentGameState = GameState.menu;
                 return;
             }
-
-            UpdateClockAndWind();
 
             if (gameController.gameState != currentGameState && currentGameState != GameState.menu)
             {
@@ -98,22 +83,13 @@ namespace MegaGame.UI
                 else
                     ShowEndGameWindow();
             }
+            else if (gameController.gameState != currentGameState && currentGameState == GameState.menu)
+                ShowHUDButtons(false);
 
             currentGameState = gameController.gameState;
         }
 
-        void UpdateClockAndWind()
-        {
-            if (globalTime.currentDay != currentDay)
-            {
-                currentDay = globalTime.currentDay;
-                currentDayText.text = currentDay.ToString();
-            }
 
-            clockFill.fillAmount = globalTime.currentTime / globalTime.dayLenght;
-            windArrow.rotation = Quaternion.Euler(0, 0, -WindController.Instance.currentRotation.eulerAngles.y);
-            windStrengthFillLeft.fillAmount = windStrengthFillRight.fillAmount = WindController.Instance.GetNormalizedCurrentStrength() / 2;
-        }
 
         public void GoToCamera(bool isNext)
         {
@@ -128,16 +104,19 @@ namespace MegaGame.UI
                 CameraController.Instance.CameraZoom(+cameraZoomMultiplier);
         }
 
-        public void ShowCameraZoomButtons(bool state)
+        public void ShowHUDButtons(bool state)
         {
             cameraZoomButtons.SetActive(state);
+
+            exploringButton.Select(false);
+            exploringButton.gameObject.SetActive(state);
         }
 
         public void ShowStartGameWindow()
         {
             startGameWindow.SetActive(true);
             HideEndGameWindow();
-            ShowCameraZoomButtons(false);
+            ShowHUDButtons(false);
         }
 
         void HideStartGameWindow()
@@ -158,7 +137,7 @@ namespace MegaGame.UI
             else
                 defeatPanel.SetActive(true);
 
-            ShowCameraZoomButtons(false);
+            ShowHUDButtons(false);
         }
 
         void HideEndGameWindow()
@@ -172,14 +151,14 @@ namespace MegaGame.UI
         {
             HideStartGameWindow();
             gameController.StartBattle();
-            ShowCameraZoomButtons(true);
+            ShowHUDButtons(true);
         }
 
         public void PrepareNewBattle()
         {
             ShowStartGameWindow();
             gameController.PrepareNewBattle();
-            ShowCameraZoomButtons(false);
+            ShowHUDButtons(false);
         }
 
         public void ShowEndCampaignWindow()
@@ -196,7 +175,7 @@ namespace MegaGame.UI
                     campaignDefeatPanel.SetActive(true);
             }
 
-            ShowCameraZoomButtons(false);
+            ShowHUDButtons(false);
         }
 
         void HideEndCampaignWindow()
