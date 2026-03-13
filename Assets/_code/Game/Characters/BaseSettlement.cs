@@ -32,13 +32,7 @@ namespace MegaGame
             if (isCaptured)
                 return;
 
-            if (targetEnemies.Count != 0)
-                if (targetEnemies[0])
-                    targetEnemies[0].DealDamage(maxDamage, this);
-
-            currentAttackTime = attackDelay;
-
-            OnAttack();
+            base.Attack();
         }
 
         protected override void OnAttack()

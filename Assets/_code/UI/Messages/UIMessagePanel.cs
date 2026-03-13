@@ -12,6 +12,7 @@ namespace MegaGame.UI
         [SerializeField] GameObject nafaivelMessagePrefab;
         [SerializeField] GameObject fortConstructionMessagePrefab;
         [SerializeField] GameObject traderConstructionMessagePrefab;
+        [SerializeField] GameObject piratesAttackVillageMessagePrefab;
 
         [Header("Messages")]
         [SerializeField] Data_Message tooFarFromPort;
@@ -20,6 +21,7 @@ namespace MegaGame.UI
         [SerializeField] Data_Message nafaivel;
         [SerializeField] Data_Message fortConstruction;
         [SerializeField] Data_Message traderConstruction;
+        [SerializeField] Data_Message piratesAttackVillage;
 
         UIColors uiColors;
 
@@ -66,8 +68,8 @@ namespace MegaGame.UI
             GameObject messo = Instantiate(fortConstructionMessagePrefab, container);
 
             UIMessageObject messageObject = messo.GetComponent<UIMessageObject>();
-            messageObject.SetText(uiColors.GetTextOwnerColorString(port.owner) + port.Island.islandData.islandName.GetLocalizedString()
-                + " " + uiColors.GetDefaultColorString() + fortConstruction.GetMessageText());
+            messageObject.SetText(uiColors.GetTextOwnerColorString(port.owner) + port.Island.islandData.islandName.GetLocalizedString() +
+                " " + uiColors.GetDefaultColorString() + fortConstruction.GetMessageText());
             messageObject.SetImageColor(uiColors.GetTextOwnerColor(port.owner));
         }
 
@@ -76,9 +78,18 @@ namespace MegaGame.UI
             GameObject messo = Instantiate(traderConstructionMessagePrefab, container);
 
             UIMessageObject messageObject = messo.GetComponent<UIMessageObject>();
-            messageObject.SetText(uiColors.GetTextOwnerColorString(port.owner) + port.Island.islandData.islandName.GetLocalizedString()
-                + " " + uiColors.GetDefaultColorString() + traderConstruction.GetMessageText());
+            messageObject.SetText(uiColors.GetTextOwnerColorString(port.owner) + port.Island.islandData.islandName.GetLocalizedString() +
+                " " + uiColors.GetDefaultColorString() + traderConstruction.GetMessageText());
             messageObject.SetImageColor(uiColors.GetTextOwnerColor(port.owner));
+        }
+
+        public void SpawnPiratesAttackVillageMessage(Village village)
+        {
+            GameObject messo = Instantiate(piratesAttackVillageMessagePrefab, container);
+
+            UIMessageObject messageObject = messo.GetComponent<UIMessageObject>();
+            messageObject.SetText(piratesAttackVillage.GetMessageText() + uiColors.GetTextOwnerColorString(village.owner) +
+                village.Island.islandData.islandName.GetLocalizedString());
         }
     }
 }

@@ -143,8 +143,12 @@ namespace MegaGame
 
             for (int i = 0; i < pirateIslandsCount; i++)
             {
-                if (!gameController.allEmptyIslands[i].pirateLair.IsCaptured)
-                    pirateLairs.Add(gameController.allEmptyIslands[i].pirateLair);
+                if (i >= gameController.allEmptyIslands.Count)
+                    break;
+
+                if (gameController.allEmptyIslands[i].pirateLair)
+                    if (!gameController.allEmptyIslands[i].pirateLair.IsCaptured)
+                        pirateLairs.Add(gameController.allEmptyIslands[i].pirateLair);
             }
 
             for (int i = 0; i < pirateLairs.Count; i++)

@@ -468,6 +468,8 @@ namespace MegaGame
 
             if (playerPortsCount < enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToPlayer(enemyPortsCount - playerPortsCount);
+            else if (playerPortsCount == 1)
+                resourcesController.AddBattleStartMoneyToPlayer(2);
 
             if (playerPortsCount >= enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToEnemy(playerPortsCount - enemyPortsCount + 1);

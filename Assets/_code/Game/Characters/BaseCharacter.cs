@@ -247,7 +247,7 @@ namespace MegaGame
         {
             if (targetEnemies.Count != 0)
                 if (targetEnemies[0])
-                    targetEnemies[0].DealDamage(maxDamage, this);
+                    targetEnemies[0].TakeDamage(maxDamage, this);
 
             currentAttackTime = attackDelay;
 
@@ -256,20 +256,20 @@ namespace MegaGame
 
         protected virtual void OnAttack() { }
 
-        public void DealDamage(float INdamage, BaseCharacter character)
+        void TakeDamage(float INdamage, BaseCharacter damager)
         {
-            if (!character)
+            if (!damager)
                 return;
-
-            if (owner == Owner.neutral && CanAddTargetToList(character))
-                if (targetEnemies.Count == 0 || targetEnemies[0] != character)
-                    targetEnemies.Add(character);
 
             currentHealth -= INdamage;
 
             if (currentHealth <= 0)
                 Kill();
+
+            OnTakeDamage(damager);
         }
+
+        protected virtual void OnTakeDamage(BaseCharacter damager) { }
 
         protected virtual bool CanAddTargetToList(BaseCharacter targetCharacter) { return true; }
     }

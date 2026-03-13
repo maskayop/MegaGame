@@ -243,6 +243,11 @@ namespace MegaGame.UI
             messagePanel.SpawnTraderConstructionMessage(port);
         }
 
+        public void SpawnPiratesAttackVillageMessage(Village village)
+        {
+            messagePanel.SpawnPiratesAttackVillageMessage(village);
+        }
+
         public void PlaceCamera()
         {
             if (gameController.gameState == GameState.menu)
