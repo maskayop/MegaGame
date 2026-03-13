@@ -48,7 +48,7 @@ namespace MegaGame.UI
             SetMaxBuildingShip(2);
         }
 
-        public void SetMaxBuildingShip(short id)
+        public void SetMaxBuildingShip(int id)
         {
             gameplayObjectsBuilder.SetMaxBuildingShip(id);
 

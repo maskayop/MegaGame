@@ -7,8 +7,8 @@ namespace MegaGame
     {
         public static ResourcesController Instance { get; private set; }
 
-        [SerializeField] short startMoneyForPlayer;
-        [SerializeField] short startMoneyForEnemy;
+        [SerializeField] int startMoneyForPlayer;
+        [SerializeField] int startMoneyForEnemy;
 
         [SerializeField] Vector2Int traderProfit;
 
@@ -18,14 +18,14 @@ namespace MegaGame
         string enemyMoney;
         public string EnemyMoney { get { return enemyMoney; } set { enemyMoney = value; } }
 
-        short playerRevenue = 0;
-        short playerMaintenance = 0;
+        int playerRevenue = 0;
+        int playerMaintenance = 0;
 
-        short enemyRevenue = 0;
-        short enemyMaintenance = 0;
+        int enemyRevenue = 0;
+        int enemyMaintenance = 0;
 
-        short playerShipsCount = 0;
-        short enemyShipsCount = 0;
+        int playerShipsCount = 0;
+        int enemyShipsCount = 0;
 
         ObjectsManager objectsManager;
         GlobalTimeController globalTime;
@@ -119,7 +119,7 @@ namespace MegaGame
                 if (objectsManager.playerShips[i])
                     playerMaintenance += objectsManager.playerShips[i].GetComponent<Warship>().maintenance;
 
-            playerShipsCount = (short)objectsManager.playerShips.Count;
+            playerShipsCount = objectsManager.playerShips.Count;
 
             playerMaintenance += GetShipsBureaucracyMaintenance(playerShipsCount);
         }
@@ -132,14 +132,14 @@ namespace MegaGame
                 if (objectsManager.enemyShips[i])
                     enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Warship>().maintenance;
 
-            enemyShipsCount = (short)objectsManager.enemyShips.Count;
+            enemyShipsCount = objectsManager.enemyShips.Count;
 
             enemyMaintenance += GetShipsBureaucracyMaintenance(enemyShipsCount);
         }
 
-        public short GetShipsBureaucracyMaintenance(short shipsCount)
+        public int GetShipsBureaucracyMaintenance(int shipsCount)
         {
-            short value = 0;
+            int value = 0;
 
             if (shipsCount >= 0 && shipsCount <= 5)
                 value = 0;
@@ -251,19 +251,19 @@ namespace MegaGame
             return enemyMaintenance;
         }
 
-        public void AddBattleStartMoneyToPlayer(short multiplier)
+        public void AddBattleStartMoneyToPlayer(int multiplier)
         {
             AddMoneyToPlayer(startMoneyForPlayer * multiplier);
         }
 
-        public void AddBattleStartMoneyToEnemy(short multiplier)
+        public void AddBattleStartMoneyToEnemy(int multiplier)
         {
             AddMoneyToEnemy(startMoneyForEnemy * multiplier);
         }
 
-        public short GetRandomTraderProfit()
+        public int GetRandomTraderProfit()
         {
-            short r = (short)Random.Range(traderProfit.x, traderProfit.y);
+            int r = Random.Range(traderProfit.x, traderProfit.y);
             return r;
         }
     }

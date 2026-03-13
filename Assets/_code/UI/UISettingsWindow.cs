@@ -18,7 +18,7 @@ namespace MegaGame
         [SerializeField] List<TextMeshProUGUI> screenResolutionTexts = new List<TextMeshProUGUI>();
 
         [Header("Graphics Level")]
-        [SerializeField] short defaultGraphicsLevel;
+        [SerializeField] int defaultGraphicsLevel;
         [SerializeField] List<Toggle> graphicsLevelToggles = new List<Toggle>();
 
         [Header("Audio")]

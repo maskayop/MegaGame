@@ -69,7 +69,7 @@ namespace MegaGame
             Instantiate(FXTargetEnemyReject, position, Quaternion.identity);
         }
 
-        public GameObject GetAttackingShipPrefab(bool isPlayer, short shipLevel)
+        public GameObject GetAttackingShipPrefab(bool isPlayer, int shipLevel)
         {
             if (isPlayer)
             {
@@ -115,7 +115,7 @@ namespace MegaGame
 
         public GameObject GetRandomPirateShipPrefab()
         {
-            short r = (short)Random.Range(0, 3);
+            int r = Random.Range(0, 3);
 
             if (r == 0)
                 return smallPirateShipPrefab;
@@ -127,7 +127,7 @@ namespace MegaGame
                 return null;
         }
 
-        public void SpawnDistanceCircle(Vector3 position, short radius)
+        public void SpawnDistanceCircle(Vector3 position, int radius)
         {
             GameObject circle = Instantiate(distanceCircle, position, Quaternion.identity);
             circle.transform.localScale = Vector3.one * radius;
@@ -148,7 +148,7 @@ namespace MegaGame
             GameObject circle = Instantiate(nafaivelWarningCircle, position, Quaternion.identity);
         }
 
-        public void SpawnTraderProfitWidget(Vector3 position, short value)
+        public void SpawnTraderProfitWidget(Vector3 position, int value)
         {
             if (value == 0)
                 return;

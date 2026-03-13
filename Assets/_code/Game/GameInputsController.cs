@@ -69,7 +69,7 @@ namespace MegaGame
                     if (port)
                     {
                         if (port == gameController.playerOpposingPorts.antagonPort)
-                            gameplayObjectsBuilder.TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, 0);
+                            gameplayObjectsBuilder.TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
                         else if (port.owner != BaseCharacter.Owner.player)
                             gameplayObjectsBuilder.SpawnWrongTargetPortMessage(gameController.playerOpposingPorts.antagonPort, port);
                         else if (port.owner == BaseCharacter.Owner.player)
@@ -85,10 +85,10 @@ namespace MegaGame
 
                     if (village)
                     {
-                        if (village.owner != BaseCharacter.Owner.player)
-                            gameplayObjectsBuilder.TryCreatePlayerShip(village, 0);
+                        if (village.owner == BaseCharacter.Owner.player)
+                            gameplayObjectsBuilder.TryCreatePlayerShip(village, false);
                         else
-                            gameplayObjectsBuilder.TryCreatePlayerShip(village, 1);
+                            gameplayObjectsBuilder.TryCreatePlayerShip(village, true);
 
                         return;
                     }
@@ -97,7 +97,7 @@ namespace MegaGame
 
                     if (fortress && fortress.owner != BaseCharacter.Owner.player)
                     {
-                        gameplayObjectsBuilder.TryCreatePlayerShip(fortress, 0);
+                        gameplayObjectsBuilder.TryCreatePlayerShip(fortress, true);
                         return;
                     }
 
@@ -105,7 +105,7 @@ namespace MegaGame
 
                     if (island && island.owner != BaseCharacter.Owner.player)
                     {
-                        gameplayObjectsBuilder.TryCreatePlayerShip(island.pirateLair, 0);
+                        gameplayObjectsBuilder.TryCreatePlayerShip(island.pirateLair, true);
                         return;
                     }
                 }

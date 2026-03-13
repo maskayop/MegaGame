@@ -7,10 +7,10 @@ namespace MegaGame
         SettlementConstructions homeTradeCompany;
         public SettlementConstructions HomeTradeCompany { get { return homeTradeCompany; } set { homeTradeCompany = value; } }
 
-        [SerializeField] short distanceToPointToChange = 1;
+        [SerializeField] int distanceToPointToChange = 1;
 
         float distance;
-        short profit;
+        int profit;
 
         bool isStart = true;
 

@@ -52,7 +52,7 @@ namespace MegaGame
         public List<Port> allPossibleEnemyTargetPorts = new List<Port>();
 
         [Header("Distances")]
-        public short distanceForPossibleTargets = 100;
+        public int distanceForPossibleTargets = 100;
 
         [Header("Enemy's Targets")]
         public List<BaseSettlement> possibleTargetSettlementForEnemy = new List<BaseSettlement>();
@@ -60,23 +60,23 @@ namespace MegaGame
         [Header("Game Modes")]
         public bool isExploringMode = false;
 
-        short playerPortsCount;
-        public short PlayerPortsCount { get { return playerPortsCount; } }
+        int playerPortsCount;
+        public int PlayerPortsCount { get { return playerPortsCount; } }
 
-        short playerVillagesCount;
-        public short PlayerVillagesCount { get { return playerVillagesCount; } }
+        int playerVillagesCount;
+        public int PlayerVillagesCount { get { return playerVillagesCount; } }
 
-        short playerFortressesCount;
-        public short PlayerFortressesCount { get { return playerFortressesCount; } }
+        int playerFortressesCount;
+        public int PlayerFortressesCount { get { return playerFortressesCount; } }
 
-        short enemyPortsCount;
-        public short EnemyPortsCount { get { return enemyPortsCount; } }
+        int enemyPortsCount;
+        public int EnemyPortsCount { get { return enemyPortsCount; } }
 
-        short enemyVillagesCount;
-        public short EnemyVillagesCount { get { return enemyVillagesCount; } }
+        int enemyVillagesCount;
+        public int EnemyVillagesCount { get { return enemyVillagesCount; } }
 
-        short enemyFortressesCount;
-        public short EnemyFortressesCount { get { return enemyFortressesCount; } }
+        int enemyFortressesCount;
+        public int EnemyFortressesCount { get { return enemyFortressesCount; } }
 
         bool isVictory = false;
         public bool IsVictory { get { return isVictory; } set { isVictory = value; } }
@@ -93,11 +93,11 @@ namespace MegaGame
         GameDataSaver gameDataSaver;
         ResourcesController resourcesController;
 
-        short playerStartIslandId;
-        public short PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
+        int playerStartIslandId;
+        public int PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
 
-        short enemyStartIslandId;
-        public short EnemyStartIslandId { get { return enemyStartIslandId; } set { enemyStartIslandId = value; } }
+        int enemyStartIslandId;
+        public int EnemyStartIslandId { get { return enemyStartIslandId; } set { enemyStartIslandId = value; } }
 
         void Awake()
         {
@@ -196,11 +196,11 @@ namespace MegaGame
 
             if (playerStartIslandId == -1)
             {
-                short randPlayer = (short)UnityEngine.Random.Range(0, startIslands.Count);
-                playerStartIslandId = (short)startIslands[randPlayer].islandData.id;
+                int randPlayer = UnityEngine.Random.Range(0, startIslands.Count);
+                playerStartIslandId = startIslands[randPlayer].islandData.id;
 
-                short randEnemy = (short)UnityEngine.Random.Range(0, startIslands[randPlayer].possibleEnemyStartIsland.Count);
-                enemyStartIslandId = (short)startIslands[randPlayer].possibleEnemyStartIsland[randEnemy].islandData.id;
+                int randEnemy = UnityEngine.Random.Range(0, startIslands[randPlayer].possibleEnemyStartIsland.Count);
+                enemyStartIslandId = startIslands[randPlayer].possibleEnemyStartIsland[randEnemy].islandData.id;
             }
 
             for (int i = 0; i < allPorts.Count; i++)
@@ -230,8 +230,8 @@ namespace MegaGame
                 else if (allPorts[i].owner == Owner.enemy)
                     enemyPorts.Add(allPorts[i]);
 
-            playerPortsCount = (short)playerPorts.Count;
-            enemyPortsCount = (short)enemyPorts.Count;
+            playerPortsCount = playerPorts.Count;
+            enemyPortsCount = enemyPorts.Count;
 
             for (int i = 0; i < playerPorts.Count; i++)
                 for (int p = 0; p < playerPorts[i].Island.possibleTargets.Count; p++)
@@ -254,8 +254,8 @@ namespace MegaGame
                 else if (allVillages[i].owner == Owner.enemy)
                     enemyVillages.Add(allVillages[i]);
 
-            playerVillagesCount = (short)playerVillages.Count;
-            enemyVillagesCount = (short)enemyVillages.Count;
+            playerVillagesCount = playerVillages.Count;
+            enemyVillagesCount = enemyVillages.Count;
 
             playerFortresses.Clear();
             enemyFortresses.Clear();
@@ -266,8 +266,8 @@ namespace MegaGame
                 else if (allFortresses[i].owner == Owner.enemy)
                     enemyFortresses.Add(allFortresses[i]);
 
-            playerFortressesCount = (short)playerFortresses.Count;
-            enemyFortressesCount = (short)enemyFortresses.Count;
+            playerFortressesCount = playerFortresses.Count;
+            enemyFortressesCount = enemyFortresses.Count;
 
             possibleTargetSettlementForEnemy.Clear();
 
@@ -278,15 +278,19 @@ namespace MegaGame
                         if (Vector3.Distance(allVillages[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
                             possibleTargetSettlementForEnemy.Add(allVillages[i]);
-            }
 
-            if (enemyOpposingPorts.protagonPort)
-            {
                 for (int i = 0; i < allFortresses.Count; i++)
                     if (allFortresses[i].owner != Owner.enemy)
                         if (Vector3.Distance(allFortresses[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
                             possibleTargetSettlementForEnemy.Add(allFortresses[i]);
+
+                for (int i = 0; i < allEmptyIslands.Count; i++)
+                    if (allEmptyIslands[i].owner == Owner.neutral)
+                        if (Vector3.Distance(allEmptyIslands[i].transform.position,
+                            enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                            if (allEmptyIslands[i].pirateLair)
+                                possibleTargetSettlementForEnemy.Add(allEmptyIslands[i].pirateLair);
             }
         }
 
@@ -370,21 +374,21 @@ namespace MegaGame
 
         void CalculateOpposingPorts(OpposingPorts fraction)
         {
-            short portsCount = 0;
-            short startIslandId = 0;
+            int portsCount = 0;
+            int startIslandId = 0;
             List<Port> allPossibleTargetPorts = new List<Port>();
             Owner owner = Owner.neutral;
 
             if (fraction == playerOpposingPorts)
             {
-                portsCount = (short)playerPorts.Count;
+                portsCount = playerPorts.Count;
                 startIslandId = playerStartIslandId;
                 allPossibleTargetPorts = allPossiblePlayerTargetPorts;
                 owner = Owner.player;
             }
             else if (fraction == enemyOpposingPorts)
             {
-                portsCount = (short)enemyPorts.Count;
+                portsCount = enemyPorts.Count;
                 startIslandId = enemyStartIslandId;
                 allPossibleTargetPorts = allPossibleEnemyTargetPorts;
                 owner = Owner.enemy;
@@ -401,7 +405,7 @@ namespace MegaGame
                 fraction.protagonPort = (Port)currentIsland.settlement;
             }
 
-            short rand = (short)UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
+            int rand = UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
 
             if (allPossibleTargetPorts.Count == 0)
                 return;
@@ -425,7 +429,7 @@ namespace MegaGame
         Port FindPossibleProtagonPortToTargetPort(Port target, Owner owner)
         {
             Port port = null;
-            short rand = (short)UnityEngine.Random.Range(0, 2);
+            int rand = UnityEngine.Random.Range(0, 2);
 
             if (rand == 0)
             {
@@ -463,10 +467,10 @@ namespace MegaGame
             resourcesController.UpdateRevenues();
 
             if (playerPortsCount < enemyPortsCount)
-                resourcesController.AddBattleStartMoneyToPlayer((short)(enemyPortsCount - playerPortsCount));
+                resourcesController.AddBattleStartMoneyToPlayer(enemyPortsCount - playerPortsCount);
 
             if (playerPortsCount >= enemyPortsCount)
-                resourcesController.AddBattleStartMoneyToEnemy((short)(playerPortsCount - enemyPortsCount + 1));
+                resourcesController.AddBattleStartMoneyToEnemy(playerPortsCount - enemyPortsCount + 1);
 
             PlaceCameraBetweenPorts();
             startGameModelButton.gameObject.SetActive(false);

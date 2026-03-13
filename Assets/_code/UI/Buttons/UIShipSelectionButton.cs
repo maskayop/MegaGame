@@ -4,7 +4,7 @@ namespace MegaGame.UI
 {
     public class UIShipSelectionButton : MonoBehaviour
     {
-        [SerializeField] short id;
+        [SerializeField] int id;
 
         [Header("Visual")]
         [SerializeField] GameObject imageOff;

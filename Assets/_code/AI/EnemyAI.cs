@@ -7,10 +7,10 @@ namespace MegaGame
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float timeForDecision = 1.0f;
-        [SerializeField] short shipSpawnChance = 1;
-        [SerializeField] short onLowMoneySpawnChanceMultiplier = 1;
+        [SerializeField] int shipSpawnChance = 1;
+        [SerializeField] int onLowMoneySpawnChanceMultiplier = 1;
 
-        public List<Village> unsafeVillagesInRadius = new List<Village>();
+        public List<Village> unsafeVillages = new List<Village>();
 
         List<Port> portsWithoutFort = new List<Port>();
         List<Port> portsWithoutTrader = new List<Port>();
@@ -18,7 +18,7 @@ namespace MegaGame
         [Header("Debug")]
         [SerializeField] bool canBuildShips = true;
 
-        short villagesCount;
+        int villagesCount;
 
         Port currentPort;
 
@@ -49,7 +49,7 @@ namespace MegaGame
                 currentDecisionTime = timeForDecision;
 
                 if (villagesCount != gameController.EnemyVillagesCount)
-                    UpdateUnsafeVillagesInRadius();
+                    UpdateUnsafeVillages();
 
                 villagesCount = gameController.EnemyVillagesCount;
 
@@ -59,7 +59,7 @@ namespace MegaGame
 
         void MakeDecision()
         {
-            short buildRandom = (short)Random.Range(0, 2);
+            int buildRandom = Random.Range(0, 2);
 
             if (buildRandom == 0)
             {
@@ -68,7 +68,7 @@ namespace MegaGame
                     portsWithoutFort.Clear();
                     portsWithoutTrader.Clear();
 
-                    for (short i = 0; i < gameController.enemyPorts.Count; i++)
+                    for (int i = 0; i < gameController.enemyPorts.Count; i++)
                     {
                         if (gameController.enemyPorts[i].GetSettlementConstructions())
                         {
@@ -80,7 +80,7 @@ namespace MegaGame
                         }
                     }
 
-                    short buildType = (short)Random.Range(0, 2);
+                    int buildType = Random.Range(0, 2);
 
                     if (buildType == 0)
                         TryBuildFort();
@@ -100,12 +100,12 @@ namespace MegaGame
                     SpawnShip();
                 else
                 {
-                    short r = -1;
+                    int r = -1;
 
                     if (resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyMaintenance() >= 0)
-                        r = (short)Random.Range(0, shipSpawnChance);
+                        r = Random.Range(0, shipSpawnChance);
                     else
-                        r = (short)Random.Range(0, shipSpawnChance * onLowMoneySpawnChanceMultiplier);
+                        r = Random.Range(0, shipSpawnChance * onLowMoneySpawnChanceMultiplier);
 
                     if (r == 0)
                         SpawnShip();
@@ -120,27 +120,27 @@ namespace MegaGame
 
             if (distanceBetweenProtagonPorts <= gameController.distanceForPossibleTargets)
             {
-                short villageR = (short)Random.Range(0, 2);
+                int randomVillage = Random.Range(0, 2);
 
-                if (villageR == 0 && unsafeVillagesInRadius.Count != 0)
+                if (randomVillage == 0 && unsafeVillages.Count != 0)
                 {
-                    gameplayObjectsBuilder.TryCreateEnemyShip(unsafeVillagesInRadius[0], 1);
-                    UpdateUnsafeVillagesInRadius();
+                    gameplayObjectsBuilder.TryCreateEnemyShip(unsafeVillages[0], false);
+                    UpdateUnsafeVillages();
                     return;
                 }
             }
 
-            short r = (short)Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count + 1);
+            int r = Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count + 1);
 
             if (r != 0)
-                gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleSettlement(), 0);
+                gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleSettlement(), true);
             else
-                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.enemyOpposingPorts.antagonPort, 0);
+                gameplayObjectsBuilder.TryCreateEnemyShip(gameController.enemyOpposingPorts.antagonPort, true);
         }
 
         BaseSettlement GetRandomPossibleSettlement()
         {
-            short r = (short)Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count);
+            int r = Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count);
 
             if (gameController.possibleTargetSettlementForEnemy.Count != 0)
                 return gameController.possibleTargetSettlementForEnemy[r];
@@ -148,9 +148,9 @@ namespace MegaGame
                 return null;
         }
 
-        void UpdateUnsafeVillagesInRadius()
+        void UpdateUnsafeVillages()
         {
-            unsafeVillagesInRadius.Clear();
+            unsafeVillages.Clear();
             float distance = 0;
 
             for (int i = 0; i < gameController.enemyVillages.Count; i++)
@@ -160,7 +160,7 @@ namespace MegaGame
                 if (distance <= gameController.distanceForPossibleTargets)
                     if (!gameController.enemyVillages[i].Island.DefenderShip ||
                         gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
-                        unsafeVillagesInRadius.Add(gameController.enemyVillages[i]);
+                        unsafeVillages.Add(gameController.enemyVillages[i]);
             }
         }
 
@@ -169,7 +169,7 @@ namespace MegaGame
             if (portsWithoutFort.Count == 0)
                 return;
 
-            short r = (short)Random.Range(0, portsWithoutFort.Count);
+            int r = Random.Range(0, portsWithoutFort.Count);
             portsWithoutFort[r].GetSettlementConstructions().TryBuildFort();
         }
 
@@ -178,7 +178,7 @@ namespace MegaGame
             if (portsWithoutTrader.Count == 0)
                 return;
 
-            short r = (short)Random.Range(0, portsWithoutTrader.Count);
+            int r = Random.Range(0, portsWithoutTrader.Count);
             portsWithoutTrader[r].GetSettlementConstructions().TryBuildTrader();
         }
     }

@@ -12,7 +12,7 @@ namespace MegaGame
         public List<GameObject> enemyShips = new List<GameObject>();
         public List<GameObject> pirateShips = new List<GameObject>();
 
-        short allCharactersCount = 0;
+        int allCharactersCount = 0;
 
         void Awake()
         {
@@ -50,7 +50,7 @@ namespace MegaGame
                 }
             }
 
-            allCharactersCount = (short)allShips.Count;
+            allCharactersCount = allShips.Count;
         }
 
         public void Init()

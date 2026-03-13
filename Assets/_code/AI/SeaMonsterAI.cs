@@ -5,20 +5,20 @@ namespace MegaGame
     public class SeaMonsterAI : MonoBehaviour
     {
         [SerializeField] bool monsterType;
+        [SerializeField] int speedDrop = 2;
+        [SerializeField] int minDay = 100;
         [SerializeField] float timeForDecision = 1.0f;
-        [SerializeField] short speedDrop = 2;
         [SerializeField] float navMeshAgentRadiusMultiplier = 2;
-        [SerializeField] short minDay = 100;
 
         [Header("Chances")]
-        [SerializeField] short playerChance = 2;
-        [SerializeField] short enemyChance = 2;
+        [SerializeField] int playerChance = 2;
+        [SerializeField] int enemyChance = 2;
 
         [Header("Debug")]
         [SerializeField] bool sleep = false;
 
         float currentDecisionTime = 0;
-        short randomChance = 0;
+        int randomChance = 0;
 
         GameController gameController;
         ObjectsManager objectsManager;
@@ -59,13 +59,13 @@ namespace MegaGame
             if (objectsManager.allShips.Count == 0)
                 return;
 
-            short shipId = (short)Random.Range(0, objectsManager.allShips.Count);
+            int shipId = Random.Range(0, objectsManager.allShips.Count);
             currentShip = objectsManager.allShips[shipId].GetComponent<Warship>();
 
             if (currentShip.owner == BaseCharacter.Owner.player)
-                randomChance = (short)Random.Range(0, playerChance);
+                randomChance = Random.Range(0, playerChance);
             else
-                randomChance = (short)Random.Range(0, enemyChance);
+                randomChance = Random.Range(0, enemyChance);
 
             if (randomChance == 0)
                 currentVictim = currentShip;
@@ -112,7 +112,7 @@ namespace MegaGame
 
             currentVictim.KilledByNekark = true;
 
-            short droppedSpeed = (short)Mathf.FloorToInt(currentVictim.currentSpeed / speedDrop);
+            int droppedSpeed = Mathf.FloorToInt(currentVictim.currentSpeed / speedDrop);
             currentVictim.GetNavMeshAgent().speed = droppedSpeed;
             currentVictim.GetNavMeshAgent().radius *= navMeshAgentRadiusMultiplier;
             currentVictim.speed = droppedSpeed;

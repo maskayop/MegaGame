@@ -9,9 +9,9 @@ namespace MegaGame
         public static GameDataSaver Instance { get; private set; }
 
         [Header("Accounts")]
+        public short totalAccountsAmount = -1;
         public short currentAccountId = -1;
         public string currentAccountName;
-        public short totalAccountsAmount = -1;
 
         DataSaveLoad dataSaveLoad;
         GameController gameController;
@@ -253,14 +253,14 @@ namespace MegaGame
 
         public void LoadAccount(string targetAccountName)
         {
-            int value = -1;
+            short value = -1;
             List<string> accountsNames = GetAccountsNames();
 
-            for (int i = 0; i < accountsNames.Count; i++)
+            for (short i = 0; i < accountsNames.Count; i++)
                 if (accountsNames[i] == targetAccountName)
-                    value = i + 1;
+                    value = (short)(i + 1);
 
-            currentAccountId = (short)value;
+            currentAccountId = value;
             dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
 
             LoadLastAccount();

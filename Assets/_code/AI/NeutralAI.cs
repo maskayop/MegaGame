@@ -8,19 +8,19 @@ namespace MegaGame
     public class NeutralAI : MonoBehaviour
     {
         [Header("Building")]
-        [SerializeField] short daysForBuildingDecision = 100;
+        [SerializeField] int daysForBuildingDecision = 100;
 
         [Header("Pirates")]
-        [SerializeField] short pirateIslandsCount = 5;
-        [SerializeField] short maxPirateShips = 10;
-        [SerializeField] short portsCountSubtractor = 10;
+        [SerializeField] int pirateIslandsCount = 5;
+        [SerializeField] int maxPirateShips = 10;
+        [SerializeField] int portsCountSubtractor = 10;
 
         List<Port> allNeutralPorts = new List<Port>();
         List<Port> portsWithoutFort = new List<Port>();
 
         public List<PirateLair> pirateLairs = new List<PirateLair>();
 
-        short currentDecisionDay = 0;
+        int currentDecisionDay = 0;
 
         GameController gameController;
         GlobalTimeController globalTime;
@@ -81,7 +81,7 @@ namespace MegaGame
         {
             allNeutralPorts.Clear();
 
-            for (short i = 0; i < gameController.allPorts.Count; i++)
+            for (int i = 0; i < gameController.allPorts.Count; i++)
             {
                 if (gameController.allPorts[i].owner == BaseCharacter.Owner.neutral)
                     allNeutralPorts.Add(gameController.allPorts[i]);
@@ -89,7 +89,7 @@ namespace MegaGame
 
             portsWithoutFort.Clear();
 
-            for (short i = 0; i < allNeutralPorts.Count; i++)
+            for (int i = 0; i < allNeutralPorts.Count; i++)
             {
                 if (allNeutralPorts[i].GetSettlementConstructions() && !allNeutralPorts[i].GetSettlementConstructions().fortIsBuilt)
                     portsWithoutFort.Add(allNeutralPorts[i]);
@@ -101,7 +101,7 @@ namespace MegaGame
             if (portsWithoutFort.Count == 0)
                 return;
 
-            short r = (short)Random.Range(0, portsWithoutFort.Count);
+            int r = Random.Range(0, portsWithoutFort.Count);
             portsWithoutFort[r].GetSettlementConstructions().TryBuildFort();
         }
 
@@ -110,7 +110,7 @@ namespace MegaGame
             if (gameController.PlayerVillagesCount == 0 && gameController.EnemyVillagesCount == 0)
                 return;
 
-            short portsCountDependence = (short)(gameController.PlayerPortsCount + gameController.EnemyPortsCount - portsCountSubtractor);
+            int portsCountDependence = (gameController.PlayerPortsCount + gameController.EnemyPortsCount - portsCountSubtractor);
 
             if (portsCountDependence >= 0)
                 if (objectsManager.pirateShips.Count < portsCountDependence && objectsManager.pirateShips.Count < maxPirateShips)
@@ -124,7 +124,7 @@ namespace MegaGame
             if (pirateLairs.Count == 0)
                 return null;
 
-            short r = (short)Random.Range(0, pirateLairs.Count);
+            int r = Random.Range(0, pirateLairs.Count);
             return pirateLairs[r];
         }
 

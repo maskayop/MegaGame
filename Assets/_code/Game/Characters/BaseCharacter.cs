@@ -9,8 +9,8 @@ namespace MegaGame
         public Owner owner;
 
         [Header("Money")]
-        public short revenue = 1;
-        public short maintenance = 1;
+        public int revenue = 1;
+        public int maintenance = 1;
 
         [Header("Health")]
         public float health = 10;

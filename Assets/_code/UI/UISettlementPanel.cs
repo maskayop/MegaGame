@@ -56,8 +56,8 @@ namespace MegaGame.UI
 
         GameController gameController;
 
-        short settlementId;
-        short constructionId;
+        int settlementId;
+        int constructionId;
 
         bool isOpen;
         public bool IsOpen { get { return isOpen; } }
@@ -160,12 +160,12 @@ namespace MegaGame.UI
 
         public void SelectSettlement(int id)
         {
-            settlementId = (short)id;
+            settlementId = id;
         }
 
         public void TryBuildConstruction(int id)
         {
-            constructionId = (short)id;
+            constructionId = id;
 
             buildQuestionPanel.gameObject.SetActive(true);
             buildQuestionPanelTransform.position = GetCurrentConstructionTransform().position;

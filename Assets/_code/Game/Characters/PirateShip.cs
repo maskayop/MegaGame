@@ -6,7 +6,7 @@ namespace MegaGame
     public class PirateShip : Warship
     {
         [Header("Distances")]
-        [SerializeField] short distanceForPossibleTarget = 200;
+        [SerializeField] int distanceForPossibleTarget = 200;
 
         Transform homePosition;
         public Transform HomePosition { get { return homePosition; } set { homePosition = value; } }
@@ -111,7 +111,7 @@ namespace MegaGame
             if (allPossibleTargets.Count == 0)
                 return;
 
-            short r = (short)Random.Range(0, allPossibleTargets.Count);
+            int r = Random.Range(0, allPossibleTargets.Count);
 
             BaseCharacter targetCharacter = allPossibleTargets[r];
 

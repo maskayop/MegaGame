@@ -30,7 +30,7 @@ namespace MegaGame
 
         public void Animate()
         {
-            short r = (short)Random.Range(0, destroyAnimStates.Count);
+            int r = Random.Range(0, destroyAnimStates.Count);
             animator.Play(destroyAnimStates[r]);
         }
 

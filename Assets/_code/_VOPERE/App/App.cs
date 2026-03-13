@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Vopere.Common
 {
     public class App : MonoBehaviour
-	{
+    {
         public static App Instance;
 
         [SerializeField] int defaultGraphicsLevel = 0;

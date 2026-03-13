@@ -210,7 +210,7 @@ namespace MegaGame
         {
             UpdateTradeTargets();
 
-            short r = (short)Random.Range(0, traderTargets.Count);
+            int r = Random.Range(0, traderTargets.Count);
 
             if (traderTargets[r].settlement == currentSettlement)
             {
@@ -223,7 +223,7 @@ namespace MegaGame
             return traderTargets[r];
         }
 
-        public int GetSettlementBuildingCost(short id)
+        public int GetSettlementBuildingCost(int id)
         {
             if (id == 1)
                 return Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(1));
