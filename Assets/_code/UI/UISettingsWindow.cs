@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using Vopere.Common;
 
@@ -207,6 +209,14 @@ namespace MegaGame
 
             if (CameraController.Instance)
                 CameraController.Instance.ChangeZoomSensitivity(zoomSensitivitySlider.value);
+        }
+
+        public void SetLocale(string localeCode)
+        {
+            Locale locale = LocalizationSettings.AvailableLocales.GetLocale(localeCode);
+
+            if (locale != null)
+                LocalizationSettings.SelectedLocale = locale;
         }
     }
 }
