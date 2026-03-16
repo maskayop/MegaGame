@@ -24,11 +24,6 @@ namespace MegaGame
         public OpposingPorts playerOpposingPorts;
         public OpposingPorts enemyOpposingPorts;
 
-        [Header("3D Model Button")]
-        [SerializeField] float offsetY = 0;
-
-        ModelButton startGameModelButton;
-
         [Header("Islands and Settlements")]
         public List<Island> allIslands = new List<Island>();
         public List<Island> allEmptyIslands = new List<Island>();
@@ -92,6 +87,7 @@ namespace MegaGame
         CameraController cameraController;
         GameDataSaver gameDataSaver;
         ResourcesController resourcesController;
+        AdditionalSceneObjects additionalObjects;
 
         int playerStartIslandId;
         public int PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
@@ -118,9 +114,6 @@ namespace MegaGame
 
         void Update()
         {
-            if (gameState == GameState.menu)
-                startGameModelButton.gameObject.SetActive(false);
-
             if (campaignIsEnded)
                 return;
 
@@ -133,6 +126,7 @@ namespace MegaGame
         public void Init()
         {
             cameraController = CameraController.Instance;
+            additionalObjects = AdditionalSceneObjects.Instance;
 
             resourcesController = ResourcesController.Instance;
             resourcesController.Init();
@@ -143,8 +137,6 @@ namespace MegaGame
             campaignIsEnded = false;
 
             gameDataSaver.LoadLastAccount();
-
-            startGameModelButton = FindFirstObjectByType<ModelButton>();
         }
 
         void InitializeScene()
@@ -342,7 +334,7 @@ namespace MegaGame
             resourcesController.UpdatePlayerMaintenance();
             resourcesController.UpdateEnemyMaintenance();
 
-            startGameModelButton.gameObject.SetActive(true);
+            additionalObjects.ShowStartGameModelButton(true);
 
             gameDataSaver.LoadAllIslandsCurrentHealth();
             gameDataSaver.SaveGameData();
@@ -469,13 +461,13 @@ namespace MegaGame
             if (playerPortsCount < enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToPlayer(enemyPortsCount - playerPortsCount);
             else if (playerPortsCount == 1)
-                resourcesController.AddBattleStartMoneyToPlayer(2);
+                resourcesController.AddBattleStartMoneyToPlayer(1);
 
             if (playerPortsCount >= enemyPortsCount)
                 resourcesController.AddBattleStartMoneyToEnemy(playerPortsCount - enemyPortsCount + 1);
 
             PlaceCameraBetweenPorts();
-            startGameModelButton.gameObject.SetActive(false);
+            additionalObjects.ShowStartGameModelButton(false);
         }
 
         public void EndBattle()
@@ -484,14 +476,14 @@ namespace MegaGame
             gameDataSaver.SaveGameData();
             UpdateSettlementsLists();
             SetGameStateAsWorld();
-            startGameModelButton.gameObject.SetActive(false);
+            additionalObjects.ShowStartGameModelButton(false);
         }
 
         public void EndCampaign()
         {
             campaignIsEnded = true;
 
-            startGameModelButton.gameObject.SetActive(false);
+            additionalObjects.ShowStartGameModelButton(false);
             UIMainCanvas.Instance.ShowEndCampaignWindow();
 
             gameDataSaver.SaveGameData();
@@ -553,14 +545,10 @@ namespace MegaGame
             if (!playerOpposingPorts.protagonPort || !playerOpposingPorts.antagonPort)
                 return;
 
-            if (!startGameModelButton)
-                return;
-
-            startGameModelButton.transform.position = CalculatePositionBetweenPorts();
-            startGameModelButton.transform.position += new Vector3(0, offsetY, 0);
+            additionalObjects.PlaceStartGameModelButtonBetweenPorts();
         }
 
-        Vector3 CalculatePositionBetweenPorts()
+        public Vector3 CalculatePositionBetweenPorts()
         {
             Vector3 newPosition = Vector3.zero;
             newPosition += playerOpposingPorts.protagonPort.transform.position + playerOpposingPorts.antagonPort.transform.position;

@@ -37,6 +37,7 @@ namespace MegaGame.UI
 
         GameController gameController;
         GameDataSaver gameDataSaver;
+        AdditionalSceneObjects additionalObjects;
 
         GameState currentGameState;
 
@@ -56,6 +57,7 @@ namespace MegaGame.UI
         {
             gameController = GameController.Instance;
             gameDataSaver = GameDataSaver.Instance;
+            additionalObjects = AdditionalSceneObjects.Instance;
 
             ShowStartGameWindow();
         }
@@ -132,10 +134,18 @@ namespace MegaGame.UI
             victoryPanel.SetActive(false);
             defeatPanel.SetActive(false);
 
+            additionalObjects.HideEndGamePanels();
+
             if (gameController.IsVictory)
+            {
                 victoryPanel.SetActive(true);
+                additionalObjects.ShowVictoryPanel(true);
+            }
             else
+            {
                 defeatPanel.SetActive(true);
+                additionalObjects.ShowDefeatPanel(true);
+            }
 
             ShowHUDButtons(false);
         }
