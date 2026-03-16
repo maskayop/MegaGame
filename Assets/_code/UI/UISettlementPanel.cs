@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace MegaGame.UI
 {
@@ -65,6 +67,8 @@ namespace MegaGame.UI
         Island currentIsland;
         SettlementConstructions currentSettlementConstructions;
 
+        LocalizedString localizedStringIslandName;
+
         void Awake()
         {
             if (Instance != null)
@@ -104,6 +108,21 @@ namespace MegaGame.UI
             Close();
         }
 
+        void OnEnable()
+        {
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        }
+
+        void OnDisable()
+        {
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+        }
+
+        void OnLocaleChanged(Locale newLocale)
+        {
+            islandNameText.text = localizedStringIslandName.GetLocalizedString();
+        }
+
         public void Open(Island island)
         {
             isOpen = true;
@@ -112,7 +131,8 @@ namespace MegaGame.UI
             currentSettlementConstructions = currentIsland.settlement.GetSettlementConstructions();
 
             settlementPanel.gameObject.SetActive(true);
-            islandNameText.text = island.islandData.islandName.GetLocalizedString();
+            localizedStringIslandName = island.islandData.islandName;
+            islandNameText.text = localizedStringIslandName.GetLocalizedString();
 
             if (island.settlement && island.settlement as Port)
             {

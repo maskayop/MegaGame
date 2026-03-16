@@ -112,7 +112,7 @@ namespace MegaGame
         {
             if (nameWidget)
             {
-                nameWidget.SetText(islandData.islandName.GetLocalizedString());
+                nameWidget.SetText(islandData.islandName);
 
                 if (settlement && settlement.GetSettlementConstructions())
                 {

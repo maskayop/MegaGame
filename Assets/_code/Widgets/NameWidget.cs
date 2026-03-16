@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace MegaGame
 {
@@ -29,6 +31,8 @@ namespace MegaGame
         [SerializeField] Color enemyColor = Color.white;
         [SerializeField] Color neutralColor = Color.white;
 
+        LocalizedString localizedStringName;
+
         void Update()
         {
             if (transform.localScale.x < scaleForDisabling)
@@ -50,12 +54,33 @@ namespace MegaGame
                 transform.localScale = Vector3.one * Mathf.Clamp((1 - CameraController.Instance.GetCameraZoom()), 0, minScale);
         }
 
-        public void SetText(string nameText)
+        public void SetText(LocalizedString localizedText)
         {
             if (!text)
                 return;
 
-            text.text = nameText;
+            localizedStringName = localizedText;
+            text.text = localizedText.GetLocalizedString();
+        }
+
+        void OnEnable()
+        {
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        }
+
+        void OnDisable()
+        {
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+        }
+
+        void OnLocaleChanged(Locale newLocale)
+        {
+            UpdateTextOnLocaleChanged();
+        }
+
+        void UpdateTextOnLocaleChanged()
+        {
+            text.text = localizedStringName.GetLocalizedString();
         }
 
         public void SetDefenderShip(bool state)
