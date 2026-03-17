@@ -120,7 +120,8 @@ namespace MegaGame.UI
 
         void OnLocaleChanged(Locale newLocale)
         {
-            islandNameText.text = localizedStringIslandName.GetLocalizedString();
+            if (localizedStringIslandName != null)
+                islandNameText.text = localizedStringIslandName.GetLocalizedString();
         }
 
         public void Open(Island island)

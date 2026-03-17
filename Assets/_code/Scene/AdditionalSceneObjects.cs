@@ -66,7 +66,7 @@ namespace MegaGame
         public void HideEndGamePanels()
         {
             ShowVictoryPanel(false);
-            ShowDefeatPanel(true);
+            ShowDefeatPanel(false);
         }
 
         public void ShowStartGameModelButton(bool state)

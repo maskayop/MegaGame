@@ -6,7 +6,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using Vopere.Common;
 
-namespace MegaGame
+namespace MegaGame.UI
 {
     public class UISettingsWindow : MonoBehaviour
     {
@@ -41,6 +41,11 @@ namespace MegaGame
         bool isOpen = false;
         public bool IsOpen { get { return isOpen; } set { isOpen = value; } }
 
+        App app;
+        DataSaveLoad dataSaveLoad;
+        CameraController cameraController;
+        AudioController audioController;
+
         void Awake()
         {
             if (Instance != null)
@@ -51,19 +56,21 @@ namespace MegaGame
             }
 
             Instance = this;
-
-            Init();
         }
 
         void Start()
         {
-            ChangeMusicVolume();
-            ChangeUIVolume();
+            app = App.Instance;
+            dataSaveLoad = DataSaveLoad.Instance;
+            cameraController = CameraController.Instance;
+            audioController = AudioController.Instance;
+
+            Init();
         }
 
         public void Init()
         {
-            int graphicsLeveId = DataSaveLoad.Instance.GetSavedInt("GraphicsLevel");
+            int graphicsLeveId = dataSaveLoad.GetSavedInt("GraphicsLevel");
 
             if (graphicsLeveId != -1)
                 graphicsLevelToggles[graphicsLeveId].isOn = true;
@@ -72,6 +79,9 @@ namespace MegaGame
 
             SetSliderLoadedValue("MusicVolume", musicSlider, musicValueText, musicSlider.maxValue / 2);
             SetSliderLoadedValue("UIVolume", UIAudioSlider, UIAudioValueText, UIAudioSlider.maxValue / 2);
+
+            ChangeMusicVolume();
+            ChangeUIVolume();
 
             SetSliderLoadedValue("MovementSensitivity", movementSensitivitySlider, movementSensitivityValueText, movementSensitivitySlider.maxValue / 2);
             SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, zoomSensitivitySlider.maxValue / 2);
@@ -89,10 +99,10 @@ namespace MegaGame
             isOpen = true;
             window.SetActive(true);
 
-            if (CameraController.Instance)
-                CameraController.Instance.Freeze(true);
+            if (cameraController)
+                cameraController.Freeze(true);
 
-            int graphicsLeveId = DataSaveLoad.Instance.GetSavedInt("GraphicsLevel");
+            int graphicsLeveId = dataSaveLoad.GetSavedInt("GraphicsLevel");
 
             if (graphicsLeveId != -1)
                 graphicsLevelToggles[graphicsLeveId].isOn = true;
@@ -105,13 +115,13 @@ namespace MegaGame
             isOpen = false;
             window.SetActive(false);
 
-            if (CameraController.Instance)
-                CameraController.Instance.Freeze(false);
+            if (cameraController)
+                cameraController.Freeze(false);
         }
 
         void SetSliderLoadedValue(string key, Slider slider, TextMeshProUGUI valueText, float defaultValue)
         {
-            float value = DataSaveLoad.Instance.GetSavedFloat(key);
+            float value = dataSaveLoad.GetSavedFloat(key);
 
             if (value != -1)
                 slider.value = value;
@@ -125,57 +135,57 @@ namespace MegaGame
         {
             musicValueText.text = musicSlider.value.ToString();
 
-            if (AudioController.Instance)
-                AudioController.Instance.ChangeVolume(0, musicSlider.value);
+            if (audioController)
+                audioController.ChangeVolume(0, musicSlider.value);
         }
 
         public void ChangeUIVolume()
         {
             UIAudioValueText.text = UIAudioSlider.value.ToString();
 
-            if (AudioController.Instance)
-                AudioController.Instance.ChangeVolume(1, UIAudioSlider.value);
+            if (audioController)
+                audioController.ChangeVolume(1, UIAudioSlider.value);
         }
 
         public void ChangeSFXVolume()
         {
-            if (AudioController.Instance)
-                AudioController.Instance.ChangeVolume(1, UIAudioSlider.value);
+            if (audioController)
+                audioController.ChangeVolume(1, UIAudioSlider.value);
         }
 
         public void ChangeVoiceVolume()
         {
-            if (AudioController.Instance)
-                AudioController.Instance.ChangeVolume(1, UIAudioSlider.value);
+            if (audioController)
+                audioController.ChangeVolume(1, UIAudioSlider.value);
         }
 
         public void ChangeGraphicsLevel(int id)
         {
             SetGraphicsLevel(id);
-            DataSaveLoad.Instance.Save("GraphicsLevel", id);
+            dataSaveLoad.Save("GraphicsLevel", id);
         }
 
         void SetGraphicsLevel(int id)
         {
-            if (App.Instance)
-                App.Instance.SetGraphicsLevel(id);
+            if (app)
+                app.SetGraphicsLevel(id);
         }
 
         public void ChangeResolutionLevel(int id)
         {
             SetResolutionLevel(id);
-            DataSaveLoad.Instance.Save("ScreenResolution", id);
+            dataSaveLoad.Save("ScreenResolution", id);
         }
 
         void SetResolutionLevel(int id)
         {
-            if (App.Instance)
-                App.Instance.SetResolution(id);
+            if (app)
+                app.SetResolution(id);
         }
 
         void SetScreenResolutionSettings()
         {
-            int screenResolution = DataSaveLoad.Instance.GetSavedInt("ScreenResolution");
+            int screenResolution = dataSaveLoad.GetSavedInt("ScreenResolution");
 
             if (screenResolution != -1)
                 screenResolutionToggles[screenResolution].isOn = true;
@@ -199,16 +209,16 @@ namespace MegaGame
         {
             movementSensitivityValueText.text = movementSensitivitySlider.value.ToString();
 
-            if (CameraController.Instance)
-                CameraController.Instance.ChangeMovementSensitivity(movementSensitivitySlider.value);
+            if (cameraController)
+                cameraController.ChangeMovementSensitivity(movementSensitivitySlider.value);
         }
 
         public void ChangeZoomSensitivity()
         {
             zoomSensitivityValueText.text = zoomSensitivitySlider.value.ToString();
 
-            if (CameraController.Instance)
-                CameraController.Instance.ChangeZoomSensitivity(zoomSensitivitySlider.value);
+            if (cameraController)
+                cameraController.ChangeZoomSensitivity(zoomSensitivitySlider.value);
         }
 
         public void SetLocale(string localeCode)
