@@ -155,6 +155,8 @@ namespace MegaGame.UI
             endGameWindow.SetActive(false);
             victoryPanel.SetActive(false);
             defeatPanel.SetActive(false);
+
+            additionalObjects.HideAllPanels();
         }
 
         public void StartBattle()
@@ -162,6 +164,7 @@ namespace MegaGame.UI
             HideStartGameWindow();
             gameController.StartBattle();
             ShowHUDButtons(true);
+            additionalObjects.HideAllPanels();
         }
 
         public void PrepareNewBattle()
@@ -169,6 +172,7 @@ namespace MegaGame.UI
             ShowStartGameWindow();
             gameController.PrepareNewBattle();
             ShowHUDButtons(false);
+            additionalObjects.HideAllPanels();
         }
 
         public void ShowEndCampaignWindow()
@@ -200,6 +204,7 @@ namespace MegaGame.UI
             mainMenu.Open();
             HideEndCampaignWindow();
             CloseGoToMainMenuQuestionWindow();
+            additionalObjects.HideAllPanels();
         }
 
         public void SpawnTooFarFromPortMessage()
