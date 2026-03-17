@@ -134,7 +134,7 @@ namespace MegaGame.UI
             victoryPanel.SetActive(false);
             defeatPanel.SetActive(false);
 
-            additionalObjects.HideEndGamePanels();
+            additionalObjects.HideAllPanels();
 
             if (gameController.IsVictory)
             {

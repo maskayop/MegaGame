@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 4556531159505048516}
   - component: {fileID: 2486254894649792254}
   m_Layer: 5
-  m_Name: Raw Image
+  m_Name: Victory Raw Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1356,7 +1356,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 750, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4556531159505048516
 CanvasRenderer:
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 9443e847db46c0141a8fe755c4f83c47, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3114,7 +3114,7 @@ GameObject:
   - component: {fileID: 472027011940165498}
   - component: {fileID: 3342393667688300459}
   m_Layer: 5
-  m_Name: Raw Image
+  m_Name: Defeat Raw Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3137,7 +3137,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 750, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &472027011940165498
 CanvasRenderer:
@@ -3167,7 +3167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 9443e847db46c0141a8fe755c4f83c47, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -10436,6 +10436,7 @@ GameObject:
   - component: {fileID: 8189066898086787943}
   - component: {fileID: 2258267045089477589}
   - component: {fileID: 4515207280104651730}
+  - component: {fileID: 8080451105628010869}
   m_Layer: 5
   m_Name: Game Canvas
   m_TagString: Untagged
@@ -10683,6 +10684,20 @@ MonoBehaviour:
   playerColor: {r: 1, g: 0.42009807, b: 0.3, a: 1}
   enemyColor: {r: 0.3, g: 0.6431374, b: 1, a: 1}
   neutralColor: {r: 1, g: 0.8284313, b: 0.3, a: 1}
+--- !u!114 &8080451105628010869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550202891944635508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143d00bb5f74d4745923239dc068aa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIAdditionalCameraRender
+  victoryRawImage: {fileID: 2486254894649792254}
+  defeatRawImage: {fileID: 3342393667688300459}
 --- !u!1 &7719576414815464119
 GameObject:
   m_ObjectHideFlags: 0

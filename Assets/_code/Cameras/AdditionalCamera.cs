@@ -5,22 +5,25 @@ namespace MegaGame
     [RequireComponent(typeof(Camera))]
     public class AdditionalCamera : MonoBehaviour
     {
-        public Camera cam;
         public int width = 512;
         public int height = 512;
-        public RenderTexture rt;
+
+        Camera cam;
+        RenderTexture renderTexture;
 
         void Awake()
         {
-            rt = new RenderTexture(width, height, 32, RenderTextureFormat.ARGB32);
+            cam = GetComponent<Camera>();
 
-            rt.autoGenerateMips = false;
-            rt.useMipMap = false;
-            rt.antiAliasing = 1;
-            rt.depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D32_SFloat_S8_UInt;
+            renderTexture = new RenderTexture(width, height, 32, RenderTextureFormat.ARGB32);
 
-            rt.Create();
-            cam.targetTexture = rt;
+            renderTexture.autoGenerateMips = false;
+            renderTexture.useMipMap = false;
+            renderTexture.antiAliasing = 1;
+            renderTexture.depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D32_SFloat_S8_UInt;
+
+            renderTexture.Create();
+            cam.targetTexture = renderTexture;
 
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0, 0, 0, 0);
@@ -33,6 +36,11 @@ namespace MegaGame
                 cam.targetTexture.Release();
                 Destroy(cam.targetTexture);
             }
+        }
+
+        public RenderTexture GetRenderTexture()
+        {
+            return renderTexture;
         }
     }
 }

@@ -117,7 +117,8 @@ namespace MegaGame
 
             for (int i = 0; i < objectsManager.playerShips.Count; i++)
                 if (objectsManager.playerShips[i])
-                    playerMaintenance += objectsManager.playerShips[i].GetComponent<Warship>().maintenance;
+                    if (objectsManager.playerShips[i].GetComponent<Warship>())
+                        playerMaintenance += objectsManager.playerShips[i].GetComponent<Warship>().maintenance;
 
             playerShipsCount = objectsManager.playerShips.Count;
 
@@ -130,7 +131,8 @@ namespace MegaGame
 
             for (int i = 0; i < objectsManager.enemyShips.Count; i++)
                 if (objectsManager.enemyShips[i])
-                    enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Warship>().maintenance;
+                    if (objectsManager.enemyShips[i].GetComponent<Warship>())
+                        enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Warship>().maintenance;
 
             enemyShipsCount = objectsManager.enemyShips.Count;
 

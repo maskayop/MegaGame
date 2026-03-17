@@ -13,7 +13,14 @@ namespace MegaGame
 
         [Header("End Game")]
         [SerializeField] GameObject victoryPanel;
+        public AdditionalCamera victoryAdditionalCamera;
+
         [SerializeField] GameObject defeatPanel;
+        public AdditionalCamera defeatAdditionalCamera;
+
+        [Header("Shop")]
+        [SerializeField] GameObject shopPanel;
+        public AdditionalCamera shopAdditionalCamera;
 
         GameController gameController;
 
@@ -50,7 +57,7 @@ namespace MegaGame
         {
             gameController = GameController.Instance;
 
-            HideEndGamePanels();
+            HideAllPanels();
         }
 
         public void ShowVictoryPanel(bool state)
@@ -63,10 +70,16 @@ namespace MegaGame
             defeatPanel.SetActive(state);
         }
 
-        public void HideEndGamePanels()
+        public void ShowShopPanel(bool state)
+        {
+            shopPanel.SetActive(state);
+        }
+
+        public void HideAllPanels()
         {
             ShowVictoryPanel(false);
             ShowDefeatPanel(false);
+            ShowShopPanel(false);
         }
 
         public void ShowStartGameModelButton(bool state)

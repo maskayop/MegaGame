@@ -3051,6 +3051,93 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 592940832243026830, guid: 5d8df7fe42cfee24594b03be5f31a541, type: 3}
   m_PrefabInstance: {fileID: 202241172}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &203956067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203956068}
+  m_Layer: 0
+  m_Name: Shop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &203956068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203956067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 207519880}
+  m_Father: {fileID: 714217654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &207519879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 207519880}
+  - component: {fileID: 207519881}
+  m_Layer: 0
+  m_Name: Shop Camera Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &207519880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207519879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1676015297}
+  m_Father: {fileID: 203956068}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+--- !u!95 &207519881
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207519879}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 750bf0d9996c1db4f86dd9aea4571155, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &216525844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9149,6 +9236,7 @@ Transform:
   - {fileID: 117901524}
   - {fileID: 1563627659}
   - {fileID: 2124112073}
+  - {fileID: 203956068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &714217655
@@ -9166,7 +9254,11 @@ MonoBehaviour:
   startGameModelButton: {fileID: 117901521}
   offsetY: 30
   victoryPanel: {fileID: 1563627658}
+  victoryAdditionalCamera: {fileID: 1449091308299038030}
   defeatPanel: {fileID: 2124112072}
+  defeatAdditionalCamera: {fileID: 1760931559}
+  shopPanel: {fileID: 203956067}
+  shopAdditionalCamera: {fileID: 1676015298}
 --- !u!1001 &718103478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18044,6 +18136,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82521da583ededf4f937d889d14e119f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.Island
+--- !u!1001 &1676015296
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 207519880}
+    m_Modifications:
+    - target: {fileID: 293745687249082110, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_Name
+      value: Victory Additional Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228421500803150849, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+      propertyPath: field of view
+      value: 45
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+--- !u!4 &1676015297 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+  m_PrefabInstance: {fileID: 1676015296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1676015298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3866135027256229318, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+  m_PrefabInstance: {fileID: 1676015296}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
 --- !u!1 &1677048848
 GameObject:
   m_ObjectHideFlags: 0
@@ -18993,7 +19162,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 293745687249082110, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
       propertyPath: m_Name
-      value: Additional Camera
+      value: Defeat Additional Camera
       objectReference: {fileID: 0}
     - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19045,6 +19214,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
   m_PrefabInstance: {fileID: 1760931557}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1760931559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3866135027256229318, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+  m_PrefabInstance: {fileID: 1760931557}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
 --- !u!1001 &1769607210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22722,7 +22902,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 293745687249082110, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
       propertyPath: m_Name
-      value: Additional Camera
+      value: Victory Additional Camera
       objectReference: {fileID: 0}
     - target: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22769,6 +22949,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+--- !u!114 &1449091308299038030 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3866135027256229318, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+  m_PrefabInstance: {fileID: 1449091308299038029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
 --- !u!1001 &3293889732735152492
 PrefabInstance:
   m_ObjectHideFlags: 0

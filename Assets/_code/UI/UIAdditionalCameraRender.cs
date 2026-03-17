@@ -5,12 +5,17 @@ namespace MegaGame.UI
 {
     public class UIAdditionalCameraRender : MonoBehaviour
     {
-        [SerializeField] AdditionalCamera additionalCamera;
-        [SerializeField] RawImage rawImage;
+        [SerializeField] RawImage victoryRawImage;
+        [SerializeField] RawImage defeatRawImage;
+
+        AdditionalSceneObjects additionalSceneObjects;
 
         void Start()
         {
-            rawImage.texture = additionalCamera.rt;
+            additionalSceneObjects = AdditionalSceneObjects.Instance;
+
+            victoryRawImage.texture = additionalSceneObjects.victoryAdditionalCamera.GetRenderTexture();
+            defeatRawImage.texture = additionalSceneObjects.defeatAdditionalCamera.GetRenderTexture();
         }
     }
 }
