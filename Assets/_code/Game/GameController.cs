@@ -561,13 +561,17 @@ namespace MegaGame
         public void SetGameStateAsWorld()
         {
             gameState = GameState.world;
-            cameraController.SetTranslationZToMax();
+
+            if (cameraController)
+                cameraController.SetTranslationZToMax();
         }
 
         public void SetGameStateAsBattle()
         {
             gameState = GameState.battle;
-            cameraController.SetTranslationZToBase();
+
+            if (cameraController)
+                cameraController.SetTranslationZToBase();
         }
 
         public void SetGameStateAsMenu()

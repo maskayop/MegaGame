@@ -38,6 +38,8 @@ namespace MegaGame.UI
         GameController gameController;
         GameDataSaver gameDataSaver;
         AdditionalSceneObjects additionalObjects;
+        UISettingsWindow settingsWindow;
+        UIGameShop gameShop;
 
         GameState currentGameState;
 
@@ -58,6 +60,8 @@ namespace MegaGame.UI
             gameController = GameController.Instance;
             gameDataSaver = GameDataSaver.Instance;
             additionalObjects = AdditionalSceneObjects.Instance;
+            settingsWindow = UISettingsWindow.Instance;
+            gameShop = UIGameShop.Instance;
 
             ShowStartGameWindow();
         }
@@ -148,6 +152,7 @@ namespace MegaGame.UI
             }
 
             ShowHUDButtons(false);
+            HideSettingsWindow();
         }
 
         void HideEndGameWindow()
@@ -190,6 +195,7 @@ namespace MegaGame.UI
             }
 
             ShowHUDButtons(false);
+            HideSettingsWindow();
         }
 
         void HideEndCampaignWindow()
@@ -259,6 +265,25 @@ namespace MegaGame.UI
         public void CloseGoToMainMenuQuestionWindow()
         {
             goToMainMenuQuestionWindow.SetActive(false);
+        }
+
+        void HideSettingsWindow()
+        {
+            if (settingsWindow)
+            {
+                if (settingsWindow.IsOpen)
+                    settingsWindow.Close();
+            }
+        }
+
+        public void OpenShopWindow()
+        {
+            gameShop.Open();
+        }
+
+        public void CloseShopWindow()
+        {
+            gameShop.Close();
         }
     }
 }

@@ -33,14 +33,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -78,7 +70,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_Name
-      value: Prev Camera
+      value: Prev
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605083153410811780, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_fontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

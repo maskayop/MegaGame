@@ -32,9 +32,18 @@ namespace MegaGame
         [SerializeField] Color neutralColor = Color.white;
 
         LocalizedString localizedStringName;
+        CameraController cameraController;
+
+        void Start()
+        {
+            cameraController = CameraController.Instance;
+        }
 
         void Update()
         {
+            if (!cameraController)
+                return;
+
             if (transform.localScale.x < scaleForDisabling)
                 container.SetActive(false);
             else

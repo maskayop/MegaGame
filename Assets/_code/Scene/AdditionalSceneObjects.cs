@@ -79,7 +79,7 @@ namespace MegaGame
         {
             ShowVictoryPanel(false);
             ShowDefeatPanel(false);
-            ShowShopPanel(false);
+            //ShowShopPanel(false);
         }
 
         public void ShowStartGameModelButton(bool state)

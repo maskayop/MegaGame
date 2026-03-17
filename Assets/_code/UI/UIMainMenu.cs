@@ -28,8 +28,11 @@ namespace MegaGame.UI
 
         GameController gameController;
         GameDataSaver gameDataSaver;
+        CameraController cameraController;
 
         List<string> accountsNames = new List<string>();
+
+        UIGameShop gameShop;
 
         void Start()
         {
@@ -58,6 +61,8 @@ namespace MegaGame.UI
         {
             gameController = GameController.Instance;
             gameDataSaver = GameDataSaver.Instance;
+            cameraController = CameraController.Instance;
+            gameShop = UIGameShop.Instance;
 
             currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
             CloseAccountManagerWindow();
@@ -67,15 +72,19 @@ namespace MegaGame.UI
         {
             isOpen = true;
             mainWindow.SetActive(true);
-            CameraController.Instance.SetFarClipPlaneToZero(true);
             gameController.SetGameStateAsMenu();
+
+            if (cameraController)
+                cameraController.SetFarClipPlaneToZero(true);
         }
 
         public void Close()
         {
             isOpen = false;
             mainWindow.SetActive(false);
-            CameraController.Instance.SetFarClipPlaneToZero(false);
+
+            if (cameraController)
+                cameraController.SetFarClipPlaneToZero(false);
         }
 
         public void OpenSettingsWindow()
@@ -164,6 +173,16 @@ namespace MegaGame.UI
         public void CloseExitAppWindow()
         {
             exitAppWindow.SetActive(false);
+        }
+
+        public void OpenShopWindow()
+        {
+            gameShop.Open();
+        }
+
+        public void CloseShopWindow()
+        {
+            gameShop.Close();
         }
     }
 }

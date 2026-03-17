@@ -24,9 +24,6 @@ namespace MegaGame
 
             renderTexture.Create();
             cam.targetTexture = renderTexture;
-
-            cam.clearFlags = CameraClearFlags.SolidColor;
-            cam.backgroundColor = new Color(0, 0, 0, 0);
         }
 
         void OnDestroy()
