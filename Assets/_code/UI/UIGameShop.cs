@@ -64,10 +64,12 @@ namespace MegaGame.UI
         [Header("Items")]
         [SerializeField] List<Data_Item> shopItemsData = new List<Data_Item>();
 
+        GameController gameController;
         GameDataSaver gameDataSaver;
         CameraController cameraController;
         AdditionalSceneObjects additionalSceneObjects;
         GameplayObjectsBuilder gameplayObjectsBuilder;
+        GameShop gameShop;
 
         Data_Item currentItemData;
         int currentItemId = 0;
@@ -100,10 +102,12 @@ namespace MegaGame.UI
 
         public void Init()
         {
+            gameController = GameController.Instance;
             gameDataSaver = GameDataSaver.Instance;
             cameraController = CameraController.Instance;
             additionalSceneObjects = AdditionalSceneObjects.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
+            gameShop = GameShop.Instance;
 
             gameDataSaver.LoadLastAccount();
             gameDataSaver.GetPlayerMoney();
@@ -205,6 +209,9 @@ namespace MegaGame.UI
             if (!currentItemData)
                 return;
 
+            if (!gameController)
+                return;
+
             if (currentItemData.openGamePrice == 0 && currentItemData.openRealPrice == 0)
             {
                 openItemButton.SetActive(false);
@@ -230,6 +237,15 @@ namespace MegaGame.UI
                 shopGameMoneyImage.gameObject.SetActive(false);
                 shopRealMoneyImage.gameObject.SetActive(true);
             }
+
+            if (gameShop.CheckForPurchasing(currentItemData))
+            {
+                openItemButton.SetActive(false);
+                itemIsAvailablePanel.SetActive(true);
+            }
+
+            if (gameController.gameState != GameController.GameState.battle)
+                openItemButton.SetActive(false);
         }
 
         public void ShowOpenItemQuestionButtons(bool state)
@@ -245,6 +261,10 @@ namespace MegaGame.UI
         public void TryPurchaseItem()
         {
             ShowOpenItemQuestionButtons(false);
+            gameShop.TryPurchaseItem(currentItemData);
+            UpdateItemOpenState();
+
+            UIShipsSelection.Instance.UpdateButtonsState();
         }
     }
 }

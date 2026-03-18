@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame
 {
@@ -9,7 +10,7 @@ namespace MegaGame
     {
         public string name;
         public Data_Item item;
-        public bool isOpen;
+        public bool isPurchased;
     }
 
     public class GameShop : MonoBehaviour
@@ -18,6 +19,8 @@ namespace MegaGame
 
         [Header("Items")]
         [SerializeField] List<GameplayObjectItem> items = new List<GameplayObjectItem>();
+
+        ResourcesController resourcesController;
 
         void Awake()
         {
@@ -38,12 +41,40 @@ namespace MegaGame
 
         public void Init()
         {
+            resourcesController = ResourcesController.Instance;
 
+            for (int i = 0; i < items.Count; i++)
+                items[i].isPurchased = false;
         }
 
-        public void TryPurchaseItem(Data_Item item)
+        public void TryPurchaseItem(Data_Item INitem)
         {
+            if (Strint.Subtraction(resourcesController.PlayerMoney, Strint.GetString(INitem.openGamePrice)) < 0)
+                return;
 
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item == INitem)
+                {
+                    items[i].isPurchased = true;
+                    resourcesController.RemoveMoneyFromPlayer(INitem.openGamePrice);
+                    break;
+                }
+            }
+        }
+
+        public bool CheckForPurchasing(Data_Item INitem)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item == INitem)
+                {
+                    if (items[i].isPurchased)
+                        return true;
+                }
+            }
+
+            return false;
         }
     }
 }

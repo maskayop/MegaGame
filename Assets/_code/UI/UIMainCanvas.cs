@@ -168,6 +168,7 @@ namespace MegaGame.UI
             gameController.StartBattle();
             ShowHUDButtons(true);
             additionalObjects.HideAllPanels();
+            UIShipsSelection.Instance.UpdateButtonsState();
         }
 
         public void PrepareNewBattle()
