@@ -101,7 +101,7 @@ namespace MegaGame
                     return;
             }
 
-            resourcesController.RemoveMoneyFromPlayer(GetCurrentBuildingShipCost(shipLevel));
+            resourcesController.RemoveMoneyFromPlayer(GetShipBuildingCost(shipLevel));
         }
 
         public void TryCreateEnemyShip(BaseSettlement targetSettlement, bool isAttackingShipType)
@@ -132,7 +132,7 @@ namespace MegaGame
                     return;
             }
 
-            resourcesController.RemoveMoneyFromEnemy(GetCurrentBuildingShipCost(shipLevel));
+            resourcesController.RemoveMoneyFromEnemy(GetShipBuildingCost(shipLevel));
         }
 
         public void BuildShip(GameObject shipObject, Transform buildingPosition, BaseSettlement targetSettlement)
@@ -200,7 +200,7 @@ namespace MegaGame
                 return maxValue;
         }
 
-        int GetCurrentBuildingShipCost(int shipLevel)
+        public int GetShipBuildingCost(int shipLevel)
         {
             if (shipLevel == 1)
                 return Strint.GetInt(smallShipCost);
@@ -228,7 +228,7 @@ namespace MegaGame
 
         public void SetMaxBuildingShip(int id)
         {
-            maxBuildingShip = (id + 1);
+            maxBuildingShip = id + 1;
         }
 
         Port FindClosestPortToVillage(Village targetVillage, Owner owner)

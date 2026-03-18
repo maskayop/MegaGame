@@ -1,8 +1,18 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static MegaGame.GameController;
 
 namespace MegaGame
 {
+    [Serializable]
+    public class ShopItemSceneObject
+    {
+        public string name;
+        public Data_Item itemData;
+        public GameObject itemGameObject;
+    }
+
     public class AdditionalSceneObjects : MonoBehaviour
     {
         public static AdditionalSceneObjects Instance;
@@ -22,7 +32,11 @@ namespace MegaGame
         [SerializeField] GameObject shopPanel;
         public AdditionalCamera shopAdditionalCamera;
 
+        [SerializeField] List<ShopItemSceneObject> shopItemSceneObjects = new List<ShopItemSceneObject>();
+
         GameController gameController;
+
+        bool shopPanelIsOpen = false;
 
         void Awake()
         {
@@ -70,16 +84,24 @@ namespace MegaGame
             defeatPanel.SetActive(state);
         }
 
-        public void ShowShopPanel(bool state)
+        public void ShowShopPanel()
         {
-            shopPanel.SetActive(state);
+            shopPanel.SetActive(true);
+            shopPanelIsOpen = true;
+        }
+
+        public void HideShopPanel()
+        {
+            shopPanel.SetActive(false);
+            shopPanelIsOpen = false;
+            HideAllShopItemsObjects();
         }
 
         public void HideAllPanels()
         {
             ShowVictoryPanel(false);
             ShowDefeatPanel(false);
-            //ShowShopPanel(false);
+            HideShopPanel();
         }
 
         public void ShowStartGameModelButton(bool state)
@@ -94,6 +116,27 @@ namespace MegaGame
 
             startGameModelButton.transform.position = gameController.CalculatePositionBetweenPorts();
             startGameModelButton.transform.position += new Vector3(0, offsetY, 0);
+        }
+
+        public void ShowShopItem(Data_Item item)
+        {
+            HideAllShopItemsObjects();
+
+            if (!shopPanelIsOpen)
+                ShowShopPanel();
+
+            for (int i = 0; i < shopItemSceneObjects.Count; i++)
+                if (item == shopItemSceneObjects[i].itemData)
+                {
+                    shopItemSceneObjects[i].itemGameObject.SetActive(true);
+                    break;
+                }
+        }
+
+        void HideAllShopItemsObjects()
+        {
+            for (int i = 0; i < shopItemSceneObjects.Count; i++)
+                shopItemSceneObjects[i].itemGameObject.SetActive(false);
         }
     }
 }
