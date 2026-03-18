@@ -94,7 +94,7 @@ namespace MegaGame
             if (!canBuildShips)
                 return;
 
-            if (resourcesController.GetEnemyMoney() >= gameplayObjectsBuilder.smallShipBuildingPrice)
+            if (resourcesController.GetEnemyMoney() >= gameplayObjectsBuilder.GetShipBuildingCost(1))
             {
                 if (currentPort.targetEnemies.Count > 0)
                     SpawnShip();

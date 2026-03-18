@@ -39,6 +39,9 @@ namespace MegaGame
             if (gameController.gameState == GameController.GameState.menu)
                 return;
 
+            if (UIGameShop.Instance.isOpen)
+                return;
+
             if (Input.GetMouseButtonDown(2))
                 PlaceCamera();
 

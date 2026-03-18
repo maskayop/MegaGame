@@ -11,15 +11,21 @@ namespace MegaGame
         public static GameplayObjectsBuilder Instance { get; private set; }
 
         [Header("Ships Prices")]
-        public int smallShipBuildingPrice = 10;
-        public int mediumShipBuildingPrice = 30;
-        public int bigShipBuildingPrice = 60;
-        public int megaShipBuildingPrice = 100;
+        [SerializeField] int smallShipBuildingPrice = 10;
+        [SerializeField] int mediumShipBuildingPrice = 30;
+        [SerializeField] int bigShipBuildingPrice = 60;
+        [SerializeField] int megaShipBuildingPrice = 100;
+
+        [Header("Enemy Ships Building Limits")]
+        [SerializeField] int enemyDefenderShipBuildMinDay = 50;
+        [SerializeField] int enemyMediumShipBuildMinDay = 100;
+        [SerializeField] int enemyBigShipBuildMinDay = 200;
+        [SerializeField] int enemyMegaShipBuildMinDay = 500;
 
         [Header("Buildings Prices")]
-        public int traderPrice = 500;
-        public int smallPortFortressPrice = 700;
-        public int bigPortFortressPrice = 1000;
+        [SerializeField] int traderPrice = 500;
+        [SerializeField] int smallPortFortressPrice = 700;
+        [SerializeField] int bigPortFortressPrice = 1000;
 
         string smallShipCost;
         string mediumShipCost;
@@ -33,6 +39,7 @@ namespace MegaGame
         GameController gameController;
         ScenePrefabsManager scenePrefabsManager;
         ResourcesController resourcesController;
+        GlobalTimeController globalTime;
 
         int maxBuildingShip = 0;
 
@@ -58,6 +65,7 @@ namespace MegaGame
             gameController = GameController.Instance;
             scenePrefabsManager = ScenePrefabsManager.Instance;
             resourcesController = ResourcesController.Instance;
+            globalTime = GlobalTimeController.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingPrice);
             mediumShipCost = Strint.GetString(mediumShipBuildingPrice);
@@ -112,10 +120,21 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.EnemyMoney, smallShipCost) < 0)
                 return;
 
-            int shipLevel = GetBuildingShipLevel(resourcesController.EnemyMoney, true, 3);
+            int maxShipLevel = 0;
+
+            if (globalTime.currentDay >= 0 && globalTime.currentDay < enemyMediumShipBuildMinDay)
+                maxShipLevel = 1;
+            else if (globalTime.currentDay >= enemyMediumShipBuildMinDay && globalTime.currentDay < enemyBigShipBuildMinDay)
+                maxShipLevel = 2;
+            else if (globalTime.currentDay >= enemyBigShipBuildMinDay && globalTime.currentDay < enemyMegaShipBuildMinDay)
+                maxShipLevel = 3;
+            else if (globalTime.currentDay >= enemyMegaShipBuildMinDay)
+                maxShipLevel = 4;
+
+            int currentShipLevel = GetBuildingShipLevel(resourcesController.EnemyMoney, true, maxShipLevel);
 
             if (isAttackingShipType) // Attacking Ship
-                BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, shipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
+                BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, currentShipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
             else if (!isAttackingShipType) // Defender Ship
             {
                 if (!targetSettlement.Island.DefenderShip)
@@ -123,16 +142,21 @@ namespace MegaGame
                     if (Strint.Subtraction(resourcesController.EnemyMoney, mediumShipCost) < 0)
                         return;
 
-                    shipLevel = 2;
-                    BuildShip(scenePrefabsManager.GetDefenderShipPrefab(false), FindClosestPortToVillage((Village)targetSettlement, Owner.enemy).transform, targetSettlement);
+                    if (globalTime.currentDay >= enemyDefenderShipBuildMinDay)
+                    {
+                        currentShipLevel = 2;
+                        BuildShip(scenePrefabsManager.GetDefenderShipPrefab(false), FindClosestPortToVillage((Village)targetSettlement, Owner.enemy).transform, targetSettlement);
+                    }
+                    else
+                        return;
                 }
                 else if (targetSettlement.Island.DefenderShip && targetSettlement.Island.DefenderShip.owner == Owner.player)
-                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, shipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
+                    BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, currentShipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
                 else
                     return;
             }
 
-            resourcesController.RemoveMoneyFromEnemy(GetShipBuildingCost(shipLevel));
+            resourcesController.RemoveMoneyFromEnemy(GetShipBuildingCost(currentShipLevel));
         }
 
         public void BuildShip(GameObject shipObject, Transform buildingPosition, BaseSettlement targetSettlement)

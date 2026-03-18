@@ -8,19 +8,21 @@ namespace MegaGame
     {
         public UnityEvent onClick;
 
-        void Start()
-        {
-            Init();
-        }
-
         void Update()
         {
+            if (!GameController.Instance)
+                return;
+
+            if (GameController.Instance && GameController.Instance.gameState == GameController.GameState.menu)
+                return;
+
+            if (!UIGameShop.Instance)
+                return;
+
+            if (UIGameShop.Instance && UIGameShop.Instance.isOpen)
+                return;
+
             SelectObject();
-        }
-
-        public void Init()
-        {
-
         }
 
         void SelectObject()

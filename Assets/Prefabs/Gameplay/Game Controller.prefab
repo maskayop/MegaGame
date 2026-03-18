@@ -58,7 +58,6 @@ MonoBehaviour:
   enemyOpposingPorts:
     protagonPort: {fileID: 0}
     antagonPort: {fileID: 0}
-  offsetY: 30
   allIslands: []
   allEmptyIslands: []
   allPorts: []
@@ -74,6 +73,7 @@ MonoBehaviour:
   allPossibleEnemyTargetPorts: []
   distanceForPossibleTargets: 150
   possibleTargetSettlementForEnemy: []
+  isExploringMode: 0
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +161,19 @@ MonoBehaviour:
   traderPrice: 500
   smallPortFortressPrice: 700
   bigPortFortressPrice: 1000
+  items:
+  - name: "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    item: {fileID: 11400000, guid: 2b33dc6c20d02e94389229863572a204, type: 2}
+    isOpen: 0
+  - name: "\u0417\u0430\u0449\u0438\u0442\u043D\u044B\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    item: {fileID: 11400000, guid: 31ef078c85c384047af011d74f6745a6, type: 2}
+    isOpen: 0
+  - name: "\u0411\u043E\u043B\u044C\u0448\u043E\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    item: {fileID: 11400000, guid: 59fa455d1e8584b4190930cc80a464f6, type: 2}
+    isOpen: 0
+  - name: "\u041C\u0435\u0433\u0430-\u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    item: {fileID: 11400000, guid: 2e0b88db98586c94faca7f17d61a5b24, type: 2}
+    isOpen: 0
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,9 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22640e42e58dce94e834c6e67780db38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.GameDataSaver
+  totalAccountsAmount: -1
   currentAccountId: -1
   currentAccountName: 
-  totalAccountsAmount: -1
 --- !u!114 &2472502709863904070
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,9 +22,10 @@ namespace MegaGame.UI
 
         [SerializeField] GameObject window;
 
-        [Header("Name and Description")]
+        [Header("Name, Description, Money")]
         [SerializeField] TextMeshProUGUI itemNameText;
         [SerializeField] TextMeshProUGUI itemDescriptionText;
+        [SerializeField] TextMeshProUGUI playerMoneyText;
 
         [Header("Open Item Panel")]
         [SerializeField] GameObject openItemButton;
@@ -93,6 +94,8 @@ namespace MegaGame.UI
         {
             if (!isOpen)
                 return;
+
+            playerMoneyText.text = ResourcesController.Instance.GetPlayerMoney().ToString();
         }
 
         public void Init()
@@ -101,6 +104,9 @@ namespace MegaGame.UI
             cameraController = CameraController.Instance;
             additionalSceneObjects = AdditionalSceneObjects.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
+
+            gameDataSaver.LoadLastAccount();
+            gameDataSaver.GetPlayerMoney();
 
             if (shopItemsData.Count > 0)
             {

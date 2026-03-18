@@ -278,5 +278,10 @@ namespace MegaGame
         {
             return ((buildingState >> bitIndex) & 1) == 1;
         }
+
+        public void GetPlayerMoney()
+        {
+            resourcesController.PlayerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
+        }
     }
 }
