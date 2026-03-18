@@ -1,14 +1,24 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MegaGame.UI
 {
+    [Serializable]
+    public class ShipSelectionItem
+    {
+        public string name;
+        public UIShipSelectionButton shipSelectionButton;
+        public int shopItemId;
+    }
+
     public class UIShipsSelection : MonoBehaviour
     {
         public static UIShipsSelection Instance { get; private set; }
 
         [SerializeField] GameObject buttonsPanel;
-        [SerializeField] List<UIShipSelectionButton> shipSelectionButtons = new List<UIShipSelectionButton>();
+        [SerializeField] List<ShipSelectionItem> shipSelectionItems = new List<ShipSelectionItem>();
+        [SerializeField] ShipSelectionItem defenderShipBuildingItem;
 
         GameController gameController;
         GameplayObjectsBuilder gameplayObjectsBuilder;
@@ -43,22 +53,27 @@ namespace MegaGame.UI
             gameController = GameController.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
 
-            //shipSelectionButtons[3].gameObject.SetActive(false);
-
             SetMaxBuildingShip(2);
+            SetBuildDefenderShip();
         }
 
         public void SetMaxBuildingShip(int id)
         {
             gameplayObjectsBuilder.SetMaxBuildingShip(id);
 
-            for (int i = 0; i < shipSelectionButtons.Count; i++)
+            for (int i = 0; i < shipSelectionItems.Count; i++)
             {
                 if (id >= i)
-                    shipSelectionButtons[i].Select(true);
+                    shipSelectionItems[i].shipSelectionButton.Select(true);
                 else
-                    shipSelectionButtons[i].Select(false);
+                    shipSelectionItems[i].shipSelectionButton.Select(false);
             }
+        }
+
+        public void SetBuildDefenderShip()
+        {
+            gameplayObjectsBuilder.CanBuildDefenderShips = !gameplayObjectsBuilder.CanBuildDefenderShips;
+            defenderShipBuildingItem.shipSelectionButton.Select(gameplayObjectsBuilder.CanBuildDefenderShips);
         }
     }
 }

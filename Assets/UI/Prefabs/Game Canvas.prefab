@@ -6671,8 +6671,7 @@ RectTransform:
   - {fileID: 573490165357849549}
   - {fileID: 5614478522938533533}
   - {fileID: 3731598422107519284}
-  - {fileID: 8565068796526445393}
-  - {fileID: 350138489288747808}
+  - {fileID: 7119560042564820961}
   m_Father: {fileID: 1364461209342828980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6691,7 +6690,7 @@ GameObject:
   - component: {fileID: 8565068796526445393}
   - component: {fileID: 2397445567108931314}
   m_Layer: 5
-  m_Name: Ships Selection Panel
+  m_Name: Ships Selection Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6704,7 +6703,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4856830146741639489}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6713,7 +6712,7 @@ RectTransform:
   - {fileID: 3027394867130879111}
   - {fileID: 8965052257466491504}
   - {fileID: 3716644736786032134}
-  m_Father: {fileID: 6647520972076287651}
+  m_Father: {fileID: 7119560042564820961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -6737,7 +6736,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 6
+  m_ChildAlignment: 8
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
@@ -10622,12 +10621,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb66c494b1abf584bb581270d998fbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShipsSelection
-  buttonsPanel: {fileID: 4856830146741639489}
+  buttonsPanel: {fileID: 8010652369301981667}
   shipSelectionButtons:
   - {fileID: 4218557374138160821}
   - {fileID: 8463737739138978499}
   - {fileID: 2529906648995445812}
   - {fileID: 9046339246207404872}
+  shipSelectionItems:
+  - name: "\u041C\u0430\u043B\u044B\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    shipSelectionButton: {fileID: 4218557374138160821}
+    shopItemId: -1
+  - name: "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    shipSelectionButton: {fileID: 8463737739138978499}
+    shopItemId: 0
+  - name: "\u0411\u043E\u043B\u044C\u0448\u043E\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    shipSelectionButton: {fileID: 2529906648995445812}
+    shopItemId: 1
+  - name: "\u041C\u0435\u0433\u0430-\u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    shipSelectionButton: {fileID: 9046339246207404872}
+    shopItemId: 2
+  defenderShipBuildingItem:
+    name: "\u0417\u0430\u0449\u0438\u0442\u043D\u044B\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
+    shipSelectionButton: {fileID: 9175411820008761654}
+    shopItemId: 3
 --- !u!114 &2258267045089477589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11298,6 +11314,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 20
+--- !u!1 &8010652369301981667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7119560042564820961}
+  m_Layer: 5
+  m_Name: Ships Building Buttons Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7119560042564820961
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010652369301981667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8565068796526445393}
+  - {fileID: 8523875148193995141}
+  - {fileID: 350138489288747808}
+  m_Father: {fileID: 6647520972076287651}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8093117609810657640
 GameObject:
   m_ObjectHideFlags: 0
@@ -13351,7 +13405,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6647520972076287651}
+    m_TransformParent: {fileID: 7119560042564820961}
     m_Modifications:
     - target: {fileID: 554207667466993395, guid: e5819394c79a5e648a77d09641821812, type: 3}
       propertyPath: m_Pivot.x
@@ -13395,15 +13449,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 554207667466993395, guid: e5819394c79a5e648a77d09641821812, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 554207667466993395, guid: e5819394c79a5e648a77d09641821812, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 554207667466993395, guid: e5819394c79a5e648a77d09641821812, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 554207667466993395, guid: e5819394c79a5e648a77d09641821812, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -15642,6 +15696,115 @@ RectTransform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5543637296534783337, guid: a277a9e82b04736448ae102aab7931f6, type: 3}
   m_PrefabInstance: {fileID: 3559525007217266209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b474f94c7109027438939538230da9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShipSelectionButton
+--- !u!1001 &3727688360082992223
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7119560042564820961}
+    m_Modifications:
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549060669553435148, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+      propertyPath: m_Name
+      value: Ship Defender
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+--- !u!224 &8523875148193995141 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+  m_PrefabInstance: {fileID: 3727688360082992223}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9175411820008761654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5543637296534783337, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
+  m_PrefabInstance: {fileID: 3727688360082992223}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

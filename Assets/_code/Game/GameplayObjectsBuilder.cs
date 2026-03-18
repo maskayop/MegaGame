@@ -43,6 +43,9 @@ namespace MegaGame
 
         int maxBuildingShip = 0;
 
+        bool canBuildDefenderShips = false;
+        public bool CanBuildDefenderShips { get { return canBuildDefenderShips; } set { canBuildDefenderShips = value; } }
+
         void Awake()
         {
             if (Instance != null)
@@ -97,7 +100,7 @@ namespace MegaGame
             {
                 if (!targetSettlement.Island.DefenderShip)
                 {
-                    if (Strint.Subtraction(resourcesController.PlayerMoney, mediumShipCost) < 0)
+                    if (Strint.Subtraction(resourcesController.PlayerMoney, mediumShipCost) < 0 || !canBuildDefenderShips)
                         return;
 
                     shipLevel = 2;

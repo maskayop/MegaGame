@@ -27,6 +27,11 @@ namespace MegaGame.UI
             shipsSelectionUI.SetMaxBuildingShip(id);
         }
 
+        public void SetBuildDefenderShip()
+        {
+            shipsSelectionUI.SetBuildDefenderShip();
+        }
+
         public void Select(bool state)
         {
             imageOn.SetActive(state);

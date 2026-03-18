@@ -113,9 +113,7 @@ namespace MegaGame.UI
         public void ShowHUDButtons(bool state)
         {
             cameraZoomButtons.SetActive(state);
-
             exploringButton.Select(false);
-            exploringButton.gameObject.SetActive(state);
         }
 
         public void ShowStartGameWindow()

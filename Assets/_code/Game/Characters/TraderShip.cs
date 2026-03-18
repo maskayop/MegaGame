@@ -40,7 +40,10 @@ namespace MegaGame
                     return;
                 }
 
-                profit = resourcesController.GetRandomTraderProfit();
+                if (owner == Owner.player)
+                    profit = resourcesController.GetRandomTraderProfit(true);
+                else if (owner == Owner.enemy)
+                    profit = resourcesController.GetRandomTraderProfit(true);
 
                 UpdateCurrentTarget();
 

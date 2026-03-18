@@ -10,7 +10,8 @@ namespace MegaGame
         [SerializeField] int startMoneyForPlayer;
         [SerializeField] int startMoneyForEnemy;
 
-        [SerializeField] Vector2Int traderProfit;
+        [SerializeField] Vector2Int playerTraderProfit;
+        [SerializeField] Vector2Int enemyTraderProfit;
 
         string playerMoney;
         public string PlayerMoney { get { return playerMoney; } set { playerMoney = value; } }
@@ -263,9 +264,15 @@ namespace MegaGame
             AddMoneyToEnemy(startMoneyForEnemy * multiplier);
         }
 
-        public int GetRandomTraderProfit()
+        public int GetRandomTraderProfit(bool isPlayer)
         {
-            int r = Random.Range(traderProfit.x, traderProfit.y);
+            int r = 0;
+
+            if (isPlayer)
+                r = Random.Range(playerTraderProfit.x, playerTraderProfit.y);
+            else
+                r = Random.Range(enemyTraderProfit.x, enemyTraderProfit.y);
+
             return r;
         }
     }
