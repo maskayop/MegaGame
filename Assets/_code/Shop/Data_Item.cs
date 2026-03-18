@@ -9,8 +9,12 @@ namespace MegaGame
         public LocalizedString itemName;
         public LocalizedString itemDescription;
 
+        [Header("Prices")]
+        public int priceId;
+        public int openGamePrice;
+        public int openRealPrice;
+
         [Space(20)]
         public GameObject prefab;
-        public int priceId;
     }
 }

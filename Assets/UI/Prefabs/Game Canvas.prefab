@@ -2731,7 +2731,7 @@ GameObject:
   - component: {fileID: 8981961961902005018}
   - component: {fileID: 617887207293320673}
   m_Layer: 5
-  m_Name: Port Characteristics
+  m_Name: Settlement Characteristics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3270,7 +3270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.73333335, b: 1, a: 1}
+  m_Color: {r: 0.39999998, g: 0.8000002, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12008,8 +12008,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294949683
-  m_fontColor: {r: 0.19999999, g: 0.73333323, b: 1, a: 1}
+    rgba: 4294954086
+  m_fontColor: {r: 0.39999998, g: 0.8000002, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14630,6 +14630,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1676382701417837712, guid: 788628181c7d99a488380f354415c81f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095424510732457367, guid: 788628181c7d99a488380f354415c81f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095424510732457367, guid: 788628181c7d99a488380f354415c81f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095424510732457367, guid: 788628181c7d99a488380f354415c81f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095424510732457367, guid: 788628181c7d99a488380f354415c81f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095424510732457367, guid: 788628181c7d99a488380f354415c81f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

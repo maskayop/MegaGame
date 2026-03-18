@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MegaGame.UI
 {
@@ -24,6 +25,15 @@ namespace MegaGame.UI
         [Header("Name and Description")]
         [SerializeField] TextMeshProUGUI itemNameText;
         [SerializeField] TextMeshProUGUI itemDescriptionText;
+
+        [Header("Open Item Panel")]
+        [SerializeField] GameObject openItemButton;
+        [SerializeField] GameObject openItemButtonImage;
+        [SerializeField] GameObject openItemQuestionButtons;
+        [SerializeField] TextMeshProUGUI itemPriceText;
+        [SerializeField] Image shopGameMoneyImage;
+        [SerializeField] Image shopRealMoneyImage;
+        [SerializeField] GameObject itemIsAvailablePanel;
 
         [Header("Characteristics")]
         [SerializeField] GameObject damageContainer;
@@ -125,7 +135,9 @@ namespace MegaGame.UI
             additionalSceneObjects.ShowShopItem(currentItemData);
             currentCharacter = currentItemData.prefab.GetComponent<BaseCharacter>();
 
+            UpdateItemOpenState();
             UpdateItemTexts();
+            ShowOpenItemQuestionButtons(false);
         }
 
         public void ShowPrevNextItem(bool next)
@@ -180,6 +192,53 @@ namespace MegaGame.UI
             maintenanceText.text = currentCharacter.maintenance.ToString();
 
             buildingPriceText.text = gameplayObjectsBuilder.GetShipBuildingCost(currentItemData.priceId).ToString();
+        }
+
+        void UpdateItemOpenState()
+        {
+            if (!currentItemData)
+                return;
+
+            if (currentItemData.openGamePrice == 0 && currentItemData.openRealPrice == 0)
+            {
+                openItemButton.SetActive(false);
+                itemIsAvailablePanel.SetActive(true);
+                return;
+            }
+
+            openItemButton.SetActive(true);
+            itemIsAvailablePanel.SetActive(false);
+
+            if (currentItemData.openGamePrice != 0)
+            {
+                itemPriceText.text = currentItemData.openGamePrice.ToString();
+                itemPriceText.color = shopGameMoneyImage.color;
+                shopGameMoneyImage.gameObject.SetActive(true);
+                shopRealMoneyImage.gameObject.SetActive(false);
+            }
+
+            if (currentItemData.openRealPrice != 0)
+            {
+                itemPriceText.text = currentItemData.openRealPrice.ToString();
+                itemPriceText.color = shopRealMoneyImage.color;
+                shopGameMoneyImage.gameObject.SetActive(false);
+                shopRealMoneyImage.gameObject.SetActive(true);
+            }
+        }
+
+        public void ShowOpenItemQuestionButtons(bool state)
+        {
+            openItemQuestionButtons.SetActive(state);
+
+            if (state)
+                openItemButtonImage.SetActive(false);
+            else
+                openItemButtonImage.SetActive(true);
+        }
+
+        public void TryPurchaseItem()
+        {
+            ShowOpenItemQuestionButtons(false);
         }
     }
 }

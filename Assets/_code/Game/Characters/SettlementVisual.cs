@@ -13,6 +13,7 @@ namespace MegaGame
 
         [Header("Constructions")]
         [SerializeField] GameObject fortVisual;
+        [SerializeField] GameObject traderVisual;
 
         BaseSettlement settlement;
         SettlementConstructions settlementConstructions;
@@ -59,6 +60,7 @@ namespace MegaGame
             }
 
             SetFortVisual();
+            SetTraderVisual();
         }
 
         public GameObject GetVisualObject()
@@ -99,6 +101,20 @@ namespace MegaGame
                 fortVisual.gameObject.SetActive(false);
             else
                 fortVisual.gameObject.SetActive(true);
+        }
+
+        public void SetTraderVisual()
+        {
+            if (!settlementConstructions)
+                return;
+
+            if (!traderVisual)
+                return;
+
+            if (!settlementConstructions.traderIsBuilt)
+                traderVisual.gameObject.SetActive(false);
+            else
+                traderVisual.gameObject.SetActive(true);
         }
     }
 }
