@@ -13,9 +13,13 @@ namespace MegaGame
         public short currentAccountId = -1;
         public string currentAccountName;
 
+        [Header("Items")]
+        [SerializeField] List<Data_Item> items = new List<Data_Item>();
+
         DataSaveLoad dataSaveLoad;
         GameController gameController;
         ResourcesController resourcesController;
+        GameShop gameShop;
 
         string islandOwnerFormat = " IO";
         string startPlayerIslandFormat = " SPI";
@@ -35,11 +39,18 @@ namespace MegaGame
         string totalAccountsAmountFormat = "TAC";
 
         string settlementConstructionsStateFormat = " SCS";
+        string shopDataStateFormat = " SDS";
 
         const int FORT_BIT = 0;
         const int TRADE_BIT = 1;
 
+        const int MediumShip_BIT = 0;
+        const int BigShip_BIT = 1;
+        const int MegaShip_BIT = 2;
+        const int DefenderShip_BIT = 3;
+
         int buildingStateForSave = 0;
+        int shopDataForSave = 0;
 
         void Awake()
         {
@@ -58,6 +69,7 @@ namespace MegaGame
             dataSaveLoad = DataSaveLoad.Instance;
             gameController = GameController.Instance;
             resourcesController = ResourcesController.Instance;
+            gameShop = GameShop.Instance;
         }
 
         public void SaveGameData()
@@ -107,6 +119,7 @@ namespace MegaGame
             else
                 dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)0);
 
+            SaveShopData();
             SaveLastAccount();
         }
 
@@ -164,6 +177,8 @@ namespace MegaGame
             }
             else
                 gameController.CampaignIsEnded = false;
+
+            LoadShopData();
         }
 
         public void LoadAllIslandsCurrentHealth()
@@ -279,9 +294,52 @@ namespace MegaGame
             return ((buildingState >> bitIndex) & 1) == 1;
         }
 
-        public void GetPlayerMoney()
+        public void LoadPlayerMoneyData()
         {
             resourcesController.PlayerMoney = dataSaveLoad.GetSavedString(currentAccountNameKey + playerMoneyFormat);
+        }
+
+        public void SaveShopData()
+        {
+            SetShopDataState(MediumShip_BIT, gameShop.CheckForPurchasing(items[0]));
+            SetShopDataState(BigShip_BIT, gameShop.CheckForPurchasing(items[1]));
+            SetShopDataState(MegaShip_BIT, gameShop.CheckForPurchasing(items[2]));
+            SetShopDataState(DefenderShip_BIT, gameShop.CheckForPurchasing(items[3]));
+
+            dataSaveLoad.Save(currentAccountNameKey + shopDataStateFormat, shopDataForSave);
+        }
+
+        public void LoadShopData()
+        {
+            int purchasedState = dataSaveLoad.GetSavedInt(currentAccountNameKey + shopDataStateFormat);
+
+            if (purchasedState == -1)
+            {
+                gameShop.SetPurchasedState(items[0], false);
+                gameShop.SetPurchasedState(items[1], false);
+                gameShop.SetPurchasedState(items[2], false);
+                gameShop.SetPurchasedState(items[3], false);
+            }
+            else
+            {
+                gameShop.SetPurchasedState(items[0], GetShopDataState(MediumShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[2], GetShopDataState(MegaShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState));
+            }
+        }
+
+        void SetShopDataState(int bitIndex, bool isPurchased)
+        {
+            if (isPurchased)
+                shopDataForSave |= (1 << bitIndex);
+            else
+                shopDataForSave &= ~(1 << bitIndex);
+        }
+
+        bool GetShopDataState(int bitIndex, int purchasedState)
+        {
+            return ((purchasedState >> bitIndex) & 1) == 1;
         }
     }
 }

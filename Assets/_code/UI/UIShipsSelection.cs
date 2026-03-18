@@ -63,6 +63,9 @@ namespace MegaGame.UI
 
         public void SetMaxBuildingShip(int id)
         {
+            if (!gameplayObjectsBuilder)
+                return;
+
             gameplayObjectsBuilder.SetMaxBuildingShip(id);
 
             for (int i = 0; i < shipSelectionItems.Count; i++)
@@ -82,6 +85,9 @@ namespace MegaGame.UI
 
         public void UpdateButtonsState()
         {
+            if (!gameShop)
+                return;
+
             for (int i = 0; i < shipSelectionItems.Count; i++)
             {
                 if (shipSelectionItems[i].shopItemData.openGamePrice == 0 && shipSelectionItems[i].shopItemData.openRealPrice == 0)
@@ -109,6 +115,17 @@ namespace MegaGame.UI
                 gameplayObjectsBuilder.CanBuildDefenderShips = true;
                 SetBuildDefenderShip();
             }
+
+            for (int i = 0; i < shipSelectionItems.Count; i++)
+            {
+                if (!gameShop.CheckForPurchasing(shipSelectionItems[i].shopItemData))
+                {
+                    addButton.SetActive(true);
+                    return;
+                }
+            }
+
+            addButton.SetActive(false);
         }
     }
 }

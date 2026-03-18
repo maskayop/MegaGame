@@ -21,6 +21,7 @@ namespace MegaGame
         [SerializeField] List<GameplayObjectItem> items = new List<GameplayObjectItem>();
 
         ResourcesController resourcesController;
+        GameDataSaver gameDataSaver;
 
         void Awake()
         {
@@ -42,9 +43,11 @@ namespace MegaGame
         public void Init()
         {
             resourcesController = ResourcesController.Instance;
+            gameDataSaver = GameDataSaver.Instance;
 
-            for (int i = 0; i < items.Count; i++)
-                items[i].isPurchased = false;
+            gameDataSaver.LoadLastAccount();
+            gameDataSaver.LoadPlayerMoneyData();
+            gameDataSaver.LoadShopData();
         }
 
         public void TryPurchaseItem(Data_Item INitem)
@@ -63,8 +66,20 @@ namespace MegaGame
             }
         }
 
+        public void SetPurchasedState(Data_Item INitem, bool state)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item == INitem)
+                    items[i].isPurchased = state;
+            }
+        }
+
         public bool CheckForPurchasing(Data_Item INitem)
         {
+            if (INitem.openGamePrice == 0 && INitem.openRealPrice == 0)
+                return true;
+
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].item == INitem)

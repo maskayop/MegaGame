@@ -65,7 +65,6 @@ namespace MegaGame.UI
         [SerializeField] List<Data_Item> shopItemsData = new List<Data_Item>();
 
         GameController gameController;
-        GameDataSaver gameDataSaver;
         CameraController cameraController;
         AdditionalSceneObjects additionalSceneObjects;
         GameplayObjectsBuilder gameplayObjectsBuilder;
@@ -103,14 +102,10 @@ namespace MegaGame.UI
         public void Init()
         {
             gameController = GameController.Instance;
-            gameDataSaver = GameDataSaver.Instance;
             cameraController = CameraController.Instance;
             additionalSceneObjects = AdditionalSceneObjects.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
             gameShop = GameShop.Instance;
-
-            gameDataSaver.LoadLastAccount();
-            gameDataSaver.GetPlayerMoney();
 
             if (shopItemsData.Count > 0)
             {
@@ -137,6 +132,9 @@ namespace MegaGame.UI
             cameraController.Freeze(false);
 
             additionalSceneObjects.HideShopPanel();
+
+            if (UIShipsSelection.Instance)
+                UIShipsSelection.Instance.UpdateButtonsState();
         }
 
         void ShowCurrentItem()
