@@ -14,6 +14,7 @@ namespace MegaGame
         public float additionalDamage = 1f;
         public float additionalHealth = 10;
         public float additionalHealthRegeneration = 1f;
+        public int fortMaintenance = 1;
 
         BaseSettlement settlement;
         public BaseSettlement Settlement { get { return settlement; } set { settlement = value; } }

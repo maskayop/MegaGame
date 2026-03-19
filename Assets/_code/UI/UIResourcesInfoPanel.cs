@@ -66,7 +66,8 @@ namespace MegaGame.UI
 
         void UpdateGameCharacteristics()
         {
-            playerMoneyGrowth = resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerMaintenance();
+            playerMoneyGrowth = resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerShipsMaintenance() -
+                resourcesController.GetPlayerSettlementsMaintenance();
 
             if (playerMoneyGrowth > 0)
                 playerMoneyAmountText.text = resourcesController.GetPlayerMoney().ToString() + uiColors.GetMoneyGrowthColorString()
@@ -80,10 +81,11 @@ namespace MegaGame.UI
             playerShipsAmountText.text = objectsManager.playerShips.Count.ToString();
             playerPortsAmountText.text = gameController.PlayerPortsCount.ToString();
             playerVillagesAmountText.text = gameController.PlayerVillagesCount.ToString();
-            playerRevenueText.text = "+" + resourcesController.GetPlayerRevenue().ToString();
-            playerMaintenanceText.text = "-" + resourcesController.GetPlayerMaintenance().ToString();
+            playerRevenueText.text = "+" + (resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerSettlementsMaintenance()).ToString();
+            playerMaintenanceText.text = "-" + resourcesController.GetPlayerShipsMaintenance().ToString();
 
-            enemyMoneyGrowth = resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyMaintenance();
+            enemyMoneyGrowth = resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyShipsMaintenance() -
+                resourcesController.GetEnemySettlementsMaintenance();
 
             if (enemyMoneyGrowth > 0)
                 enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyGrowthColorString()
@@ -97,8 +99,8 @@ namespace MegaGame.UI
             enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
             enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
             enemyVillagesAmountText.text = gameController.EnemyVillagesCount.ToString();
-            enemyRevenueText.text = "+" + resourcesController.GetEnemyRevenue().ToString();
-            enemyMaintenanceText.text = "-" + resourcesController.GetEnemyMaintenance().ToString();
+            enemyRevenueText.text = "+" + (resourcesController.GetEnemyRevenue() - resourcesController.GetEnemySettlementsMaintenance()).ToString();
+            enemyMaintenanceText.text = "-" + resourcesController.GetEnemyShipsMaintenance().ToString();
         }
     }
 }

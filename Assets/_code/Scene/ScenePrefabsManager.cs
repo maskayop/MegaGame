@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vopere.Common;
 
 namespace MegaGame
 {
@@ -44,6 +45,12 @@ namespace MegaGame
         [SerializeField] GameObject nafaivelWarningCircle;
         [SerializeField] GameObject traderProfitWidget;
 
+        [SerializeField] string distanceCircleAnimationState;
+
+        GameObject constantDistanceCircle;
+
+        GameController gameController;
+
         void Awake()
         {
             if (Instance != null)
@@ -54,6 +61,26 @@ namespace MegaGame
             }
 
             Instance = this;
+        }
+
+        void Start()
+        {
+            Init();
+        }
+
+        public void Init()
+        {
+            gameController = GameController.Instance;
+
+            if (constantDistanceCircle == null)
+            {
+                constantDistanceCircle = Instantiate(distanceCircle);
+                constantDistanceCircle.transform.localScale = Vector3.one * gameController.distanceForPossibleTargets;
+                constantDistanceCircle.SetActive(false);
+
+                if (constantDistanceCircle.GetComponent<DestroyAfterTime>())
+                    constantDistanceCircle.GetComponent<DestroyAfterTime>().destroyAtStart = false;
+            }
         }
 
         public void SpawnAsTargetFX(Vector3 position, bool targetIsEnemy)
@@ -155,6 +182,13 @@ namespace MegaGame
 
             GameObject widget = Instantiate(traderProfitWidget, position, Quaternion.identity);
             widget.GetComponent<ValueWidget>().SetText("+ " + value.ToString());
+        }
+
+        public void ShowConstantDistanceCircle()
+        {
+            constantDistanceCircle.SetActive(true);
+            constantDistanceCircle.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
+            constantDistanceCircle.GetComponent<Animator>().Play(distanceCircleAnimationState);
         }
     }
 }

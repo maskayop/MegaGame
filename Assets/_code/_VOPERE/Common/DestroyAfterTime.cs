@@ -4,8 +4,9 @@ namespace Vopere.Common
 {
     public class DestroyAfterTime : MonoBehaviour
     {
+        public bool destroyAtStart = false;
+
         [SerializeField] float time = 1;
-        [SerializeField] bool destroyAtStart = false;
 
         void Start()
         {

@@ -109,35 +109,79 @@ namespace MegaGame
                 UpdateEnemyMaintenance();
 
             if (globalTime.currentDay != currentDay)
+            {
+                UpdatePlayerMaintenance();
+                UpdateEnemyMaintenance();
                 UpdateRevenues();
+            }
         }
 
         public void UpdatePlayerMaintenance()
         {
             playerMaintenance = 0;
-
-            for (int i = 0; i < objectsManager.playerShips.Count; i++)
-                if (objectsManager.playerShips[i])
-                    if (objectsManager.playerShips[i].GetComponent<Warship>())
-                        playerMaintenance += objectsManager.playerShips[i].GetComponent<Warship>().maintenance;
-
-            playerShipsCount = objectsManager.playerShips.Count;
-
-            playerMaintenance += GetShipsBureaucracyMaintenance(playerShipsCount);
+            playerMaintenance += GetPlayerShipsMaintenance();
+            playerMaintenance += GetPlayerSettlementsMaintenance();
         }
 
         public void UpdateEnemyMaintenance()
         {
             enemyMaintenance = 0;
+            enemyMaintenance += GetEnemyShipsMaintenance();
+            enemyMaintenance += GetEnemySettlementsMaintenance();
+        }
+
+        public int GetPlayerShipsMaintenance()
+        {
+            int maintenance = 0;
+
+            for (int i = 0; i < objectsManager.playerShips.Count; i++)
+                if (objectsManager.playerShips[i])
+                    if (objectsManager.playerShips[i].GetComponent<Warship>())
+                        maintenance += objectsManager.playerShips[i].GetComponent<Warship>().maintenance;
+
+            playerShipsCount = objectsManager.playerShips.Count;
+            maintenance += GetShipsBureaucracyMaintenance(playerShipsCount);
+
+            return maintenance;
+        }
+
+        public int GetEnemyShipsMaintenance()
+        {
+            int maintenance = 0;
 
             for (int i = 0; i < objectsManager.enemyShips.Count; i++)
                 if (objectsManager.enemyShips[i])
                     if (objectsManager.enemyShips[i].GetComponent<Warship>())
-                        enemyMaintenance += objectsManager.enemyShips[i].GetComponent<Warship>().maintenance;
+                        maintenance += objectsManager.enemyShips[i].GetComponent<Warship>().maintenance;
 
             enemyShipsCount = objectsManager.enemyShips.Count;
+            maintenance += GetShipsBureaucracyMaintenance(enemyShipsCount);
 
-            enemyMaintenance += GetShipsBureaucracyMaintenance(enemyShipsCount);
+            return maintenance;
+        }
+
+        public int GetPlayerSettlementsMaintenance()
+        {
+            int maintenance = 0;
+
+            for (int i = 0; i < gameController.playerPorts.Count; i++)
+                if (gameController.playerPorts[i] && gameController.playerPorts[i].GetSettlementConstructions())
+                    if (gameController.playerPorts[i].GetSettlementConstructions().fortIsBuilt)
+                        maintenance += gameController.playerPorts[i].GetSettlementConstructions().fortMaintenance;
+
+            return maintenance;
+        }
+
+        public int GetEnemySettlementsMaintenance()
+        {
+            int maintenance = 0;
+
+            for (int i = 0; i < gameController.enemyPorts.Count; i++)
+                if (gameController.enemyPorts[i] && gameController.enemyPorts[i].GetSettlementConstructions())
+                    if (gameController.enemyPorts[i].GetSettlementConstructions().fortIsBuilt)
+                        maintenance += gameController.enemyPorts[i].GetSettlementConstructions().fortMaintenance;
+
+            return maintenance;
         }
 
         public int GetShipsBureaucracyMaintenance(int shipsCount)

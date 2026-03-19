@@ -55,6 +55,7 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI currentHealthText;
         [SerializeField] TextMeshProUGUI maxHealthRegenerationText;
         [SerializeField] TextMeshProUGUI revenueText;
+        [SerializeField] TextMeshProUGUI maintenanceText;
 
         GameController gameController;
 
@@ -154,6 +155,14 @@ namespace MegaGame.UI
             maxHealthText.text = currentIsland.settlement.MaxHealth.ToString();
             maxHealthRegenerationText.text = currentIsland.settlement.MaxRegeneration.ToString();
             revenueText.text = currentIsland.settlement.revenue.ToString();
+
+            if (currentIsland.settlement.GetSettlementConstructions())
+            {
+                if (currentIsland.settlement.GetSettlementConstructions().fortIsBuilt)
+                    maintenanceText.text = (currentIsland.settlement.maintenance - currentIsland.settlement.GetSettlementConstructions().fortMaintenance).ToString();
+                else
+                    maintenanceText.text = currentIsland.settlement.maintenance.ToString();
+            }
         }
 
         public void Close()
