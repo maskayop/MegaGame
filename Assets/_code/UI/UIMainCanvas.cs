@@ -114,6 +114,7 @@ namespace MegaGame.UI
         {
             cameraZoomButtons.SetActive(state);
             exploringButton.Select(false);
+            ResourcesController.Instance.CloseEnemyResources();
         }
 
         public void ShowStartGameWindow()

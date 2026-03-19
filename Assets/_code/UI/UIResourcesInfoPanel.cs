@@ -23,6 +23,12 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI enemyRevenueText;
         [SerializeField] TextMeshProUGUI enemyMaintenanceText;
 
+        [Header("Send Spies")]
+        [SerializeField] Data_Item sendSpiesItem;
+        [SerializeField] UISendSpiesButton sendSpiesButton;
+        [SerializeField] GameObject sendSpiesPanel;
+        [SerializeField] TextMeshProUGUI sendSpicesPriceText;
+
         GameController gameController;
         ObjectsManager objectsManager;
         ResourcesController resourcesController;
@@ -30,6 +36,8 @@ namespace MegaGame.UI
 
         int playerMoneyGrowth;
         int enemyMoneyGrowth;
+
+        bool sendSpiesPanelIsOpen = false;
 
         void Awake()
         {
@@ -58,13 +66,37 @@ namespace MegaGame.UI
 
         void Update()
         {
+            if (!gameController)
+                return;
+
             if (gameController.CampaignIsEnded)
                 return;
 
-            UpdateGameCharacteristics();
+            if (gameController.gameState == GameController.GameState.battle)
+            {
+                sendSpiesButton.gameObject.SetActive(true);
+
+                if (resourcesController.EnemyResourcesAreOpen)
+                    sendSpiesButton.Select(true);
+                else
+                    sendSpiesButton.Select(false);
+            }
+            else
+                sendSpiesButton.gameObject.SetActive(false);
+
+            UpdateFractionsResources();
+
+            if (sendSpiesPanelIsOpen)
+                sendSpicesPriceText.text = resourcesController.GetSendSpiesPrice().ToString();
         }
 
-        void UpdateGameCharacteristics()
+        void UpdateFractionsResources()
+        {
+            UpdatePlayerResources();
+            UpdateEnemyResources();
+        }
+
+        void UpdatePlayerResources()
         {
             playerMoneyGrowth = resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerShipsMaintenance() -
                 resourcesController.GetPlayerSettlementsMaintenance();
@@ -83,24 +115,53 @@ namespace MegaGame.UI
             playerVillagesAmountText.text = gameController.PlayerVillagesCount.ToString();
             playerRevenueText.text = "+" + (resourcesController.GetPlayerRevenue() - resourcesController.GetPlayerSettlementsMaintenance()).ToString();
             playerMaintenanceText.text = "-" + resourcesController.GetPlayerShipsMaintenance().ToString();
+        }
 
-            enemyMoneyGrowth = resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyShipsMaintenance() -
-                resourcesController.GetEnemySettlementsMaintenance();
+        void UpdateEnemyResources()
+        {
+            if (resourcesController.EnemyResourcesAreOpen)
+            {
+                enemyMoneyGrowth = resourcesController.GetEnemyRevenue() - resourcesController.GetEnemyShipsMaintenance() -
+                    resourcesController.GetEnemySettlementsMaintenance();
 
-            if (enemyMoneyGrowth > 0)
-                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyGrowthColorString()
-                    + " +" + enemyMoneyGrowth.ToString() + "</color></size>";
-            else if (enemyMoneyGrowth == 0)
-                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString();
+                if (enemyMoneyGrowth > 0)
+                    enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyGrowthColorString()
+                        + " +" + enemyMoneyGrowth.ToString() + "</color></size>";
+                else if (enemyMoneyGrowth == 0)
+                    enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString();
+                else
+                    enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyWasteColorString()
+                        + " " + enemyMoneyGrowth.ToString() + "</color></size>";
+
+                enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
+                enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
+                enemyVillagesAmountText.text = gameController.EnemyVillagesCount.ToString();
+                enemyRevenueText.text = "+" + (resourcesController.GetEnemyRevenue() - resourcesController.GetEnemySettlementsMaintenance()).ToString();
+                enemyMaintenanceText.text = "-" + resourcesController.GetEnemyShipsMaintenance().ToString();
+            }
             else
-                enemyMoneyAmountText.text = resourcesController.GetEnemyMoney().ToString() + uiColors.GetMoneyWasteColorString()
-                    + " " + enemyMoneyGrowth.ToString() + "</color></size>";
+            {
+                enemyMoneyAmountText.text = enemyShipsAmountText.text = enemyPortsAmountText.text =
+                    enemyVillagesAmountText.text = enemyRevenueText.text = enemyMaintenanceText.text = "???";
+            }
+        }
 
-            enemyShipsAmountText.text = objectsManager.enemyShips.Count.ToString();
-            enemyPortsAmountText.text = gameController.EnemyPortsCount.ToString();
-            enemyVillagesAmountText.text = gameController.EnemyVillagesCount.ToString();
-            enemyRevenueText.text = "+" + (resourcesController.GetEnemyRevenue() - resourcesController.GetEnemySettlementsMaintenance()).ToString();
-            enemyMaintenanceText.text = "-" + resourcesController.GetEnemyShipsMaintenance().ToString();
+        public void OpenSendSpiesPanel()
+        {
+            sendSpiesPanelIsOpen = true;
+            sendSpiesPanel.SetActive(true);
+        }
+
+        public void CloseSendSpiesPanel()
+        {
+            sendSpiesPanelIsOpen = false;
+            sendSpiesPanel.SetActive(false);
+        }
+
+        public void TryOpenEnemyResources()
+        {
+            resourcesController.TryOpenEnemyResources();
+            CloseSendSpiesPanel();
         }
     }
 }

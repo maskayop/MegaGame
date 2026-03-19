@@ -13,6 +13,8 @@ namespace MegaGame
         [SerializeField] Vector2Int playerTraderProfit;
         [SerializeField] Vector2Int enemyTraderProfit;
 
+        [SerializeField] int sendSpiesPriceMultiplier = 100;
+
         string playerMoney;
         public string PlayerMoney { get { return playerMoney; } set { playerMoney = value; } }
 
@@ -34,6 +36,9 @@ namespace MegaGame
 
         int currentDay = 0;
         public int CurrentDay { get { return currentDay; } set { currentDay = value; } }
+
+        bool enemyResourcesAreOpen = false;
+        public bool EnemyResourcesAreOpen { get { return enemyResourcesAreOpen; } }
 
         void Awake()
         {
@@ -318,6 +323,25 @@ namespace MegaGame
                 r = Random.Range(enemyTraderProfit.x, enemyTraderProfit.y);
 
             return r;
+        }
+
+        public int GetSendSpiesPrice()
+        {
+            return gameController.EnemyPortsCount * sendSpiesPriceMultiplier;
+        }
+
+        public void TryOpenEnemyResources()
+        {
+            if (Strint.Subtraction(playerMoney, Strint.GetString(GetSendSpiesPrice())) < 0)
+                return;
+
+            enemyResourcesAreOpen = true;
+            RemoveMoneyFromPlayer(GetSendSpiesPrice());
+        }
+
+        public void CloseEnemyResources()
+        {
+            enemyResourcesAreOpen = false;
         }
     }
 }

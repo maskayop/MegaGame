@@ -48,7 +48,7 @@ namespace MegaGame
 
         [Header("Distances")]
         [SerializeField] int distanceForPossibleTargets = 100;
-        [SerializeField] Data_Item doubleTargetDistanceItem;
+        public Data_Item doubleTargetDistanceItem;
 
         [Header("Enemy's Targets")]
         public List<BaseSettlement> possibleTargetSettlementForEnemy = new List<BaseSettlement>();
@@ -616,8 +616,8 @@ namespace MegaGame
                     return
                         distanceForPossibleTargets;
                 }
-
-                return distanceForPossibleTargets;
+                else
+                    return distanceForPossibleTargets;
             }
             else
                 return distanceForPossibleTargets;

@@ -14,6 +14,9 @@ namespace MegaGame
         [SerializeField] int playerChance = 2;
         [SerializeField] int enemyChance = 2;
 
+        [SerializeField] Data_Item seaMonstersPacificationItem;
+        [SerializeField] int chanceWithItemMultiplier = 4;
+
         [Header("Debug")]
         [SerializeField] bool sleep = false;
 
@@ -23,6 +26,7 @@ namespace MegaGame
         GameController gameController;
         ObjectsManager objectsManager;
         GlobalTimeController globalTime;
+        GameShop gameShop;
 
         Warship currentShip;
         Warship currentVictim;
@@ -32,6 +36,7 @@ namespace MegaGame
             gameController = GameController.Instance;
             objectsManager = ObjectsManager.Instance;
             globalTime = GlobalTimeController.Instance;
+            gameShop = GameShop.Instance;
         }
 
         void Update()
@@ -63,7 +68,15 @@ namespace MegaGame
             currentShip = objectsManager.allShips[shipId].GetComponent<Warship>();
 
             if (currentShip.owner == BaseCharacter.Owner.player)
-                randomChance = Random.Range(0, playerChance);
+            {
+                if (gameShop)
+                {
+                    if (gameShop.CheckForPurchasing(seaMonstersPacificationItem))
+                        randomChance = Random.Range(0, playerChance * chanceWithItemMultiplier);
+                    else
+                        randomChance = Random.Range(0, playerChance);
+                }
+            }
             else
                 randomChance = Random.Range(0, enemyChance);
 

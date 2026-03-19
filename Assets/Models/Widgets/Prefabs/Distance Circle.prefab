@@ -90,6 +90,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &-2925215301248136961
 Animator:
@@ -125,5 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816f0751f34cd6844ab271272f80430c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DestroyAfterTime
-  time: 1
   destroyAtStart: 1
+  time: 1

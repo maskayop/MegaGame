@@ -189,6 +189,7 @@ namespace MegaGame
             constantDistanceCircle.SetActive(true);
             constantDistanceCircle.transform.position = gameController.playerOpposingPorts.protagonPort.transform.position;
             constantDistanceCircle.GetComponent<Animator>().Play(distanceCircleAnimationState);
+            constantDistanceCircle.transform.localScale = Vector3.one * gameController.GetDistanceForPossibleTargets(true);
         }
     }
 }
