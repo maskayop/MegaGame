@@ -45,9 +45,15 @@ namespace MegaGame
             resourcesController = ResourcesController.Instance;
             gameDataSaver = GameDataSaver.Instance;
 
+            LoadData();
+        }
+
+        void LoadData()
+        {
             gameDataSaver.LoadLastAccount();
             gameDataSaver.LoadPlayerMoneyData();
             gameDataSaver.LoadShopData();
+            gameDataSaver.LoadPremiumShopData();
         }
 
         public void TryPurchaseItem(Data_Item INitem)
@@ -64,6 +70,8 @@ namespace MegaGame
                     break;
                 }
             }
+
+            gameDataSaver.SavePremiumShopData();
         }
 
         public void SetPurchasedState(Data_Item INitem, bool state)

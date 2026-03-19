@@ -187,6 +187,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 59fa455d1e8584b4190930cc80a464f6, type: 2}
   - {fileID: 11400000, guid: 2e0b88db98586c94faca7f17d61a5b24, type: 2}
   - {fileID: 11400000, guid: 31ef078c85c384047af011d74f6745a6, type: 2}
+  - {fileID: 11400000, guid: 8fc765af0c9cab64ca119efbf506b3cf, type: 2}
+  - {fileID: 11400000, guid: a0717c4ca34708f4f996aa427acafe25, type: 2}
+  - {fileID: 11400000, guid: db7d3aabd294f49448750ec7024a1835, type: 2}
 --- !u!114 &2472502709863904070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +206,8 @@ MonoBehaviour:
   startMoneyForEnemy: 100
   playerTraderProfit: {x: 10, y: 20}
   enemyTraderProfit: {x: 15, y: 30}
+  sendSpiesItem: {fileID: 11400000, guid: a0717c4ca34708f4f996aa427acafe25, type: 2}
+  sendSpiesPriceMultiplier: 100
 --- !u!114 &1907761513824449833
 MonoBehaviour:
   m_ObjectHideFlags: 0

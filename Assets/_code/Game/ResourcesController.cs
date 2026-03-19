@@ -7,12 +7,16 @@ namespace MegaGame
     {
         public static ResourcesController Instance { get; private set; }
 
+        [Header("Start Money")]
         [SerializeField] int startMoneyForPlayer;
         [SerializeField] int startMoneyForEnemy;
 
+        [Header("Trader Profit")]
         [SerializeField] Vector2Int playerTraderProfit;
         [SerializeField] Vector2Int enemyTraderProfit;
 
+        [Header("Send Spies")]
+        [SerializeField] Data_Item sendSpiesItem;
         [SerializeField] int sendSpiesPriceMultiplier = 100;
 
         string playerMoney;
@@ -33,6 +37,7 @@ namespace MegaGame
         ObjectsManager objectsManager;
         GlobalTimeController globalTime;
         GameController gameController;
+        GameShop gameShop;
 
         int currentDay = 0;
         public int CurrentDay { get { return currentDay; } set { currentDay = value; } }
@@ -65,6 +70,7 @@ namespace MegaGame
             globalTime = GlobalTimeController.Instance;
             objectsManager = ObjectsManager.Instance;
             gameController = GameController.Instance;
+            gameShop = GameShop.Instance;
         }
 
         public void RemoveMoneyFromPlayer(int value)
@@ -341,7 +347,15 @@ namespace MegaGame
 
         public void CloseEnemyResources()
         {
-            enemyResourcesAreOpen = false;
+            if (gameShop)
+            {
+                if (gameShop.CheckForPurchasing(sendSpiesItem))
+                    enemyResourcesAreOpen = true;
+                else
+                    enemyResourcesAreOpen = false;
+            }
+            else
+                enemyResourcesAreOpen = false;
         }
     }
 }

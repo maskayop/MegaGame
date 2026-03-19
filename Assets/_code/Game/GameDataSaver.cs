@@ -48,6 +48,9 @@ namespace MegaGame
         const int BigShip_BIT = 1;
         const int MegaShip_BIT = 2;
         const int DefenderShip_BIT = 3;
+        const int MonstersArtifact_BIT = 4;
+        const int Spies_BIT = 5;
+        const int DoubleDistances_BIT = 6;
 
         int buildingStateForSave = 0;
         int shopDataForSave = 0;
@@ -120,6 +123,7 @@ namespace MegaGame
                 dataSaveLoad.Save(currentAccountNameKey + campaignIsEndedFormat, (short)0);
 
             SaveShopData();
+            SavePremiumShopData();
             SaveLastAccount();
         }
 
@@ -179,6 +183,7 @@ namespace MegaGame
                 gameController.CampaignIsEnded = false;
 
             LoadShopData();
+            LoadPremiumShopData();
         }
 
         public void LoadAllIslandsCurrentHealth()
@@ -303,10 +308,19 @@ namespace MegaGame
         {
             SetShopDataState(MediumShip_BIT, gameShop.CheckForPurchasing(items[0]));
             SetShopDataState(BigShip_BIT, gameShop.CheckForPurchasing(items[1]));
-            SetShopDataState(MegaShip_BIT, gameShop.CheckForPurchasing(items[2]));
             SetShopDataState(DefenderShip_BIT, gameShop.CheckForPurchasing(items[3]));
 
             dataSaveLoad.Save(currentAccountNameKey + shopDataStateFormat, shopDataForSave);
+        }
+
+        public void SavePremiumShopData()
+        {
+            SetShopDataState(MegaShip_BIT, gameShop.CheckForPurchasing(items[2]));
+            SetShopDataState(MonstersArtifact_BIT, gameShop.CheckForPurchasing(items[4]));
+            SetShopDataState(Spies_BIT, gameShop.CheckForPurchasing(items[5]));
+            SetShopDataState(DoubleDistances_BIT, gameShop.CheckForPurchasing(items[6]));
+
+            dataSaveLoad.Save("P" + shopDataStateFormat, shopDataForSave);
         }
 
         public void LoadShopData()
@@ -317,8 +331,26 @@ namespace MegaGame
             {
                 gameShop.SetPurchasedState(items[0], false);
                 gameShop.SetPurchasedState(items[1], false);
-                gameShop.SetPurchasedState(items[2], false);
                 gameShop.SetPurchasedState(items[3], false);
+            }
+            else
+            {
+                gameShop.SetPurchasedState(items[0], GetShopDataState(MediumShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState));
+            }
+        }
+
+        public void LoadPremiumShopData()
+        {
+            int purchasedState = dataSaveLoad.GetSavedInt("P" + shopDataStateFormat);
+
+            if (purchasedState == -1)
+            {
+                gameShop.SetPurchasedState(items[2], false);
+                gameShop.SetPurchasedState(items[4], false);
+                gameShop.SetPurchasedState(items[5], false);
+                gameShop.SetPurchasedState(items[6], false);
             }
             else
             {
@@ -326,6 +358,9 @@ namespace MegaGame
                 gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[2], GetShopDataState(MegaShip_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[4], GetShopDataState(MonstersArtifact_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[5], GetShopDataState(Spies_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[6], GetShopDataState(DoubleDistances_BIT, purchasedState));
             }
         }
 

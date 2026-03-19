@@ -36,8 +36,11 @@ namespace MegaGame.UI
         [SerializeField] Image shopGameMoneyImage;
         [SerializeField] Image shopRealMoneyImage;
         [SerializeField] GameObject itemIsAvailablePanel;
+        [SerializeField] GameObject premiumItemIsAvailablePanel;
 
         [Header("Characteristics")]
+        [SerializeField] GameObject characteristicsPanel;
+
         [SerializeField] GameObject damageContainer;
         [SerializeField] TextMeshProUGUI damageText;
 
@@ -136,6 +139,8 @@ namespace MegaGame.UI
 
             if (UIShipsSelection.Instance)
                 UIShipsSelection.Instance.UpdateButtonsState();
+
+            ResourcesController.Instance.CloseEnemyResources();
         }
 
         void ShowCurrentItem()
@@ -144,7 +149,12 @@ namespace MegaGame.UI
             additionalSceneObjects.ShowShopItem(currentItemData);
 
             if (currentItemData.prefab)
+            {
                 currentCharacter = currentItemData.prefab.GetComponent<BaseCharacter>();
+                characteristicsPanel.SetActive(true);
+            }
+            else
+                characteristicsPanel.SetActive(false);
 
             HideAllItemIcons();
             shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
@@ -220,11 +230,13 @@ namespace MegaGame.UI
             {
                 openItemButton.SetActive(false);
                 itemIsAvailablePanel.SetActive(true);
+                premiumItemIsAvailablePanel.SetActive(false);
                 return;
             }
 
             openItemButton.SetActive(true);
             itemIsAvailablePanel.SetActive(false);
+            premiumItemIsAvailablePanel.SetActive(false);
 
             if (currentItemData.openGamePrice != 0)
             {
@@ -245,11 +257,20 @@ namespace MegaGame.UI
             if (gameShop.CheckForPurchasing(currentItemData))
             {
                 openItemButton.SetActive(false);
-                itemIsAvailablePanel.SetActive(true);
+
+                if (currentItemData.openRealPrice != 0)
+                    premiumItemIsAvailablePanel.SetActive(true);
+                else
+                    itemIsAvailablePanel.SetActive(true);
             }
 
             if (gameController.gameState != GameController.GameState.battle)
-                openItemButton.SetActive(false);
+            {
+                if (currentItemData.openRealPrice != 0)
+                    openItemButton.SetActive(true);
+                else
+                    openItemButton.SetActive(false);
+            }
         }
 
         public void ShowOpenItemQuestionButtons(bool state)
