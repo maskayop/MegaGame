@@ -118,7 +118,7 @@ namespace MegaGame
             float distanceBetweenProtagonPorts =
                 Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.enemyOpposingPorts.protagonPort.transform.position);
 
-            if (distanceBetweenProtagonPorts <= gameController.distanceForPossibleTargets)
+            if (distanceBetweenProtagonPorts <= gameController.GetDistanceForPossibleTargets(false))
             {
                 int randomVillage = Random.Range(0, 2);
 
@@ -157,7 +157,7 @@ namespace MegaGame
             {
                 distance = Vector3.Distance(gameController.enemyVillages[i].transform.position, gameController.enemyOpposingPorts.protagonPort.transform.position);
 
-                if (distance <= gameController.distanceForPossibleTargets)
+                if (distance <= gameController.GetDistanceForPossibleTargets(false))
                     if (!gameController.enemyVillages[i].Island.DefenderShip ||
                         gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
                         unsafeVillages.Add(gameController.enemyVillages[i]);

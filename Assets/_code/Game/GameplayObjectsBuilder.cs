@@ -83,7 +83,8 @@ namespace MegaGame
         public void TryCreatePlayerShip(BaseSettlement targetSettlement, bool isAttackingShipType)
         {
             if (targetSettlement as Village && targetSettlement.owner == Owner.player) { }
-            else if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) > gameController.distanceForPossibleTargets)
+            else if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) >
+                gameController.GetDistanceForPossibleTargets(true))
             {
                 SpawnTooFarFromPortMessage(targetSettlement);
                 return;
@@ -297,7 +298,7 @@ namespace MegaGame
         void SpawnTooFarFromPortMessage(BaseSettlement targetSettlement)
         {
             scenePrefabsManager.SpawnAsTargetReject(targetSettlement.transform.position);
-            scenePrefabsManager.SpawnDistanceCircle(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.distanceForPossibleTargets);
+            scenePrefabsManager.SpawnDistanceCircle(gameController.playerOpposingPorts.protagonPort.transform.position, gameController.GetDistanceForPossibleTargets(true));
             UIMainCanvas.Instance.SpawnTooFarFromPortMessage();
         }
 

@@ -75,7 +75,7 @@ namespace MegaGame
             if (constantDistanceCircle == null)
             {
                 constantDistanceCircle = Instantiate(distanceCircle);
-                constantDistanceCircle.transform.localScale = Vector3.one * gameController.distanceForPossibleTargets;
+                constantDistanceCircle.transform.localScale = Vector3.one * gameController.GetDistanceForPossibleTargets(true);
                 constantDistanceCircle.SetActive(false);
 
                 if (constantDistanceCircle.GetComponent<DestroyAfterTime>())

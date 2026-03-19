@@ -47,7 +47,8 @@ namespace MegaGame
         public List<Port> allPossibleEnemyTargetPorts = new List<Port>();
 
         [Header("Distances")]
-        public int distanceForPossibleTargets = 100;
+        [SerializeField] int distanceForPossibleTargets = 100;
+        [SerializeField] Data_Item doubleTargetDistanceItem;
 
         [Header("Enemy's Targets")]
         public List<BaseSettlement> possibleTargetSettlementForEnemy = new List<BaseSettlement>();
@@ -84,16 +85,17 @@ namespace MegaGame
 
         List<Island> islandsForExploring = new List<Island>();
 
-        CameraController cameraController;
-        GameDataSaver gameDataSaver;
-        ResourcesController resourcesController;
-        AdditionalSceneObjects additionalObjects;
-
         int playerStartIslandId;
         public int PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
 
         int enemyStartIslandId;
         public int EnemyStartIslandId { get { return enemyStartIslandId; } set { enemyStartIslandId = value; } }
+
+        CameraController cameraController;
+        GameDataSaver gameDataSaver;
+        ResourcesController resourcesController;
+        AdditionalSceneObjects additionalObjects;
+        GameShop gameShop;
 
         void Awake()
         {
@@ -133,6 +135,8 @@ namespace MegaGame
 
             gameDataSaver = GameDataSaver.Instance;
             gameDataSaver.Init();
+
+            gameShop = GameShop.Instance;
 
             campaignIsEnded = false;
 
@@ -268,19 +272,19 @@ namespace MegaGame
                 for (int i = 0; i < allVillages.Count; i++)
                     if (allVillages[i].owner != Owner.enemy)
                         if (Vector3.Distance(allVillages[i].transform.position,
-                            enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                            enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
                             possibleTargetSettlementForEnemy.Add(allVillages[i]);
 
                 for (int i = 0; i < allFortresses.Count; i++)
                     if (allFortresses[i].owner != Owner.enemy)
                         if (Vector3.Distance(allFortresses[i].transform.position,
-                            enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                            enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
                             possibleTargetSettlementForEnemy.Add(allFortresses[i]);
 
                 for (int i = 0; i < allEmptyIslands.Count; i++)
                     if (allEmptyIslands[i].owner == Owner.neutral)
                         if (Vector3.Distance(allEmptyIslands[i].transform.position,
-                            enemyOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                            enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
                             if (allEmptyIslands[i].pirateLair)
                                 possibleTargetSettlementForEnemy.Add(allEmptyIslands[i].pirateLair);
             }
@@ -588,7 +592,7 @@ namespace MegaGame
                 islandsForExploring.Clear();
 
                 for (int i = 0; i < allEmptyIslands.Count; i++)
-                    if (Vector3.Distance(allEmptyIslands[i].pirateLair.transform.position, playerOpposingPorts.protagonPort.transform.position) <= distanceForPossibleTargets)
+                    if (Vector3.Distance(allEmptyIslands[i].pirateLair.transform.position, playerOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(true))
                         islandsForExploring.Add(allEmptyIslands[i]);
 
                 for (int i = 0; i < islandsForExploring.Count; i++)
@@ -599,6 +603,24 @@ namespace MegaGame
                 for (int i = 0; i < islandsForExploring.Count; i++)
                     islandsForExploring[i].EnableExploringCircle(false);
             }
+        }
+
+        public int GetDistanceForPossibleTargets(bool isPlayer)
+        {
+            if (isPlayer)
+            {
+                if (gameShop)
+                {
+                    if (gameShop.CheckForPurchasing(doubleTargetDistanceItem))
+                        return distanceForPossibleTargets * 2;
+                    return
+                        distanceForPossibleTargets;
+                }
+
+                return distanceForPossibleTargets;
+            }
+            else
+                return distanceForPossibleTargets;
         }
     }
 }

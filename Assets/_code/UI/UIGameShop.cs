@@ -142,7 +142,9 @@ namespace MegaGame.UI
         {
             currentItemData = shopItemsData[currentItemId].itemData;
             additionalSceneObjects.ShowShopItem(currentItemData);
-            currentCharacter = currentItemData.prefab.GetComponent<BaseCharacter>();
+
+            if (currentItemData.prefab)
+                currentCharacter = currentItemData.prefab.GetComponent<BaseCharacter>();
 
             HideAllItemIcons();
             shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
