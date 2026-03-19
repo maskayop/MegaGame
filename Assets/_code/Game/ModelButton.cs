@@ -19,7 +19,7 @@ namespace MegaGame
             if (!UIGameShop.Instance)
                 return;
 
-            if (UIGameShop.Instance && UIGameShop.Instance.isOpen)
+            if (UIGameShop.Instance && UIGameShop.Instance.IsOpen)
                 return;
 
             SelectObject();

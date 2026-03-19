@@ -11,14 +11,15 @@ namespace MegaGame.UI
     {
         public string name;
         public Data_Item itemData;
-        public GameObject itemGameObject;
+        public GameObject itemIconGameObject;
     }
 
     public class UIGameShop : MonoBehaviour
     {
         public static UIGameShop Instance { get; private set; }
 
-        public bool isOpen = false;
+        bool isOpen = false;
+        public bool IsOpen { get { return isOpen; } }
 
         [SerializeField] GameObject window;
 
@@ -62,7 +63,7 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI buildingPriceText;
 
         [Header("Items")]
-        [SerializeField] List<Data_Item> shopItemsData = new List<Data_Item>();
+        [SerializeField] List<UIShopItem> shopItemsData = new List<UIShopItem>();
 
         GameController gameController;
         CameraController cameraController;
@@ -109,7 +110,7 @@ namespace MegaGame.UI
 
             if (shopItemsData.Count > 0)
             {
-                currentItemData = shopItemsData[0];
+                currentItemData = shopItemsData[0].itemData;
                 currentItemId = 0;
             }
 
@@ -139,9 +140,12 @@ namespace MegaGame.UI
 
         void ShowCurrentItem()
         {
-            currentItemData = shopItemsData[currentItemId];
+            currentItemData = shopItemsData[currentItemId].itemData;
             additionalSceneObjects.ShowShopItem(currentItemData);
             currentCharacter = currentItemData.prefab.GetComponent<BaseCharacter>();
+
+            HideAllItemIcons();
+            shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
 
             UpdateItemOpenState();
             UpdateItemTexts();
@@ -263,6 +267,12 @@ namespace MegaGame.UI
             UpdateItemOpenState();
 
             UIShipsSelection.Instance.UpdateButtonsState();
+        }
+
+        void HideAllItemIcons()
+        {
+            for (int i = 0; i < shopItemsData.Count; i++)
+                shopItemsData[i].itemIconGameObject.SetActive(false);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace MegaGame
             if (gameController.gameState == GameController.GameState.menu)
                 return;
 
-            if (UIGameShop.Instance.isOpen)
+            if (UIGameShop.Instance.IsOpen)
                 return;
 
             if (Input.GetMouseButtonDown(2))
