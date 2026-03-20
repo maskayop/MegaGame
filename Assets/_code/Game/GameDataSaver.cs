@@ -316,6 +316,8 @@ namespace MegaGame
         public void SavePremiumShopData()
         {
             SetShopDataState(MegaShip_BIT, gameShop.CheckForPurchasing(items[2]));
+            SetShopDataState(MegaShip_BIT, gameShop.CheckForPurchasing(items[7]));
+
             SetShopDataState(MonstersArtifact_BIT, gameShop.CheckForPurchasing(items[4]));
             SetShopDataState(Spies_BIT, gameShop.CheckForPurchasing(items[5]));
             SetShopDataState(DoubleDistances_BIT, gameShop.CheckForPurchasing(items[6]));
@@ -356,7 +358,10 @@ namespace MegaGame
             {
                 gameShop.SetPurchasedState(items[0], GetShopDataState(MediumShip_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState));
+
                 gameShop.SetPurchasedState(items[2], GetShopDataState(MegaShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[7], GetShopDataState(MegaShip_BIT, purchasedState));
+
                 gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[4], GetShopDataState(MonstersArtifact_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[5], GetShopDataState(Spies_BIT, purchasedState));

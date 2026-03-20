@@ -38,6 +38,9 @@ namespace MegaGame.UI
         [SerializeField] GameObject itemIsAvailablePanel;
         [SerializeField] GameObject premiumItemIsAvailablePanel;
 
+        [SerializeField] GameObject previewRawImage;
+        [SerializeField] GameObject premiumPreviewRawImage;
+
         [Header("Characteristics")]
         [SerializeField] GameObject characteristicsPanel;
 
@@ -145,16 +148,25 @@ namespace MegaGame.UI
 
         void ShowCurrentItem()
         {
+            gameShop.LoadData();
+
             currentItemData = shopItemsData[currentItemId].itemData;
             additionalSceneObjects.ShowShopItem(currentItemData);
 
             if (currentItemData.prefab)
             {
                 currentCharacter = currentItemData.prefab.GetComponent<BaseCharacter>();
+
                 characteristicsPanel.SetActive(true);
+                previewRawImage.SetActive(true);
+                premiumPreviewRawImage.SetActive(false);
             }
             else
+            {
                 characteristicsPanel.SetActive(false);
+                previewRawImage.SetActive(false);
+                premiumPreviewRawImage.SetActive(true);
+            }
 
             HideAllItemIcons();
             shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
@@ -266,7 +278,7 @@ namespace MegaGame.UI
 
             if (gameController.gameState != GameController.GameState.battle)
             {
-                if (currentItemData.openRealPrice != 0)
+                if (currentItemData.openRealPrice != 0 && !gameShop.CheckForPurchasing(currentItemData))
                     openItemButton.SetActive(true);
                 else
                     openItemButton.SetActive(false);
@@ -287,8 +299,8 @@ namespace MegaGame.UI
         {
             ShowOpenItemQuestionButtons(false);
             gameShop.TryPurchaseItem(currentItemData);
+            additionalSceneObjects.ShowShopItem(currentItemData);
             UpdateItemOpenState();
-
             UIShipsSelection.Instance.UpdateButtonsState();
         }
 

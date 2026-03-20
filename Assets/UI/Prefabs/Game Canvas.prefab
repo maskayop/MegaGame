@@ -11113,6 +11113,7 @@ MonoBehaviour:
   victoryRawImage: {fileID: 2486254894649792254}
   defeatRawImage: {fileID: 3342393667688300459}
   shopRawImage: {fileID: 7863240562692826036}
+  shopPremiumRawImage: {fileID: 5993232241669853969}
 --- !u!1 &7719576414815464119
 GameObject:
   m_ObjectHideFlags: 0
@@ -16181,6 +16182,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 418551360220963329, guid: 788628181c7d99a488380f354415c81f, type: 3}
   m_PrefabInstance: {fileID: 2909936769015707066}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5993232241669853969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8885057714357610155, guid: 788628181c7d99a488380f354415c81f, type: 3}
+  m_PrefabInstance: {fileID: 2909936769015707066}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
 --- !u!114 &7863240562692826036 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5007435109183837710, guid: 788628181c7d99a488380f354415c81f, type: 3}

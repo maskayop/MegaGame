@@ -52,6 +52,7 @@ namespace MegaGame
         [SerializeField] List<ShopPremiumItemSceneObject> shopPremiumItemSceneObjects = new List<ShopPremiumItemSceneObject>();
 
         GameController gameController;
+        GameShop gameShop;
 
         bool shopPanelIsOpen = false;
 
@@ -87,6 +88,7 @@ namespace MegaGame
         public void Init()
         {
             gameController = GameController.Instance;
+            gameShop = GameShop.Instance;
 
             HideAllPanels();
         }
@@ -143,17 +145,70 @@ namespace MegaGame
                 ShowShopPanel();
 
             for (int i = 0; i < shopItemSceneObjects.Count; i++)
+            {
                 if (item == shopItemSceneObjects[i].itemData)
                 {
+                    EnableShopObjects(false);
                     shopItemSceneObjects[i].itemGameObject.SetActive(true);
                     break;
                 }
+            }
+
+            for (int i = 0; i < shopPremiumItemSceneObjects.Count; i++)
+            {
+                if (item == shopPremiumItemSceneObjects[i].itemData)
+                {
+                    EnableShopObjects(true);
+                    shopPremiumItemSceneObjects[i].itemContainer.SetActive(true);
+
+                    if (gameShop.CheckForPurchasing(item))
+                    {
+                        shopPremiumItemSceneObjects[i].openedItemGameObject.SetActive(true);
+                        shopPremiumItemSceneObjects[i].lockedItemGameObject.SetActive(false);
+                        shopPremiumItemSceneObjects[i].lockGameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        shopPremiumItemSceneObjects[i].openedItemGameObject.SetActive(false);
+                        shopPremiumItemSceneObjects[i].lockedItemGameObject.SetActive(true);
+                        shopPremiumItemSceneObjects[i].lockGameObject.SetActive(false);
+                    }
+
+                    break;
+                }
+            }
         }
 
         void HideAllShopItemsObjects()
         {
             for (int i = 0; i < shopItemSceneObjects.Count; i++)
                 shopItemSceneObjects[i].itemGameObject.SetActive(false);
+
+            for (int i = 0; i < shopPremiumItemSceneObjects.Count; i++)
+            {
+                shopPremiumItemSceneObjects[i].itemContainer.SetActive(false);
+                shopPremiumItemSceneObjects[i].lockedItemGameObject.SetActive(false);
+                shopPremiumItemSceneObjects[i].openedItemGameObject.SetActive(false);
+                shopPremiumItemSceneObjects[i].lockGameObject.SetActive(false);
+            }
+        }
+
+        void EnableShopObjects(bool isPremium)
+        {
+            if (isPremium)
+            {
+                gameModelsPreview.SetActive(false);
+                shopAdditionalCamera.gameObject.SetActive(false);
+                premiumItemsPreview.SetActive(true);
+                shopPremiumAdditionalCamera.gameObject.SetActive(true);
+            }
+            else
+            {
+                gameModelsPreview.SetActive(true);
+                shopAdditionalCamera.gameObject.SetActive(true);
+                premiumItemsPreview.SetActive(false);
+                shopPremiumAdditionalCamera.gameObject.SetActive(false);
+            }
         }
     }
 }

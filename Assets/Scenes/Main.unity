@@ -6146,10 +6146,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 83612471}
     m_Modifications:
-    - target: {fileID: 8557065054233638045, guid: 7fe62b1e8c0a4034ea3acd8fa846a9ec, type: 3}
-      propertyPath: m_Name
-      value: Mega-Ship Medal Locked
-      objectReference: {fileID: 0}
     - target: {fileID: 7353481945232436465, guid: 7fe62b1e8c0a4034ea3acd8fa846a9ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6189,6 +6185,10 @@ PrefabInstance:
     - target: {fileID: 7353481945232436465, guid: 7fe62b1e8c0a4034ea3acd8fa846a9ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8557065054233638045, guid: 7fe62b1e8c0a4034ea3acd8fa846a9ec, type: 3}
+      propertyPath: m_Name
+      value: Mega-Ship Medal Locked
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21034,7 +21034,7 @@ Transform:
   m_GameObject: {fileID: 1710436931}
   serializedVersion: 2
   m_LocalRotation: {x: 0.06975647, y: 0, z: 0, w: 0.9975641}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21282,7 +21282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717244777}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21294,7 +21294,7 @@ Transform:
   - {fileID: 1445750361}
   - {fileID: 567179008}
   m_Father: {fileID: 203956068}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1720476326
 GameObject:
   m_ObjectHideFlags: 0
@@ -23075,7 +23075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1727884764302490715, guid: dc42464108127f946a5345b24c7498a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1727884764302490715, guid: dc42464108127f946a5345b24c7498a7, type: 3}
       propertyPath: m_LocalRotation.w

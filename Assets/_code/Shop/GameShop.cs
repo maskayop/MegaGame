@@ -48,7 +48,7 @@ namespace MegaGame
             LoadData();
         }
 
-        void LoadData()
+        public void LoadData()
         {
             gameDataSaver.LoadLastAccount();
             gameDataSaver.LoadPlayerMoneyData();
@@ -57,6 +57,14 @@ namespace MegaGame
         }
 
         public void TryPurchaseItem(Data_Item INitem)
+        {
+            if (INitem.openGamePrice != 0 && INitem.openRealPrice == 0)
+                TryPurchaseGameItem(INitem);
+            else if (INitem.openGamePrice == 0 && INitem.openRealPrice != 0)
+                TryPurchasePremiumItem(INitem);
+        }
+
+        void TryPurchaseGameItem(Data_Item INitem)
         {
             if (Strint.Subtraction(resourcesController.PlayerMoney, Strint.GetString(INitem.openGamePrice)) < 0)
                 return;
@@ -67,6 +75,18 @@ namespace MegaGame
                 {
                     items[i].isPurchased = true;
                     resourcesController.RemoveMoneyFromPlayer(INitem.openGamePrice);
+                    break;
+                }
+            }
+        }
+
+        void TryPurchasePremiumItem(Data_Item INitem)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item == INitem)
+                {
+                    items[i].isPurchased = true;
                     break;
                 }
             }
