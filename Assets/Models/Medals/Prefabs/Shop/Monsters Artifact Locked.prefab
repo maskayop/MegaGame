@@ -8,10 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2284975332474420553, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: d491b6196e38c2f43b3198cea3870d28, type: 2}
+    - target: {fileID: -1740879833877088423, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2316588916171858282, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
       propertyPath: m_Name
       value: Monsters Artifact Locked
@@ -56,18 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6868723937919074480, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0470aef025c4b5e4b8dedc047d4de8ad, type: 2}
-    - target: {fileID: 8057661168198227242, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: d491b6196e38c2f43b3198cea3870d28, type: 2}
-    - target: {fileID: 8685920702916468226, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0b5d9e29dddc661489c4b61b01a7cd41, type: 2}
+    - target: {fileID: 8109209789132532876, guid: 09622bc551fc54d44bc6be6f780e19c7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

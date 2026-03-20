@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5360347784441242987}
   - component: {fileID: 3631527099411440285}
   - component: {fileID: 6059445832697846133}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Birds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
+  m_MeshLodSelectionBias: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

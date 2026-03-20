@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4825835885603544733, guid: 884200710d921804a964c20557ae4721, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2316588916171858282, guid: 884200710d921804a964c20557ae4721, type: 3}
       propertyPath: m_Name
       value: Mega-Ship Medal Locked
@@ -52,22 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3531067789257481402, guid: 884200710d921804a964c20557ae4721, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 1228ded67b93e5b468611bcf20340e92, type: 2}
-    - target: {fileID: 5198522591615754054, guid: 884200710d921804a964c20557ae4721, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 59967ce90c79db24eba761065fac436d, type: 2}
-    - target: {fileID: 5836797839601748675, guid: 884200710d921804a964c20557ae4721, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0b5d9e29dddc661489c4b61b01a7cd41, type: 2}
-    - target: {fileID: 8087738298300899964, guid: 884200710d921804a964c20557ae4721, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: ccb0f0b005436aa439e49c7fb3c53ae0, type: 2}
+    - target: {fileID: 8109209789132532876, guid: 884200710d921804a964c20557ae4721, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

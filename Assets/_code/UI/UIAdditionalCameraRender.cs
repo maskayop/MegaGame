@@ -8,6 +8,7 @@ namespace MegaGame.UI
         [SerializeField] RawImage victoryRawImage;
         [SerializeField] RawImage defeatRawImage;
         [SerializeField] RawImage shopRawImage;
+        [SerializeField] RawImage shopPremiumRawImage;
 
         AdditionalSceneObjects additionalSceneObjects;
 
@@ -18,6 +19,7 @@ namespace MegaGame.UI
             victoryRawImage.texture = additionalSceneObjects.victoryAdditionalCamera.GetRenderTexture();
             defeatRawImage.texture = additionalSceneObjects.defeatAdditionalCamera.GetRenderTexture();
             shopRawImage.texture = additionalSceneObjects.shopAdditionalCamera.GetRenderTexture();
+            shopPremiumRawImage.texture = additionalSceneObjects.shopPremiumAdditionalCamera.GetRenderTexture();
         }
     }
 }

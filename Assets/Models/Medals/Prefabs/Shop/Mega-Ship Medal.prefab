@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1810361954783484127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3468665353216751349}
+  m_Layer: 10
+  m_Name: Shturval
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3468665353216751349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810361954783484127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5215708056767960931}
+  m_Father: {fileID: 8456046767035151135}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2316588916171858282
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3524683338303748358}
-  - component: {fileID: 1535384912867174787}
+  - component: {fileID: -4825835885603544733}
   m_Layer: 10
   m_Name: Mega-Ship Medal
   m_TagString: Untagged
@@ -33,7 +65,7 @@ Transform:
   - {fileID: 8456046767035151135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1535384912867174787
+--- !u!95 &-4825835885603544733
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -82,10 +114,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 5215708056767960931}
+  - {fileID: 3468665353216751349}
   - {fileID: 8071595963404380152}
   - {fileID: 2872470812253196174}
   - {fileID: 6802940903073902320}
@@ -99,9 +131,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4938357629980522323}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5d25a76512edf7942b41b67148c6ae16, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9f45ba156b0f7c84db0ee6a6be716536, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -349,7 +381,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8456046767035151135}
+    m_TransformParent: {fileID: 3468665353216751349}
     m_Modifications:
     - target: {fileID: 372425819112772786, guid: e79688beac9ff6b428faa7624f704b19, type: 3}
       propertyPath: m_LocalPosition.x

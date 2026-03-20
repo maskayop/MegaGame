@@ -13,6 +13,17 @@ namespace MegaGame
         public GameObject itemGameObject;
     }
 
+    [Serializable]
+    public class ShopPremiumItemSceneObject
+    {
+        public string name;
+        public Data_Item itemData;
+        public GameObject itemContainer;
+        public GameObject lockedItemGameObject;
+        public GameObject openedItemGameObject;
+        public GameObject lockGameObject;
+    }
+
     public class AdditionalSceneObjects : MonoBehaviour
     {
         public static AdditionalSceneObjects Instance;
@@ -30,9 +41,15 @@ namespace MegaGame
 
         [Header("Shop")]
         [SerializeField] GameObject shopPanel;
-        public AdditionalCamera shopAdditionalCamera;
 
+        [SerializeField] GameObject gameModelsPreview;
+        public AdditionalCamera shopAdditionalCamera;
         [SerializeField] List<ShopItemSceneObject> shopItemSceneObjects = new List<ShopItemSceneObject>();
+
+        [Space(10)]
+        [SerializeField] GameObject premiumItemsPreview;
+        public AdditionalCamera shopPremiumAdditionalCamera;
+        [SerializeField] List<ShopPremiumItemSceneObject> shopPremiumItemSceneObjects = new List<ShopPremiumItemSceneObject>();
 
         GameController gameController;
 

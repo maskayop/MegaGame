@@ -8,14 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 75920327280599428, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 59967ce90c79db24eba761065fac436d, type: 2}
-    - target: {fileID: 2151045845037099866, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 59967ce90c79db24eba761065fac436d, type: 2}
+    - target: {fileID: -7827301512160262154, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2316588916171858282, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
       propertyPath: m_Name
       value: Spies Medal Locked
@@ -60,22 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3603386627154920284, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 1228ded67b93e5b468611bcf20340e92, type: 2}
-    - target: {fileID: 4325612944602541424, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0b5d9e29dddc661489c4b61b01a7cd41, type: 2}
-    - target: {fileID: 5490744157258448017, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a4b0369d834de074581a507ff8d8e50c, type: 2}
-    - target: {fileID: 6767332652763014171, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a4b0369d834de074581a507ff8d8e50c, type: 2}
+    - target: {fileID: 8109209789132532876, guid: ab3b2a16a9828054bbbf92726ad4f50c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
