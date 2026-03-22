@@ -76,6 +76,7 @@ namespace MegaGame.UI
         AdditionalSceneObjects additionalSceneObjects;
         GameplayObjectsBuilder gameplayObjectsBuilder;
         GameShop gameShop;
+        GameDataSaver gameDataSaver;
 
         Data_Item currentItemData;
         int currentItemId = 0;
@@ -113,6 +114,7 @@ namespace MegaGame.UI
             additionalSceneObjects = AdditionalSceneObjects.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
             gameShop = GameShop.Instance;
+            gameDataSaver = GameDataSaver.Instance;
 
             if (shopItemsData.Count > 0)
             {
@@ -144,12 +146,22 @@ namespace MegaGame.UI
                 UIShipsSelection.Instance.UpdateButtonsState();
 
             ResourcesController.Instance.CloseEnemyResources();
+            gameDataSaver.SavePremiumShopData();
         }
 
         void ShowCurrentItem()
         {
-            gameShop.LoadData();
-
+            gameDataSaver.LoadShopData();
+            gameDataSaver.LoadPremiumShopData();
+            /*
+            if (gameController.gameState != GameController.GameState.battle)
+            {
+                gameDataSaver.LoadShopData();
+                gameDataSaver.LoadPremiumShopData();
+            }
+            else
+                gameDataSaver.LoadPremiumShopData();
+            */
             currentItemData = shopItemsData[currentItemId].itemData;
             additionalSceneObjects.ShowShopItem(currentItemData);
 

@@ -18,10 +18,11 @@ namespace MegaGame
         [SerializeField] Vector2 positionLimits = new Vector2(100f, 100f);
         [SerializeField] Vector3 zoomInfluence = new Vector3(1f, 0f, 1f);
 
-        [Header("Scroll")]
+        [Header("Zoom")]
         [SerializeField] float scrollSpeed = 1;
         [SerializeField] float currentZoom = 0.5f;
         [SerializeField] Vector2Int baseTranslationZ = new Vector2Int(100, 500);
+        [SerializeField] float doubleTouchZoomSpeed = 1.0f;
 
         Vector2Int translationZ = new Vector2Int(100, 500);
 
@@ -150,10 +151,32 @@ namespace MegaGame
                     currentZoom += scrollSpeed;
 
                 currentZoom = Mathf.Clamp01(currentZoom);
+
+#if PLATFORM_ANDROID
+                HandleZoom();
+#endif
             }
 
             for (int i = 0; i < virtualCameras.Count; i++)
                 virtualCameras[i].transform.localPosition = Vector3.Lerp(new Vector3(0, 0, -translationZ.x), new Vector3(0, 0, -translationZ.y), currentZoom);
+        }
+
+        void HandleZoom()
+        {
+            if (Input.touchCount == 2)
+            {
+                Touch touch1 = Input.GetTouch(0);
+                Touch touch2 = Input.GetTouch(1);
+
+                Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
+                Vector2 touch2PrevPos = touch2.position - touch2.deltaPosition;
+
+                float prevDistance = Vector2.Distance(touch1PrevPos, touch2PrevPos);
+                float currentDistance = Vector2.Distance(touch1.position, touch2.position);
+
+                float difference = currentDistance - prevDistance;
+                currentZoom -= difference * doubleTouchZoomSpeed * scrollSpeed;
+            }
         }
 
         public void CameraZoom(float INvalue)

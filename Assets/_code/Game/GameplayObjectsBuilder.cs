@@ -27,6 +27,9 @@ namespace MegaGame
         [SerializeField] int smallPortFortressPrice = 700;
         [SerializeField] int bigPortFortressPrice = 1000;
 
+        [Header("Items")]
+        [SerializeField] List<Data_Item> items = new List<Data_Item>();
+
         string smallShipCost;
         string mediumShipCost;
         string bigShipCost;
@@ -40,6 +43,7 @@ namespace MegaGame
         ScenePrefabsManager scenePrefabsManager;
         ResourcesController resourcesController;
         GlobalTimeController globalTime;
+        GameShop gameShop;
 
         int maxBuildingShip = 0;
 
@@ -69,6 +73,7 @@ namespace MegaGame
             scenePrefabsManager = ScenePrefabsManager.Instance;
             resourcesController = ResourcesController.Instance;
             globalTime = GlobalTimeController.Instance;
+            gameShop = GameShop.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingPrice);
             mediumShipCost = Strint.GetString(mediumShipBuildingPrice);
@@ -93,7 +98,7 @@ namespace MegaGame
             if (Strint.Subtraction(resourcesController.PlayerMoney, smallShipCost) < 0)
                 return;
 
-            int shipLevel = GetBuildingShipLevel(resourcesController.PlayerMoney, false, maxBuildingShip);
+            int shipLevel = GetBuildingShipLevel(true, resourcesController.PlayerMoney, false, maxBuildingShip);
 
             if (isAttackingShipType) // Attacking Ship
                 BuildShip(scenePrefabsManager.GetAttackingShipPrefab(true, shipLevel), gameController.playerOpposingPorts.protagonPort.transform, targetSettlement);
@@ -135,7 +140,7 @@ namespace MegaGame
             else if (globalTime.currentDay >= enemyMegaShipBuildMinDay)
                 maxShipLevel = 4;
 
-            int currentShipLevel = GetBuildingShipLevel(resourcesController.EnemyMoney, true, maxShipLevel);
+            int currentShipLevel = GetBuildingShipLevel(false, resourcesController.EnemyMoney, true, maxShipLevel);
 
             if (isAttackingShipType) // Attacking Ship
                 BuildShip(scenePrefabsManager.GetAttackingShipPrefab(false, currentShipLevel), gameController.enemyOpposingPorts.protagonPort.transform, targetSettlement);
@@ -203,7 +208,7 @@ namespace MegaGame
             ship.GetComponent<PirateShip>().HomePosition = buildingPosition;
         }
 
-        int GetBuildingShipLevel(string money, bool isRandom, int maxShipLevel)
+        int GetBuildingShipLevel(bool isPlayer, string money, bool isRandom, int maxShipLevel)
         {
             int maxValue = 0;
 
@@ -224,8 +229,25 @@ namespace MegaGame
                 int r = Random.Range(1, maxValue + 1);
                 return r;
             }
-            else
-                return maxValue;
+            else if (isPlayer)
+                return GetAvailableShipLevel(maxValue);
+
+            return maxValue;
+        }
+
+        int GetAvailableShipLevel(int shipLevel)
+        {
+            for (int i = shipLevel; i > 0; i--)
+            {
+                if (i == 4 && gameShop.CheckForPurchasing(items[2]))
+                    return 4;
+                else if (i == 3 && gameShop.CheckForPurchasing(items[1]))
+                    return 3;
+                else if (i == 2 && gameShop.CheckForPurchasing(items[0]))
+                    return 2;
+            }
+
+            return 1;
         }
 
         public int GetShipBuildingCost(int shipLevel)
