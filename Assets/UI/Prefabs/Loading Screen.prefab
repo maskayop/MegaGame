@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1875, g: 0.75, b: 0.75, a: 1}
+  m_Color: {r: 0.12, g: 0.6, b: 0.6, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1875, g: 0.5624999, b: 0.75, a: 1}
+  m_Color: {r: 0.12, g: 0.44139132, b: 0.6, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -659,8 +659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61865b5ed674964eb6369890bd070da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UILoadingScreen
-  destroyAfterTime: {fileID: 6907093036191896679}
   warningPanel: {fileID: 4150050370009404783}
+  destroyAfterTime: {fileID: 6907093036191896679}
+  editorTimeToDestroy: 1
 --- !u!114 &6907093036191896679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,7 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DestroyAfterTime
   destroyAtStart: 0
-  time: 1
+  time: 5
 --- !u!1 &4150050370009404783
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +808,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apply and Start Game
       objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6459385276452469151}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MegaGame.UI.UILoadingScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8452506770420281188, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -833,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8452506770420281188, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 520
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 8452506770420281188, guid: 4ac97c420c3d8784bb320f24dd3cc037, type: 3}
       propertyPath: m_SizeDelta.y
@@ -905,13 +934,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2408012095474479887}
     m_Modifications:
-    - target: {fileID: 549732716209953221, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
-      propertyPath: m_fontSize
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 5050928701495720114, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
       propertyPath: m_Name
       value: Reject and Exit Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6459385276452469151}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MegaGame.UI.UILoadingScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064720774762540719, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8452506770420281188, guid: 4e458e243bf320b47b02ca679c199e28, type: 3}
       propertyPath: m_Pivot.x

@@ -40,6 +40,7 @@ namespace MegaGame
 
         string settlementConstructionsStateFormat = " SCS";
         string shopDataStateFormat = " SDS";
+        string tutorialStateFormat = " TS";
 
         const int FORT_BIT = 0;
         const int TRADE_BIT = 1;
@@ -54,6 +55,8 @@ namespace MegaGame
 
         int buildingStateForSave = 0;
         int shopDataForSave = 0;
+
+        int currentTutorialProgress = -1;
 
         void Awake()
         {
@@ -380,6 +383,26 @@ namespace MegaGame
         bool GetShopDataState(int bitIndex, int purchasedState)
         {
             return ((purchasedState >> bitIndex) & 1) == 1;
+        }
+
+        public void SaveTutorialData(int progress)
+        {
+            dataSaveLoad.Save(tutorialStateFormat, progress);
+        }
+
+        public void LoadTutorialData()
+        {
+            int tutorialState = dataSaveLoad.GetSavedInt(tutorialStateFormat);
+
+            if (tutorialState == -1)
+                currentTutorialProgress = 0;
+            else
+                currentTutorialProgress = tutorialState;
+        }
+
+        public int GetCurrentTutorialState()
+        {
+            return currentTutorialProgress;
         }
     }
 }

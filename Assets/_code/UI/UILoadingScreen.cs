@@ -7,8 +7,11 @@ namespace MegaGame.UI
     {
         public static UILoadingScreen Instance { get; private set; }
 
-        [SerializeField] DestroyAfterTime destroyAfterTime;
         [SerializeField] GameObject warningPanel;
+
+        [Header("Destroy")]
+        [SerializeField] DestroyAfterTime destroyAfterTime;
+        [SerializeField] float editorTimeToDestroy = 1;
 
         GameDataSaver gameDataSaver;
 
@@ -32,6 +35,35 @@ namespace MegaGame.UI
         public void Init()
         {
             gameDataSaver = GameDataSaver.Instance;
+
+            if (!gameDataSaver)
+                return;
+
+            gameDataSaver.LoadTutorialData();
+
+            if (gameDataSaver.GetCurrentTutorialState() == 0)
+                warningPanel.SetActive(true);
+            else
+            {
+                warningPanel.SetActive(false);
+
+#if UNITY_EDITOR
+                destroyAfterTime.DestroyGameObjectAfterTime(editorTimeToDestroy);
+#else
+                destroyAfterTime.DestroyGameObject();
+#endif
+            }
+        }
+
+        public void StartGame()
+        {
+            destroyAfterTime.DestroyGameObjectAfterTime(0);
+            gameDataSaver.SaveTutorialData(1);
+        }
+
+        public void ExitGame()
+        {
+            App.Instance.ExitGame();
         }
     }
 }
