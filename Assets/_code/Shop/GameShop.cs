@@ -119,5 +119,19 @@ namespace MegaGame
 
             return false;
         }
+
+        public bool CheckForAllPremiumItemPurchased()
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item.openRealPrice != 0)
+                {
+                    if (!items[i].isPurchased)
+                        return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

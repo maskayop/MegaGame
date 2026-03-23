@@ -26,13 +26,19 @@ namespace MegaGame.UI
         [SerializeField] GameObject renameAccountButton;
         [SerializeField] GameObject createAccountButton;
 
+        [Header("No Ads")]
+        [SerializeField] GameObject noAdsButton;
+        [SerializeField] GameObject noAdsPanel;
+        [SerializeField] int minDayForNoAdsButton = 100;
+
         GameController gameController;
         GameDataSaver gameDataSaver;
         CameraController cameraController;
+        GlobalTimeController globalTime;
+        GameShop gameShop;
+        UIGameShop gameShopUI;
 
         List<string> accountsNames = new List<string>();
-
-        UIGameShop gameShop;
 
         void Start()
         {
@@ -62,7 +68,9 @@ namespace MegaGame.UI
             gameController = GameController.Instance;
             gameDataSaver = GameDataSaver.Instance;
             cameraController = CameraController.Instance;
-            gameShop = UIGameShop.Instance;
+            gameShop = GameShop.Instance;
+            gameShopUI = UIGameShop.Instance;
+            globalTime = GlobalTimeController.Instance;
 
             currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
             CloseAccountManagerWindow();
@@ -76,6 +84,8 @@ namespace MegaGame.UI
 
             if (cameraController)
                 cameraController.SetFarClipPlaneToZero(true);
+
+            TryShowNoAdsButton();
         }
 
         public void Close()
@@ -177,12 +187,33 @@ namespace MegaGame.UI
 
         public void OpenShopWindow()
         {
-            gameShop.Open();
+            gameShopUI.Open();
         }
 
         public void CloseShopWindow()
         {
-            gameShop.Close();
+            gameShopUI.Close();
+            TryShowNoAdsButton();
+        }
+
+        void TryShowNoAdsButton()
+        {
+            if (globalTime.currentDay > minDayForNoAdsButton && !gameShop.CheckForAllPremiumItemPurchased())
+                noAdsButton.SetActive(true);
+            else
+                noAdsButton.SetActive(false);
+        }
+
+        public void OpenNoAdsPanel()
+        {
+            noAdsPanel.SetActive(true);
+            noAdsButton.SetActive(false);
+        }
+
+        public void CloseNoAdsPanel()
+        {
+            noAdsPanel.SetActive(false);
+            noAdsButton.SetActive(true);
         }
     }
 }

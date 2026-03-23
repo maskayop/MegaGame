@@ -366,12 +366,10 @@ namespace MegaGame
                 gameShop.SetPurchasedState(items[4], false);
                 gameShop.SetPurchasedState(items[5], false);
                 gameShop.SetPurchasedState(items[6], false);
+                gameShop.SetPurchasedState(items[7], false);
             }
             else
             {
-                gameShop.SetPurchasedState(items[0], GetShopDataState(MediumShip_BIT, purchasedState));
-                gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState));
-
                 if (GetShopDataState(MegaShip_BIT, purchasedState))
                 {
                     gameShop.SetPurchasedState(items[2], true);
@@ -383,7 +381,6 @@ namespace MegaGame
                     gameShop.SetPurchasedState(items[7], false);
                 }
 
-                gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[4], GetShopDataState(MonstersArtifact_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[5], GetShopDataState(Spies_BIT, purchasedState));
                 gameShop.SetPurchasedState(items[6], GetShopDataState(DoubleDistances_BIT, purchasedState));
