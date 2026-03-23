@@ -54,6 +54,8 @@ namespace MegaGame
         protected float currentAttackTime = 0;
         protected float currentTargetsUpdateTime = 0;
 
+        protected Owner currentDamagerOwner;
+
         protected Collider coll;
 
         void Awake()
@@ -267,6 +269,7 @@ namespace MegaGame
                 Kill();
 
             OnTakeDamage(damager);
+            currentDamagerOwner = damager.owner;
         }
 
         protected virtual void OnTakeDamage(BaseCharacter damager) { }

@@ -143,6 +143,7 @@ MonoBehaviour:
   nekarkWarningCircle: {fileID: 6874639579808131834, guid: 6a32aba1f31dc1a4b9789ba09ce37676, type: 3}
   nafaivelWarningCircle: {fileID: 6874639579808131834, guid: 27311473fe0897347925d9bd491f5f88, type: 3}
   traderProfitWidget: {fileID: 4355659799799374417, guid: 9c5c225a6726239428bd3b8c17fe1617, type: 3}
+  pirateLairProfitWidget: {fileID: 4355659799799374417, guid: 2af9f740ead3fb64ba8c04275ffaf26a, type: 3}
   distanceCircleAnimationState: Distance Circle
 --- !u!114 &15590748652426754
 MonoBehaviour:
@@ -211,6 +212,8 @@ MonoBehaviour:
   startMoneyForEnemy: 100
   playerTraderProfit: {x: 10, y: 20}
   enemyTraderProfit: {x: 15, y: 30}
+  playerPirateLairProfit: {x: 50, y: 100}
+  enemyPirateLairProfit: {x: 50, y: 150}
   sendSpiesItem: {fileID: 11400000, guid: a0717c4ca34708f4f996aa427acafe25, type: 2}
   sendSpiesPriceMultiplier: 100
 --- !u!114 &1907761513824449833

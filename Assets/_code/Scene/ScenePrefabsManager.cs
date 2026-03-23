@@ -44,6 +44,7 @@ namespace MegaGame
         [SerializeField] GameObject nekarkWarningCircle;
         [SerializeField] GameObject nafaivelWarningCircle;
         [SerializeField] GameObject traderProfitWidget;
+        [SerializeField] GameObject pirateLairProfitWidget;
 
         [SerializeField] string distanceCircleAnimationState;
 
@@ -180,7 +181,20 @@ namespace MegaGame
             if (value == 0)
                 return;
 
-            GameObject widget = Instantiate(traderProfitWidget, position, Quaternion.identity);
+            SpawnProfitWidget(traderProfitWidget, position, value);
+        }
+
+        public void SpawnPirateLairProfitWidget(Vector3 position, int value)
+        {
+            if (value == 0)
+                return;
+
+            SpawnProfitWidget(pirateLairProfitWidget, position, value);
+        }
+
+        void SpawnProfitWidget(GameObject prefab, Vector3 position, int value)
+        {
+            GameObject widget = Instantiate(prefab, position, Quaternion.identity);
             widget.GetComponent<ValueWidget>().SetText("+ " + value.ToString());
         }
 

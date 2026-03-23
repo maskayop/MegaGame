@@ -8,6 +8,21 @@ namespace MegaGame
 
         [SerializeField] GameObject capturedFX;
 
+        ResourcesController resourcesController;
+        ScenePrefabsManager prefabsManager;
+
+        bool profitAlreadyDone = false;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+
+            resourcesController = ResourcesController.Instance;
+            prefabsManager = ScenePrefabsManager.Instance;
+
+            profitAlreadyDone = false;
+        }
+
         protected override void OnUpdate()
         {
             base.OnUpdate();
@@ -65,6 +80,14 @@ namespace MegaGame
 
             GetCurrentHealthWidget().SetValue(0);
             GetCurrentHealthWidget().gameObject.SetActive(false);
+
+            if (profitAlreadyDone)
+                return;
+
+            resourcesController.OnPirateLairCaptured(currentDamagerOwner, out int profit);
+            prefabsManager.SpawnPirateLairProfitWidget(transform.position, profit);
+
+            profitAlreadyDone = true;
         }
 
         public void ShowPirateLair(bool state)

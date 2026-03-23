@@ -15,6 +15,10 @@ namespace MegaGame
         [SerializeField] Vector2Int playerTraderProfit;
         [SerializeField] Vector2Int enemyTraderProfit;
 
+        [Header("Trader Profit")]
+        [SerializeField] Vector2Int playerPirateLairProfit;
+        [SerializeField] Vector2Int enemyPirateLairProfit;
+
         [Header("Send Spies")]
         [SerializeField] Data_Item sendSpiesItem;
         [SerializeField] int sendSpiesPriceMultiplier = 100;
@@ -329,6 +333,34 @@ namespace MegaGame
                 r = Random.Range(enemyTraderProfit.x, enemyTraderProfit.y);
 
             return r;
+        }
+
+        int GetRandomPirateLairProfit(bool isPlayer)
+        {
+            int r = 0;
+
+            if (isPlayer)
+                r = Random.Range(playerPirateLairProfit.x, playerPirateLairProfit.y);
+            else
+                r = Random.Range(enemyPirateLairProfit.x, enemyPirateLairProfit.y);
+
+            return r;
+        }
+
+        public void OnPirateLairCaptured(BaseCharacter.Owner owner, out int profit)
+        {
+            if (owner == BaseCharacter.Owner.player)
+            {
+                profit = GetRandomPirateLairProfit(true);
+                AddMoneyToPlayer(profit);
+            }
+            else if (owner == BaseCharacter.Owner.enemy)
+            {
+                profit = GetRandomPirateLairProfit(false);
+                AddMoneyToEnemy(profit);
+            }
+            else
+                profit = 0;
         }
 
         public int GetSendSpiesPrice()
