@@ -48,28 +48,44 @@ MonoBehaviour:
   items:
   - name: "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
     item: {fileID: 11400000, guid: 2b33dc6c20d02e94389229863572a204, type: 2}
+    rustoreId: 
+    isAvailable: 0
     isPurchased: 0
   - name: "\u0411\u043E\u043B\u044C\u0448\u043E\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
     item: {fileID: 11400000, guid: 59fa455d1e8584b4190930cc80a464f6, type: 2}
+    rustoreId: 
+    isAvailable: 0
     isPurchased: 0
   - name: "\u041C\u0435\u0433\u0430-\u043A\u043E\u0440\u0430\u0431\u043B\u044C"
     item: {fileID: 11400000, guid: 2e0b88db98586c94faca7f17d61a5b24, type: 2}
+    rustoreId: Mega-Ship
+    isAvailable: 0
     isPurchased: 0
   - name: "\u0417\u0430\u0449\u0438\u0442\u043D\u044B\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
     item: {fileID: 11400000, guid: 31ef078c85c384047af011d74f6745a6, type: 2}
+    rustoreId: 
+    isAvailable: 0
     isPurchased: 0
   - name: "\u0423\u0441\u043C\u0438\u0440\u0438\u0442\u0435\u043B\u044C \u0447\u0443\u0434\u043E\u0432\u0438\u0449"
     item: {fileID: 11400000, guid: 8fc765af0c9cab64ca119efbf506b3cf, type: 2}
+    rustoreId: MonstersArtifact
+    isAvailable: 0
     isPurchased: 0
   - name: "\u0428\u043F\u0438\u043E\u043D\u044B"
     item: {fileID: 11400000, guid: a0717c4ca34708f4f996aa427acafe25, type: 2}
+    rustoreId: Spies
+    isAvailable: 0
     isPurchased: 0
   - name: "\u0423\u0434\u0432\u043E\u0435\u043D\u0438\u0435 \u0434\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u0438
       \u043F\u043B\u0430\u0432\u0430\u043D\u0438\u044F"
     item: {fileID: 11400000, guid: db7d3aabd294f49448750ec7024a1835, type: 2}
+    rustoreId: DoubleDistances
+    isAvailable: 0
     isPurchased: 0
   - name: "\u041C\u0435\u0433\u0430-\u043A\u043E\u0440\u0430\u0431\u043B\u044C \u043C\u0435\u0434\u0430\u043B\u044C"
     item: {fileID: 11400000, guid: 7e93167337479e749aa46f88effd43f7, type: 2}
+    rustoreId: Mega-Ship
+    isAvailable: 0
     isPurchased: 0
 --- !u!114 &1560527560960037869
 MonoBehaviour:
@@ -83,3 +99,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80d4ce57b081442921e13db3989915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RuStorePayments
+  PurchaseAvailability: 0
+  UserStatusAuthorization: 0

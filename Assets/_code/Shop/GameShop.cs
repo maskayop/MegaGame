@@ -10,6 +10,8 @@ namespace MegaGame
     {
         public string name;
         public Data_Item item;
+        public string rustoreId;
+        public bool isAvailable;
         public bool isPurchased;
     }
 
