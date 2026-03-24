@@ -5,10 +5,9 @@ using UnityEngine;
 public class RustorePayments : MonoBehaviour
 {
     public bool PurchaseAvailability;
-    public RuStoreError PurchaseAvailabilityError;
-
     public bool UserStatusAuthorization;
 
+    public RuStoreError PurchaseAvailabilityError;
     public ProductId[] productIds;
 
     void Start()
