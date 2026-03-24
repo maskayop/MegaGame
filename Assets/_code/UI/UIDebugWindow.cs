@@ -9,6 +9,8 @@ namespace MegaGame.UI
 
         [SerializeField] TextMeshProUGUI text;
 
+        GameShop gameshop;
+
         void Awake()
         {
             if (Instance != null)
@@ -28,7 +30,9 @@ namespace MegaGame.UI
 
         public void Init()
         {
+            gameshop = GameShop.Instance;
 
+            RustoreValidation();
         }
 
         public void SetText(string INtext)
@@ -39,6 +43,14 @@ namespace MegaGame.UI
         public void AddText(string INtext)
         {
             text.text += INtext;
+        }
+
+        public void RustoreValidation()
+        {
+            SetText("");
+
+            for (int i = 0; i < gameshop.currentRustoreStatus.Length; i++)
+                AddText(gameshop.currentRustoreStatus[i] + "\n");
         }
     }
 }

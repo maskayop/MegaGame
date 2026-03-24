@@ -71,16 +71,12 @@ namespace MegaGame.UI
         [Header("Items")]
         [SerializeField] List<UIShopItem> shopItemsData = new List<UIShopItem>();
 
-        [Header("Debug")]
-        [SerializeField] bool rustoreDebug = false;
-
         GameController gameController;
         CameraController cameraController;
         AdditionalSceneObjects additionalSceneObjects;
         GameplayObjectsBuilder gameplayObjectsBuilder;
         GameShop gameShop;
         GameDataSaver gameDataSaver;
-        UIDebugWindow debugWindow;
 
         Data_Item currentItemData;
         int currentItemId = 0;
@@ -119,7 +115,6 @@ namespace MegaGame.UI
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
             gameShop = GameShop.Instance;
             gameDataSaver = GameDataSaver.Instance;
-            debugWindow = UIDebugWindow.Instance;
 
             if (shopItemsData.Count > 0)
             {

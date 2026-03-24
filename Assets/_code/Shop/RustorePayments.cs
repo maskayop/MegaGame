@@ -1,14 +1,44 @@
 ﻿using RuStore;
 using RuStore.PayClient;
+using System;
 using UnityEngine;
 
 public class RustorePayments : MonoBehaviour
 {
-    public bool PurchaseAvailability;
-    public bool UserStatusAuthorization;
+    public static RustorePayments Instance { get; private set; }
 
-    public RuStoreError PurchaseAvailabilityError;
+    public bool StoreAvailability;
+
+    public static event Action OnStoreCheckStarted;
+
+    public static event Action OnStoreAvailable;
+    public static event Action<string> OnStoreAvailableError;
+    public static event Action<RuStoreError> OnStoreConnectionFailed;
+
+    public static event Action OnUserAuthorized;
+    public static event Action OnUserUnauthorized;
+    public static event Action<RuStoreError> OnUserAuthorizationFailed;
+
+    public static event Action OnProductsLoaded;
+    public static event Action<RuStoreError> OnProductsLoadingError;
+
+    public static event Action OnGetUserPurchasesSuccess;
+    public static event Action OnGetUserSubscriptionPurchasesSuccess;
+    public static event Action<RuStoreError> OnGetUserPurchasesFailed;
+
     public ProductId[] productIds;
+
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("Cannot create RustorePayments");
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     void Start()
     {
@@ -17,31 +47,33 @@ public class RustorePayments : MonoBehaviour
 
     public void Init()
     {
-        GetPurchaseAvailability();
+        CheckStoreAvailability();
         GetUserAuthorizationStatus();
         LoadProducts();
         GetPurchases();
     }
 
-    void GetPurchaseAvailability()
+    void CheckStoreAvailability()
     {
+        OnStoreCheckStarted?.Invoke();
+
         RuStorePayClient.Instance.GetPurchaseAvailability(
             onFailure: (error) =>
             {
-                OnPurchaseConnectionError();
+                OnStoreConnectionFailed?.Invoke(error);
             },
             onSuccess: (response) =>
             {
                 if (response.isAvailable)
                 {
-                    PurchaseAvailability = true;
-                    OnPurchaseAvailable();
+                    StoreAvailability = true;
+                    OnStoreAvailable?.Invoke();
                 }
                 else
                 {
-                    PurchaseAvailability = false;
-                    PurchaseAvailabilityError = response.cause;
-                    OnPurchaseAvailableError();
+                    StoreAvailability = false;
+                    string errorReason = GetReasonMessage(response.cause);
+                    OnStoreAvailableError?.Invoke(errorReason);
                 }
             }
         );
@@ -52,20 +84,14 @@ public class RustorePayments : MonoBehaviour
         RuStorePayClient.Instance.GetUserAuthorizationStatus(
             onFailure: (error) =>
             {
-                OnUserAuthorizationError();
+                OnUserAuthorizationFailed?.Invoke(error);
             },
             onSuccess: (result) =>
             {
                 if (result == UserAuthorizationStatus.AUTHORIZED)
-                {
-                    UserStatusAuthorization = true;
-                    OnUserAuthorized();
-                }
+                    OnUserAuthorized?.Invoke();
                 else
-                {
-                    UserStatusAuthorization = false;
-                    OnUserUnauthorized();
-                }
+                    OnUserUnauthorized?.Invoke();
             });
     }
 
@@ -75,11 +101,11 @@ public class RustorePayments : MonoBehaviour
             productsId: productIds,
             onFailure: (error) =>
             {
-                OnProductsLoadingError();
+                OnProductsLoadingError?.Invoke(error);
             },
             onSuccess: (result) =>
             {
-                OnProductsLoaded();
+                OnProductsLoaded?.Invoke();
             });
     }
 
@@ -88,7 +114,7 @@ public class RustorePayments : MonoBehaviour
         RuStorePayClient.Instance.GetPurchases(
             onFailure: (error) =>
             {
-                OnGetUserPurchasesFailed();
+                OnGetUserPurchasesFailed?.Invoke(error);
             },
             onSuccess: (result) =>
             {
@@ -97,63 +123,13 @@ public class RustorePayments : MonoBehaviour
                     if (purchase is ProductPurchase productPurchase)
                         OnGetUserPurchasesSuccess();
                     if (purchase is SubscriptionPurchase subscriptionPurchase)
-                        OnGetUserPurchasesError();
+                        OnGetUserSubscriptionPurchasesSuccess();
                 });
             });
     }
 
-    void OnPurchaseConnectionError()
+    string GetReasonMessage(RuStoreError cause)
     {
-
-    }
-
-    void OnPurchaseAvailable()
-    {
-
-    }
-
-    void OnPurchaseAvailableError()
-    {
-
-    }
-
-    void OnUserAuthorizationError()
-    {
-
-    }
-
-    void OnUserAuthorized()
-    {
-
-    }
-
-    void OnUserUnauthorized()
-    {
-
-    }
-
-    void OnProductsLoaded()
-    {
-
-    }
-
-    void OnProductsLoadingError()
-    {
-
-    }
-
-    void OnGetUserPurchasesFailed()
-    {
-
-    }
-
-    void OnGetUserPurchasesSuccess()
-    {
-
-    }
-
-    void OnGetUserPurchasesError()
-    {
-
+        return cause.name;
     }
 }
