@@ -1,12 +1,12 @@
-﻿using RuStore;
-using RuStore.PayClient;
+﻿//using RuStore;
+//using RuStore.PayClient;
 using System;
 using UnityEngine;
 
 public class RustorePayments : MonoBehaviour
 {
     public static RustorePayments Instance { get; private set; }
-
+    /*
     public bool StoreAvailability;
 
     public static event Action OnStoreCheckStarted;
@@ -27,7 +27,7 @@ public class RustorePayments : MonoBehaviour
     public static event Action<RuStoreError> OnGetUserPurchasesFailed;
 
     public ProductId[] productIds;
-
+    */
     void Awake()
     {
         if (Instance != null)
@@ -46,13 +46,14 @@ public class RustorePayments : MonoBehaviour
     }
 
     public void Init()
-    {
+    {/*
         CheckStoreAvailability();
         GetUserAuthorizationStatus();
         LoadProducts();
         GetPurchases();
+        */
     }
-
+    /*
     void CheckStoreAvailability()
     {
         OnStoreCheckStarted?.Invoke();
@@ -132,4 +133,5 @@ public class RustorePayments : MonoBehaviour
     {
         return cause.name;
     }
+    */
 }

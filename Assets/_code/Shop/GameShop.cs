@@ -1,4 +1,4 @@
-using RuStore;
+//using RuStore;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +54,7 @@ namespace MegaGame
             gameDataSaver = GameDataSaver.Instance;
 
             LoadData();
-            RustoreValidation();
+            //RustoreValidation();
         }
 
         public void LoadData()
@@ -142,7 +142,7 @@ namespace MegaGame
 
             return true;
         }
-
+        /*
         public void RustoreValidation()
         {
             RustorePayments.OnStoreAvailable += OnRustoreAvailable;
@@ -215,5 +215,6 @@ namespace MegaGame
         {
             currentRustoreStatus[3] = "<color=red>" + "User Purchases Not loaded" + " - " + "</color>" + error.name + " - " + error.description;
         }
+        */
     }
 }
