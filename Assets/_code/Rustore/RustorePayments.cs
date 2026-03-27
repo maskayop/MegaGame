@@ -263,7 +263,7 @@ namespace MegaGame
                     break;
 
                 default:
-                    OnError(error);
+                    //OnError(error);
                     break;
             }
         }
@@ -405,6 +405,15 @@ namespace MegaGame
         void OnRustoreGetUserPurchasesFailed(RuStoreError error)
         {
             currentRustoreStatus[3] = "<color=#DD2244>" + "User Purchases Not loaded" + "</color>" + " - " + error.name + " - " + error.description;
+        }
+
+        public Product GetProductById(string productId)
+        {
+            for (int i = 0; i < products.Count; i++)
+                if (products[i].productId.value == productId)
+                    return products[i];
+
+            return null;
         }
     }
 }

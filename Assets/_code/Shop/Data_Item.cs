@@ -12,7 +12,10 @@ namespace MegaGame
         [Header("Prices")]
         public int priceId;
         public int openGamePrice;
+
+        [Header("Real Prices")]
         public int openRealPrice;
+        public string rustoreId;
 
         [Space(20)]
         public GameObject prefab;
