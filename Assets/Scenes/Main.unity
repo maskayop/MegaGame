@@ -377,42 +377,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Shop
       objectReference: {fileID: 0}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: messageBox
-      value: 
-      objectReference: {fileID: 2090028463}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: productsView
-      value: 
-      objectReference: {fileID: 571858339}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: purchasesView
-      value: 
-      objectReference: {fileID: 571858338}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: productInfoBox
-      value: 
-      objectReference: {fileID: 1694561201}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: productTypeView
-      value: 
-      objectReference: {fileID: 571858336}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: loadingIndicator
-      value: 
-      objectReference: {fileID: 945168233}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: purchaseMethodBox
-      value: 
-      objectReference: {fileID: 1074287002}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: purchaseStatusView
-      value: 
-      objectReference: {fileID: 571858337}
-    - target: {fileID: 1560527560960037869, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
-      propertyPath: m_EditorClassIdentifier
-      value: Assembly-CSharp::RustorePayments
-      objectReference: {fileID: 0}
     - target: {fileID: 1854424577947326170, guid: 90b800744ce135d47b2490b07c5f0fb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11709,50 +11673,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
---- !u!114 &571858336 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1957784947517911193, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1222d9f7923e474184df648c1b2479e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIProductTypeView
---- !u!114 &571858337 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4340504805469600395, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402115e7b10b64f47a93678be1cf0c10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIPurchaseStatusView
---- !u!114 &571858338 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3430883010176372550, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6138c0cd08b1e6c4ea7d4a8aa47f4031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UICardsView
---- !u!114 &571858339 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 958955596716893541, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6138c0cd08b1e6c4ea7d4a8aa47f4031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UICardsView
 --- !u!1001 &582358596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14953,17 +14873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82521da583ededf4f937d889d14e119f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.Island
---- !u!114 &945168233 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5234592411121939443, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5c11d66ba405d46993350acce504e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShopLoadingIndicator
 --- !u!1 &961461726
 GameObject:
   m_ObjectHideFlags: 0
@@ -16176,17 +16085,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4d3a8b43c117314b870a504c274766f, type: 3}
---- !u!114 &1074287002 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9151015350836559680, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef072a0a52059214b8c0f75ce7bddd39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIPurchaseMethodBox
 --- !u!1 &1089749608
 GameObject:
   m_ObjectHideFlags: 0
@@ -22634,17 +22532,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3228828438821100152, guid: 75350df1b63047a4d8a1fb35f0d18c00, type: 3}
   m_PrefabInstance: {fileID: 1678012795}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1694561201 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7125524621998136618, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1a3c16e27577cf4186afca36333511e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIProductInfoBox
 --- !u!1001 &1703469525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27493,17 +27380,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1067865441765021539, guid: 03414333efed2ac47ac7f87da503b89f, type: 3}
   m_PrefabInstance: {fileID: 4807071854735244770}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2090028463 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9080564897914249398, guid: ee4eb839c84576146a3249edc8db0449, type: 3}
-  m_PrefabInstance: {fileID: 571858335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88e54f4da02d3a4bbbb16ef0ec8f1ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIMessageBox
 --- !u!1001 &2092403749
 PrefabInstance:
   m_ObjectHideFlags: 0

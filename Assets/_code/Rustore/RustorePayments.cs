@@ -12,37 +12,19 @@ namespace MegaGame
         public static RustorePayments Instance { get; private set; }
 
         [SerializeField] string logTag = "json";
-        [SerializeField] UIShopLoadingIndicator loadingIndicator;
-        [SerializeField] UIPurchaseMethodBox purchaseMethodBox;
-        [SerializeField] UIMessageBox messageBox;
-        [SerializeField] UIProductInfoBox productInfoBox;
-        [SerializeField] UICardsView purchasesView;
-        [SerializeField] UIProductTypeView productTypeView;
-        [SerializeField] UIPurchaseStatusView purchaseStatusView;
-        [SerializeField] UICardsView productsView;
 
         public static event Action OnStoreCheckStarted;
-
-        public static event Action OnStoreAvailable;
-        public static event Action<string> OnStoreAvailableError;
-        public static event Action<RuStoreError> OnStoreConnectionFailed;
-
-        public static event Action OnProductsLoaded;
-        public static event Action<RuStoreError> OnProductsLoadingError;
-
-        public static event Action OnGetUserPurchasesSuccess;
-        public static event Action OnGetUserSubscriptionPurchasesSuccess;
-        public static event Action<RuStoreError> OnGetUserPurchasesFailed;
 
         bool rustoreIsAvailable;
         public bool RustoreIsAvailable { get { return rustoreIsAvailable; } }
 
         public string[] productsId;
-
         public string[] currentRustoreStatus = new string[4];
 
         public List<Product> products = new List<Product>();
         public List<IPurchase> purchases = new List<IPurchase>();
+
+        UIRustoreWindow rustoreWindowUI;
 
         void Awake()
         {
@@ -58,6 +40,8 @@ namespace MegaGame
 
         void Start()
         {
+            rustoreWindowUI = UIRustoreWindow.Instance;
+
             Init();
         }
 
@@ -74,17 +58,6 @@ namespace MegaGame
         {
             //---
 
-            OnStoreAvailable -= OnRustoreAvailable;
-            OnStoreAvailableError -= OnRustoreAvailableError;
-            OnStoreConnectionFailed -= OnRustoreConnectionFailed;
-
-            OnProductsLoaded -= OnRustoreProductsLoaded;
-            OnProductsLoadingError -= OnRustoreProductsLoadingError;
-
-            OnGetUserPurchasesSuccess -= OnRustoreGetUserPurchasesSuccess;
-            OnGetUserSubscriptionPurchasesSuccess -= OnRustoreGetUserSubscriptionPurchasesSuccess;
-            OnGetUserPurchasesFailed -= OnRustoreGetUserPurchasesFailed;
-
             UIProductCard.OnBuyProduct -= ProductCard_OnBuyProduct;
             UIProductCard.OnInfoProduct -= ProductCard_OnInfoProduct;
 
@@ -92,21 +65,7 @@ namespace MegaGame
             UIPurchaseCard.OnCancelPurchase -= PurchaseCard_OnCancelPurchase;
             UIPurchaseCard.OnGetPurchase -= PurchaseCard_OnGetPurchase;
 
-            productTypeView.onValueChangedEvent -= ProductTypeView_onValueChangedEvent;
-            purchaseStatusView.onValueChangedEvent -= PurchaseStatusView_onValueChangedEvent;
-
             //+++
-
-            OnStoreAvailable += OnRustoreAvailable;
-            OnStoreAvailableError += OnRustoreAvailableError;
-            OnStoreConnectionFailed += OnRustoreConnectionFailed;
-
-            OnProductsLoaded += OnRustoreProductsLoaded;
-            OnProductsLoadingError += OnRustoreProductsLoadingError;
-
-            OnGetUserPurchasesSuccess += OnRustoreGetUserPurchasesSuccess;
-            OnGetUserSubscriptionPurchasesSuccess += OnRustoreGetUserSubscriptionPurchasesSuccess;
-            OnGetUserPurchasesFailed += OnRustoreGetUserPurchasesFailed;
 
             UIProductCard.OnBuyProduct += ProductCard_OnBuyProduct;
             UIProductCard.OnInfoProduct += ProductCard_OnInfoProduct;
@@ -114,9 +73,6 @@ namespace MegaGame
             UIPurchaseCard.OnConfirmPurchase += PurchaseCard_OnConfirmPurchase;
             UIPurchaseCard.OnCancelPurchase += PurchaseCard_OnCancelPurchase;
             UIPurchaseCard.OnGetPurchase += PurchaseCard_OnGetPurchase;
-
-            productTypeView.onValueChangedEvent += ProductTypeView_onValueChangedEvent;
-            purchaseStatusView.onValueChangedEvent += PurchaseStatusView_onValueChangedEvent;
         }
 
         public void CheckStoreAvailability()
@@ -126,20 +82,20 @@ namespace MegaGame
             RuStorePayClient.Instance.GetPurchaseAvailability(
                 onFailure: (error) =>
                 {
-                    OnStoreConnectionFailed?.Invoke(error);
+                    OnRustoreConnectionFailed(error);
                 },
                 onSuccess: (response) =>
                 {
                     if (response.isAvailable)
                     {
                         rustoreIsAvailable = true;
-                        OnStoreAvailable?.Invoke();
+                        OnRustoreAvailable();
                     }
                     else
                     {
                         rustoreIsAvailable = false;
                         string errorReason = GetReasonMessage(response.cause);
-                        OnStoreAvailableError?.Invoke(errorReason);
+                        OnRustoreAvailableError(errorReason);
                     }
                 }
             );
@@ -147,18 +103,24 @@ namespace MegaGame
 
         public void GetUserAuthorizationStatus()
         {
-            loadingIndicator.Show();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
 
             RuStorePayClient.Instance.GetUserAuthorizationStatus(
                 onFailure: (error) =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRuStorePaymentException(error);
+                    OnRustoreUserAuthorizationFailed(error);
                 },
                 onSuccess: (result) =>
                 {
-                    loadingIndicator.Hide();
-                    messageBox.Show("UserAuthorizationStatus", result.ToString());
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
+                    rustoreWindowUI?.ShowMessageBox("UserAuthorizationStatus", result.ToString());
+
+                    if (result == UserAuthorizationStatus.AUTHORIZED)
+                        OnRustoreUserAuthorized();
+                    else if (result == UserAuthorizationStatus.UNAUTHORIZED)
+                        OnRustoreUserUnauthorized();
                 });
         }
 
@@ -170,11 +132,11 @@ namespace MegaGame
                 productsId: ids,
                 onFailure: (error) =>
                 {
-                    OnProductsLoadingError?.Invoke(error);
+                    OnRustoreProductsLoadingError(error);
                 },
                 onSuccess: (result) =>
                 {
-                    OnProductsLoaded?.Invoke();
+                    OnRustoreProductsLoaded();
                     products = result;
                 });
         }
@@ -184,7 +146,7 @@ namespace MegaGame
             RuStorePayClient.Instance.GetPurchases(
                 onFailure: (error) =>
                 {
-                    OnGetUserPurchasesFailed?.Invoke(error);
+                    OnRustoreGetUserPurchasesFailed(error);
                 },
                 onSuccess: (result) =>
                 {
@@ -193,9 +155,9 @@ namespace MegaGame
                     result.ForEach(purchase =>
                     {
                         if (purchase is ProductPurchase productPurchase)
-                            OnGetUserPurchasesSuccess();
+                            OnRustoreGetUserPurchasesSuccess();
                         if (purchase is SubscriptionPurchase subscriptionPurchase)
-                            OnGetUserSubscriptionPurchasesSuccess();
+                            OnRustoreGetUserSubscriptionPurchasesSuccess();
                     });
                 });
         }
@@ -207,7 +169,7 @@ namespace MegaGame
 
         public void GetProducts()
         {
-            loadingIndicator.Show();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
 
             var ids = Array.ConvertAll(productsId, p => new ProductId(p));
 
@@ -215,13 +177,13 @@ namespace MegaGame
                 productsId: ids,
                 onFailure: (error) =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRuStorePaymentException(error);
                 },
                 onSuccess: (result) =>
                 {
-                    loadingIndicator.Hide();
-                    productsView.SetData(result);
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
+                    rustoreWindowUI?.SetProductsViewData(result);
                 });
         }
 
@@ -232,7 +194,7 @@ namespace MegaGame
             var json = RustoreDataSerializer.SerializeToJson(product, true);
             RustoreLogger.LogWarning(logTag, json);
 
-            productInfoBox.Show(product);
+            rustoreWindowUI?.ShowProductInfoBox(product);
         }
 
         void ProductCard_OnBuyProduct(object sender, EventArgs e)
@@ -242,41 +204,42 @@ namespace MegaGame
 
             Action<RuStoreError> onError = (error) =>
             {
-                loadingIndicator.Hide();
+                rustoreWindowUI?.ShowLoadingIndicator(false);
                 OnRuStorePaymentException(error);
             };
 
             Action<ProductPurchaseResult> onSuccess = (result) =>
             {
-                loadingIndicator.Hide();
+                rustoreWindowUI?.ShowLoadingIndicator(false);
+
                 var jsonResult = RustoreDataSerializer.SerializeToJson(result, true);
                 RustoreLogger.LogWarning(logTag, jsonResult);
             };
 
             Action<SdkTheme> onPreferredOneStep = (sdkTheme) =>
             {
-                loadingIndicator.Show();
+                rustoreWindowUI?.ShowLoadingIndicator(true);
                 RuStorePayClient.Instance.Purchase(parameters, PreferredPurchaseType.ONE_STEP, sdkTheme, onError, onSuccess);
             };
 
             Action<SdkTheme> onPreferredOTwoStep = (sdkTheme) =>
             {
-                loadingIndicator.Show();
+                rustoreWindowUI?.ShowLoadingIndicator(true);
                 RuStorePayClient.Instance.Purchase(parameters, PreferredPurchaseType.TWO_STEP, sdkTheme, onError, onSuccess);
             };
 
             Action<SdkTheme> onTwoStep = (sdkTheme) =>
             {
-                loadingIndicator.Show();
+                rustoreWindowUI?.ShowLoadingIndicator(true);
                 RuStorePayClient.Instance.PurchaseTwoStep(parameters, sdkTheme, onError, onSuccess);
             };
 
-            purchaseMethodBox?.Show(product.title.value, onPreferredOneStep, onPreferredOTwoStep, onTwoStep);
+            rustoreWindowUI?.ShowPurchaseMethodBox(product.title.value, onPreferredOneStep, onPreferredOTwoStep, onTwoStep);
         }
 
         void OnError(RuStoreError error)
         {
-            messageBox.Show(error.name, error.description);
+            rustoreWindowUI?.ShowMessageBox(error.name, error.description);
             Debug.LogErrorFormat("{0} : {1}", error.name, error.description);
         }
 
@@ -288,14 +251,14 @@ namespace MegaGame
                 case RuStorePaymentException.RuStorePaymentNetworkException networkException:
                     message = string.Format("{0}\ncode: {1}\nid: {2}", networkException.description, networkException.code, networkException.id);
 
-                    messageBox.Show(error.name, message);
+                    rustoreWindowUI?.ShowMessageBox(error.name, message);
                     Debug.LogErrorFormat("{0} : {1}", error.name, message);
                     break;
 
                 case RuStorePaymentException.ProductPurchaseException productPurchaseException:
                     message = string.Format("Sandbox: {0}", productPurchaseException.sandbox?.ToString() ?? "null");
 
-                    messageBox.Show(error.name, message);
+                    rustoreWindowUI?.ShowMessageBox(error.name, message);
                     Debug.LogErrorFormat("{0} : {1}", error.name, message);
                     break;
 
@@ -307,19 +270,20 @@ namespace MegaGame
 
         public void LoadPurchases()
         {
-            loadingIndicator.Show();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
+
             RuStorePayClient.Instance.GetPurchases(
-                productType: productTypeView.GetState(),
-                purchaseStatus: purchaseStatusView.GetState(),
+                productType: rustoreWindowUI?.GetUIProductTypeView().GetState(),
+                purchaseStatus: rustoreWindowUI?.GetUIPurchaseStatusView().GetState(),
                 onFailure: (error) =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRuStorePaymentException(error);
                 },
                 onSuccess: (result) =>
                 {
-                    loadingIndicator.Hide();
-                    purchasesView.SetData(result);
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
+                    rustoreWindowUI?.SetPurchasesViewData(result);
 
                     var jsonResult = RustoreDataSerializer.SerializeToJson(result.Count, true);
                     RustoreLogger.LogWarning(logTag, jsonResult);
@@ -328,7 +292,7 @@ namespace MegaGame
 
         void PurchaseCard_OnGetPurchase(object sender, EventArgs e)
         {
-            loadingIndicator.Show();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
 
             var purchase = (sender as IProductCard<IPurchase>).GetData();
 
@@ -336,13 +300,13 @@ namespace MegaGame
                 purchaseId: purchase.purchaseId,
                 onFailure: (error) =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRuStorePaymentException(error);
                 },
                 onSuccess: (result) =>
                 {
-                    loadingIndicator.Hide();
-                    messageBox.Show("Purchase", string.Format("Purchase id: {0}", result.purchaseId));
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
+                    rustoreWindowUI?.ShowMessageBox("Purchase", string.Format("Purchase id: {0}", result.purchaseId));
 
                     var jsonResult = RustoreDataSerializer.SerializeToJson(result, true);
                     RustoreLogger.LogWarning(logTag, jsonResult);
@@ -351,7 +315,7 @@ namespace MegaGame
 
         void PurchaseCard_OnConfirmPurchase(object sender, EventArgs e)
         {
-            loadingIndicator.Show();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
 
             var purchase = (sender as IProductCard<IPurchase>).GetData();
             RuStorePayClient.Instance.ConfirmTwoStepPurchase(
@@ -359,92 +323,88 @@ namespace MegaGame
                 developerPayload: null,
                 onFailure: (error) =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRuStorePaymentException(error);
                 },
                 onSuccess: () =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     LoadPurchases();
                 });
         }
 
         void PurchaseCard_OnCancelPurchase(object sender, EventArgs e)
         {
-            loadingIndicator.Show();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
 
             var purchase = (sender as IProductCard<IPurchase>).GetData();
             RuStorePayClient.Instance.CancelTwoStepPurchase(
                 purchaseId: purchase.purchaseId,
                 onFailure: (error) =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRuStorePaymentException(error);
                 },
                 onSuccess: () =>
                 {
-                    loadingIndicator.Hide();
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     LoadPurchases();
                 });
         }
 
-        void PurchaseStatusView_onValueChangedEvent(object sender, Enum e) => LoadPurchases();
-
-        void ProductTypeView_onValueChangedEvent(object sender, ProductType? e) => LoadPurchases();
-
         void OnRustoreAvailable()
         {
-            currentRustoreStatus[0] = "<color=#009922>" + "Rustore is Ready" + "</color>";
+            currentRustoreStatus[0] = "<color=#22DD44>" + "Rustore is Ready" + "</color>";
         }
 
         void OnRustoreAvailableError(string reason)
         {
-            currentRustoreStatus[0] = "<color=#990022>" + "Rustore is Not ready" + "</color>" + " - " + reason;
+            currentRustoreStatus[0] = "<color=#DD2244>" + "Rustore is Not ready" + "</color>" + " - " + reason;
         }
 
         void OnRustoreConnectionFailed(RuStoreError error)
         {
-            currentRustoreStatus[0] = "<color=#990022>" + "Rustore is Not ready" + "</color>" + " - " + error.name + " - " + error.description;
+            currentRustoreStatus[0] = "<color=#DD2244>" + "Rustore is Not ready" + "</color>" + " - " + error.name + " - " + error.description;
         }
 
         void OnRustoreUserAuthorized()
         {
-            currentRustoreStatus[1] = "<color=#009922>" + "User is Authorized" + "</color>";
+            currentRustoreStatus[1] = "<color=#22DD44>" + "User is Authorized" + "</color>";
         }
 
         void OnRustoreUserUnauthorized()
         {
-            currentRustoreStatus[1] = "<color=#990022>" + "User is Not authorized" + "</color>";
+            currentRustoreStatus[1] = "<color=#DD2244>" + "User is Not authorized" + "</color>";
         }
 
         void OnRustoreUserAuthorizationFailed(RuStoreError error)
         {
-            currentRustoreStatus[1] = "<color=#990022>" + "User is Not authorized" + "</color>" + " - " + error.name + " - " + error.description;
+            currentRustoreStatus[1] = "<color=#DD2244>" + "User is Not authorized" + "</color>" + " - " + error.name + " - " + error.description;
         }
 
         void OnRustoreProductsLoaded()
         {
-            currentRustoreStatus[2] = "<color=#009922>" + "Products Successfully loaded" + "</color>";
+            currentRustoreStatus[2] = "<color=#22DD44>" + "Products Successfully loaded" + "</color>";
         }
 
         void OnRustoreProductsLoadingError(RuStoreError error)
         {
-            currentRustoreStatus[2] = "<color=#990022>" + "Products Not loaded" + "</color>" + " - " + error.name + " - " + error.description;
+            currentRustoreStatus[2] = "<color=#DD2244>" + "Products Not loaded" + "</color>" + " - " + error.name + " - " + error.description;
         }
 
         void OnRustoreGetUserPurchasesSuccess()
         {
-            currentRustoreStatus[3] = "<color=#009922>" + "User Purchases Successfully loaded" + "</color>";
+            currentRustoreStatus[3] = "<color=#22DD44>" + "User Purchases Successfully loaded" + "</color>";
         }
 
         void OnRustoreGetUserSubscriptionPurchasesSuccess()
         {
-            currentRustoreStatus[3] = "<color=#009922>" + "User Subscription Purchases Successfully loaded" + "</color>";
+            currentRustoreStatus[3] = "<color=#22DD44>" + "User Subscription Purchases Successfully loaded" + "</color>";
         }
 
         void OnRustoreGetUserPurchasesFailed(RuStoreError error)
         {
-            currentRustoreStatus[3] = "<color=#990022>" + "User Purchases Not loaded" + "</color>" + " - " + error.name + " - " + error.description;
+            currentRustoreStatus[3] = "<color=#DD2244>" + "User Purchases Not loaded" + "</color>" + " - " + error.name + " - " + error.description;
         }
     }
 }

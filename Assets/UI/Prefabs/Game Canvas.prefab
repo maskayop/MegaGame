@@ -169,7 +169,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4346336504533452552}
-  - {fileID: 7376619755678235968}
   - {fileID: 2766801198662014032}
   m_Father: {fileID: 9221456214669896399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1120,6 +1119,7 @@ GameObject:
   - component: {fileID: 8712795151279603667}
   - component: {fileID: 555916869429804196}
   - component: {fileID: 3407227563079856119}
+  - component: {fileID: 1915075883439784254}
   m_Layer: 5
   m_Name: Rustore Debug Button
   m_TagString: Untagged
@@ -1140,7 +1140,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6032272035060581922}
-  m_Father: {fileID: 1364461209342828980}
+  m_Father: {fileID: 540759863267071024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1241,6 +1241,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1915075883439784254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580647001003351974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0c1956b3ac3934f892dc38f0357e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DisableOnAwake
+  disableOnAwake: 0
 --- !u!1 &581624584141070432
 GameObject:
   m_ObjectHideFlags: 0
@@ -8005,12 +8018,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 32
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMin: 16
+  m_fontSizeMax: 32
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -11492,81 +11505,6 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: -25}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0, y: 1}
---- !u!1 &4259980663540634961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7376619755678235968}
-  - component: {fileID: 8154483036863082622}
-  - component: {fileID: 3499075791993929217}
-  m_Layer: 5
-  m_Name: Border
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7376619755678235968
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259980663540634961}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5582176827410924812}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8154483036863082622
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259980663540634961}
-  m_CullTransparentMesh: 1
---- !u!114 &3499075791993929217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259980663540634961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aca7d1e5ad9347f4291215c6fa143e5d, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 10
 --- !u!1 &4274780589884615254
 GameObject:
   m_ObjectHideFlags: 0
@@ -14985,6 +14923,57 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &5620135123421067214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 540759863267071024}
+  - component: {fileID: 8576975691141348485}
+  m_Layer: 5
+  m_Name: Rustore Debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &540759863267071024
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620135123421067214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 536777086407334570}
+  - {fileID: 9221456214669896399}
+  m_Father: {fileID: 1364461209342828980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8576975691141348485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620135123421067214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0c1956b3ac3934f892dc38f0357e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DisableOnAwake
+  disableOnAwake: 0
 --- !u!1 &5620827534834106703
 GameObject:
   m_ObjectHideFlags: 0
@@ -17789,7 +17778,7 @@ RectTransform:
   - {fileID: 4678225417592034541}
   - {fileID: 7236570193237147729}
   - {fileID: 6023947894749447065}
-  m_Father: {fileID: 1364461209342828980}
+  m_Father: {fileID: 540759863267071024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17823,9 +17812,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIDebugWindow
   text: {fileID: 686209500647939224}
   productCardPrefab: {fileID: 5608082721159686138, guid: 5657250cb4436eb4183faa25cf43180b, type: 3}
+  productsView: {fileID: 958955596716893541}
   productCardsContainer: {fileID: 2050016032140293625}
   purchaseCardPrefab: {fileID: 5608082721159686138, guid: ffc3f64b736ad5347bcbd0ff64ae4ca9, type: 3}
+  purchasesView: {fileID: 3430883010176372550}
   purchasesCardsContainer: {fileID: 7565631837219705765}
+  loadingIndicator: {fileID: 5234592411121939443}
+  purchaseMethodBox: {fileID: 9151015350836559680}
+  messageBox: {fileID: 9080564897914249398}
+  productInfoBox: {fileID: 7125524621998136618}
+  productTypeView: {fileID: 1957784947517911193}
+  purchaseStatusView: {fileID: 4340504805469600395}
 --- !u!114 &5385646304548487821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17838,7 +17835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0c1956b3ac3934f892dc38f0357e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DisableOnAwake
-  disableOnAwake: 1
+  disableOnAwake: 0
 --- !u!1 &6710750310208391668
 GameObject:
   m_ObjectHideFlags: 0
@@ -19679,8 +19676,7 @@ RectTransform:
   - {fileID: 3291236516105115579}
   - {fileID: 3639858015913616628}
   - {fileID: 9044108101911279333}
-  - {fileID: 536777086407334570}
-  - {fileID: 9221456214669896399}
+  - {fileID: 540759863267071024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
