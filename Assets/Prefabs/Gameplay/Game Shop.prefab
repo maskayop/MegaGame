@@ -99,5 +99,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80d4ce57b081442921e13db3989915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RuStorePayments
-  PurchaseAvailability: 0
-  UserStatusAuthorization: 0
+  logTag: json
+  loadingIndicator: {fileID: 0}
+  purchaseMethodBox: {fileID: 0}
+  messageBox: {fileID: 0}
+  productInfoBox: {fileID: 0}
+  purchasesView: {fileID: 0}
+  productTypeView: {fileID: 0}
+  purchaseStatusView: {fileID: 0}
+  productsView: {fileID: 0}
+  productsId:
+  - MonstersArtifact
+  - Spies
+  - DoubleDistances
+  - Mega-Ship
+  currentRustoreStatus:
+  - 
+  - 
+  - 
+  - 
