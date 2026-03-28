@@ -84,6 +84,8 @@ namespace MegaGame.UI
 
         RustorePayments rustorePayments;
 
+        bool canShowPremiumItemObjects = false;
+
         void Awake()
         {
             if (Instance != null)
@@ -138,7 +140,7 @@ namespace MegaGame.UI
 
             if (rustorePayments)
             {
-                if (rustorePayments.RustoreIsAvailable)
+                if (rustorePayments.RustoreIsAvailable && rustorePayments.UserIsAuthorized)
                 {
                     rustorePayments?.LoadProducts();
                     rustorePayments?.GetPurchases();
@@ -189,6 +191,7 @@ namespace MegaGame.UI
             HideAllItemIcons();
             shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
 
+            UpdateCanShowPremiumItemObjects();
             UpdateItemOpenState();
             UpdateItemTexts();
             ShowOpenItemQuestionButtons(false);
@@ -269,55 +272,70 @@ namespace MegaGame.UI
             premiumItemIsAvailablePanel.SetActive(false);
 
             if (currentItemData.openGamePrice != 0)
-            {
-                itemPriceText.text = currentItemData.openGamePrice.ToString();
-                itemPriceText.color = shopGameMoneyImage.color;
-                shopGameMoneyImage.gameObject.SetActive(true);
-                shopRealMoneyImage.gameObject.SetActive(false);
-            }
+                ShowGameItemObjects();
 
             if (currentItemData.openRealPrice != 0 || !string.IsNullOrWhiteSpace(currentItemData.rustoreId))
-            {
-                if (rustorePayments)
-                {
-                    if (rustorePayments.RustoreIsAvailable)
-                        itemPriceText.text = rustorePayments?.GetProductById(currentItemData.rustoreId).amountLabel.value;
-                }
-                else
-                    itemPriceText.text = currentItemData.openRealPrice.ToString();
-
-                itemPriceText.color = shopRealMoneyImage.color;
-                shopGameMoneyImage.gameObject.SetActive(false);
-                shopRealMoneyImage.gameObject.SetActive(true);
-            }
+                ShowPremiumItemPriceObjects();
 
             if (gameShop.CheckForPurchasing(currentItemData))
-            {
-                openItemButton.SetActive(false);
-
-                if (currentItemData.openRealPrice != 0)
-                    premiumItemIsAvailablePanel.SetActive(true);
-                else
-                    itemIsAvailablePanel.SetActive(true);
-            }
+                ShowPurchasedItemObjects();
 
             if (gameController.gameState != GameController.GameState.battle)
             {
-                if (currentItemData.openRealPrice != 0 && !gameShop.CheckForPurchasing(currentItemData))
-                    openItemButton.SetActive(true);
+                if (currentItemData.openRealPrice != 0 || !string.IsNullOrWhiteSpace(currentItemData.rustoreId))
+                {
+#if UNITY_EDITOR
+                    if (!gameShop.CheckForPurchasing(currentItemData))
+                        openItemButton.SetActive(true);
+#else
+                    if (canShowPremiumItemObjects)
+                    {
+                        if (!gameShop.CheckForPurchasing(currentItemData))
+                            openItemButton.SetActive(true);
+                    }
+                    else
+                        openItemButton.SetActive(false);
+#endif
+                }
                 else
                     openItemButton.SetActive(false);
             }
         }
 
+        void ShowGameItemObjects()
+        {
+            itemPriceText.text = currentItemData.openGamePrice.ToString();
+            itemPriceText.color = shopGameMoneyImage.color;
+            shopGameMoneyImage.gameObject.SetActive(true);
+            shopRealMoneyImage.gameObject.SetActive(false);
+        }
+
+        void ShowPremiumItemPriceObjects()
+        {
+            if (canShowPremiumItemObjects)
+                itemPriceText.text = rustorePayments?.GetProductById(currentItemData.rustoreId).amountLabel.value;
+            else
+                itemPriceText.text = currentItemData.openRealPrice.ToString();
+
+            itemPriceText.color = shopRealMoneyImage.color;
+            shopGameMoneyImage.gameObject.SetActive(false);
+            shopRealMoneyImage.gameObject.SetActive(true);
+        }
+
+        void ShowPurchasedItemObjects()
+        {
+            openItemButton.SetActive(false);
+
+            if (currentItemData.openRealPrice != 0)
+                premiumItemIsAvailablePanel.SetActive(true);
+            else
+                itemIsAvailablePanel.SetActive(true);
+        }
+
         public void ShowOpenItemQuestionButtons(bool state)
         {
             openItemQuestionButtons.SetActive(state);
-
-            if (state)
-                openItemButtonImage.SetActive(false);
-            else
-                openItemButtonImage.SetActive(true);
+            openItemButtonImage.SetActive(!state);
         }
 
         public void TryPurchaseItem()
@@ -333,6 +351,18 @@ namespace MegaGame.UI
         {
             for (int i = 0; i < shopItemsData.Count; i++)
                 shopItemsData[i].itemIconGameObject.SetActive(false);
+        }
+
+        void UpdateCanShowPremiumItemObjects()
+        {
+            if (rustorePayments)
+            {
+                if (rustorePayments.RustoreIsAvailable && rustorePayments.UserIsAuthorized)
+
+                    canShowPremiumItemObjects = true;
+                else
+                    canShowPremiumItemObjects = false;
+            }
         }
     }
 }

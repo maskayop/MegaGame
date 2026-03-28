@@ -15,8 +15,11 @@ namespace MegaGame
 
         public static event Action OnStoreCheckStarted;
 
-        bool rustoreIsAvailable;
+        public bool rustoreIsAvailable = false;
         public bool RustoreIsAvailable { get { return rustoreIsAvailable; } }
+
+        public bool userIsAuthorized = false;
+        public bool UserIsAuthorized { get { return userIsAuthorized; } }
 
         public string[] productsId;
         public string[] currentRustoreStatus = new string[4];
@@ -83,17 +86,16 @@ namespace MegaGame
                 onFailure: (error) =>
                 {
                     OnRustoreConnectionFailed(error);
+                    rustoreIsAvailable = false;
                 },
                 onSuccess: (response) =>
                 {
                     if (response.isAvailable)
                     {
-                        rustoreIsAvailable = true;
                         OnRustoreAvailable();
                     }
                     else
                     {
-                        rustoreIsAvailable = false;
                         string errorReason = GetReasonMessage(response.cause);
                         OnRustoreAvailableError(errorReason);
                     }
@@ -354,31 +356,37 @@ namespace MegaGame
 
         void OnRustoreAvailable()
         {
+            rustoreIsAvailable = true;
             currentRustoreStatus[0] = "<color=#22DD44>" + "Rustore is Ready" + "</color>";
         }
 
         void OnRustoreAvailableError(string reason)
         {
+            rustoreIsAvailable = false;
             currentRustoreStatus[0] = "<color=#DD2244>" + "Rustore is Not ready" + "</color>" + " - " + reason;
         }
 
         void OnRustoreConnectionFailed(RuStoreError error)
         {
+            rustoreIsAvailable = false;
             currentRustoreStatus[0] = "<color=#DD2244>" + "Rustore is Not ready" + "</color>" + " - " + error.name + " - " + error.description;
         }
 
         void OnRustoreUserAuthorized()
         {
+            userIsAuthorized = true;
             currentRustoreStatus[1] = "<color=#22DD44>" + "User is Authorized" + "</color>";
         }
 
         void OnRustoreUserUnauthorized()
         {
+            userIsAuthorized = false;
             currentRustoreStatus[1] = "<color=#DD2244>" + "User is Not authorized" + "</color>";
         }
 
         void OnRustoreUserAuthorizationFailed(RuStoreError error)
         {
+            userIsAuthorized = false;
             currentRustoreStatus[1] = "<color=#DD2244>" + "User is Not authorized" + "</color>" + " - " + error.name + " - " + error.description;
         }
 

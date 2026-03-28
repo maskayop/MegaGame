@@ -22,6 +22,7 @@ namespace MegaGame
 
         ResourcesController resourcesController;
         GameDataSaver gameDataSaver;
+        RustorePayments rustorePayments;
 
         void Awake()
         {
@@ -44,6 +45,7 @@ namespace MegaGame
         {
             resourcesController = ResourcesController.Instance;
             gameDataSaver = GameDataSaver.Instance;
+            rustorePayments = RustorePayments.Instance;
 
             LoadData();
         }
@@ -66,6 +68,9 @@ namespace MegaGame
 
         void TryPurchaseGameItem(Data_Item INitem)
         {
+            if (INitem.openRealPrice != 0 || !string.IsNullOrWhiteSpace(INitem.rustoreId))
+                return;
+
             if (Strint.Subtraction(resourcesController.PlayerMoney, Strint.GetString(INitem.openGamePrice)) < 0)
                 return;
 
@@ -108,6 +113,8 @@ namespace MegaGame
             if (INitem.openGamePrice == 0 && INitem.openRealPrice == 0)
                 return true;
 
+            UpdateRustorePurchases();
+
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].item == INitem)
@@ -122,9 +129,11 @@ namespace MegaGame
 
         public bool CheckForAllPremiumItemPurchased()
         {
+            UpdateRustorePurchases();
+
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].item.openRealPrice != 0)
+                if (items[i].item.openRealPrice != 0 || !string.IsNullOrWhiteSpace(items[i].item.rustoreId))
                 {
                     if (!items[i].isPurchased)
                         return false;
@@ -134,10 +143,35 @@ namespace MegaGame
             return true;
         }
 
-        public void RustoreValidation()
+        void UpdateRustorePurchases()
         {
-            if (RustorePayments.Instance)
-                RustorePayments.Instance.RustoreValidation();
+            if (rustorePayments)
+            {
+                if (rustorePayments.RustoreIsAvailable && rustorePayments.UserIsAuthorized)
+                {
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        if (items[i].item.openRealPrice != 0 || !string.IsNullOrWhiteSpace(items[i].item.rustoreId))
+                            items[i].isPurchased = false;
+                    }
+
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        if (items[i].item.openRealPrice != 0 || !string.IsNullOrWhiteSpace(items[i].item.rustoreId))
+                        {
+                            for (int p = 0; p < rustorePayments.products.Count; p++)
+                            {
+                                if (items[i].item.rustoreId == rustorePayments.purchases[p].purchaseId.value)
+                                    items[i].isPurchased = true;
+                            }
+                        }
+                    }
+
+                    gameDataSaver?.SavePremiumShopData();
+                }
+            }
+
+            gameDataSaver?.LoadPremiumShopData();
         }
     }
 }
