@@ -84,7 +84,7 @@ namespace MegaGame.UI
 
         RustorePayments rustorePayments;
 
-        bool canShowPremiumItemObjects = false;
+        bool isInitialized = false;
 
         void Awake()
         {
@@ -128,6 +128,8 @@ namespace MegaGame.UI
             }
 
             Close();
+
+            isInitialized = true;
         }
 
         public void Open()
@@ -138,15 +140,13 @@ namespace MegaGame.UI
 
             rustorePayments?.CheckStoreAvailability();
 
-            if (rustorePayments)
+            if (CanGetRustoreData())
             {
-                if (rustorePayments.RustoreIsAvailable && rustorePayments.UserIsAuthorized)
-                {
-                    rustorePayments?.LoadProducts();
-                    rustorePayments?.GetPurchases();
-                }
+                rustorePayments?.LoadProducts();
+                rustorePayments?.GetPurchases();
             }
 
+            gameShop?.UpdateRustorePurchases();
             ShowCurrentItem();
         }
 
@@ -158,18 +158,15 @@ namespace MegaGame.UI
 
             additionalSceneObjects.HideShopPanel();
 
-            if (UIShipsSelection.Instance)
-                UIShipsSelection.Instance.UpdateButtonsState();
+            UIShipsSelection.Instance?.UpdateButtonsState();
+            ResourcesController.Instance?.CloseEnemyResources();
 
-            ResourcesController.Instance.CloseEnemyResources();
-            gameDataSaver.SavePremiumShopData();
+            if (isInitialized)
+                gameDataSaver.SavePremiumShopData();
         }
 
         void ShowCurrentItem()
         {
-            gameDataSaver.LoadShopData();
-            gameDataSaver.LoadPremiumShopData();
-
             currentItemData = shopItemsData[currentItemId].itemData;
             additionalSceneObjects.ShowShopItem(currentItemData);
 
@@ -191,7 +188,6 @@ namespace MegaGame.UI
             HideAllItemIcons();
             shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
 
-            UpdateCanShowPremiumItemObjects();
             UpdateItemOpenState();
             UpdateItemTexts();
             ShowOpenItemQuestionButtons(false);
@@ -259,22 +255,22 @@ namespace MegaGame.UI
             if (!gameController)
                 return;
 
+            premiumItemIsAvailablePanel.SetActive(false);
+
             if (currentItemData.openGamePrice == 0 && currentItemData.openRealPrice == 0)
             {
                 openItemButton.SetActive(false);
                 itemIsAvailablePanel.SetActive(true);
-                premiumItemIsAvailablePanel.SetActive(false);
                 return;
             }
 
             openItemButton.SetActive(true);
             itemIsAvailablePanel.SetActive(false);
-            premiumItemIsAvailablePanel.SetActive(false);
 
-            if (currentItemData.openGamePrice != 0)
+            if (!currentItemData.IsPremium() && currentItemData.openGamePrice != 0)
                 ShowGameItemObjects();
 
-            if (currentItemData.openRealPrice != 0 || !string.IsNullOrWhiteSpace(currentItemData.rustoreId))
+            if (currentItemData.IsPremium())
                 ShowPremiumItemPriceObjects();
 
             if (gameShop.CheckForPurchasing(currentItemData))
@@ -282,19 +278,21 @@ namespace MegaGame.UI
 
             if (gameController.gameState != GameController.GameState.battle)
             {
-                if (currentItemData.openRealPrice != 0 || !string.IsNullOrWhiteSpace(currentItemData.rustoreId))
+                if (currentItemData.IsPremium())
                 {
 #if UNITY_EDITOR
                     if (!gameShop.CheckForPurchasing(currentItemData))
                         openItemButton.SetActive(true);
 #else
-                    if (canShowPremiumItemObjects)
+                    if (CanGetRustoreData())
                     {
                         if (!gameShop.CheckForPurchasing(currentItemData))
                             openItemButton.SetActive(true);
+                        else
+                            openItemButton.SetActive(false);
                     }
                     else
-                        openItemButton.SetActive(false);
+                        openItemButton.SetActive(true);
 #endif
                 }
                 else
@@ -312,8 +310,13 @@ namespace MegaGame.UI
 
         void ShowPremiumItemPriceObjects()
         {
-            if (canShowPremiumItemObjects)
-                itemPriceText.text = rustorePayments?.GetProductById(currentItemData.rustoreId).amountLabel.value;
+            if (CanGetRustoreData())
+            {
+                if (rustorePayments.GetProductById(currentItemData.rustoreId) != null)
+                    itemPriceText.text = rustorePayments?.GetProductById(currentItemData.rustoreId).amountLabel.value;
+                else
+                    itemPriceText.text = "???";
+            }
             else
                 itemPriceText.text = currentItemData.openRealPrice.ToString();
 
@@ -326,7 +329,7 @@ namespace MegaGame.UI
         {
             openItemButton.SetActive(false);
 
-            if (currentItemData.openRealPrice != 0)
+            if (currentItemData.IsPremium())
                 premiumItemIsAvailablePanel.SetActive(true);
             else
                 itemIsAvailablePanel.SetActive(true);
@@ -353,16 +356,17 @@ namespace MegaGame.UI
                 shopItemsData[i].itemIconGameObject.SetActive(false);
         }
 
-        void UpdateCanShowPremiumItemObjects()
+        bool CanGetRustoreData()
         {
             if (rustorePayments)
             {
                 if (rustorePayments.RustoreIsAvailable && rustorePayments.UserIsAuthorized)
-
-                    canShowPremiumItemObjects = true;
+                    return true;
                 else
-                    canShowPremiumItemObjects = false;
+                    return false;
             }
+            else
+                return false;
         }
     }
 }

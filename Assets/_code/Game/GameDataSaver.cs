@@ -309,37 +309,47 @@ namespace MegaGame
 
         public void SaveShopData()
         {
-            SetShopDataState(MediumShip_BIT, gameShop.CheckForPurchasing(items[0]));
-            SetShopDataState(BigShip_BIT, gameShop.CheckForPurchasing(items[1]));
-            SetShopDataState(DefenderShip_BIT, gameShop.CheckForPurchasing(items[3]));
+            Debug.Log("--- Сохраняем обычные покупки ---");
+
+            SetShopDataState(MediumShip_BIT, gameShop.CheckForPurchasing(items[0]), items[0].itemName.GetLocalizedString());
+            SetShopDataState(BigShip_BIT, gameShop.CheckForPurchasing(items[1]), items[1].itemName.GetLocalizedString());
+            SetShopDataState(DefenderShip_BIT, gameShop.CheckForPurchasing(items[3]), items[3].itemName.GetLocalizedString());
 
             dataSaveLoad.Save(currentAccountNameKey + shopDataStateFormat, shopDataForSave);
+
+            Debug.Log("--- Закончили с сохранением обычных покупок ---");
         }
 
         public void SavePremiumShopData()
         {
+            Debug.Log("--- Сохраняем премиальные покупки ---");
+
             if (gameShop.CheckForPurchasing(items[2]) || gameShop.CheckForPurchasing(items[7]))
             {
-                SetShopDataState(MegaShip_BIT, true);
+                SetShopDataState(MegaShip_BIT, true, items[2].itemName.GetLocalizedString());
                 gameShop.SetPurchasedState(items[2], true);
                 gameShop.SetPurchasedState(items[7], true);
             }
             else
             {
-                SetShopDataState(MegaShip_BIT, false);
+                SetShopDataState(MegaShip_BIT, false, items[2].itemName.GetLocalizedString());
                 gameShop.SetPurchasedState(items[2], false);
                 gameShop.SetPurchasedState(items[7], false);
             }
 
-            SetShopDataState(MonstersArtifact_BIT, gameShop.CheckForPurchasing(items[4]));
-            SetShopDataState(Spies_BIT, gameShop.CheckForPurchasing(items[5]));
-            SetShopDataState(DoubleDistances_BIT, gameShop.CheckForPurchasing(items[6]));
+            SetShopDataState(MonstersArtifact_BIT, gameShop.CheckForPurchasing(items[4]), items[4].itemName.GetLocalizedString());
+            SetShopDataState(Spies_BIT, gameShop.CheckForPurchasing(items[5]), items[5].itemName.GetLocalizedString());
+            SetShopDataState(DoubleDistances_BIT, gameShop.CheckForPurchasing(items[6]), items[6].itemName.GetLocalizedString());
 
             dataSaveLoad.Save("P" + shopDataStateFormat, shopDataForSave);
+
+            Debug.Log("--- Закончили с сохранением премиальных покупок ---");
         }
 
         public void LoadShopData()
         {
+            Debug.Log("--- Загружаем обычные покупки ---");
+
             int purchasedState = dataSaveLoad.GetSavedInt(currentAccountNameKey + shopDataStateFormat);
 
             if (purchasedState == -1)
@@ -350,14 +360,18 @@ namespace MegaGame
             }
             else
             {
-                gameShop.SetPurchasedState(items[0], GetShopDataState(MediumShip_BIT, purchasedState));
-                gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState));
-                gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[0], GetShopDataState(MediumShip_BIT, purchasedState, items[0].itemName.GetLocalizedString()));
+                gameShop.SetPurchasedState(items[1], GetShopDataState(BigShip_BIT, purchasedState, items[1].itemName.GetLocalizedString()));
+                gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState, items[3].itemName.GetLocalizedString()));
             }
+
+            Debug.Log("--- Закончили с загрузкой обычных покупок ---");
         }
 
         public void LoadPremiumShopData()
         {
+            Debug.Log("--- Загружаем премиальные покупки ---");
+
             int purchasedState = dataSaveLoad.GetSavedInt("P" + shopDataStateFormat);
 
             if (purchasedState == -1)
@@ -370,7 +384,7 @@ namespace MegaGame
             }
             else
             {
-                if (GetShopDataState(MegaShip_BIT, purchasedState))
+                if (GetShopDataState(MegaShip_BIT, purchasedState, items[2].itemName.GetLocalizedString()))
                 {
                     gameShop.SetPurchasedState(items[2], true);
                     gameShop.SetPurchasedState(items[7], true);
@@ -381,22 +395,28 @@ namespace MegaGame
                     gameShop.SetPurchasedState(items[7], false);
                 }
 
-                gameShop.SetPurchasedState(items[4], GetShopDataState(MonstersArtifact_BIT, purchasedState));
-                gameShop.SetPurchasedState(items[5], GetShopDataState(Spies_BIT, purchasedState));
-                gameShop.SetPurchasedState(items[6], GetShopDataState(DoubleDistances_BIT, purchasedState));
+                gameShop.SetPurchasedState(items[4], GetShopDataState(MonstersArtifact_BIT, purchasedState, items[4].itemName.GetLocalizedString()));
+                gameShop.SetPurchasedState(items[5], GetShopDataState(Spies_BIT, purchasedState, items[5].itemName.GetLocalizedString()));
+                gameShop.SetPurchasedState(items[6], GetShopDataState(DoubleDistances_BIT, purchasedState, items[6].itemName.GetLocalizedString()));
             }
+
+            Debug.Log("--- Закончили с загрузкой премиальных покупок ---");
         }
 
-        void SetShopDataState(int bitIndex, bool isPurchased)
+        void SetShopDataState(int bitIndex, bool isPurchased, string itemName)
         {
+            Debug.Log("- Сохраняю " + itemName);
+
             if (isPurchased)
                 shopDataForSave |= (1 << bitIndex);
             else
                 shopDataForSave &= ~(1 << bitIndex);
         }
 
-        bool GetShopDataState(int bitIndex, int purchasedState)
+        bool GetShopDataState(int bitIndex, int purchasedState, string itemName)
         {
+            Debug.Log("- Загружаю " + itemName);
+
             return ((purchasedState >> bitIndex) & 1) == 1;
         }
 

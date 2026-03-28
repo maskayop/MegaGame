@@ -13,6 +13,8 @@ namespace MegaGame.UI
 
         float currentFillSpeed;
 
+        bool isOpen = false;
+
         void Awake()
         {
             ResetIndicator();
@@ -25,6 +27,9 @@ namespace MegaGame.UI
 
         void Update()
         {
+            if (isOpen)
+                return;
+
             var fill = indicatorFillImage.fillAmount + currentFillSpeed * Time.deltaTime;
 
             if (fill < 0f || fill > 1f)
@@ -41,11 +46,14 @@ namespace MegaGame.UI
                 ResetIndicator();
                 gameObject.SetActive(true);
             }
+
+            isOpen = true;
         }
 
         public void Hide()
         {
             gameObject.SetActive(false);
+            isOpen = false;
         }
 
         void ResetIndicator()

@@ -81,15 +81,17 @@ namespace MegaGame
         public void CheckStoreAvailability()
         {
             OnStoreCheckStarted?.Invoke();
+            rustoreWindowUI?.ShowLoadingIndicator(true);
 
             RuStorePayClient.Instance.GetPurchaseAvailability(
                 onFailure: (error) =>
                 {
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRustoreConnectionFailed(error);
-                    rustoreIsAvailable = false;
                 },
                 onSuccess: (response) =>
                 {
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     if (response.isAvailable)
                     {
                         OnRustoreAvailable();
@@ -128,16 +130,20 @@ namespace MegaGame
 
         public void LoadProducts()
         {
+            rustoreWindowUI?.ShowLoadingIndicator(true);
+
             var ids = Array.ConvertAll(productsId, p => new ProductId(p));
 
             RuStorePayClient.Instance.GetProducts(
                 productsId: ids,
                 onFailure: (error) =>
                 {
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRustoreProductsLoadingError(error);
                 },
                 onSuccess: (result) =>
                 {
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRustoreProductsLoaded();
                     products = result;
                 });
@@ -145,13 +151,17 @@ namespace MegaGame
 
         public void GetPurchases()
         {
+            rustoreWindowUI?.ShowLoadingIndicator(true);
+
             RuStorePayClient.Instance.GetPurchases(
                 onFailure: (error) =>
                 {
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     OnRustoreGetUserPurchasesFailed(error);
                 },
                 onSuccess: (result) =>
                 {
+                    rustoreWindowUI?.ShowLoadingIndicator(false);
                     purchases = result;
 
                     result.ForEach(purchase =>
@@ -420,6 +430,28 @@ namespace MegaGame
             for (int i = 0; i < products.Count; i++)
                 if (products[i].productId.value == productId)
                     return products[i];
+
+            return null;
+        }
+
+        public bool CheckForPurchaseById(string productId)
+        {
+            for (int i = 0; i < purchases.Count; i++)
+            {
+                if (GetPurchaseProductId(purchases[i]) == null)
+                    return false;
+
+                if (GetPurchaseProductId(purchases[i]) == productId)
+                    return true;
+            }
+
+            return false;
+        }
+
+        string GetPurchaseProductId(IPurchase INpurchase)
+        {
+            if (INpurchase is ProductPurchase productPurchase) return productPurchase.productId.value;
+            if (INpurchase is SubscriptionPurchase subscriptionPurchase) return subscriptionPurchase.productId.value;
 
             return null;
         }

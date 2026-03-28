@@ -9,7 +9,6 @@ namespace MegaGame
     {
         public string name;
         public Data_Item item;
-        public bool isAvailable;
         public bool isPurchased;
     }
 
@@ -52,6 +51,9 @@ namespace MegaGame
 
         public void LoadData()
         {
+            if (!gameDataSaver)
+                return;
+
             gameDataSaver.LoadLastAccount();
             gameDataSaver.LoadPlayerMoneyData();
             gameDataSaver.LoadShopData();
@@ -60,15 +62,13 @@ namespace MegaGame
 
         public void TryPurchaseItem(Data_Item INitem)
         {
-            if (INitem.openGamePrice != 0 && INitem.openRealPrice == 0)
-                TryPurchaseGameItem(INitem);
-            else if (INitem.openGamePrice == 0 && INitem.openRealPrice != 0)
-                TryPurchasePremiumItem(INitem);
+            TryPurchaseGameItem(INitem);
+            TryPurchasePremiumItem(INitem);
         }
 
         void TryPurchaseGameItem(Data_Item INitem)
         {
-            if (INitem.openRealPrice != 0 || !string.IsNullOrWhiteSpace(INitem.rustoreId))
+            if (INitem.IsPremium())
                 return;
 
             if (Strint.Subtraction(resourcesController.PlayerMoney, Strint.GetString(INitem.openGamePrice)) < 0)
@@ -87,13 +87,13 @@ namespace MegaGame
 
         void TryPurchasePremiumItem(Data_Item INitem)
         {
+            if (!INitem.IsPremium())
+                return;
+
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].item == INitem)
-                {
                     items[i].isPurchased = true;
-                    break;
-                }
             }
 
             gameDataSaver.SavePremiumShopData();
@@ -113,8 +113,6 @@ namespace MegaGame
             if (INitem.openGamePrice == 0 && INitem.openRealPrice == 0)
                 return true;
 
-            UpdateRustorePurchases();
-
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].item == INitem)
@@ -133,45 +131,43 @@ namespace MegaGame
 
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].item.openRealPrice != 0 || !string.IsNullOrWhiteSpace(items[i].item.rustoreId))
-                {
-                    if (!items[i].isPurchased)
-                        return false;
-                }
+                if (items[i].item.IsPremium() && !items[i].isPurchased)
+                    return false;
             }
 
             return true;
         }
 
-        void UpdateRustorePurchases()
+        bool CanGetRustoreData()
         {
             if (rustorePayments)
             {
                 if (rustorePayments.RustoreIsAvailable && rustorePayments.UserIsAuthorized)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
+        public void UpdateRustorePurchases()
+        {
+            if (CanGetRustoreData())
+            {
+                for (int i = 0; i < items.Count; i++)
                 {
-                    for (int i = 0; i < items.Count; i++)
+                    if (items[i].item.IsPremium())
                     {
-                        if (items[i].item.openRealPrice != 0 || !string.IsNullOrWhiteSpace(items[i].item.rustoreId))
-                            items[i].isPurchased = false;
-                    }
+                        items[i].isPurchased = false;
 
-                    for (int i = 0; i < items.Count; i++)
-                    {
-                        if (items[i].item.openRealPrice != 0 || !string.IsNullOrWhiteSpace(items[i].item.rustoreId))
-                        {
-                            for (int p = 0; p < rustorePayments.products.Count; p++)
-                            {
-                                if (items[i].item.rustoreId == rustorePayments.purchases[p].purchaseId.value)
-                                    items[i].isPurchased = true;
-                            }
-                        }
+                        if (rustorePayments.CheckForPurchaseById(items[i].item.rustoreId))
+                            items[i].isPurchased = true;
                     }
-
-                    gameDataSaver?.SavePremiumShopData();
                 }
             }
-
-            gameDataSaver?.LoadPremiumShopData();
+            else
+                gameDataSaver?.LoadPremiumShopData();
         }
     }
 }

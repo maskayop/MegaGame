@@ -19,5 +19,13 @@ namespace MegaGame
 
         [Space(20)]
         public GameObject prefab;
+
+        public bool IsPremium()
+        {
+            if (openRealPrice != 0 || !string.IsNullOrWhiteSpace(rustoreId))
+                return true;
+            else
+                return false;
+        }
     }
 }
