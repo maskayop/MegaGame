@@ -11,7 +11,7 @@ namespace MegaGame
     {
         public static RustorePayments Instance { get; private set; }
 
-        [SerializeField] string logTag = "json";
+        public string logTag = "json";
 
         public static event Action OnStoreCheckStarted;
 
@@ -255,7 +255,7 @@ namespace MegaGame
             Debug.LogErrorFormat("{0} : {1}", error.name, error.description);
         }
 
-        void OnRuStorePaymentException(RuStoreError error)
+        public void OnRuStorePaymentException(RuStoreError error)
         {
             var message = "";
             switch (error)

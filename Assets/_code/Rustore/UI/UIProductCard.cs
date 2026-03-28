@@ -20,7 +20,7 @@ namespace MegaGame.UI
         public static event EventHandler OnBuyProduct;
         public static event EventHandler OnInfoProduct;
 
-        Product product = null;
+        public Product product = null;
 
         public void SetData(Product INproduct)
         {

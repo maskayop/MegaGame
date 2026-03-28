@@ -1,3 +1,4 @@
+using RuStore.PayClient;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -70,6 +71,10 @@ namespace MegaGame.UI
 
         [Header("Items")]
         [SerializeField] List<UIShopItem> shopItemsData = new List<UIShopItem>();
+
+        [Header("Rustore")]
+        [SerializeField] GameObject productCardPrefab;
+        [SerializeField] Transform productCardsContainer;
 
         GameController gameController;
         CameraController cameraController;
@@ -144,6 +149,7 @@ namespace MegaGame.UI
             {
                 rustorePayments?.LoadProducts();
                 rustorePayments?.GetPurchases();
+                CreateProductsCards();
             }
 
             gameShop?.UpdateRustorePurchases();
@@ -292,7 +298,7 @@ namespace MegaGame.UI
                             openItemButton.SetActive(false);
                     }
                     else
-                        openItemButton.SetActive(true);
+                        openItemButton.SetActive(false);
 #endif
                 }
                 else
@@ -343,9 +349,10 @@ namespace MegaGame.UI
 
         public void TryPurchaseItem()
         {
-            ShowOpenItemQuestionButtons(false);
             gameShop.TryPurchaseItem(currentItemData);
             additionalSceneObjects.ShowShopItem(currentItemData);
+
+            ShowOpenItemQuestionButtons(false);
             UpdateItemOpenState();
             UIShipsSelection.Instance.UpdateButtonsState();
         }
@@ -367,6 +374,40 @@ namespace MegaGame.UI
             }
             else
                 return false;
+        }
+
+        public void CreateProductsCards()
+        {
+            foreach (Transform t in productCardsContainer)
+                Destroy(t.gameObject);
+
+            if (!gameShop)
+                return;
+
+            if (rustorePayments.products.Count == 0)
+                return;
+
+            for (int i = 0; i < rustorePayments.products.Count; i++)
+            {
+                GameObject go = Instantiate(productCardPrefab, productCardsContainer);
+                go.GetComponent<UIProductCard>().SetData(rustorePayments.products[i]);
+            }
+        }
+
+        public UIProductCard GetUIProductCard(Product INproduct)
+        {
+            UIProductCard card = null;
+
+            foreach (Transform t in productCardsContainer)
+            {
+                card = t.GetComponent<UIProductCard>();
+
+                if (card)
+                    if (card.product == INproduct)
+                        return card;
+            }
+
+            return card;
         }
     }
 }

@@ -1,3 +1,6 @@
+using MegaGame.UI;
+using RuStore;
+using RuStore.PayClient;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,10 +96,40 @@ namespace MegaGame
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].item == INitem)
+                {
+#if UNITY_EDITOR
                     items[i].isPurchased = true;
+#else
+                    TryPurchaseOnRustore(items[i].item);
+#endif
+                }
             }
 
             gameDataSaver.SavePremiumShopData();
+        }
+
+        void TryPurchaseOnRustore(Data_Item item)
+        {
+            Product product = rustorePayments.GetProductById(item.rustoreId);
+            var card = UIGameShop.Instance.GetUIProductCard(product);
+
+            if (card != null)
+            {
+                var parameters = new ProductPurchaseParams(productId: product.productId);
+
+                Action<RuStoreError> onError = (error) =>
+                {
+                    rustorePayments.OnRuStorePaymentException(error);
+                };
+
+                Action<ProductPurchaseResult> onSuccess = (result) =>
+                {
+                    var jsonResult = RustoreDataSerializer.SerializeToJson(result, true);
+                    RustoreLogger.LogWarning(rustorePayments.logTag, jsonResult);
+                };
+
+                RuStorePayClient.Instance.Purchase(parameters, PreferredPurchaseType.ONE_STEP, onError, onSuccess);
+            }
         }
 
         public void SetPurchasedState(Data_Item INitem, bool state)
