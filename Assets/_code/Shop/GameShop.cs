@@ -1,10 +1,10 @@
-using MegaGame.UI;
 using RuStore;
 using RuStore.PayClient;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Vopere.Common;
+
 namespace MegaGame
 {
     [Serializable]
@@ -25,6 +25,12 @@ namespace MegaGame
         ResourcesController resourcesController;
         GameDataSaver gameDataSaver;
         RustorePayments rustorePayments;
+
+        public static event EventHandler OnLoading;
+        public static event EventHandler OnBuyProductSuccess;
+        public static event EventHandler OnBuyProductFailed;
+
+        string currentError = "";
 
         void Awake()
         {
@@ -111,25 +117,50 @@ namespace MegaGame
         void TryPurchaseOnRustore(Data_Item item)
         {
             Product product = rustorePayments.GetProductById(item.rustoreId);
-            var card = UIGameShop.Instance.GetUIProductCard(product);
 
-            if (card != null)
+            if (product != null)
             {
                 var parameters = new ProductPurchaseParams(productId: product.productId);
+
+                StartLoading();
 
                 Action<RuStoreError> onError = (error) =>
                 {
                     rustorePayments.OnRuStorePaymentException(error);
+                    BuyProductFailed(error);
                 };
 
                 Action<ProductPurchaseResult> onSuccess = (result) =>
                 {
                     var jsonResult = RustoreDataSerializer.SerializeToJson(result, true);
                     RustoreLogger.LogWarning(rustorePayments.logTag, jsonResult);
+                    BuyProductSuccess();
                 };
 
                 RuStorePayClient.Instance.Purchase(parameters, PreferredPurchaseType.ONE_STEP, onError, onSuccess);
             }
+        }
+
+        public void StartLoading()
+        {
+            OnLoading?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void BuyProductSuccess()
+        {
+            OnBuyProductSuccess?.Invoke(this, EventArgs.Empty);
+            currentError = "";
+        }
+
+        public void BuyProductFailed(RuStoreError error)
+        {
+            OnBuyProductFailed?.Invoke(this, EventArgs.Empty);
+            currentError = error.name + "\n" + error.description;
+        }
+
+        public string GetCurrentError()
+        {
+            return currentError;
         }
 
         public void SetPurchasedState(Data_Item INitem, bool state)

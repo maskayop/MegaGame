@@ -642,8 +642,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2015,12 +2015,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 32
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 10
-  m_fontSizeMax: 30
+  m_fontSizeMax: 32
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2504,6 +2504,10 @@ PrefabInstance:
     - target: {fileID: 2498719030336850795, guid: d78113cd930b8c343af9c33a1249e660, type: 3}
       propertyPath: m_Name
       value: No Ads Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536949802255064556, guid: d78113cd930b8c343af9c33a1249e660, type: 3}
+      propertyPath: m_fontSize
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7926310522338473798, guid: d78113cd930b8c343af9c33a1249e660, type: 3}
       propertyPath: m_Pivot.x

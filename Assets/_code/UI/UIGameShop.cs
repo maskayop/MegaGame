@@ -1,4 +1,3 @@
-using RuStore.PayClient;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -72,9 +71,10 @@ namespace MegaGame.UI
         [Header("Items")]
         [SerializeField] List<UIShopItem> shopItemsData = new List<UIShopItem>();
 
-        [Header("Rustore")]
-        [SerializeField] GameObject productCardPrefab;
-        [SerializeField] Transform productCardsContainer;
+        [Header("Status Windows")]
+        [SerializeField] UIShopLoadingIndicator shopLoadingIndicator;
+        [SerializeField] GameObject shopBuySuccessWindow;
+        [SerializeField] GameObject shopBuyFailedWindow;
 
         GameController gameController;
         CameraController cameraController;
@@ -135,6 +135,18 @@ namespace MegaGame.UI
             Close();
 
             isInitialized = true;
+
+            //---
+
+            GameShop.OnLoading -= StartLoading;
+            GameShop.OnBuyProductSuccess -= BuyProductSuccess;
+            GameShop.OnBuyProductFailed -= BuyProductFailed;
+
+            //+++
+
+            GameShop.OnLoading += StartLoading;
+            GameShop.OnBuyProductSuccess += BuyProductSuccess;
+            GameShop.OnBuyProductFailed += BuyProductFailed;
         }
 
         public void Open()
@@ -149,11 +161,13 @@ namespace MegaGame.UI
             {
                 rustorePayments?.LoadProducts();
                 rustorePayments?.GetPurchases();
-                CreateProductsCards();
             }
 
             gameShop?.UpdateRustorePurchases();
             ShowCurrentItem();
+
+            shopBuySuccessWindow.SetActive(false);
+            shopBuyFailedWindow.SetActive(false);
         }
 
         public void Close()
@@ -376,38 +390,23 @@ namespace MegaGame.UI
                 return false;
         }
 
-        public void CreateProductsCards()
+        public void StartLoading(object sender, EventArgs e)
         {
-            foreach (Transform t in productCardsContainer)
-                Destroy(t.gameObject);
-
-            if (!gameShop)
-                return;
-
-            if (rustorePayments.products.Count == 0)
-                return;
-
-            for (int i = 0; i < rustorePayments.products.Count; i++)
-            {
-                GameObject go = Instantiate(productCardPrefab, productCardsContainer);
-                go.GetComponent<UIProductCard>().SetData(rustorePayments.products[i]);
-            }
+            shopLoadingIndicator.Show();
         }
 
-        public UIProductCard GetUIProductCard(Product INproduct)
+        public void BuyProductSuccess(object sender, EventArgs e)
         {
-            UIProductCard card = null;
+            shopBuySuccessWindow.SetActive(true);
+            shopLoadingIndicator.Hide();
+        }
 
-            foreach (Transform t in productCardsContainer)
-            {
-                card = t.GetComponent<UIProductCard>();
+        public void BuyProductFailed(object sender, EventArgs e)
+        {
+            shopBuyFailedWindow.SetActive(true);
+            shopLoadingIndicator.Hide();
 
-                if (card)
-                    if (card.product == INproduct)
-                        return card;
-            }
-
-            return card;
+            shopBuyFailedWindow.GetComponent<UIShopMessagePanel>()?.Show(gameShop.GetCurrentError());
         }
     }
 }

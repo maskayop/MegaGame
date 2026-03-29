@@ -45,6 +45,8 @@ namespace MegaGame
         float cos;
         float sin;
 
+        bool isDoubleTouch = false;
+
         void Awake()
         {
             if (Instance != null)
@@ -86,6 +88,9 @@ namespace MegaGame
 
         void MoveCamera()
         {
+            if (isDoubleTouch)
+                return;
+
             if (Input.GetMouseButtonDown(0))
             {
                 startMousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
@@ -165,6 +170,8 @@ namespace MegaGame
         {
             if (Input.touchCount == 2)
             {
+                isDoubleTouch = true;
+
                 Touch touch1 = Input.GetTouch(0);
                 Touch touch2 = Input.GetTouch(1);
 
@@ -177,6 +184,10 @@ namespace MegaGame
                 float difference = currentDistance - prevDistance;
                 currentZoom -= difference * doubleTouchZoomSpeed * scrollSpeed;
             }
+            else if (Input.touchCount == 1 && isDoubleTouch)
+                isDoubleTouch = true;
+            else
+                isDoubleTouch = false;
         }
 
         public void CameraZoom(float INvalue)
@@ -231,6 +242,16 @@ namespace MegaGame
                     virtualCameras[i].Lens.FarClipPlane = virtualCameras[i].Lens.NearClipPlane + 0.1f;
                 else
                     virtualCameras[i].Lens.FarClipPlane = farClipPlane;
+        }
+
+        Vector2 GetNormalizedPosition(Vector2 screenPosition)
+        {
+            return new Vector2(screenPosition.x / Screen.width, screenPosition.y / Screen.height);
+        }
+
+        public void SetMovementSensitivity()
+        {
+
         }
     }
 }
