@@ -358,12 +358,13 @@ MonoBehaviour:
   healthRegeneration: 0.5
   damage: 4
   neutralDamageDivider: 4
-  attackDelay: 0.7
+  attackDelay: 0.6
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   neutralHealthWidget: {fileID: 3601601711594763890}
   timeForTargetsUpdate: 3
   targetEnemies: []
+  isCaptured: 0
 --- !u!114 &8105532551895774037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +381,7 @@ MonoBehaviour:
   enemyVisual: {fileID: 4968616874187129814}
   neutralVisual: {fileID: 8296940048202839377}
   fortVisual: {fileID: 0}
+  traderVisual: {fileID: 0}
 --- !u!114 &9180247853507066247
 MonoBehaviour:
   m_ObjectHideFlags: 0

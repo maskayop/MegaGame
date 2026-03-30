@@ -178,7 +178,6 @@ namespace MegaGame.UI
 
             additionalSceneObjects.HideShopPanel();
 
-            UIShipsSelection.Instance?.UpdateButtonsState();
             ResourcesController.Instance?.CloseEnemyResources();
 
             if (isInitialized)

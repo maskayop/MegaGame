@@ -143,7 +143,10 @@ namespace MegaGame
                         if (targetSettlement.IsCaptured)
                             targetSettlement = gameController.enemyOpposingPorts.antagonPort;
                         else if (Vector3.Distance(transform.position, targetSettlement.transform.position) <= distanceForPirateLair)
+                        {
+                            targetSettlement.isCaptured = true;
                             targetSettlement = gameController.enemyOpposingPorts.antagonPort;
+                        }
                     }
                 }
             }

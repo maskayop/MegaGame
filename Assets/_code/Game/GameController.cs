@@ -51,7 +51,7 @@ namespace MegaGame
         public Data_Item doubleTargetDistanceItem;
 
         [Header("Enemy's Targets")]
-        public List<BaseSettlement> possibleTargetSettlementForEnemy = new List<BaseSettlement>();
+        public List<BaseSettlement> possibleTargetSettlementsForEnemy = new List<BaseSettlement>();
 
         [Header("Game Modes")]
         public bool isExploringMode = false;
@@ -265,7 +265,12 @@ namespace MegaGame
             playerFortressesCount = playerFortresses.Count;
             enemyFortressesCount = enemyFortresses.Count;
 
-            possibleTargetSettlementForEnemy.Clear();
+            UpdatePossibleTargetsForEnemy();
+        }
+
+        void UpdatePossibleTargetsForEnemy()
+        {
+            possibleTargetSettlementsForEnemy.Clear();
 
             if (enemyOpposingPorts.protagonPort)
             {
@@ -273,20 +278,20 @@ namespace MegaGame
                     if (allVillages[i].owner != Owner.enemy)
                         if (Vector3.Distance(allVillages[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
-                            possibleTargetSettlementForEnemy.Add(allVillages[i]);
+                            possibleTargetSettlementsForEnemy.Add(allVillages[i]);
 
                 for (int i = 0; i < allFortresses.Count; i++)
                     if (allFortresses[i].owner != Owner.enemy)
                         if (Vector3.Distance(allFortresses[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
-                            possibleTargetSettlementForEnemy.Add(allFortresses[i]);
+                            possibleTargetSettlementsForEnemy.Add(allFortresses[i]);
 
                 for (int i = 0; i < allEmptyIslands.Count; i++)
                     if (allEmptyIslands[i].owner == Owner.neutral)
                         if (Vector3.Distance(allEmptyIslands[i].transform.position,
                             enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
                             if (allEmptyIslands[i].pirateLair)
-                                possibleTargetSettlementForEnemy.Add(allEmptyIslands[i].pirateLair);
+                                possibleTargetSettlementsForEnemy.Add(allEmptyIslands[i].pirateLair);
             }
         }
 

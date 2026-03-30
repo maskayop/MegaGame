@@ -77,6 +77,14 @@ namespace MegaGame.UI
             }
         }
 
+        public void SetMinBuildingShip()
+        {
+            if (!gameplayObjectsBuilder)
+                return;
+
+            SetMaxBuildingShip(0);
+        }
+
         public void SetBuildDefenderShip()
         {
             gameplayObjectsBuilder.CanBuildDefenderShips = !gameplayObjectsBuilder.CanBuildDefenderShips;

@@ -4,13 +4,21 @@ using Vopere.Common;
 
 namespace MegaGame
 {
+    [System.Serializable]
+    public class EmptyIslandStatus
+    {
+        public Island island;
+        public bool isCleared = false;
+    }
+
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float timeForDecision = 1.0f;
         [SerializeField] int shipSpawnChance = 1;
         [SerializeField] int onLowMoneySpawnChanceMultiplier = 1;
 
-        public List<Village> unsafeVillages = new List<Village>();
+        List<Village> unsafeVillages = new List<Village>();
+        public List<EmptyIslandStatus> emptyIslandsForCheck = new List<EmptyIslandStatus>();
 
         List<Port> portsWithoutFort = new List<Port>();
         List<Port> portsWithoutTrader = new List<Port>();
@@ -40,6 +48,9 @@ namespace MegaGame
             if (gameController.gameState != GameController.GameState.battle)
                 return;
 
+            if (currentPort != gameController.enemyOpposingPorts.protagonPort)
+                ResetEmptyIslands();
+
             currentPort = gameController.enemyOpposingPorts.protagonPort;
 
             currentDecisionTime -= Time.deltaTime;
@@ -65,28 +76,7 @@ namespace MegaGame
             {
                 if (Strint.Subtraction(resourcesController.EnemyMoney, gameplayObjectsBuilder.GetSettlementBuildingCost(1)) >= 0)
                 {
-                    portsWithoutFort.Clear();
-                    portsWithoutTrader.Clear();
-
-                    for (int i = 0; i < gameController.enemyPorts.Count; i++)
-                    {
-                        if (gameController.enemyPorts[i].GetSettlementConstructions())
-                        {
-                            if (!gameController.enemyPorts[i].GetSettlementConstructions().fortIsBuilt)
-                                portsWithoutFort.Add(gameController.enemyPorts[i]);
-
-                            if (!gameController.enemyPorts[i].GetSettlementConstructions().traderIsBuilt)
-                                portsWithoutTrader.Add(gameController.enemyPorts[i]);
-                        }
-                    }
-
-                    int buildType = Random.Range(0, 2);
-
-                    if (buildType == 0)
-                        TryBuildFort();
-                    else
-                        TryBuildTrader();
-
+                    TryBuildConstruction();
                     return;
                 }
             }
@@ -130,7 +120,9 @@ namespace MegaGame
                 }
             }
 
-            int r = Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count + 1);
+            UpdateEmptyIslandsStates();
+
+            int r = Random.Range(0, gameController.possibleTargetSettlementsForEnemy.Count + 1);
 
             if (r != 0)
                 gameplayObjectsBuilder.TryCreateEnemyShip(GetRandomPossibleSettlement(), true);
@@ -140,12 +132,30 @@ namespace MegaGame
 
         BaseSettlement GetRandomPossibleSettlement()
         {
-            int r = Random.Range(0, gameController.possibleTargetSettlementForEnemy.Count);
+            UpdatePossibleTargetSettlementsForEnemy();
 
-            if (gameController.possibleTargetSettlementForEnemy.Count != 0)
-                return gameController.possibleTargetSettlementForEnemy[r];
+            int r = Random.Range(0, gameController.possibleTargetSettlementsForEnemy.Count);
+
+            if (gameController.possibleTargetSettlementsForEnemy.Count != 0)
+                return gameController.possibleTargetSettlementsForEnemy[r];
             else
                 return null;
+        }
+
+        void UpdatePossibleTargetSettlementsForEnemy()
+        {
+            for (int i = 0; i < gameController.possibleTargetSettlementsForEnemy.Count; i++)
+            {
+                for (int e = 0; e < emptyIslandsForCheck.Count; e++)
+                {
+                    if (gameController.possibleTargetSettlementsForEnemy[i].Island == emptyIslandsForCheck[e].island)
+                        if (emptyIslandsForCheck[e].isCleared)
+                        {
+                            gameController.possibleTargetSettlementsForEnemy.Remove(gameController.possibleTargetSettlementsForEnemy[i]);
+                            return;
+                        }
+                }
+            }
         }
 
         void UpdateUnsafeVillages()
@@ -162,6 +172,72 @@ namespace MegaGame
                         gameController.enemyVillages[i].Island.DefenderShip && gameController.enemyVillages[i].Island.DefenderShip.owner != BaseCharacter.Owner.enemy)
                         unsafeVillages.Add(gameController.enemyVillages[i]);
             }
+        }
+
+        void UpdateEmptyIslandsStates()
+        {
+            for (int e = 0; e < emptyIslandsForCheck.Count; e++)
+            {
+                if (emptyIslandsForCheck[e].island.pirateLair.isCaptured)
+                    SetEmptyIslandState(emptyIslandsForCheck[e].island, true);
+            }
+        }
+
+        void SetEmptyIslandState(Island INisland, bool state)
+        {
+            for (int i = 0; i < emptyIslandsForCheck.Count; i++)
+                if (emptyIslandsForCheck[i].island == INisland)
+                    emptyIslandsForCheck[i].isCleared = state;
+        }
+
+        void ResetEmptyIslands()
+        {
+            emptyIslandsForCheck.Clear();
+
+            for (int i = 0; i < gameController.possibleTargetSettlementsForEnemy.Count; i++)
+            {
+                if (gameController.possibleTargetSettlementsForEnemy[i] as PirateLair)
+                {
+                    EmptyIslandStatus emptyIsland = new EmptyIslandStatus();
+                    emptyIsland.island = gameController.possibleTargetSettlementsForEnemy[i].Island;
+
+                    if (emptyIsland.island.pirateLair.isCaptured)
+                        emptyIsland.isCleared = true;
+                    else
+                    {
+                        emptyIsland.isCleared = false;
+                        emptyIslandsForCheck.Add(emptyIsland);
+                    }
+                }
+            }
+
+            for (int i = 0; i < emptyIslandsForCheck.Count; i++)
+                emptyIslandsForCheck[i].isCleared = false;
+        }
+
+        void TryBuildConstruction()
+        {
+            portsWithoutFort.Clear();
+            portsWithoutTrader.Clear();
+
+            for (int i = 0; i < gameController.enemyPorts.Count; i++)
+            {
+                if (gameController.enemyPorts[i].GetSettlementConstructions())
+                {
+                    if (!gameController.enemyPorts[i].GetSettlementConstructions().fortIsBuilt)
+                        portsWithoutFort.Add(gameController.enemyPorts[i]);
+
+                    if (!gameController.enemyPorts[i].GetSettlementConstructions().traderIsBuilt)
+                        portsWithoutTrader.Add(gameController.enemyPorts[i]);
+                }
+            }
+
+            int buildType = Random.Range(0, 2);
+
+            if (buildType == 0)
+                TryBuildFort();
+            else
+                TryBuildTrader();
         }
 
         void TryBuildFort()

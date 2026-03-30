@@ -465,7 +465,7 @@ MonoBehaviour:
   healthRegeneration: 1
   damage: 2
   neutralDamageDivider: 1.5
-  attackDelay: 0.8
+  attackDelay: 0.7
   playerHealthWidget: {fileID: 270342029067948695}
   enemyHealthWidget: {fileID: 720149832170365361}
   neutralHealthWidget: {fileID: 3601601711594763890}
@@ -525,9 +525,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.SettlementConstructions
   fortIsBuilt: 0
   traderIsBuilt: 0
-  additionalDamage: 2
+  additionalDamage: 3
   additionalHealth: 150
   additionalHealthRegeneration: 1
+  fortMaintenance: 1
 --- !u!1 &7716687303811175578
 GameObject:
   m_ObjectHideFlags: 0
