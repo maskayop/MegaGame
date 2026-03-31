@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14db95150626b3499898a8c7a2b2129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tutorial
-  destroyAfterTime: {fileID: 6469910105498114977}
+  tutorialDataset:
+  - {fileID: 11400000, guid: f1452573c9db4f94ba992988f370b3e4, type: 2}
   currentProgress: 0
 --- !u!114 &6469910105498114977
 MonoBehaviour:

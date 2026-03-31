@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Vopere.Common;
 
@@ -7,12 +8,15 @@ namespace MegaGame
     {
         public static Tutorial Instance { get; private set; }
 
-        [SerializeField] DestroyAfterTime destroyAfterTime;
-
         [Header("Info")]
+        [SerializeField] List<Data_Tutorial> tutorialDataset = new List<Data_Tutorial>();
+
+        [Header("Progress")]
         public int currentProgress = 0;
 
         GameDataSaver gameDataSaver;
+
+        DestroyAfterTime destroyAfterTime;
 
         void Awake()
         {
