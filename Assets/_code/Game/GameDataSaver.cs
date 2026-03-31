@@ -309,7 +309,7 @@ namespace MegaGame
 
         public void SaveShopData()
         {
-            Debug.Log("--- Сохраняем обычные покупки ---");
+            //Debug.Log("--- Сохраняем обычные покупки ---");
 
             SetShopDataState(MediumShip_BIT, gameShop.CheckForPurchasing(items[0]), items[0].itemName.GetLocalizedString());
             SetShopDataState(BigShip_BIT, gameShop.CheckForPurchasing(items[1]), items[1].itemName.GetLocalizedString());
@@ -317,12 +317,12 @@ namespace MegaGame
 
             dataSaveLoad.Save(currentAccountNameKey + shopDataStateFormat, shopDataForSave);
 
-            Debug.Log("--- Закончили с сохранением обычных покупок ---");
+            //Debug.Log("--- Закончили с сохранением обычных покупок ---");
         }
 
         public void SavePremiumShopData()
         {
-            Debug.Log("--- Сохраняем премиальные покупки ---");
+            //Debug.Log("--- Сохраняем премиальные покупки ---");
 
             if (gameShop.CheckForPurchasing(items[2]) || gameShop.CheckForPurchasing(items[7]))
             {
@@ -343,12 +343,12 @@ namespace MegaGame
 
             dataSaveLoad.Save("P" + shopDataStateFormat, shopDataForSave);
 
-            Debug.Log("--- Закончили с сохранением премиальных покупок ---");
+            //Debug.Log("--- Закончили с сохранением премиальных покупок ---");
         }
 
         public void LoadShopData()
         {
-            Debug.Log("--- Загружаем обычные покупки ---");
+            //Debug.Log("--- Загружаем обычные покупки ---");
 
             int purchasedState = dataSaveLoad.GetSavedInt(currentAccountNameKey + shopDataStateFormat);
 
@@ -365,12 +365,12 @@ namespace MegaGame
                 gameShop.SetPurchasedState(items[3], GetShopDataState(DefenderShip_BIT, purchasedState, items[3].itemName.GetLocalizedString()));
             }
 
-            Debug.Log("--- Закончили с загрузкой обычных покупок ---");
+            //Debug.Log("--- Закончили с загрузкой обычных покупок ---");
         }
 
         public void LoadPremiumShopData()
         {
-            Debug.Log("--- Загружаем премиальные покупки ---");
+            //Debug.Log("--- Загружаем премиальные покупки ---");
 
             int purchasedState = dataSaveLoad.GetSavedInt("P" + shopDataStateFormat);
 
@@ -400,12 +400,12 @@ namespace MegaGame
                 gameShop.SetPurchasedState(items[6], GetShopDataState(DoubleDistances_BIT, purchasedState, items[6].itemName.GetLocalizedString()));
             }
 
-            Debug.Log("--- Закончили с загрузкой премиальных покупок ---");
+            //Debug.Log("--- Закончили с загрузкой премиальных покупок ---");
         }
 
         void SetShopDataState(int bitIndex, bool isPurchased, string itemName)
         {
-            Debug.Log("- Сохраняю " + itemName);
+            //Debug.Log("- Сохраняю " + itemName);
 
             if (isPurchased)
                 shopDataForSave |= (1 << bitIndex);
@@ -415,7 +415,7 @@ namespace MegaGame
 
         bool GetShopDataState(int bitIndex, int purchasedState, string itemName)
         {
-            Debug.Log("- Загружаю " + itemName);
+            //Debug.Log("- Загружаю " + itemName);
 
             return ((purchasedState >> bitIndex) & 1) == 1;
         }

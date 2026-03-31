@@ -8,5 +8,11 @@ namespace MegaGame
     {
         public LocalizedString title;
         public LocalizedString description;
+        public LocalizedString readyButtonText;
+
+        public bool showTarget = false;
+        public bool waitForUser = false;
+        public bool freezeCamera = false;
+        public bool showStartBattleMedal = false;
     }
 }

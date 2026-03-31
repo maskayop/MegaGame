@@ -74,6 +74,8 @@ namespace MegaGame.UI
 
             currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
             CloseAccountManagerWindow();
+
+            Tutorial.Instance?.Init();
         }
 
         public void Open()
@@ -82,8 +84,7 @@ namespace MegaGame.UI
             mainWindow.SetActive(true);
             gameController.SetGameStateAsMenu();
 
-            if (cameraController)
-                cameraController.SetFarClipPlaneToZero(true);
+            cameraController?.SetFarClipPlaneToZero(true);
 
             TryShowNoAdsButton();
         }
@@ -93,8 +94,7 @@ namespace MegaGame.UI
             isOpen = false;
             mainWindow.SetActive(false);
 
-            if (cameraController)
-                cameraController.SetFarClipPlaneToZero(false);
+            cameraController?.SetFarClipPlaneToZero(false);
         }
 
         public void OpenSettingsWindow()

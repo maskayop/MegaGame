@@ -96,6 +96,7 @@ namespace MegaGame
         ResourcesController resourcesController;
         AdditionalSceneObjects additionalObjects;
         GameShop gameShop;
+        Tutorial tutorial;
 
         void Awake()
         {
@@ -137,6 +138,7 @@ namespace MegaGame
             gameDataSaver.Init();
 
             gameShop = GameShop.Instance;
+            tutorial = Tutorial.Instance;
 
             campaignIsEnded = false;
 
@@ -211,6 +213,10 @@ namespace MegaGame
             PrepareNewBattle();
 
             campaignIsEnded = false;
+
+            if (tutorial)
+                if (tutorial.IsTutorial)
+                    tutorial.ShowTutorialChapter(1);
         }
 
         public void UpdateSettlementsLists()

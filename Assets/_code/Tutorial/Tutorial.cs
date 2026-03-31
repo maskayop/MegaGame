@@ -1,6 +1,6 @@
+using MegaGame.UI;
 using System.Collections.Generic;
 using UnityEngine;
-using Vopere.Common;
 
 namespace MegaGame
 {
@@ -11,12 +11,13 @@ namespace MegaGame
         [Header("Info")]
         [SerializeField] List<Data_Tutorial> tutorialDataset = new List<Data_Tutorial>();
 
-        [Header("Progress")]
-        public int currentProgress = 0;
+        public bool isTutorial = false;
+        public bool IsTutorial { get { return isTutorial; } }
 
         GameDataSaver gameDataSaver;
+        UITutorialWindow tutorialWindow;
 
-        DestroyAfterTime destroyAfterTime;
+        public int currentChapter = 0;
 
         void Awake()
         {
@@ -38,7 +39,50 @@ namespace MegaGame
         public void Init()
         {
             gameDataSaver = GameDataSaver.Instance;
+            tutorialWindow = UITutorialWindow.Instance;
+
             gameDataSaver.LoadTutorialData();
+            currentChapter = gameDataSaver.GetCurrentTutorialState();
+
+            CheckForTutorialState();
+        }
+
+        public void EndTutorial()
+        {
+            gameDataSaver.SaveTutorialData(31);
+            isTutorial = false;
+        }
+
+        public void ShowTutorialChapter(int id)
+        {
+            currentChapter = id;
+            tutorialWindow.Open();
+
+            CheckForTutorialState();
+
+            if (isTutorial)
+                tutorialWindow.ShowTutorialChapter(tutorialDataset[id - 1]);
+        }
+
+        public void ShowNextChapter()
+        {
+            currentChapter++;
+
+            if (currentChapter > tutorialDataset.Count)
+                tutorialWindow.SkipTutorial();
+            else
+                ShowTutorialChapter(currentChapter);
+        }
+
+        void CheckForTutorialState()
+        {
+            if (currentChapter == 31)
+            {
+                isTutorial = false;
+                return;
+            }
+            else
+                isTutorial = true;
         }
     }
 }

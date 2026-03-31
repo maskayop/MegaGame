@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9021321432762194101}
   - component: {fileID: 3285472533215486674}
-  - component: {fileID: 6469910105498114977}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -47,18 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tutorial
   tutorialDataset:
   - {fileID: 11400000, guid: f1452573c9db4f94ba992988f370b3e4, type: 2}
-  currentProgress: 0
---- !u!114 &6469910105498114977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7859625670126124014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 816f0751f34cd6844ab271272f80430c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DestroyAfterTime
-  destroyAtStart: 0
-  time: 1
+  - {fileID: 11400000, guid: a2764b4f4c0fa4a44a71f0f7157ec2ba, type: 2}
+  isTutorial: 0
+  currentChapter: 0

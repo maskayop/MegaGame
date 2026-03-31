@@ -15,6 +15,7 @@ namespace MegaGame.UI
         [SerializeField] GameObject window;
 
         [Header("Screen Resolution")]
+        [SerializeField] int defaultScreenResolutionLevel;
         [SerializeField] GameObject screenResolutionContainer;
         [SerializeField] List<Toggle> screenResolutionToggles = new List<Toggle>();
         [SerializeField] List<TextMeshProUGUI> screenResolutionTexts = new List<TextMeshProUGUI>();
@@ -179,8 +180,7 @@ namespace MegaGame.UI
 
         void SetResolutionLevel(int id)
         {
-            if (app)
-                app.SetResolution(id);
+            app?.SetResolution(id);
         }
 
         void SetScreenResolutionSettings()
@@ -189,6 +189,8 @@ namespace MegaGame.UI
 
             if (screenResolution != -1)
                 screenResolutionToggles[screenResolution].isOn = true;
+            else
+                screenResolutionToggles[defaultScreenResolutionLevel].isOn = true;
 
             Vector2Int defaultScreenResolution = App.Instance.GetDefaultScreenResolution();
 

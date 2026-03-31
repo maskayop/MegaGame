@@ -32,6 +32,7 @@ namespace MegaGame
 
         bool freeze = false;
         bool scrollLock = false;
+        public bool tutorialFreeze = false;
 
         int currentCamera;
 
@@ -88,6 +89,9 @@ namespace MegaGame
 
         void MoveCamera()
         {
+            if (tutorialFreeze)
+                return;
+
             if (isDoubleTouch)
                 return;
 
@@ -148,6 +152,9 @@ namespace MegaGame
 
         void ZoomView()
         {
+            if (tutorialFreeze)
+                return;
+
             if (!scrollLock)
             {
                 if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -207,6 +214,11 @@ namespace MegaGame
         public void Freeze(bool state)
         {
             freeze = state;
+        }
+
+        public void TutorialFreeze(bool state)
+        {
+            tutorialFreeze = state;
         }
 
         public void ChangeMovementSensitivity(float INvalue)
