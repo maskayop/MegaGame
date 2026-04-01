@@ -15,6 +15,8 @@ namespace MegaGame
         [Range(0.001f, 1f)]
         public float multiplier = 0.01f;
 
+        bool freeze = false;
+
         void Awake()
         {
             if (Instance != null)
@@ -32,6 +34,11 @@ namespace MegaGame
             if (GameController.Instance.gameState != GameController.GameState.battle)
                 return;
 
+            if (Tutorial.Instance)
+                if (Tutorial.Instance.isTutorial)
+                    if (freeze)
+                        return;
+
             currentTime += Time.deltaTime;
 
             if (useTimeDeceleration)
@@ -42,6 +49,11 @@ namespace MegaGame
                 currentDay++;
                 currentTime = 0;
             }
+        }
+
+        public void FreezeTime(bool state)
+        {
+            freeze = state;
         }
     }
 }

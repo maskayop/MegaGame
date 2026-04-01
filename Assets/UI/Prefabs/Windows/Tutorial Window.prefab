@@ -465,9 +465,11 @@ MonoBehaviour:
   tutorialPanelAnimator: {fileID: 2146211142587707525}
   readyStatusFillImage: {fileID: 7464153510544576710}
   readyStatusCountdown: 30
+  readyButton: {fileID: 1968244774189836707}
   titleText: {fileID: 5384168326993512812}
   descriptionText: {fileID: 7767677489038386889}
   readyButtonText: {fileID: 6550791507429443796}
+  skipQuestionWindow: {fileID: 3554721625892021061}
 --- !u!114 &7458083187711048845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,23 +534,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414998629681263543, guid: efeca9e1d9cd1634a803c1554282a6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 414998629681263543, guid: efeca9e1d9cd1634a803c1554282a6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3554721625892021061}
+      objectReference: {fileID: 4340847946652227595}
     - target: {fileID: 414998629681263543, guid: efeca9e1d9cd1634a803c1554282a6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 414998629681263543, guid: efeca9e1d9cd1634a803c1554282a6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: CloseSkipQuestionWindow
       objectReference: {fileID: 0}
     - target: {fileID: 414998629681263543, guid: efeca9e1d9cd1634a803c1554282a6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: MegaGame.UI.UITutorialWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 414998629681263543, guid: efeca9e1d9cd1634a803c1554282a6f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -873,23 +875,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7126545094576023232, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7126545094576023232, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3554721625892021061}
+      objectReference: {fileID: 4340847946652227595}
     - target: {fileID: 7126545094576023232, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7126545094576023232, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: OpenSkipQuestionWindow
       objectReference: {fileID: 0}
     - target: {fileID: 7126545094576023232, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: MegaGame.UI.UITutorialWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7126545094576023232, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -932,6 +934,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
+--- !u!1 &1968244774189836707 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6484052972573428492, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}
+  m_PrefabInstance: {fileID: 4804047650893898415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1992196398700368509 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6417299561706795218, guid: 9960a7ca6815aeb438b09fb334517eeb, type: 3}

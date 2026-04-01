@@ -15,17 +15,23 @@ namespace MegaGame.UI
         [SerializeField] GameObject backgroundTarget;
         [SerializeField] GameObject targetCircles;
 
-        [Header("Panel")]
+        [Header("Main Panel")]
         [SerializeField] Animator assistantAnimator;
         [SerializeField] GameObject tutorialPanel;
         [SerializeField] Animator tutorialPanelAnimator;
         [SerializeField] Image readyStatusFillImage;
         [SerializeField] int readyStatusCountdown = 1;
+        [SerializeField] GameObject readyButton;
 
         [Header("Texts")]
         [SerializeField] TextMeshProUGUI titleText;
         [SerializeField] TextMeshProUGUI descriptionText;
         [SerializeField] TextMeshProUGUI readyButtonText;
+
+        [Header("Skip Window")]
+        [SerializeField] GameObject skipQuestionWindow;
+
+        bool skipQuestionWindowIsOpen = false;
 
         bool isOpen = false;
         public bool IsOpen { get { return isOpen; } set { isOpen = value; } }
@@ -33,6 +39,9 @@ namespace MegaGame.UI
         Tutorial tutorial;
         CameraController cameraController;
         AdditionalSceneObjects sceneObjects;
+        GameController gameController;
+        ObjectsManager objectsManager;
+        GlobalTimeController globalTime;
 
         float currentTime = 0;
         bool waitForUser = false;
@@ -57,7 +66,20 @@ namespace MegaGame.UI
         void Update()
         {
             if (waitForUser)
+            {
+                if (tutorial.currentChapter == 5)
+                {
+                    if (objectsManager.playerShips.Count == 1)
+                    {
+                        ShowNextChapter();
+                        cameraController.SetPosition(objectsManager.playerShips[0].transform.position);
+                        cameraController.SetTranslationZToBase();
+                    }
+                }
+
+                readyStatusFillImage.fillAmount = 0;
                 return;
+            }
 
             if (!isOpen)
                 return;
@@ -75,6 +97,9 @@ namespace MegaGame.UI
             tutorial = Tutorial.Instance;
             cameraController = CameraController.Instance;
             sceneObjects = AdditionalSceneObjects.Instance;
+            gameController = GameController.Instance;
+            objectsManager = ObjectsManager.Instance;
+            globalTime = GlobalTimeController.Instance;
 
             Close();
         }
@@ -91,12 +116,28 @@ namespace MegaGame.UI
             window.SetActive(false);
         }
 
+        public void OpenSkipQuestionWindow()
+        {
+            skipQuestionWindowIsOpen = true;
+            skipQuestionWindow.SetActive(true);
+        }
+
+        public void CloseSkipQuestionWindow()
+        {
+            skipQuestionWindowIsOpen = false;
+            skipQuestionWindow.SetActive(false);
+        }
+
         public void SkipTutorial()
         {
             tutorial?.EndTutorial();
-            Close();
             cameraController.TutorialFreeze(false);
             sceneObjects.ShowStartGameModelButton(true);
+
+            Close();
+
+            if (skipQuestionWindowIsOpen)
+                CloseSkipQuestionWindow();
         }
 
         public void ShowNextChapter()
@@ -105,6 +146,9 @@ namespace MegaGame.UI
             assistantAnimator.gameObject.SetActive(false);
 
             tutorial?.ShowNextChapter();
+
+            if (skipQuestionWindowIsOpen)
+                CloseSkipQuestionWindow();
         }
 
         public void ShowTutorialChapter(Data_Tutorial data)
@@ -125,16 +169,48 @@ namespace MegaGame.UI
                 targetCircles.SetActive(false);
             }
 
+            if (data.hideBackgrounds)
+            {
+                background.SetActive(false);
+                backgroundTarget.SetActive(false);
+                targetCircles.SetActive(false);
+            }
+
             cameraController.TutorialFreeze(data.freezeCamera);
+            globalTime.FreezeTime(data.freezeTime);
 
             sceneObjects.ShowStartGameModelButton(data.showStartBattleMedal);
 
             waitForUser = data.waitForUser;
+
+            if (waitForUser)
+                readyButton.SetActive(false);
+            else
+                readyButton.SetActive(true);
+
             currentTime = readyStatusCountdown;
 
             titleText.text = data.title.GetLocalizedString();
             descriptionText.text = data.description.GetLocalizedString();
             readyButtonText.text = data.readyButtonText.GetLocalizedString();
+
+            ShowCameraTarget();
+            cameraController.SetTranslationZToMax();
+        }
+
+        void ShowCameraTarget()
+        {
+            if (!cameraController || !gameController || !tutorial)
+                return;
+
+            if (tutorial.currentChapter == 2)
+                cameraController.SetPosition(gameController.playerOpposingPorts.protagonPort.transform.position);
+            else if (tutorial.currentChapter == 3)
+                cameraController.SetPosition(gameController.playerOpposingPorts.antagonPort.transform.position);
+            else if (tutorial.currentChapter == 4)
+                cameraController.SetPosition(sceneObjects.GetStartGameMedal().transform.position);
+            else if (tutorial.currentChapter == 5)
+                cameraController.SetPosition(gameController.playerOpposingPorts.antagonPort.transform.position);
         }
     }
 }

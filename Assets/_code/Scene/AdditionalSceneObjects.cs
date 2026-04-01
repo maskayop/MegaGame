@@ -210,5 +210,10 @@ namespace MegaGame
                 shopPremiumAdditionalCamera.gameObject.SetActive(false);
             }
         }
+
+        public GameObject GetStartGameMedal()
+        {
+            return startGameModelButton.gameObject;
+        }
     }
 }

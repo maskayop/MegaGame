@@ -14,6 +14,9 @@ namespace MegaGame
         Port currentSelectedPort;
         public Port CurrentSelectedPort { get { return currentSelectedPort; } }
 
+        Tutorial tutorial;
+        UITutorialWindow tutorialWindow;
+
         void Awake()
         {
             if (Instance != null)
@@ -42,7 +45,7 @@ namespace MegaGame
             if (UIGameShop.Instance.IsOpen)
                 return;
 
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(2) && !tutorial.isTutorial)
                 PlaceCamera();
 
             if (gameController.gameState != GameController.GameState.battle)
@@ -57,6 +60,8 @@ namespace MegaGame
             gameController = GameController.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
             cameraController = CameraController.Instance;
+            tutorial = Tutorial.Instance;
+            tutorialWindow = UITutorialWindow.Instance;
         }
 
         void SelectObject()
@@ -77,12 +82,19 @@ namespace MegaGame
                             gameplayObjectsBuilder.SpawnWrongTargetPortMessage(gameController.playerOpposingPorts.antagonPort, port);
                         else if (port.owner == BaseCharacter.Owner.player)
                         {
+                            if (tutorial)
+                                if (tutorial.isTutorial)
+                                    return;
+
                             currentSelectedPort = port;
                             UISettlementPanel.Instance.Open(port.Island);
                         }
 
                         return;
                     }
+
+                    if (GetCurrentTutorialChapter() == 5 || GetCurrentTutorialChapter() == 6)
+                        return;
 
                     Village village = hit.collider.GetComponent<Village>();
 
@@ -129,6 +141,15 @@ namespace MegaGame
                 PlaceCameraToCurrentPort();
             else if (gameController.gameState == GameController.GameState.world)
                 gameController.PlaceCameraBetweenPorts();
+        }
+
+        int GetCurrentTutorialChapter()
+        {
+            if (tutorial)
+                if (tutorial.isTutorial)
+                    return tutorial.currentChapter;
+
+            return -1;
         }
     }
 }

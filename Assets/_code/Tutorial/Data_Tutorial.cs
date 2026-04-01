@@ -10,9 +10,11 @@ namespace MegaGame
         public LocalizedString description;
         public LocalizedString readyButtonText;
 
+        public bool hideBackgrounds = false;
         public bool showTarget = false;
         public bool waitForUser = false;
         public bool freezeCamera = false;
         public bool showStartBattleMedal = false;
+        public bool freezeTime = false;
     }
 }

@@ -49,6 +49,10 @@ namespace MegaGame
         public void StartBattle()
         {
             UIMainCanvas.Instance.StartBattle();
+
+            if (Tutorial.Instance)
+                if (Tutorial.Instance.isTutorial)
+                    UITutorialWindow.Instance.ShowNextChapter();
         }
     }
 }

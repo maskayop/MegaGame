@@ -261,9 +261,9 @@ namespace MegaGame
             return new Vector2(screenPosition.x / Screen.width, screenPosition.y / Screen.height);
         }
 
-        public void SetMovementSensitivity()
+        public void SetPosition(Vector3 position)
         {
-
+            transform.position = position;
         }
     }
 }

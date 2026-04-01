@@ -48,6 +48,10 @@ namespace MegaGame
             if (gameController.gameState != GameController.GameState.battle)
                 return;
 
+            if (Tutorial.Instance)
+                if (Tutorial.Instance.isTutorial)
+                    return;
+
             if (currentPort != gameController.enemyOpposingPorts.protagonPort)
                 ResetEmptyIslands();
 
