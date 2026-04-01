@@ -6,8 +6,7 @@ namespace MegaGame
         {
             if (Tutorial.Instance)
                 if (Tutorial.Instance.isTutorial)
-                    if (Tutorial.Instance.currentChapter == 6 || Tutorial.Instance.currentChapter == 7 ||
-                        Tutorial.Instance.currentChapter == 8)
+                    if (Tutorial.Instance.currentChapter < 9)
                         return;
 
             base.Attack();

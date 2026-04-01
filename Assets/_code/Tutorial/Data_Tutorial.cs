@@ -17,5 +17,6 @@ namespace MegaGame
         public bool showStartBattleMedal = false;
         public bool freezeTime = false;
         public bool assistantLeftPosition = false;
+        public bool canHidePanel = false;
     }
 }

@@ -74,11 +74,12 @@ namespace MegaGame
                 {
                     Port port = hit.collider.GetComponent<Port>();
 
-                    if (GetCurrentTutorialChapter() == 6 || GetCurrentTutorialChapter() == 7)
-                        return;
 
                     if (port)
                     {
+                        if (GetCurrentTutorialChapter() != 5 && GetCurrentTutorialChapter() != 10)
+                            return;
+
                         if (port == gameController.playerOpposingPorts.antagonPort)
                             gameplayObjectsBuilder.TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
                         else if (port.owner != BaseCharacter.Owner.player)
@@ -96,13 +97,16 @@ namespace MegaGame
                         return;
                     }
 
-                    if (GetCurrentTutorialChapter() == 5)
-                        return;
-
                     Village village = hit.collider.GetComponent<Village>();
 
                     if (village)
                     {
+                        if (GetCurrentTutorialChapter() != 8 && GetCurrentTutorialChapter() != 10)
+                            return;
+
+                        if (GetCurrentTutorialChapter() == 8 && village != UITutorialWindow.Instance.GetCurrentTargetVillage())
+                            return;
+
                         if (village.owner == BaseCharacter.Owner.player)
                             gameplayObjectsBuilder.TryCreatePlayerShip(village, false);
                         else
@@ -115,6 +119,12 @@ namespace MegaGame
 
                     if (fortress && fortress.owner != BaseCharacter.Owner.player)
                     {
+                        if (GetCurrentTutorialChapter() != 9)
+                            return;
+
+                        if (GetCurrentTutorialChapter() == 9 && fortress != UITutorialWindow.Instance.GetCurrentTargetFortress())
+                            return;
+
                         gameplayObjectsBuilder.TryCreatePlayerShip(fortress, true);
                         return;
                     }

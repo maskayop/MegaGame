@@ -43,6 +43,10 @@ namespace MegaGame
 
         void Update()
         {
+            if (Tutorial.Instance)
+                if (Tutorial.Instance.isTutorial)
+                    return;
+
             if (currentGameState != gameController.gameState)
             {
                 if (gameController.gameState == GameState.battle)

@@ -44,6 +44,8 @@ namespace MegaGame
         ResourcesController resourcesController;
         GlobalTimeController globalTime;
         GameShop gameShop;
+        ObjectsManager objectsManager;
+        Tutorial tutorial;
 
         int maxBuildingShip = 0;
 
@@ -74,6 +76,8 @@ namespace MegaGame
             resourcesController = ResourcesController.Instance;
             globalTime = GlobalTimeController.Instance;
             gameShop = GameShop.Instance;
+            objectsManager = ObjectsManager.Instance;
+            tutorial = Tutorial.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingPrice);
             mediumShipCost = Strint.GetString(mediumShipBuildingPrice);
@@ -87,6 +91,23 @@ namespace MegaGame
 
         public void TryCreatePlayerShip(BaseSettlement targetSettlement, bool isAttackingShipType)
         {
+            if (tutorial && objectsManager)
+            {
+                if (tutorial.isTutorial)
+                {
+                    if (tutorial.currentChapter < 9)
+                    {
+                        if (objectsManager.playerShips.Count >= 3)
+                            return;
+                    }
+                    else if (tutorial.currentChapter == 9)
+                    {
+                        if (objectsManager.playerShips.Count >= 5)
+                            return;
+                    }
+                }
+            }
+
             if (targetSettlement as Village && targetSettlement.owner == Owner.player) { }
             else if (Vector3.Distance(gameController.playerOpposingPorts.protagonPort.transform.position, targetSettlement.transform.position) >
                 gameController.GetDistanceForPossibleTargets(true))

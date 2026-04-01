@@ -20,10 +20,12 @@ namespace MegaGame.UI
         [SerializeField] GameObject assistantRight;
         [SerializeField] GameObject assistantLeft;
         [SerializeField] GameObject tutorialPanel;
-        [SerializeField] Animator tutorialPanelAnimator;
+        [SerializeField] GameObject tutorialPanelAnimator;
         [SerializeField] Image readyStatusFillImage;
         [SerializeField] int readyStatusCountdown = 1;
         [SerializeField] GameObject readyButton;
+        [SerializeField] GameObject hidePanelButton;
+        [SerializeField] GameObject showPanelButton;
 
         [Header("Texts")]
         [SerializeField] TextMeshProUGUI titleText;
@@ -50,6 +52,8 @@ namespace MegaGame.UI
         GlobalTimeController globalTime;
 
         RectTransform targetCirclesRectTransform;
+        Village currentTargetVillage = null;
+        Fortress currentTargetFortress = null;
 
         float currentTime = 0;
         bool waitForUser = false;
@@ -86,12 +90,24 @@ namespace MegaGame.UI
                     if (objectsManager.playerShips.Count == 1)
                         ShowNextChapter();
                 }
+                else if (tutorial.currentChapter == 8)
+                {
+                    if (currentTargetVillage != null)
+                        if (currentTargetVillage.owner == BaseCharacter.Owner.player)
+                            ShowNextChapter();
+                }
+                else if (tutorial.currentChapter == 9)
+                {
+                    if (currentTargetFortress != null)
+                        if (currentTargetFortress.owner == BaseCharacter.Owner.player)
+                            ShowNextChapter();
+                }
 
                 readyStatusFillImage.fillAmount = 0;
                 return;
             }
 
-            if (tutorial.currentChapter == 6 || tutorial.currentChapter == 7 || tutorial.currentChapter == 8)
+            if (tutorial.currentChapter >= 6 && tutorial.currentChapter < 10)
                 if (objectsManager.playerShips.Count != 0)
                     cameraController.SetPosition(objectsManager.playerShips[0].transform.position);
 
@@ -157,6 +173,7 @@ namespace MegaGame.UI
             cameraController.TutorialFreeze(false);
             sceneObjects.ShowStartGameModelButton(true);
 
+            ShowAllObjects();
             Close();
 
             if (skipQuestionWindowIsOpen)
@@ -204,6 +221,13 @@ namespace MegaGame.UI
                 backgroundTarget.SetActive(false);
             }
 
+            hidePanelButton.SetActive(false);
+            showPanelButton.SetActive(false);
+            tutorialPanelAnimator.SetActive(true);
+
+            if (data.canHidePanel)
+                hidePanelButton.SetActive(true);
+
             cameraController.TutorialFreeze(data.freezeCamera);
             globalTime.FreezeTime(data.freezeTime);
 
@@ -224,6 +248,13 @@ namespace MegaGame.UI
 
             cameraController.SetTranslationZToMax();
             ShowCameraTarget();
+        }
+
+        public void ShowMainPanel(bool state)
+        {
+            tutorialPanelAnimator.SetActive(state);
+            hidePanelButton.SetActive(state);
+            showPanelButton.SetActive(!state);
         }
 
         void ShowCameraTarget()
@@ -254,9 +285,26 @@ namespace MegaGame.UI
             }
             else if (tutorial.currentChapter == 8)
             {
-                ShowOnlyObject(-1);
+                ShowOnlyObject(2);
+                cameraController.SetTranslationZToBase();
+                cameraController.SetPosition(FindClosestVillage().transform.position);
                 SetTargetCirclesPosition(GetComponent<RectTransform>());
             }
+            else if (tutorial.currentChapter == 9)
+            {
+                ShowOnlyObject(2);
+                cameraController.SetTranslationZToBase();
+                cameraController.SetPosition(FindClosestFortress().transform.position);
+                SetTargetCirclesPosition(GetComponent<RectTransform>());
+            }
+            else if (tutorial.currentChapter == 10)
+            {
+                cameraController.SetTranslationZToBase();
+                ShowOnlyObject(2);
+                cameraController.SetPosition(gameController.playerOpposingPorts.antagonPort.transform.position);
+            }
+            else if (tutorial.currentChapter == 11)
+                cameraController.SetPosition(gameController.enemyOpposingPorts.protagonPort.transform.position);
         }
 
         void ShowOnlyObject(int id)
@@ -272,9 +320,65 @@ namespace MegaGame.UI
                     additionalObjects[i].SetActive(true);
         }
 
+        void ShowAllObjects()
+        {
+            foreach (GameObject g in additionalObjects)
+                g.SetActive(true);
+        }
+
         void SetTargetCirclesPosition(RectTransform INtransform)
         {
             targetCirclesRectTransform.position = INtransform.position;
+        }
+
+        Village FindClosestVillage()
+        {
+            float distance = float.MaxValue;
+            Village village = null;
+
+            for (int i = 0; i < gameController.allVillages.Count; i++)
+            {
+                float currentDistance = Vector3.Distance(gameController.allVillages[i].transform.position, gameController.playerOpposingPorts.protagonPort.transform.position);
+
+                if (currentDistance <= distance)
+                {
+                    village = gameController.allVillages[i];
+                    distance = currentDistance;
+                }
+            }
+
+            currentTargetVillage = village;
+            return village;
+        }
+
+        public Village GetCurrentTargetVillage()
+        {
+            return currentTargetVillage;
+        }
+
+        Fortress FindClosestFortress()
+        {
+            float distance = float.MaxValue;
+            Fortress fort = null;
+
+            for (int i = 0; i < gameController.allFortresses.Count; i++)
+            {
+                float currentDistance = Vector3.Distance(gameController.allFortresses[i].transform.position, gameController.playerOpposingPorts.protagonPort.transform.position);
+
+                if (currentDistance <= distance)
+                {
+                    fort = gameController.allFortresses[i];
+                    distance = currentDistance;
+                }
+            }
+
+            currentTargetFortress = fort;
+            return fort;
+        }
+
+        public Fortress GetCurrentTargetFortress()
+        {
+            return currentTargetFortress;
         }
     }
 }
