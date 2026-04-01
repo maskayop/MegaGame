@@ -77,8 +77,11 @@ namespace MegaGame
 
                     if (port)
                     {
-                        if (GetCurrentTutorialChapter() != 5 && GetCurrentTutorialChapter() != 10)
-                            return;
+                        if (GetCurrentTutorialChapter() != -1)
+                        {
+                            if (GetCurrentTutorialChapter() != 5 && GetCurrentTutorialChapter() != 10)
+                                return;
+                        }
 
                         if (port == gameController.playerOpposingPorts.antagonPort)
                             gameplayObjectsBuilder.TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
@@ -101,11 +104,14 @@ namespace MegaGame
 
                     if (village)
                     {
-                        if (GetCurrentTutorialChapter() != 8 && GetCurrentTutorialChapter() != 10)
-                            return;
+                        if (GetCurrentTutorialChapter() != -1)
+                        {
+                            if (GetCurrentTutorialChapter() != 8 && GetCurrentTutorialChapter() != 10)
+                                return;
 
-                        if (GetCurrentTutorialChapter() == 8 && village != UITutorialWindow.Instance.GetCurrentTargetVillage())
-                            return;
+                            if (GetCurrentTutorialChapter() == 8 && village != UITutorialWindow.Instance.GetCurrentTargetVillage())
+                                return;
+                        }
 
                         if (village.owner == BaseCharacter.Owner.player)
                             gameplayObjectsBuilder.TryCreatePlayerShip(village, false);
@@ -119,11 +125,14 @@ namespace MegaGame
 
                     if (fortress && fortress.owner != BaseCharacter.Owner.player)
                     {
-                        if (GetCurrentTutorialChapter() != 9)
-                            return;
+                        if (GetCurrentTutorialChapter() != -1)
+                        {
+                            if (GetCurrentTutorialChapter() != 9)
+                                return;
 
-                        if (GetCurrentTutorialChapter() == 9 && fortress != UITutorialWindow.Instance.GetCurrentTargetFortress())
-                            return;
+                            if (GetCurrentTutorialChapter() == 9 && fortress != UITutorialWindow.Instance.GetCurrentTargetFortress())
+                                return;
+                        }
 
                         gameplayObjectsBuilder.TryCreatePlayerShip(fortress, true);
                         return;

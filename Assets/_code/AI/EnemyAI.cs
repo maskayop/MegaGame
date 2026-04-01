@@ -18,7 +18,7 @@ namespace MegaGame
         [SerializeField] int onLowMoneySpawnChanceMultiplier = 1;
 
         List<Village> unsafeVillages = new List<Village>();
-        public List<EmptyIslandStatus> emptyIslandsForCheck = new List<EmptyIslandStatus>();
+        List<EmptyIslandStatus> emptyIslandsForCheck = new List<EmptyIslandStatus>();
 
         List<Port> portsWithoutFort = new List<Port>();
         List<Port> portsWithoutTrader = new List<Port>();

@@ -51,6 +51,7 @@ namespace MegaGame
         public Data_Item doubleTargetDistanceItem;
 
         [Header("Enemy's Targets")]
+        [SerializeField] int emptyIslandsExploringMinDay = 100;
         public List<BaseSettlement> possibleTargetSettlementsForEnemy = new List<BaseSettlement>();
 
         [Header("Game Modes")]
@@ -292,6 +293,10 @@ namespace MegaGame
                             enemyOpposingPorts.protagonPort.transform.position) <= GetDistanceForPossibleTargets(false))
                             possibleTargetSettlementsForEnemy.Add(allFortresses[i]);
 
+                if (GlobalTimeController.Instance)
+                    if (GlobalTimeController.Instance.currentDay < emptyIslandsExploringMinDay)
+                        return;
+
                 for (int i = 0; i < allEmptyIslands.Count; i++)
                     if (allEmptyIslands[i].owner == Owner.neutral)
                         if (Vector3.Distance(allEmptyIslands[i].transform.position,
@@ -353,6 +358,11 @@ namespace MegaGame
 
             gameDataSaver.LoadAllIslandsCurrentHealth();
             gameDataSaver.SaveGameData();
+
+            if (tutorial)
+                if (tutorial.isTutorial)
+                    if (tutorial.currentChapter == 10)
+                        UITutorialWindow.Instance.ShowNextChapter();
         }
 
         void CalculateCurrentPorts()

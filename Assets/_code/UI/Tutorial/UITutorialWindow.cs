@@ -102,6 +102,11 @@ namespace MegaGame.UI
                         if (currentTargetFortress.owner == BaseCharacter.Owner.player)
                             ShowNextChapter();
                 }
+                else if (tutorial.currentChapter == 10)
+                {
+                    if (gameController.playerPorts.Count > 1)
+                        tutorialPanel.SetActive(false);
+                }
 
                 readyStatusFillImage.fillAmount = 0;
                 return;
@@ -171,7 +176,9 @@ namespace MegaGame.UI
         {
             tutorial?.EndTutorial();
             cameraController.TutorialFreeze(false);
-            sceneObjects.ShowStartGameModelButton(true);
+
+            if (gameController.gameState != GameController.GameState.battle)
+                sceneObjects.ShowStartGameModelButton(true);
 
             ShowAllObjects();
             Close();
@@ -191,6 +198,9 @@ namespace MegaGame.UI
 
             if (skipQuestionWindowIsOpen)
                 CloseSkipQuestionWindow();
+
+            if (UIGameShop.Instance.IsOpen)
+                UIGameShop.Instance.Close();
         }
 
         public void ShowTutorialChapter(Data_Tutorial data)
@@ -247,6 +257,7 @@ namespace MegaGame.UI
             readyButtonText.text = data.readyButtonText.GetLocalizedString();
 
             cameraController.SetTranslationZToMax();
+            SetTargetCirclesPosition(GetComponent<RectTransform>());
             ShowCameraTarget();
         }
 
@@ -305,6 +316,13 @@ namespace MegaGame.UI
             }
             else if (tutorial.currentChapter == 11)
                 cameraController.SetPosition(gameController.enemyOpposingPorts.protagonPort.transform.position);
+            else if (tutorial.currentChapter == 12)
+            {
+                ShowOnlyObject(1);
+                SetTargetCirclesPosition(additionalRectTransforms[2]);
+            }
+            else if (tutorial.currentChapter == 13)
+                cameraController.SetPosition(gameController.playerOpposingPorts.protagonPort.transform.position);
         }
 
         void ShowOnlyObject(int id)
