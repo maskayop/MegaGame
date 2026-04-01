@@ -44,6 +44,10 @@ namespace MegaGame.UI
 
         void Update()
         {
+            if (Tutorial.Instance)
+                if (Tutorial.Instance.isTutorial)
+                    return;
+
             if (gameController.gameState != GameController.GameState.battle)
                 buttonsPanel.SetActive(false);
             else

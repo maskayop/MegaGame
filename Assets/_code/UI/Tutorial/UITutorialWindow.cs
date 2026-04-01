@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,8 @@ namespace MegaGame.UI
         [SerializeField] GameObject targetCircles;
 
         [Header("Main Panel")]
-        [SerializeField] Animator assistantAnimator;
+        [SerializeField] GameObject assistantRight;
+        [SerializeField] GameObject assistantLeft;
         [SerializeField] GameObject tutorialPanel;
         [SerializeField] Animator tutorialPanelAnimator;
         [SerializeField] Image readyStatusFillImage;
@@ -31,6 +33,10 @@ namespace MegaGame.UI
         [Header("Skip Window")]
         [SerializeField] GameObject skipQuestionWindow;
 
+        [Header("Additional Objects")]
+        [SerializeField] List<GameObject> additionalObjects = new List<GameObject>();
+        [SerializeField] List<RectTransform> additionalRectTransforms = new List<RectTransform>();
+
         bool skipQuestionWindowIsOpen = false;
 
         bool isOpen = false;
@@ -42,6 +48,8 @@ namespace MegaGame.UI
         GameController gameController;
         ObjectsManager objectsManager;
         GlobalTimeController globalTime;
+
+        RectTransform targetCirclesRectTransform;
 
         float currentTime = 0;
         bool waitForUser = false;
@@ -65,21 +73,27 @@ namespace MegaGame.UI
 
         void Update()
         {
+            if (!tutorial)
+                return;
+
+            if (!tutorial.isTutorial)
+                return;
+
             if (waitForUser)
             {
                 if (tutorial.currentChapter == 5)
                 {
                     if (objectsManager.playerShips.Count == 1)
-                    {
                         ShowNextChapter();
-                        cameraController.SetPosition(objectsManager.playerShips[0].transform.position);
-                        cameraController.SetTranslationZToBase();
-                    }
                 }
 
                 readyStatusFillImage.fillAmount = 0;
                 return;
             }
+
+            if (tutorial.currentChapter == 6 || tutorial.currentChapter == 7 || tutorial.currentChapter == 8)
+                if (objectsManager.playerShips.Count != 0)
+                    cameraController.SetPosition(objectsManager.playerShips[0].transform.position);
 
             if (!isOpen)
                 return;
@@ -101,6 +115,8 @@ namespace MegaGame.UI
             objectsManager = ObjectsManager.Instance;
             globalTime = GlobalTimeController.Instance;
 
+            targetCirclesRectTransform = targetCircles.GetComponent<RectTransform>();
+
             Close();
         }
 
@@ -114,6 +130,13 @@ namespace MegaGame.UI
         {
             isOpen = false;
             window.SetActive(false);
+
+            if (tutorial.currentChapter == 0 || tutorial.currentChapter == 1)
+            {
+                ShowOnlyObject(-1);
+                assistantRight.SetActive(false);
+                assistantLeft.SetActive(false);
+            }
         }
 
         public void OpenSkipQuestionWindow()
@@ -143,8 +166,10 @@ namespace MegaGame.UI
         public void ShowNextChapter()
         {
             tutorialPanel.SetActive(false);
-            assistantAnimator.gameObject.SetActive(false);
+            assistantRight.SetActive(false);
+            assistantLeft.SetActive(false);
 
+            ShowOnlyObject(-1);
             tutorial?.ShowNextChapter();
 
             if (skipQuestionWindowIsOpen)
@@ -154,7 +179,11 @@ namespace MegaGame.UI
         public void ShowTutorialChapter(Data_Tutorial data)
         {
             tutorialPanel.SetActive(true);
-            assistantAnimator.gameObject.SetActive(true);
+
+            if (data.assistantLeftPosition)
+                assistantLeft.SetActive(true);
+            else
+                assistantRight.SetActive(true);
 
             if (data.showTarget)
             {
@@ -173,7 +202,6 @@ namespace MegaGame.UI
             {
                 background.SetActive(false);
                 backgroundTarget.SetActive(false);
-                targetCircles.SetActive(false);
             }
 
             cameraController.TutorialFreeze(data.freezeCamera);
@@ -194,8 +222,8 @@ namespace MegaGame.UI
             descriptionText.text = data.description.GetLocalizedString();
             readyButtonText.text = data.readyButtonText.GetLocalizedString();
 
-            ShowCameraTarget();
             cameraController.SetTranslationZToMax();
+            ShowCameraTarget();
         }
 
         void ShowCameraTarget()
@@ -203,7 +231,9 @@ namespace MegaGame.UI
             if (!cameraController || !gameController || !tutorial)
                 return;
 
-            if (tutorial.currentChapter == 2)
+            if (tutorial.currentChapter == 1)
+                cameraController.SetPosition(Vector3.zero);
+            else if (tutorial.currentChapter == 2)
                 cameraController.SetPosition(gameController.playerOpposingPorts.protagonPort.transform.position);
             else if (tutorial.currentChapter == 3)
                 cameraController.SetPosition(gameController.playerOpposingPorts.antagonPort.transform.position);
@@ -211,6 +241,40 @@ namespace MegaGame.UI
                 cameraController.SetPosition(sceneObjects.GetStartGameMedal().transform.position);
             else if (tutorial.currentChapter == 5)
                 cameraController.SetPosition(gameController.playerOpposingPorts.antagonPort.transform.position);
+            else if (tutorial.currentChapter == 6)
+            {
+                cameraController.SetTranslationZToBase();
+                ShowOnlyObject(2);
+                SetTargetCirclesPosition(additionalRectTransforms[0]);
+            }
+            else if (tutorial.currentChapter == 7)
+            {
+                ShowOnlyObject(5);
+                SetTargetCirclesPosition(additionalRectTransforms[1]);
+            }
+            else if (tutorial.currentChapter == 8)
+            {
+                ShowOnlyObject(-1);
+                SetTargetCirclesPosition(GetComponent<RectTransform>());
+            }
+        }
+
+        void ShowOnlyObject(int id)
+        {
+            foreach (GameObject g in additionalObjects)
+                g.SetActive(false);
+
+            if (id == -1)
+                return;
+
+            for (int i = 0; i < additionalObjects.Count; i++)
+                if (i == id)
+                    additionalObjects[i].SetActive(true);
+        }
+
+        void SetTargetCirclesPosition(RectTransform INtransform)
+        {
+            targetCirclesRectTransform.position = INtransform.position;
         }
     }
 }

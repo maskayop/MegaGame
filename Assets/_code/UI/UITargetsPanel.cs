@@ -69,6 +69,10 @@ namespace MegaGame.UI
 
         void Update()
         {
+            if (Tutorial.Instance)
+                if (Tutorial.Instance.isTutorial)
+                    return;
+
             if (gameController.CampaignIsEnded)
                 return;
 

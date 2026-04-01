@@ -74,6 +74,9 @@ namespace MegaGame
                 {
                     Port port = hit.collider.GetComponent<Port>();
 
+                    if (GetCurrentTutorialChapter() == 6 || GetCurrentTutorialChapter() == 7)
+                        return;
+
                     if (port)
                     {
                         if (port == gameController.playerOpposingPorts.antagonPort)
@@ -93,7 +96,7 @@ namespace MegaGame
                         return;
                     }
 
-                    if (GetCurrentTutorialChapter() == 5 || GetCurrentTutorialChapter() == 6)
+                    if (GetCurrentTutorialChapter() == 5)
                         return;
 
                     Village village = hit.collider.GetComponent<Village>();

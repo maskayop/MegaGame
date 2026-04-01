@@ -67,6 +67,9 @@ namespace MegaGame
             if (freeze)
                 return;
 
+            if (tutorialFreeze)
+                return;
+
             MoveCamera();
             ZoomView();
         }
@@ -89,9 +92,6 @@ namespace MegaGame
 
         void MoveCamera()
         {
-            if (tutorialFreeze)
-                return;
-
             if (isDoubleTouch)
                 return;
 
@@ -152,9 +152,6 @@ namespace MegaGame
 
         void ZoomView()
         {
-            if (tutorialFreeze)
-                return;
-
             if (!scrollLock)
             {
                 if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -238,6 +235,8 @@ namespace MegaGame
             translationZ = baseTranslationZ;
             scrollLock = false;
             currentZoom = 0.5f;
+
+            ZoomView();
         }
 
         public void SetTranslationZToMax()
@@ -245,6 +244,8 @@ namespace MegaGame
             translationZ = new Vector2Int(baseTranslationZ.y, baseTranslationZ.y);
             scrollLock = true;
             currentZoom = 1.0f;
+
+            ZoomView();
         }
 
         public void SetFarClipPlaneToZero(bool isZero)
