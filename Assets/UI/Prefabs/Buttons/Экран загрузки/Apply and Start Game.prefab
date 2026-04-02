@@ -195,10 +195,6 @@ PrefabInstance:
       value: Apply and Start Game
       objectReference: {fileID: 0}
     - target: {fileID: 6605083153410811780, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f15f71ecbd9eac9459b996f379bdcbc0, type: 3}
-    - target: {fileID: 6605083153410811780, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 11
       objectReference: {fileID: 0}
@@ -208,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -13
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -228,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997499847213269352, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_text
@@ -237,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_fontSize
-      value: 32
+      value: 35.85
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_fontAsset
@@ -249,11 +245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_fontSizeMax
-      value: 32
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_lineSpacing
-      value: -10
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 8379522077922750734, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_fontSizeBase

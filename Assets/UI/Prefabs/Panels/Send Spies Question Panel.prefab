@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
   m_Padding:
-    m_Left: 15
+    m_Left: 20
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -102,7 +102,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 40}
+  m_SizeDelta: {x: 0, y: 45}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8012154939828674433
 CanvasRenderer:
@@ -379,7 +379,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5549282436277341294
 CanvasRenderer:
@@ -436,12 +436,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 36
   m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 10
-  m_fontSizeMax: 32
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -613,12 +613,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 40
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 10
-  m_fontSizeMax: 36
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -712,7 +712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1724161216854725881, guid: 79e92497e0ba6e84f8dba88e55a9a1a1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 740
+      value: 780
       objectReference: {fileID: 0}
     - target: {fileID: 1724161216854725881, guid: 79e92497e0ba6e84f8dba88e55a9a1a1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -776,7 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5052612002662406328, guid: 79e92497e0ba6e84f8dba88e55a9a1a1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -120
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 5052612002662406328, guid: 79e92497e0ba6e84f8dba88e55a9a1a1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -807,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6424266628885937747, guid: 79e92497e0ba6e84f8dba88e55a9a1a1, type: 3}
       propertyPath: m_fontSize
-      value: 32
+      value: 35.6
       objectReference: {fileID: 0}
     - target: {fileID: 7311092413675770307, guid: 79e92497e0ba6e84f8dba88e55a9a1a1, type: 3}
       propertyPath: m_Pivot.x
