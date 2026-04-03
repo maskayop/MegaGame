@@ -39,11 +39,9 @@ namespace MegaGame.UI
         {
             accountManagerWindow = UIAccountManagerWindow.Instance;
             gameDataSaver = GameDataSaver.Instance;
-
-            accountName = "";
         }
 
-        public void Init(string INaccountName)
+        public void Init(string INaccountName, bool isCurrentAccount)
         {
             accountName = INaccountName;
             nameText.text = accountName;
@@ -51,7 +49,7 @@ namespace MegaGame.UI
             accountInfoPanel.SetActive(true);
             createAccountButton.SetActive(false);
 
-            if (gameDataSaver.GetCurrentAccountName() == accountName)
+            if (isCurrentAccount)
             {
                 mainButton.interactable = false;
                 currentAccountPanel.SetActive(true);

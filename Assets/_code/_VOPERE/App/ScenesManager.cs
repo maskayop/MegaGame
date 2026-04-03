@@ -50,6 +50,11 @@ namespace Vopere.Common
             return currentLoadedScene;
         }
 
+        public Scene GetCurrentOpenScene()
+        {
+            return SceneManager.GetActiveScene();
+        }
+
         public void LoadSceneByName(string sceneName)
         {
             for (int i = 0; i < scenes.Count; i++)

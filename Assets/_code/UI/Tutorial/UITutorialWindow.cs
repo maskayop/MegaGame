@@ -180,11 +180,11 @@ namespace MegaGame.UI
             if (gameController.gameState != GameController.GameState.battle)
                 sceneObjects.ShowStartGameModelButton(true);
 
-            ShowAllObjects();
-            Close();
-
             if (skipQuestionWindowIsOpen)
                 CloseSkipQuestionWindow();
+
+            ShowAllObjects();
+            Close();
         }
 
         public void ShowNextChapter()

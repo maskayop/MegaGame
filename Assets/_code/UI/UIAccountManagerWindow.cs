@@ -34,7 +34,7 @@ namespace MegaGame.UI
 
         bool isOpen = false;
 
-        List<string> accountsNames = new List<string>();
+        public List<string> accountsNames = new List<string>();
         string currentSelectedAccount;
 
         void Awake()
@@ -94,24 +94,27 @@ namespace MegaGame.UI
         public void CreateAccount()
         {
             gameDataSaver.CreateAccount(createAccountNameInputField.text);
-
             mainMenu.Init();
         }
 
         public void DeleteAccount()
         {
-            gameDataSaver.DeleteCurrentAccount();
             gameDataSaver.LoadLastAccount();
-
             mainMenu.Init();
         }
 
         void InitAccountsButtons()
         {
+            gameDataSaver.LoadGameData();
             accountsNames = gameDataSaver.GetAccountsNames();
 
             for (int i = 0; i < accountsNames.Count; i++)
-                loadAccountButtons[i].Init(accountsNames[i]);
+            {
+                if (gameDataSaver.GetCurrentAccountName() == accountsNames[i])
+                    loadAccountButtons[i].Init(accountsNames[i], true);
+                else
+                    loadAccountButtons[i].Init(accountsNames[i], false);
+            }
 
             for (int i = 0; i < loadAccountButtons.Count; i++)
                 loadAccountButtons[i].Init();
@@ -120,8 +123,7 @@ namespace MegaGame.UI
         public void DeletePlayerPrefs()
         {
             DataSaveLoad.Instance.DeletePlayerPrefs();
-            gameDataSaver.LoadLastAccount();
-            mainMenu.Init();
+            ScenesManager.Instance.LoadScene(ScenesManager.Instance.GetCurrentOpenScene().name);
         }
 
         public void LoadAccount(string targetAccountName)
@@ -161,6 +163,7 @@ namespace MegaGame.UI
         {
             createAccountQuestionWindow.SetActive(true);
             createAccountNameInputField.text = "";
+            CheckForNameAvailability();
         }
 
         public void CloseCreateAccountQuestionWindow()
@@ -188,6 +191,31 @@ namespace MegaGame.UI
         {
             deleteSavesSecurityQuestionWindow.SetActive(false);
             CloseDeleteSavesQuestionWindow();
+        }
+
+        void SetCreateAccountButtonInteractable(bool state)
+        {
+            createAccountButton.interactable = state;
+        }
+
+        public void CheckForNameAvailability()
+        {
+            if (string.IsNullOrWhiteSpace(createAccountNameInputField.text))
+            {
+                SetCreateAccountButtonInteractable(false);
+                return;
+            }
+
+            for (int i = 0; i < accountsNames.Count; i++)
+            {
+                if (accountsNames[i] == createAccountNameInputField.text)
+                {
+                    SetCreateAccountButtonInteractable(false);
+                    return;
+                }
+            }
+
+            SetCreateAccountButtonInteractable(true);
         }
     }
 }

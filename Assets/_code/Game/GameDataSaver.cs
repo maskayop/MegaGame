@@ -16,6 +16,8 @@ namespace MegaGame
         [Header("Items")]
         [SerializeField] List<Data_Item> items = new List<Data_Item>();
 
+        public List<string> accountsNames = new List<string>();
+
         DataSaveLoad dataSaveLoad;
         GameController gameController;
         ResourcesController resourcesController;
@@ -264,13 +266,9 @@ namespace MegaGame
             SaveLastAccount();
         }
 
-        public void DeleteCurrentAccount()
-        {
-        }
-
         public List<string> GetAccountsNames()
         {
-            List<string> accountsNames = new List<string>();
+            accountsNames.Clear();
 
             for (int i = 1; i <= totalAccountsAmount; i++)
                 accountsNames.Add(dataSaveLoad.GetSavedString(accountNameFormat + i + "-"));
