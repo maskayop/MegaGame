@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +31,6 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI enemyVillagesText;
 
         UIAccountManagerWindow accountManagerWindow;
-        GameDataSaver gameDataSaver;
 
         string accountName;
         public string AccountName { get { return accountName; } }
@@ -38,7 +38,6 @@ namespace MegaGame.UI
         void Start()
         {
             accountManagerWindow = UIAccountManagerWindow.Instance;
-            gameDataSaver = GameDataSaver.Instance;
         }
 
         public void Init(string INaccountName, bool isCurrentAccount)
@@ -59,6 +58,8 @@ namespace MegaGame.UI
                 mainButton.interactable = true;
                 currentAccountPanel.SetActive(false);
             }
+
+            gameEndPanel.SetActive(false);
         }
 
         public void Init()
@@ -70,6 +71,15 @@ namespace MegaGame.UI
             accountInfoPanel.SetActive(false);
             currentAccountPanel.SetActive(false);
             createAccountButton.SetActive(true);
+        }
+
+        public void SetData(List<int> dataList)
+        {
+            playerMoneyText.text = dataList[0].ToString();
+            playerPortsText.text = dataList[1].ToString();
+            enemyPortsText.text = dataList[2].ToString();
+            playerVillagesText.text = dataList[3].ToString();
+            enemyVillagesText.text = dataList[4].ToString();
         }
 
         public void TryLoadAccount()

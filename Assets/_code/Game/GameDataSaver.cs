@@ -16,7 +16,7 @@ namespace MegaGame
         [Header("Items")]
         [SerializeField] List<Data_Item> items = new List<Data_Item>();
 
-        public List<string> accountsNames = new List<string>();
+        List<string> accountsNames = new List<string>();
 
         DataSaveLoad dataSaveLoad;
         GameController gameController;
@@ -289,6 +289,57 @@ namespace MegaGame
             dataSaveLoad.Save(lastAccountIdFormat, currentAccountId);
 
             LoadLastAccount();
+        }
+
+        public List<int> GetAccountData(string targetAccountName)
+        {
+            List<int> ints = new List<int>();
+
+            for (int i = 0; i <= 4; i++)
+                ints.Add(0);
+
+            string accountNameKey = "";
+
+            int playerMoney = 0;
+            int playerPortsCount = 0;
+            int playerVillagesCount = 0;
+
+            int enemyPortsCount = 0;
+            int enemyVillagesCount = 0;
+
+            for (int i = 1; i <= accountsNames.Count; i++)
+                if (accountsNames[i - 1] == targetAccountName)
+                    accountNameKey = accountNameFormat + i.ToString() + "-";
+
+            for (int i = 0; i < gameController.allIslands.Count; i++)
+            {
+                playerMoney = Strint.GetInt(dataSaveLoad.GetSavedString(accountNameKey + playerMoneyFormat));
+
+                Island island = gameController.allIslands[i];
+
+                if (dataSaveLoad.GetSavedShort(accountNameKey + island.islandData.id + islandOwnerFormat) == 0)
+                {
+                    if (island.settlement as Port)
+                        playerPortsCount++;
+                    else if (island.settlement as Village)
+                        playerVillagesCount++;
+                }
+                else if (dataSaveLoad.GetSavedShort(accountNameKey + island.islandData.id + islandOwnerFormat) == 1)
+                {
+                    if (island.settlement as Port)
+                        enemyPortsCount++;
+                    else if (island.settlement as Village)
+                        enemyVillagesCount++;
+                }
+            }
+
+            ints[0] = playerMoney;
+            ints[1] = playerPortsCount;
+            ints[2] = enemyPortsCount;
+            ints[3] = playerVillagesCount;
+            ints[4] = enemyVillagesCount;
+
+            return ints;
         }
 
         void SetBuildingState(int bitIndex, bool isBuilt)

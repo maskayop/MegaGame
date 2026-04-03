@@ -34,7 +34,7 @@ namespace MegaGame.UI
 
         bool isOpen = false;
 
-        public List<string> accountsNames = new List<string>();
+        List<string> accountsNames = new List<string>();
         string currentSelectedAccount;
 
         void Awake()
@@ -114,6 +114,8 @@ namespace MegaGame.UI
                     loadAccountButtons[i].Init(accountsNames[i], true);
                 else
                     loadAccountButtons[i].Init(accountsNames[i], false);
+
+                loadAccountButtons[i].SetData(gameDataSaver.GetAccountData(accountsNames[i]));
             }
 
             for (int i = 0; i < loadAccountButtons.Count; i++)
