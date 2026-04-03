@@ -5,19 +5,35 @@ namespace MegaGame.UI
 {
     public class UILoadAccountButton : MonoBehaviour
     {
-        public TextMeshProUGUI nameText;
+        [SerializeField] TextMeshProUGUI nameText;
 
         UIMainMenu mainMenu;
+        UIAccountManagerWindow accountManagerWindow;
 
-        public void Init(UIMainMenu menu, string accountName)
+        void Start()
         {
-            mainMenu = menu;
+            accountManagerWindow = UIAccountManagerWindow.Instance;
+            mainMenu = UIMainMenu.Instance;
+        }
+
+        public void Init(string accountName)
+        {
             nameText.text = accountName;
         }
 
         public void LoadAccount()
         {
             mainMenu.LoadAccount(nameText.text);
+        }
+
+        public void TryRenameAccount()
+        {
+            accountManagerWindow.RenameAccount();
+        }
+
+        public void TryDeleteAccount()
+        {
+            accountManagerWindow.DeleteAccount();
         }
     }
 }

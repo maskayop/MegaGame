@@ -7,6 +7,8 @@ namespace MegaGame.UI
 {
     public class UIMainMenu : MonoBehaviour
     {
+        public static UIMainMenu Instance { get; private set; }
+
         public bool isOpen = false;
 
         [Header("Windows")]
@@ -16,15 +18,11 @@ namespace MegaGame.UI
         [SerializeField] GameObject exitAppWindow;
 
         [Header("Accounts")]
-        [SerializeField] GameObject accountManagerWindow;
         [SerializeField] GameObject accountButtonPrefab;
         [SerializeField] Transform accountButtonsContainer;
 
         [Header("Account")]
         [SerializeField] TextMeshProUGUI currentAccountNameText;
-        [SerializeField] TMP_InputField accountNameInputField;
-        [SerializeField] GameObject renameAccountButton;
-        [SerializeField] GameObject createAccountButton;
 
         [Header("No Ads")]
         [SerializeField] GameObject noAdsButton;
@@ -37,8 +35,21 @@ namespace MegaGame.UI
         GlobalTimeController globalTime;
         GameShop gameShop;
         UIGameShop gameShopUI;
+        UIAccountManagerWindow accountManagerWindow;
 
         List<string> accountsNames = new List<string>();
+
+        void Awake()
+        {
+            if (Instance != null)
+            {
+                Debug.LogWarning("Cannot create UIMainMenu");
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
 
         void Start()
         {
@@ -50,17 +61,6 @@ namespace MegaGame.UI
         {
             if (!isOpen)
                 return;
-
-            if (accountNameInputField.text == gameDataSaver.GetCurrentAccountName())
-            {
-                renameAccountButton.SetActive(false);
-                createAccountButton.SetActive(false);
-            }
-            else
-            {
-                renameAccountButton.SetActive(true);
-                createAccountButton.SetActive(true);
-            }
         }
 
         public void Init()
@@ -71,6 +71,7 @@ namespace MegaGame.UI
             gameShop = GameShop.Instance;
             gameShopUI = UIGameShop.Instance;
             globalTime = GlobalTimeController.Instance;
+            accountManagerWindow = UIAccountManagerWindow.Instance;
 
             currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
             CloseAccountManagerWindow();
@@ -110,26 +111,12 @@ namespace MegaGame.UI
 
         public void OpenAccountManagerWindow()
         {
-            accountManagerWindow.SetActive(true);
-            accountNameInputField.text = gameDataSaver.GetCurrentAccountName();
-            CreateAccountsButtons();
+            accountManagerWindow.Open();
         }
 
         public void CloseAccountManagerWindow()
         {
-            accountManagerWindow.SetActive(false);
-        }
-
-        public void OnRenameAccountButtonClicked()
-        {
-            gameDataSaver.SetAccountName(accountNameInputField.text);
-            Init();
-        }
-
-        public void OnCreateAccountButtonClicked()
-        {
-            gameDataSaver.CreateAccount(accountNameInputField.text);
-            Init();
+            accountManagerWindow.Close();
         }
 
         void CreateAccountsButtons()
@@ -142,7 +129,7 @@ namespace MegaGame.UI
             for (int i = 0; i < accountsNames.Count; i++)
             {
                 GameObject b = Instantiate(accountButtonPrefab, accountButtonsContainer);
-                b.GetComponent<UILoadAccountButton>().Init(this, accountsNames[i]);
+                b.GetComponent<UILoadAccountButton>().Init(accountsNames[i]);
             }
         }
 

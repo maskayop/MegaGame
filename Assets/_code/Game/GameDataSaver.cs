@@ -250,18 +250,22 @@ namespace MegaGame
             return currentAccountName;
         }
 
-        public void SetAccountName(string textValue)
+        public void SetAccountName(string INaccountName)
         {
-            currentAccountName = textValue;
+            currentAccountName = INaccountName;
             SaveLastAccount();
         }
 
-        public void CreateAccount(string textValue)
+        public void CreateAccount(string INaccountName)
         {
             totalAccountsAmount++;
             currentAccountId = totalAccountsAmount;
-            currentAccountName = textValue;
+            currentAccountName = INaccountName;
             SaveLastAccount();
+        }
+
+        public void DeleteCurrentAccount()
+        {
         }
 
         public List<string> GetAccountsNames()

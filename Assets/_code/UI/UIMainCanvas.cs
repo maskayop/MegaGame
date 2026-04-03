@@ -12,7 +12,6 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI currentAccountNameText;
 
         [Header("Main Menu")]
-        [SerializeField] UIMainMenu mainMenu;
         [SerializeField] GameObject goToMainMenuQuestionWindow;
 
         [Header("Game")]
@@ -40,6 +39,7 @@ namespace MegaGame.UI
         AdditionalSceneObjects additionalObjects;
         UISettingsWindow settingsWindow;
         UIGameShop gameShopWindow;
+        UIMainMenu mainMenu;
 
         GameState currentGameState;
 
@@ -62,6 +62,7 @@ namespace MegaGame.UI
             additionalObjects = AdditionalSceneObjects.Instance;
             settingsWindow = UISettingsWindow.Instance;
             gameShopWindow = UIGameShop.Instance;
+            mainMenu = UIMainMenu.Instance;
 
             ShowStartGameWindow();
         }
