@@ -21,6 +21,11 @@ namespace MegaGame.UI
         [SerializeField] TMP_InputField createAccountNameInputField;
         [SerializeField] Button createAccountButton;
 
+        [Header("Delete Saves")]
+        [SerializeField] GameObject deleteSavesButton;
+        [SerializeField] GameObject deleteSavesQuestionWindow;
+        [SerializeField] GameObject deleteSavesSecurityQuestionWindow;
+
         [Header("Buttons")]
         [SerializeField] List<UILoadAccountButton> loadAccountButtons = new List<UILoadAccountButton>();
 
@@ -68,6 +73,11 @@ namespace MegaGame.UI
             window.SetActive(true);
 
             InitAccountsButtons();
+
+            if (accountsNames.Count == loadAccountButtons.Count)
+                deleteSavesButton.SetActive(true);
+            else
+                deleteSavesButton.SetActive(false);
         }
 
         public void Close()
@@ -77,13 +87,8 @@ namespace MegaGame.UI
 
             CloseLoadAccountQuestionWindow();
             CloseCreateAccountQuestionWindow();
-        }
-
-        public void RenameAccount()
-        {
-            //gameDataSaver.SetAccountName(accountNameInputField.text);
-
-            mainMenu.Init();
+            CloseDeleteSavesQuestionWindow();
+            CloseDeleteSavesSecurityQuestionWindow();
         }
 
         public void CreateAccount()
@@ -161,6 +166,28 @@ namespace MegaGame.UI
         public void CloseCreateAccountQuestionWindow()
         {
             createAccountQuestionWindow.SetActive(false);
+        }
+
+        public void OpenDeleteSavesQuestionWindow()
+        {
+            deleteSavesQuestionWindow.SetActive(true);
+        }
+
+        public void CloseDeleteSavesQuestionWindow()
+        {
+            deleteSavesQuestionWindow.SetActive(false);
+        }
+
+        public void OpenDeleteSavesSecurityQuestionWindow()
+        {
+            deleteSavesSecurityQuestionWindow.SetActive(true);
+            CloseDeleteSavesQuestionWindow();
+        }
+
+        public void CloseDeleteSavesSecurityQuestionWindow()
+        {
+            deleteSavesSecurityQuestionWindow.SetActive(false);
+            CloseDeleteSavesQuestionWindow();
         }
     }
 }

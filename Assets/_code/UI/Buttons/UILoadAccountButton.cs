@@ -80,11 +80,6 @@ namespace MegaGame.UI
             accountManagerWindow.OpenLoadAccountQuestionWindow();
         }
 
-        public void TryRenameAccount()
-        {
-            accountManagerWindow.RenameAccount();
-        }
-
         public void TryCreateAccount()
         {
             accountManagerWindow.OpenCreateAccountQuestionWindow();
