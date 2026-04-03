@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Vopere.Common;
@@ -14,12 +13,7 @@ namespace MegaGame.UI
         [Header("Windows")]
         [SerializeField] GameObject mainWindow;
         [SerializeField] GameObject menuButtons;
-
         [SerializeField] GameObject exitAppWindow;
-
-        [Header("Accounts")]
-        [SerializeField] GameObject accountButtonPrefab;
-        [SerializeField] Transform accountButtonsContainer;
 
         [Header("Account")]
         [SerializeField] TextMeshProUGUI currentAccountNameText;
@@ -36,8 +30,6 @@ namespace MegaGame.UI
         GameShop gameShop;
         UIGameShop gameShopUI;
         UIAccountManagerWindow accountManagerWindow;
-
-        List<string> accountsNames = new List<string>();
 
         void Awake()
         {
@@ -117,39 +109,6 @@ namespace MegaGame.UI
         public void CloseAccountManagerWindow()
         {
             accountManagerWindow.Close();
-        }
-
-        void CreateAccountsButtons()
-        {
-            foreach (Transform t in accountButtonsContainer)
-                Destroy(t.gameObject);
-
-            accountsNames = gameDataSaver.GetAccountsNames();
-
-            for (int i = 0; i < accountsNames.Count; i++)
-            {
-                GameObject b = Instantiate(accountButtonPrefab, accountButtonsContainer);
-                b.GetComponent<UILoadAccountButton>().Init(accountsNames[i]);
-            }
-        }
-
-        public void LoadAccount(string targetAccountName)
-        {
-            gameDataSaver.LoadAccount(targetAccountName);
-            gameDataSaver.SetAccountName(targetAccountName);
-            Init();
-        }
-
-        public void DeletePlayerPrefs()
-        {
-            DataSaveLoad.Instance.DeletePlayerPrefs();
-
-            foreach (Transform t in accountButtonsContainer)
-                Destroy(t.gameObject);
-
-            gameDataSaver.LoadLastAccount();
-
-            Init();
         }
 
         public void OpenCloseMenuButtons()

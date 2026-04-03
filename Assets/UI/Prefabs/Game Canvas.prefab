@@ -20304,7 +20304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAccountNameText: {fileID: 991945827473395780}
-  mainMenu: {fileID: 4794209143728947511}
   goToMainMenuQuestionWindow: {fileID: 7958867557027246234}
   startGameWindow: {fileID: 8459066534937350434}
   endGameWindow: {fileID: 4779067796813486346}
@@ -29588,17 +29587,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3227876043919153410, guid: 7a715e3008e9c2f48b428a7603327204, type: 3}
   m_PrefabInstance: {fileID: 2939675832170790072}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4794209143728947511 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7657140025203883407, guid: 7a715e3008e9c2f48b428a7603327204, type: 3}
-  m_PrefabInstance: {fileID: 2939675832170790072}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ba4431c7af8744d8a8da242bd8f234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIMainMenu
 --- !u!1001 &2949929315313309813
 PrefabInstance:
   m_ObjectHideFlags: 0
