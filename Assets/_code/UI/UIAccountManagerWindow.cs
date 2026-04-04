@@ -94,7 +94,7 @@ namespace MegaGame.UI
         public void CreateAccount()
         {
             gameDataSaver.CreateAccount(createAccountNameInputField.text);
-            mainMenu.Init();
+            ScenesManager.Instance.LoadScene(ScenesManager.Instance.GetCurrentOpenScene().name);
         }
 
         public void DeleteAccount()
