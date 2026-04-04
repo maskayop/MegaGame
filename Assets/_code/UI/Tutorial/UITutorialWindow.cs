@@ -152,6 +152,13 @@ namespace MegaGame.UI
             isOpen = false;
             window.SetActive(false);
 
+            if (!tutorial)
+                return;
+
+            if (tutorial)
+                if (!tutorial.isTutorial)
+                    return;
+
             if (tutorial.currentChapter == 0 || tutorial.currentChapter == 1)
             {
                 ShowOnlyObject(-1);
@@ -340,8 +347,8 @@ namespace MegaGame.UI
 
         void ShowAllObjects()
         {
-            foreach (GameObject g in additionalObjects)
-                g.SetActive(true);
+            for (int i = 0; i < additionalObjects.Count; i++)
+                additionalObjects[i].SetActive(true);
         }
 
         void SetTargetCirclesPosition(RectTransform INtransform)
