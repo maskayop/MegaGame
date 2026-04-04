@@ -30,6 +30,7 @@ namespace MegaGame.UI
         GameShop gameShop;
         UIGameShop gameShopUI;
         UIAccountManagerWindow accountManagerWindow;
+        AudioController audioController;
 
         void Awake()
         {
@@ -64,6 +65,7 @@ namespace MegaGame.UI
             gameShopUI = UIGameShop.Instance;
             globalTime = GlobalTimeController.Instance;
             accountManagerWindow = UIAccountManagerWindow.Instance;
+            audioController = AudioController.Instance;
 
             currentAccountNameText.text = gameDataSaver.GetCurrentAccountName();
             CloseAccountManagerWindow();
@@ -80,6 +82,16 @@ namespace MegaGame.UI
             cameraController?.SetFarClipPlaneToZero(true);
 
             TryShowNoAdsButton();
+
+            if (!audioController)
+                return;
+
+            if (audioController.GetCurrentMusicPack() != 0)
+            {
+                audioController.StopPlayingMusic();
+                audioController.SetCurrentMusicPack(0);
+                audioController.PlayNextMusicClip();
+            }
         }
 
         public void Close()

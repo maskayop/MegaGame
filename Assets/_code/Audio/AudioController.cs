@@ -13,6 +13,13 @@ namespace MegaGame
         public AudioClip clip;
     }
 
+    [Serializable]
+    public class MusicPack
+    {
+        public string name;
+        public List<MusicSample> musicSamples = new List<MusicSample>();
+    }
+
     public class AudioController : MonoBehaviour
     {
         public static AudioController Instance;
@@ -20,7 +27,9 @@ namespace MegaGame
         [Header("Music")]
         public AudioSource musicSource;
         public AudioMixerGroup musicMixer;
-        public List<MusicSample> musicSamples = new List<MusicSample>();
+        public List<MusicPack> musicPacks = new List<MusicPack>();
+
+        int currentMusicPack = 0;
 
         [Header("UI")]
         public AudioSource UISource;
@@ -68,7 +77,7 @@ namespace MegaGame
                 {
                     if (musicSource.loop)
                         return;
-                
+
                     if (isRandomPlaying)
                         PlayRandomMusicClip();
                     else
@@ -96,12 +105,12 @@ namespace MegaGame
         void PlayMusicClip()
         {
             if (currentMusic < 0)
-                currentMusic = musicSamples.Count - 1;
-            else if (currentMusic >= musicSamples.Count)
+                currentMusic = musicPacks[currentMusicPack].musicSamples.Count - 1;
+            else if (currentMusic >= musicPacks[currentMusicPack].musicSamples.Count)
                 currentMusic = 0;
 
             musicSource.Stop();
-            musicSource.clip = musicSamples[currentMusic].clip;
+            musicSource.clip = musicPacks[currentMusicPack].musicSamples[currentMusic].clip;
             musicSource.Play();
 
             currentMusicTime = musicSource.clip.length;
@@ -127,7 +136,7 @@ namespace MegaGame
 
         void PlayRandomMusicClip()
         {
-            int randomValue = UnityEngine.Random.Range(0, musicSamples.Count);
+            int randomValue = UnityEngine.Random.Range(0, musicPacks[currentMusicPack].musicSamples.Count);
 
             if (randomValue == currentMusic)
                 PlayNextMusicClip();
@@ -147,6 +156,13 @@ namespace MegaGame
         {
             musicSource.UnPause();
             isPaused = false;
+        }
+
+        public void StopPlayingMusic()
+        {
+            musicSource.Stop();
+            isPaused = true;
+            currentMusicTime = 0;
         }
 
         public void PauseCurrentMusic()
@@ -192,5 +208,15 @@ namespace MegaGame
             mixerGroup.audioMixer.SetFloat(mixerGroup.name + "Volume", value);
             DataSaveLoad.Instance.Save(mixerGroup.name + "Volume", INvalue);
         }
+
+        public void SetCurrentMusicPack(int id)
+        {
+            currentMusicPack = id;
+        }
+
+        public int GetCurrentMusicPack()
+        {
+            return currentMusicPack;
+        }
     }
- }
+}

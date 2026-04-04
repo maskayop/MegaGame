@@ -566,17 +566,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalAnatomy.AudioController
   musicSource: {fileID: 1257489392370667870}
   musicMixer: {fileID: -6158324240980398787, guid: 1993f228958937d45a317fa3d60135e6, type: 2}
-  musicSamples:
-  - name: "\u0411\u0438\u0442\u0432\u0430"
-    clip: {fileID: 8300000, guid: e0a6287022ca47e4d85d0952e9a6029d, type: 3}
-  - name: "\u0421\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
-    clip: {fileID: 8300000, guid: 0a3e81af374c35d43a46c811de96d027, type: 3}
-  - name: "\u0413\u0440\u044F\u0434\u0451\u0442 \u0431\u043E\u0439"
-    clip: {fileID: 8300000, guid: 884aa840a1d15e94e929ecd9b04c7063, type: 3}
-  - name: "\u041D\u0430\u043F\u0430\u0434\u0435\u043D\u0438\u0435"
-    clip: {fileID: 8300000, guid: d4aa9bb52c0841c4282f70a8fff6b86a, type: 3}
-  - name: "\u0412 \u043F\u044B\u043B\u0443 \u0441\u0440\u0430\u0436\u0435\u043D\u0438\u044F"
-    clip: {fileID: 8300000, guid: 7036e1f27a1570e448ceb27ee9eb76cb, type: 3}
+  musicPacks:
+  - name: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
+    musicSamples:
+    - name: "\u041E\u0433\u0440\u043E\u043C\u043D\u044B\u0435 \u043F\u0430\u0440\u0443\u0441\u0430"
+      clip: {fileID: 8300000, guid: 9ab51ccb4083078479716dff8daeaa1e, type: 3}
+    - name: "\u041E\u043F\u0443\u0441\u0442\u0438\u0442\u044C \u043F\u0430\u0440\u0443\u0441\u0430"
+      clip: {fileID: 8300000, guid: 4369d2a98b4f3e3438b20739a3f1b822, type: 3}
+    - name: "\u041C\u043E\u0440\u0441\u043A\u043E\u0435 \u0447\u0443\u0434\u043E\u0432\u0438\u0449\u0435"
+      clip: {fileID: 8300000, guid: ffc16ac850ece6b49956254be09c0ab5, type: 3}
+    - name: "\u0412 \u043C\u043E\u0440\u0435"
+      clip: {fileID: 8300000, guid: f0b4d3df32aa89e4997b2d733d47974f, type: 3}
+  - name: "\u0411\u043E\u0439"
+    musicSamples:
+    - name: "\u0411\u0440\u043E\u0441\u0430\u0439\u0442\u0435\u0441\u044C \u0432
+        \u0430\u0442\u0430\u043A\u0443"
+      clip: {fileID: 8300000, guid: 504309afa1db6d94e9f541aaea746a85, type: 3}
+    - name: "\u0412 \u043F\u044B\u043B\u0443 \u0441\u0440\u0430\u0436\u0435\u043D\u0438\u044F"
+      clip: {fileID: 8300000, guid: 7994b42aa91c79a4f94363fb6c10375f, type: 3}
+    - name: "\u0413\u043D\u0435\u0432 \u043A\u043E\u043B\u0434\u0443\u043D\u0430"
+      clip: {fileID: 8300000, guid: 2f5340ee0a541cf488f390ce41b1d7ca, type: 3}
+    - name: "\u0414\u044B\u043C \u0438 \u043F\u043E\u0440\u043E\u0445"
+      clip: {fileID: 8300000, guid: ecd0f74e6cb934946842837142a3b42f, type: 3}
+    - name: "\u041C\u043E\u0440\u0441\u043A\u043E\u0439 \u0431\u043E\u0439"
+      clip: {fileID: 8300000, guid: 4372de20e3f5e344d90c29a214715d80, type: 3}
+    - name: "\u041F\u0440\u0438\u0431\u043B\u0438\u0436\u0430\u044E\u0449\u0430\u044F\u0441\u044F
+        \u0443\u0433\u0440\u043E\u0437\u0430"
+      clip: {fileID: 8300000, guid: 5597fdc6a8a30ba42b4f92578b5481aa, type: 3}
+    - name: "\u0420\u0435\u0448\u0430\u044E\u0449\u0438\u0439 \u0448\u0442\u0443\u0440\u043C"
+      clip: {fileID: 8300000, guid: 431bb385a9259e84ba121ffcafa65fb3, type: 3}
+    - name: "\u0420\u0451\u0432 \u0434\u0440\u0430\u043A\u043E\u043D\u0430"
+      clip: {fileID: 8300000, guid: a744753b753fc384cb97594fc3d13aee, type: 3}
+    - name: "\u0422\u0430\u0439\u043D\u043E\u0435 \u043D\u0430\u043F\u0430\u0434\u0435\u043D\u0438\u0435"
+      clip: {fileID: 8300000, guid: 1c4aff7db078907418944ebe20728cff, type: 3}
+  currentMusicPack: 0
   UISource: {fileID: 2118019015863251886}
   UIMixer: {fileID: -3943094602109605090, guid: 1993f228958937d45a317fa3d60135e6, type: 2}
   SFXSource: {fileID: 4357081712548094026}

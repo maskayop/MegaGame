@@ -40,6 +40,7 @@ namespace MegaGame.UI
         UISettingsWindow settingsWindow;
         UIGameShop gameShopWindow;
         UIMainMenu mainMenu;
+        AudioController audioController;
 
         GameState currentGameState;
 
@@ -63,6 +64,7 @@ namespace MegaGame.UI
             settingsWindow = UISettingsWindow.Instance;
             gameShopWindow = UIGameShop.Instance;
             mainMenu = UIMainMenu.Instance;
+            audioController = AudioController.Instance;
 
             ShowStartGameWindow();
         }
@@ -174,6 +176,16 @@ namespace MegaGame.UI
 
             UIShipsSelection.Instance?.UpdateButtonsState();
             UIShipsSelection.Instance?.SetMinBuildingShip();
+
+            if (!audioController)
+                return;
+
+            if (audioController.GetCurrentMusicPack() != 1)
+            {
+                audioController.StopPlayingMusic();
+                audioController.SetCurrentMusicPack(1);
+                audioController.PlayNextMusicClip();
+            }
         }
 
         public void PrepareNewBattle()
