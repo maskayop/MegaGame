@@ -1,3 +1,4 @@
+using MegaGame.UI;
 using RuStore;
 using RuStore.PayClient;
 using System;
@@ -89,6 +90,7 @@ namespace MegaGame
                 {
                     items[i].isPurchased = true;
                     resourcesController.RemoveMoneyFromPlayer(INitem.openGamePrice);
+                    GetComponent<UISoundPlayer>()?.PlayClip();
                     break;
                 }
             }
@@ -150,6 +152,7 @@ namespace MegaGame
         {
             OnBuyProductSuccess?.Invoke(this, EventArgs.Empty);
             currentError = "";
+            GetComponent<UISoundPlayer>()?.PlayClip();
         }
 
         public void BuyProductFailed(RuStoreError error)

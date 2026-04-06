@@ -756,6 +756,7 @@ GameObject:
   - component: {fileID: 5475055458305279532}
   - component: {fileID: 1521927924123245637}
   - component: {fileID: 7090011885915507496}
+  - component: {fileID: 3428712848333099653}
   m_Layer: 5
   m_Name: Build Construction Question Panel
   m_TagString: Untagged
@@ -860,6 +861,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &3428712848333099653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395007745022617812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UISoundPlayer
+  clip: {fileID: 8300000, guid: 5c2d492d71a3a764290742f3c32fab7d, type: 3}
 --- !u!1 &7027003644692137124
 GameObject:
   m_ObjectHideFlags: 0

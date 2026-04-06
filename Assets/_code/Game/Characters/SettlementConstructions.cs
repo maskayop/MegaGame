@@ -117,6 +117,8 @@ namespace MegaGame
                         resourcesController.RemoveMoneyFromPlayer(GetSettlementBuildingCost(3));
                     else
                         resourcesController.RemoveMoneyFromPlayer(GetSettlementBuildingCost(2));
+
+                    PlayBuySound();
                 }
             }
             else if (settlement.owner == BaseCharacter.Owner.enemy)
@@ -164,7 +166,10 @@ namespace MegaGame
             settlement.Island.UpdateIslandState();
 
             if (settlement.owner == BaseCharacter.Owner.player)
+            {
                 resourcesController.RemoveMoneyFromPlayer(GetSettlementBuildingCost(1));
+                PlayBuySound();
+            }
             else if (settlement.owner == BaseCharacter.Owner.enemy)
                 resourcesController.RemoveMoneyFromEnemy(GetSettlementBuildingCost(1));
 
@@ -234,6 +239,11 @@ namespace MegaGame
                 return Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(3));
             else
                 return 0;
+        }
+
+        public void PlayBuySound()
+        {
+            GetComponent<UISoundPlayer>()?.PlayClip();
         }
     }
 }

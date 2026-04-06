@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 1265925437394889432}
   - component: {fileID: -8781073907132552050}
   - component: {fileID: -3640810434803283954}
+  - component: {fileID: 6844722901087103583}
   - component: {fileID: 2380062407938278797}
   m_Layer: 9
   m_Name: Big Port
@@ -482,6 +483,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4f3987d759b7d7340b20fa47b2e7b6c7, type: 3}
   - {fileID: 8300000, guid: ee9e6e401c68e284bb91f7e070a15ebb, type: 3}
   deadClips: []
+--- !u!114 &6844722901087103583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902065961005520750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UISoundPlayer
+  clip: {fileID: 8300000, guid: 5c2d492d71a3a764290742f3c32fab7d, type: 3}
 --- !u!82 &2380062407938278797
 AudioSource:
   m_ObjectHideFlags: 0
