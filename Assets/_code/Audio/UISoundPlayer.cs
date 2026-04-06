@@ -22,7 +22,7 @@ namespace MegaGame.UI
         public void PlayEndGameMusic()
         {
             audioController = AudioController.Instance;
-            audioController.PlayMusicAudioClip(clip);
+            audioController.PlayUIAudioClip(clip);
 
             if (audioController.GetCurrentMusicPack() != 0)
             {
@@ -34,6 +34,8 @@ namespace MegaGame.UI
 
         public void PlayEndCampaignMusic(bool isVictory)
         {
+            audioController = AudioController.Instance;
+
             if (isVictory)
             {
                 if (audioController.GetCurrentMusicPack() != 2)

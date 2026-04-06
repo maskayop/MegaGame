@@ -475,7 +475,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.CharacterSoundPlayer
   startClips: []
-  attackClips: []
+  attackClips:
+  - {fileID: 8300000, guid: b898b4e9a242cb049b1d8d2e50ff3756, type: 3}
+  - {fileID: 8300000, guid: 848e276499b7b5d40bcc32edec5edcba, type: 3}
+  - {fileID: 8300000, guid: e305f934d4993a9429a2933f80c51972, type: 3}
+  - {fileID: 8300000, guid: 4f3987d759b7d7340b20fa47b2e7b6c7, type: 3}
+  - {fileID: 8300000, guid: ee9e6e401c68e284bb91f7e070a15ebb, type: 3}
   deadClips: []
 --- !u!82 &2380062407938278797
 AudioSource:
