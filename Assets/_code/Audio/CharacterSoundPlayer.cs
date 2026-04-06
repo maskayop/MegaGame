@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace MegaGame
 {
-    [RequireComponent(typeof(BaseCharacter))]
     [RequireComponent(typeof(AudioSource))]
     public class CharacterSoundPlayer : MonoBehaviour
     {

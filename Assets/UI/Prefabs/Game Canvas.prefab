@@ -238,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6601533722504004348}
   - component: {fileID: 416644986710594523}
+  - component: {fileID: 4486385901311190109}
   m_Layer: 5
   m_Name: Victory Panel
   m_TagString: Untagged
@@ -279,6 +280,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.UI.UIMoveToZeroOnAwake
   rectTransform: {fileID: 6601533722504004348}
+--- !u!114 &4486385901311190109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177366674706298183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UISoundPlayer
+  clip: {fileID: 8300000, guid: a4660a932376b074f94bacdf41448d28, type: 3}
 --- !u!1 &182695174044918647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,6 +6080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3134545964849076295}
   - component: {fileID: 5499232778524447067}
+  - component: {fileID: 8165959323815692478}
   m_Layer: 5
   m_Name: Campaign Defeat Panel
   m_TagString: Untagged
@@ -6107,6 +6122,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.UI.UIMoveToZeroOnAwake
   rectTransform: {fileID: 3134545964849076295}
+--- !u!114 &8165959323815692478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115556946032062827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UISoundPlayer
+  clip: {fileID: 8300000, guid: d95a29a1f7114fc4f988d38899b210e6, type: 3}
 --- !u!1 &2135072514449938678
 GameObject:
   m_ObjectHideFlags: 0
@@ -14090,6 +14118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 428814749027799908}
   - component: {fileID: 7016573176308837915}
+  - component: {fileID: 8818760886667637022}
   m_Layer: 5
   m_Name: Campaign Victory Panel
   m_TagString: Untagged
@@ -14131,6 +14160,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.UI.UIMoveToZeroOnAwake
   rectTransform: {fileID: 428814749027799908}
+--- !u!114 &8818760886667637022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072235736190120690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UISoundPlayer
+  clip: {fileID: 8300000, guid: d1650a9465220614e92175ca912a34e0, type: 3}
 --- !u!1 &5087408125800510918
 GameObject:
   m_ObjectHideFlags: 0
@@ -18296,6 +18338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4989319776736151376}
   - component: {fileID: 7495343360329577087}
+  - component: {fileID: 5616160377769776055}
   m_Layer: 5
   m_Name: Defeat Panel
   m_TagString: Untagged
@@ -18336,6 +18379,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.UI.UIMoveToZeroOnAwake
   rectTransform: {fileID: 4989319776736151376}
+--- !u!114 &5616160377769776055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856324931956960457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UISoundPlayer
+  clip: {fileID: 8300000, guid: bab9d547550007740aa129e1b50068b2, type: 3}
 --- !u!1 &6893751613664399681
 GameObject:
   m_ObjectHideFlags: 0

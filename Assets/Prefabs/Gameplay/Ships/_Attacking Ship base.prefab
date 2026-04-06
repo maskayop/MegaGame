@@ -258,8 +258,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb55fdf58d1abd419de0bd0a5a51ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.CharacterSoundPlayer
-  audioSource: {fileID: 0}
-  startClips: []
+  startClips:
+  - {fileID: 8300000, guid: ebde08c9e7def734b89b05d0aef1b8bf, type: 3}
+  - {fileID: 8300000, guid: 46fa59ae5befb5e45a1e49de6a6e04fc, type: 3}
+  - {fileID: 8300000, guid: d1ae38e270d38bf44b62cb7e2b4e3a78, type: 3}
+  - {fileID: 8300000, guid: 806c7dcef1c44de4d975dcfddae3f204, type: 3}
+  - {fileID: 8300000, guid: a8fd9272661857646bd459e6627abf46, type: 3}
+  - {fileID: 8300000, guid: 000aa8ff05f45c54cb1407814f025e59, type: 3}
   attackClips: []
   deadClips: []
 --- !u!82 &1257244319238204344
@@ -282,11 +287,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 256
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 200
+  MaxDistance: 250
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -294,23 +299,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.004
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -1.9850128
+      outSlope: -1.9850128
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.0579139
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.3097369
+      outSlope: -0.3097369
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.14262655
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

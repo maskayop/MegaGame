@@ -125,6 +125,17 @@ namespace MegaGame
 
         public void PlayNextMusicClip()
         {
+            if (useRepeatChance)
+            {
+                int r = UnityEngine.Random.Range(0, 3);
+
+                if (r == 0)
+                {
+                    PlayMusicClip();
+                    return;
+                }
+            }
+
             if (isRandomPlaying)
                 PlayRandomMusicClip();
             else
@@ -142,6 +153,17 @@ namespace MegaGame
 
         void PlayRandomMusicClip()
         {
+            if (useRepeatChance)
+            {
+                int r = UnityEngine.Random.Range(0, 3);
+
+                if (r == 0)
+                {
+                    PlayMusicClip();
+                    return;
+                }
+            }
+
             int randomValue = UnityEngine.Random.Range(0, musicPacks[currentMusicPack].musicSamples.Count);
 
             if (randomValue == currentMusic)
@@ -185,6 +207,12 @@ namespace MegaGame
         public void SetRandomPlaying(bool state)
         {
             isRandomPlaying = state;
+        }
+
+        public void PlayMusicAudioClip(AudioClip clip)
+        {
+            StopPlayingMusic();
+            musicSource.PlayOneShot(clip);
         }
 
         public void PlayUIAudioClip(AudioClip clip)

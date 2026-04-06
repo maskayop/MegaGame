@@ -135,22 +135,24 @@ namespace MegaGame.UI
 
         void ShowEndGameWindow()
         {
-            startGameWindow.SetActive(false);
-            endGameWindow.SetActive(true);
-            victoryPanel.SetActive(false);
-            defeatPanel.SetActive(false);
+            startGameWindow?.SetActive(false);
+            endGameWindow?.SetActive(true);
+            victoryPanel?.SetActive(false);
+            defeatPanel?.SetActive(false);
 
-            additionalObjects.HideAllPanels();
+            additionalObjects?.HideAllPanels();
 
             if (gameController.IsVictory)
             {
-                victoryPanel.SetActive(true);
-                additionalObjects.ShowVictoryPanel(true);
+                victoryPanel?.SetActive(true);
+                additionalObjects?.ShowVictoryPanel(true);
+                victoryPanel.GetComponent<UISoundPlayer>()?.PlayEndGameMusic();
             }
             else
             {
-                defeatPanel.SetActive(true);
-                additionalObjects.ShowDefeatPanel(true);
+                defeatPanel?.SetActive(true);
+                additionalObjects?.ShowDefeatPanel(true);
+                defeatPanel.GetComponent<UISoundPlayer>()?.PlayEndGameMusic();
             }
 
             ShowHUDButtons(false);
@@ -205,9 +207,15 @@ namespace MegaGame.UI
             if (gameController.CampaignIsEnded)
             {
                 if (gameController.IsVictory)
+                {
                     campaignVictoryPanel.SetActive(true);
+                    campaignVictoryPanel.GetComponent<UISoundPlayer>()?.PlayEndCampaignMusic(true);
+                }
                 else
+                {
                     campaignDefeatPanel.SetActive(true);
+                    campaignDefeatPanel.GetComponent<UISoundPlayer>()?.PlayEndCampaignMusic(false);
+                }
             }
 
             ShowHUDButtons(false);

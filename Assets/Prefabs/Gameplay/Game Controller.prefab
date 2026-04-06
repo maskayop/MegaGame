@@ -73,7 +73,8 @@ MonoBehaviour:
   allPossibleEnemyTargetPorts: []
   distanceForPossibleTargets: 150
   doubleTargetDistanceItem: {fileID: 11400000, guid: db7d3aabd294f49448750ec7024a1835, type: 2}
-  possibleTargetSettlementForEnemy: []
+  emptyIslandsExploringMinDay: 100
+  possibleTargetSettlementsForEnemy: []
   isExploringMode: 0
 --- !u!114 &8288885944846870642
 MonoBehaviour:
@@ -172,6 +173,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b33dc6c20d02e94389229863572a204, type: 2}
   - {fileID: 11400000, guid: 59fa455d1e8584b4190930cc80a464f6, type: 2}
   - {fileID: 11400000, guid: 2e0b88db98586c94faca7f17d61a5b24, type: 2}
+  setAsTargetClip: {fileID: 8300000, guid: eca6c739ecf1f8940ac4d73c30d0d854, type: 3}
 --- !u!114 &7090913357105979908
 MonoBehaviour:
   m_ObjectHideFlags: 0
