@@ -29,6 +29,8 @@ namespace MegaGame.UI
         [SerializeField] TextMeshProUGUI musicValueText;
         [SerializeField] Slider UIAudioSlider;
         [SerializeField] TextMeshProUGUI UIAudioValueText;
+        [SerializeField] Slider SFXAudioSlider;
+        [SerializeField] TextMeshProUGUI SFXAudioValueText;
 
         [Header("Sensitivity")]
         [SerializeField] Slider movementSensitivitySlider;
@@ -80,6 +82,7 @@ namespace MegaGame.UI
 
             SetSliderLoadedValue("MusicVolume", musicSlider, musicValueText, musicSlider.maxValue / 2);
             SetSliderLoadedValue("UIVolume", UIAudioSlider, UIAudioValueText, UIAudioSlider.maxValue / 2);
+            SetSliderLoadedValue("SFXVolume", SFXAudioSlider, SFXAudioValueText, SFXAudioSlider.maxValue / 2);
 
             ChangeMusicVolume();
             ChangeUIVolume();
@@ -150,14 +153,17 @@ namespace MegaGame.UI
 
         public void ChangeSFXVolume()
         {
+            SFXAudioValueText.text = SFXAudioSlider.value.ToString();
+
             if (audioController)
-                audioController.ChangeVolume(1, UIAudioSlider.value);
+                audioController.ChangeVolume(2, SFXAudioSlider.value);
         }
 
         public void ChangeVoiceVolume()
-        {
+        {/*
             if (audioController)
                 audioController.ChangeVolume(1, UIAudioSlider.value);
+            */
         }
 
         public void ChangeGraphicsLevel(int id)

@@ -57,6 +57,7 @@ namespace MegaGame
         protected Owner currentDamagerOwner;
 
         protected Collider coll;
+        protected CharacterSoundPlayer soundPlayer;
 
         void Awake()
         {
@@ -127,6 +128,9 @@ namespace MegaGame
                 gameController = GameController.Instance;
 
             coll = GetComponent<Collider>();
+            soundPlayer = GetComponent<CharacterSoundPlayer>();
+
+            soundPlayer?.PlayStartSound();
 
             OnInit();
         }
@@ -239,6 +243,8 @@ namespace MegaGame
                 return;
 
             currentHealth = 0;
+
+            soundPlayer?.PlayDeadSound();
             UpdateHealthWidget();
             OnKilled();
         }
@@ -253,6 +259,7 @@ namespace MegaGame
 
             currentAttackTime = attackDelay;
 
+            soundPlayer?.PlayAttackSound();
             OnAttack();
         }
 

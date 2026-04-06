@@ -30,6 +30,9 @@ namespace MegaGame
         [Header("Items")]
         [SerializeField] List<Data_Item> items = new List<Data_Item>();
 
+        [Header("Sounds")]
+        [SerializeField] AudioClip setAsTargetClip;
+
         string smallShipCost;
         string mediumShipCost;
         string bigShipCost;
@@ -46,6 +49,7 @@ namespace MegaGame
         GameShop gameShop;
         ObjectsManager objectsManager;
         Tutorial tutorial;
+        AudioController audioController;
 
         int maxBuildingShip = 0;
 
@@ -78,6 +82,7 @@ namespace MegaGame
             gameShop = GameShop.Instance;
             objectsManager = ObjectsManager.Instance;
             tutorial = Tutorial.Instance;
+            audioController = AudioController.Instance;
 
             smallShipCost = Strint.GetString(smallShipBuildingPrice);
             mediumShipCost = Strint.GetString(mediumShipBuildingPrice);
@@ -192,9 +197,7 @@ namespace MegaGame
         public void BuildShip(GameObject shipObject, Transform buildingPosition, BaseSettlement targetSettlement)
         {
             GameObject ship = Instantiate(shipObject, buildingPosition.position, buildingPosition.rotation);
-
             Warship character = ship.GetComponent<Warship>();
-
             character.SetDestinationSettlementPosition(targetSettlement);
 
             if (character.owner == Owner.player)
@@ -203,6 +206,8 @@ namespace MegaGame
                     scenePrefabsManager.SpawnAsTargetFX(targetSettlement.Island.transform.position, true);
                 else
                     scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, true);
+
+                PlaySetAsTargetClip();
             }
             else if (character.owner == Owner.enemy)
                 scenePrefabsManager.SpawnAsTargetFX(targetSettlement.transform.position, false);
@@ -362,6 +367,11 @@ namespace MegaGame
         {
             scenePrefabsManager.SpawnNafaivelWarningCircle(ship.transform.position);
             UIMainCanvas.Instance.SpawnNafaivelMessage();
+        }
+
+        public void PlaySetAsTargetClip()
+        {
+            audioController?.PlayUIAudioClip(setAsTargetClip);
         }
     }
 }

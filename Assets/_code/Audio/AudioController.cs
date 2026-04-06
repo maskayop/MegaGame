@@ -28,6 +28,7 @@ namespace MegaGame
         public AudioSource musicSource;
         public AudioMixerGroup musicMixer;
         public List<MusicPack> musicPacks = new List<MusicPack>();
+        public bool useRepeatChance = true;
 
         int currentMusicPack = 0;
 
@@ -100,6 +101,11 @@ namespace MegaGame
 
             if (UIVolume != -1)
                 ChangeVolume(1, UIVolume);
+
+            float SFXVolume = DataSaveLoad.Instance.GetSavedFloat("SFXVolume");
+
+            if (SFXVolume != -1)
+                ChangeVolume(2, SFXVolume);
         }
 
         void PlayMusicClip()
@@ -184,6 +190,11 @@ namespace MegaGame
         public void PlayUIAudioClip(AudioClip clip)
         {
             UISource.PlayOneShot(clip);
+        }
+
+        public void PlaySFXAudioClip(AudioClip clip)
+        {
+            SFXSource.PlayOneShot(clip);
         }
 
         public void ChangeVolume(int group, float INvalue)
