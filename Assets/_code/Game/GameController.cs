@@ -81,15 +81,15 @@ namespace MegaGame
         bool campaignIsEnded = false;
         public bool CampaignIsEnded { get { return campaignIsEnded; } set { campaignIsEnded = value; } }
 
-        List<Island> startIslands = new List<Island>();
-        List<Island> neutralIslands = new List<Island>();
+        public List<Island> startIslands = new List<Island>();
+        public List<Island> neutralIslands = new List<Island>();
 
         List<Island> islandsForExploring = new List<Island>();
 
-        int playerStartIslandId;
+        public int playerStartIslandId;
         public int PlayerStartIslandId { get { return playerStartIslandId; } set { playerStartIslandId = value; } }
 
-        int enemyStartIslandId;
+        public int enemyStartIslandId;
         public int EnemyStartIslandId { get { return enemyStartIslandId; } set { enemyStartIslandId = value; } }
 
         CameraController cameraController;
@@ -144,6 +144,33 @@ namespace MegaGame
             campaignIsEnded = false;
 
             gameDataSaver.LoadLastAccount();
+
+            playerStartIslandId = -1;
+            enemyStartIslandId = -1;
+        }
+
+        public void StartGame()
+        {
+            InitializeScene();
+
+            gameDataSaver.LoadLastAccount();
+            gameDataSaver.LoadGameData();
+
+            if (campaignIsEnded)
+            {
+                EndCampaign();
+                return;
+            }
+
+            CalculateStartIslandsAndPorts();
+            UpdateSettlementsLists();
+            PrepareNewBattle();
+
+            campaignIsEnded = false;
+
+            if (tutorial)
+                if (tutorial.IsTutorial)
+                    tutorial.ShowTutorialChapter(1);
         }
 
         void InitializeScene()
@@ -172,19 +199,8 @@ namespace MegaGame
             }
         }
 
-        public void StartGame()
+        void CalculateStartIslandsAndPorts()
         {
-            InitializeScene();
-
-            gameDataSaver.LoadLastAccount();
-            gameDataSaver.LoadGameData();
-
-            if (campaignIsEnded)
-            {
-                EndCampaign();
-                return;
-            }
-
             for (int i = 0; i < allIslands.Count; i++)
             {
                 if (allIslands[i].isStartIsland)
@@ -196,28 +212,27 @@ namespace MegaGame
             if (playerStartIslandId == -1)
             {
                 int randPlayer = UnityEngine.Random.Range(0, startIslands.Count);
-                playerStartIslandId = startIslands[randPlayer].islandData.id;
+                Island playerStartIsland = startIslands[randPlayer];
+                playerStartIslandId = playerStartIsland.islandData.id;
+                playerStartIsland.owner = Owner.player;
 
-                int randEnemy = UnityEngine.Random.Range(0, startIslands[randPlayer].possibleEnemyStartIsland.Count);
-                enemyStartIslandId = startIslands[randPlayer].possibleEnemyStartIsland[randEnemy].islandData.id;
+                Port playerStartPort = playerStartIsland.settlement as Port;
+                playerStartPort.owner = Owner.player;
+                playerPorts.Add(playerStartPort);
+                playerPortsCount = playerPorts.Count;
+                playerOpposingPorts.protagonPort = playerStartPort;
+
+                int randEnemy = UnityEngine.Random.Range(0, playerStartIsland.possibleEnemyStartIsland.Count);
+                Island enemyStartIsland = playerStartIsland.possibleEnemyStartIsland[randEnemy];
+                enemyStartIslandId = enemyStartIsland.islandData.id;
+                enemyStartIsland.owner = Owner.enemy;
+
+                Port enemyStartPort = enemyStartIsland.settlement as Port;
+                enemyStartPort.owner = Owner.enemy;
+                enemyPorts.Add(enemyStartPort);
+                enemyPortsCount = enemyPorts.Count;
+                enemyOpposingPorts.protagonPort = enemyStartPort;
             }
-
-            for (int i = 0; i < allPorts.Count; i++)
-            {
-                if (allPorts[i].Island.islandData.id == playerStartIslandId)
-                    allPorts[i].owner = Owner.player;
-                else if (allPorts[i].Island.islandData.id == enemyStartIslandId)
-                    allPorts[i].owner = Owner.enemy;
-            }
-
-            UpdateSettlementsLists();
-            PrepareNewBattle();
-
-            campaignIsEnded = false;
-
-            if (tutorial)
-                if (tutorial.IsTutorial)
-                    tutorial.ShowTutorialChapter(1);
         }
 
         public void UpdateSettlementsLists()
@@ -392,34 +407,20 @@ namespace MegaGame
         void CalculateOpposingPorts(OpposingPorts fraction)
         {
             int portsCount = 0;
-            int startIslandId = 0;
             List<Port> allPossibleTargetPorts = new List<Port>();
             Owner owner = Owner.neutral;
 
             if (fraction == playerOpposingPorts)
             {
                 portsCount = playerPorts.Count;
-                startIslandId = playerStartIslandId;
                 allPossibleTargetPorts = allPossiblePlayerTargetPorts;
                 owner = Owner.player;
             }
             else if (fraction == enemyOpposingPorts)
             {
                 portsCount = enemyPorts.Count;
-                startIslandId = enemyStartIslandId;
                 allPossibleTargetPorts = allPossibleEnemyTargetPorts;
                 owner = Owner.enemy;
-            }
-
-            if (portsCount <= 1)
-            {
-                Island currentIsland = null;
-
-                for (int i = 0; i < allIslands.Count; i++)
-                    if (allIslands[i].islandData.id == startIslandId)
-                        currentIsland = allIslands[i];
-
-                fraction.protagonPort = (Port)currentIsland.settlement;
             }
 
             int rand = UnityEngine.Random.Range(0, allPossibleTargetPorts.Count);
@@ -431,8 +432,13 @@ namespace MegaGame
 
             if (portsCount > 1)
                 fraction.protagonPort = FindPossibleProtagonPortToTargetPort(fraction.antagonPort, owner);
-
-            fraction.protagonPort.owner = owner;
+            else if (portsCount == 1)
+            {
+                if (owner == Owner.player)
+                    playerOpposingPorts.protagonPort = playerPorts[0];
+                else if (owner == Owner.enemy)
+                    enemyOpposingPorts.protagonPort = enemyPorts[0];
+            }
 
             UpdatePortState(fraction.protagonPort, fraction.protagonPort.owner);
 
