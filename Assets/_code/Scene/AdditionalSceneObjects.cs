@@ -34,21 +34,21 @@ namespace MegaGame
 
         [Header("End Game")]
         [SerializeField] GameObject victoryPanel;
-        public AdditionalCamera victoryAdditionalCamera;
+        [SerializeField] GameObject victoryAdditionalCamera;
 
         [SerializeField] GameObject defeatPanel;
-        public AdditionalCamera defeatAdditionalCamera;
+        [SerializeField] GameObject defeatAdditionalCamera;
 
         [Header("Shop")]
         [SerializeField] GameObject shopPanel;
 
         [SerializeField] GameObject gameModelsPreview;
-        public AdditionalCamera shopAdditionalCamera;
+        [SerializeField] GameObject shopAdditionalCamera;
         [SerializeField] List<ShopItemSceneObject> shopItemSceneObjects = new List<ShopItemSceneObject>();
 
         [Space(10)]
         [SerializeField] GameObject premiumItemsPreview;
-        public AdditionalCamera shopPremiumAdditionalCamera;
+        [SerializeField] GameObject shopPremiumAdditionalCamera;
         [SerializeField] List<ShopPremiumItemSceneObject> shopPremiumItemSceneObjects = new List<ShopPremiumItemSceneObject>();
 
         GameController gameController;
@@ -198,16 +198,16 @@ namespace MegaGame
             if (isPremium)
             {
                 gameModelsPreview.SetActive(false);
-                shopAdditionalCamera.gameObject.SetActive(false);
+                shopAdditionalCamera.SetActive(false);
                 premiumItemsPreview.SetActive(true);
-                shopPremiumAdditionalCamera.gameObject.SetActive(true);
+                shopPremiumAdditionalCamera.SetActive(true);
             }
             else
             {
                 gameModelsPreview.SetActive(true);
-                shopAdditionalCamera.gameObject.SetActive(true);
+                shopAdditionalCamera.SetActive(true);
                 premiumItemsPreview.SetActive(false);
-                shopPremiumAdditionalCamera.gameObject.SetActive(false);
+                shopPremiumAdditionalCamera.SetActive(false);
             }
         }
 

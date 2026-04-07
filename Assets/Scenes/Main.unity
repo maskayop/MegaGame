@@ -10888,6 +10888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714217654}
   - component: {fileID: 714217655}
+  - component: {fileID: 714217656}
   m_Layer: 0
   m_Name: Additional Objects
   m_TagString: Untagged
@@ -10980,6 +10981,25 @@ MonoBehaviour:
     lockedItemGameObject: {fileID: 83612470}
     openedItemGameObject: {fileID: 1420010938}
     lockGameObject: {fileID: 1388472977}
+--- !u!114 &714217656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714217653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
+  width: 2048
+  height: 1024
+  cameras:
+  - {fileID: 1449091308299038031}
+  - {fileID: 1760931560}
+  - {fileID: 1676015299}
+  - {fileID: 1840315903}
 --- !u!1001 &718103478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20709,17 +20729,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1727884764302490715, guid: 3f5cb44c492aabf479831d0f72af645c, type: 3}
   m_PrefabInstance: {fileID: 1676015296}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1676015298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4168730608178404824, guid: 3f5cb44c492aabf479831d0f72af645c, type: 3}
+--- !u!1 &1676015298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607584701221189344, guid: 3f5cb44c492aabf479831d0f72af645c, type: 3}
   m_PrefabInstance: {fileID: 1676015296}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
+--- !u!20 &1676015299 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2355562325421986847, guid: 3f5cb44c492aabf479831d0f72af645c, type: 3}
+  m_PrefabInstance: {fileID: 1676015296}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1677048848
 GameObject:
   m_ObjectHideFlags: 0
@@ -22083,17 +22102,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1983735845320383557, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
   m_PrefabInstance: {fileID: 1760931557}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1760931559 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3866135027256229318, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+--- !u!1 &1760931559 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 293745687249082110, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
   m_PrefabInstance: {fileID: 1760931557}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
+--- !u!20 &1760931560 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3228421500803150849, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+  m_PrefabInstance: {fileID: 1760931557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1762051699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23233,17 +23251,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1727884764302490715, guid: dc42464108127f946a5345b24c7498a7, type: 3}
   m_PrefabInstance: {fileID: 1840315900}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1840315902 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4168730608178404824, guid: dc42464108127f946a5345b24c7498a7, type: 3}
+--- !u!1 &1840315902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607584701221189344, guid: dc42464108127f946a5345b24c7498a7, type: 3}
   m_PrefabInstance: {fileID: 1840315900}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
+--- !u!20 &1840315903 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2355562325421986847, guid: dc42464108127f946a5345b24c7498a7, type: 3}
+  m_PrefabInstance: {fileID: 1840315900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1845634058
 GameObject:
   m_ObjectHideFlags: 0
@@ -26263,17 +26280,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
---- !u!114 &1449091308299038030 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3866135027256229318, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+--- !u!1 &1449091308299038030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 293745687249082110, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
   m_PrefabInstance: {fileID: 1449091308299038029}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3afe7b796461c2408386d54634301cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.AdditionalCamera
+--- !u!20 &1449091308299038031 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3228421500803150849, guid: 5a333fcf2ca016844b9d67df9d9c5a56, type: 3}
+  m_PrefabInstance: {fileID: 1449091308299038029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3293889732735152492
 PrefabInstance:
   m_ObjectHideFlags: 0
