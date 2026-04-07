@@ -279,6 +279,11 @@ namespace MegaGame
             currentDamagerOwner = damager.owner;
         }
 
+        public Owner GetCurrentDamagerOwner()
+        {
+            return currentDamagerOwner;
+        }
+
         protected virtual void OnTakeDamage(BaseCharacter damager) { }
 
         protected virtual bool CanAddTargetToList(BaseCharacter targetCharacter) { return true; }

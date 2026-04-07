@@ -118,9 +118,14 @@ namespace MegaGame
 
             if (portsCountDependence >= 0)
                 if (objectsManager.pirateShips.Count < portsCountDependence && objectsManager.pirateShips.Count < maxPirateShips)
-                    if (GetHomePirateLaire())
-                        if (!GetHomePirateLaire().IsCaptured)
-                            gameplayObjectsBuilder.TryCreatePirateShip(GetHomePirateLaire().transform);
+                {
+                    PirateLair lair = GetHomePirateLaire();
+
+                    if (lair == null)
+                        return;
+                    else if (!lair.IsCaptured)
+                        gameplayObjectsBuilder.TryCreatePirateShip(lair.transform);
+                }
         }
 
         PirateLair GetHomePirateLaire()
