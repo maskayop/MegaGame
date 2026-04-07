@@ -20082,6 +20082,7 @@ GameObject:
   - component: {fileID: 1797982473079708219}
   - component: {fileID: 2418214818090819419}
   - component: {fileID: 1353060729599489920}
+  - component: {fileID: 2865772316496279645}
   m_Layer: 5
   m_Name: Settlement Panel
   m_TagString: Untagged
@@ -20149,6 +20150,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2865772316496279645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491542091182858627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UISoundPlayer
+  clip: {fileID: 8300000, guid: d789ec0398fc77749a5c92ae3f606630, type: 3}
 --- !u!1 &7500344011480397465
 GameObject:
   m_ObjectHideFlags: 0

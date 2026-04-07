@@ -53,6 +53,7 @@ namespace MegaGame
 
         GameController gameController;
         GameShop gameShop;
+        AdditionalCamera additionalCamera;
 
         bool shopPanelIsOpen = false;
 
@@ -89,6 +90,7 @@ namespace MegaGame
         {
             gameController = GameController.Instance;
             gameShop = GameShop.Instance;
+            additionalCamera = GetComponent<AdditionalCamera>();
 
             HideAllPanels();
         }
@@ -214,6 +216,11 @@ namespace MegaGame
         public GameObject GetStartGameMedal()
         {
             return startGameModelButton.gameObject;
+        }
+
+        public AdditionalCamera GetAdditionalCamera()
+        {
+            return additionalCamera;
         }
     }
 }

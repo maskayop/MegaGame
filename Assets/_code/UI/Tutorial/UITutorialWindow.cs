@@ -58,6 +58,8 @@ namespace MegaGame.UI
         float currentTime = 0;
         bool waitForUser = false;
 
+        UISoundPlayer soundPlayer;
+
         void Awake()
         {
             if (Instance != null)
@@ -137,6 +139,7 @@ namespace MegaGame.UI
             globalTime = GlobalTimeController.Instance;
 
             targetCirclesRectTransform = targetCircles.GetComponent<RectTransform>();
+            soundPlayer = GetComponent<UISoundPlayer>();
 
             Close();
         }
@@ -208,6 +211,8 @@ namespace MegaGame.UI
 
             if (UIGameShop.Instance.IsOpen)
                 UIGameShop.Instance.Close();
+
+            soundPlayer?.PlayClip();
         }
 
         public void ShowTutorialChapter(Data_Tutorial data)

@@ -69,6 +69,7 @@ namespace MegaGame.UI
         SettlementConstructions currentSettlementConstructions;
 
         LocalizedString localizedStringIslandName;
+        UISoundPlayer soundPlayer;
 
         void Awake()
         {
@@ -104,6 +105,7 @@ namespace MegaGame.UI
             gameController = GameController.Instance;
 
             buildQuestionPanelTransform = buildQuestionPanel.GetComponent<RectTransform>();
+            soundPlayer = settlementPanel.GetComponent<UISoundPlayer>();
 
             CloseAllSettlements();
             Close();
@@ -147,6 +149,8 @@ namespace MegaGame.UI
             buildQuestionPanel.gameObject.SetActive(false);
             EnableConstructionButtons(true);
             EnableConstructionImages(false);
+
+            soundPlayer?.PlayClip();
         }
 
         void UpdateTexts()

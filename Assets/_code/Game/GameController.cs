@@ -525,10 +525,20 @@ namespace MegaGame
                 isVictory = false;
                 EndBattle();
             }
-            else if (playerOpposingPorts.antagonPort.currentHealth <= 0)
+
+            if (playerOpposingPorts.antagonPort.currentHealth <= 0)
             {
-                UpdatePortState(playerOpposingPorts.antagonPort, Owner.player);
-                isVictory = true;
+                if (playerOpposingPorts.antagonPort.GetCurrentDamagerOwner() == Owner.player)
+                {
+                    UpdatePortState(playerOpposingPorts.antagonPort, Owner.player);
+                    isVictory = true;
+                }
+                else if (playerOpposingPorts.antagonPort.GetCurrentDamagerOwner() == Owner.enemy)
+                {
+                    UpdatePortState(playerOpposingPorts.antagonPort, Owner.enemy);
+                    isVictory = false;
+                }
+
                 EndBattle();
             }
 

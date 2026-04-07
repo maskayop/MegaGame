@@ -16,7 +16,7 @@ namespace MegaGame.UI
         void Start()
         {
             additionalSceneObjects = AdditionalSceneObjects.Instance;
-            additionalCamera = additionalSceneObjects.GetComponent<AdditionalCamera>();
+            additionalCamera = additionalSceneObjects.GetAdditionalCamera();
 
             victoryRawImage.texture = additionalCamera.GetRenderTexture();
             defeatRawImage.texture = additionalCamera.GetRenderTexture();

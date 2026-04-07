@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 4431677000108559724}
   - component: {fileID: 4340847946652227595}
   - component: {fileID: 7458083187711048845}
+  - component: {fileID: 2917798418341363534}
   m_Layer: 5
   m_Name: Tutorial Window
   m_TagString: Untagged
@@ -489,6 +490,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.UI.UIMoveToZeroOnAwake
   rectTransform: {fileID: 4431677000108559724}
+--- !u!114 &2917798418341363534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756880814493869066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5b82993922fc04a9752a08c718f1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UISoundPlayer
+  clip: {fileID: 8300000, guid: 16f40a840de343e49a821c7357a49232, type: 3}
 --- !u!1 &9008540479741719593
 GameObject:
   m_ObjectHideFlags: 0
