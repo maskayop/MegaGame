@@ -76,6 +76,10 @@ MonoBehaviour:
   emptyIslandsExploringMinDay: 100
   possibleTargetSettlementsForEnemy: []
   isExploringMode: 0
+  startIslands: []
+  neutralIslands: []
+  playerStartIslandId: 0
+  enemyStartIslandId: 0
 --- !u!114 &8288885944846870642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,9 +166,9 @@ MonoBehaviour:
   mediumShipBuildingPrice: 30
   bigShipBuildingPrice: 60
   megaShipBuildingPrice: 100
-  enemyDefenderShipBuildMinDay: 50
-  enemyMediumShipBuildMinDay: 100
-  enemyBigShipBuildMinDay: 200
+  enemyDefenderShipBuildMinDay: 100
+  enemyMediumShipBuildMinDay: 150
+  enemyBigShipBuildMinDay: 300
   enemyMegaShipBuildMinDay: 500
   traderPrice: 500
   smallPortFortressPrice: 700

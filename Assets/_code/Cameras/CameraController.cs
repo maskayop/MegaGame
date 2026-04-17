@@ -70,8 +70,8 @@ namespace MegaGame
             if (tutorialFreeze)
                 return;
 
-            MoveCamera();
             ZoomView();
+            MoveCamera();
         }
 
         public void Init()

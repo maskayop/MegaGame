@@ -10,6 +10,7 @@ namespace MegaGame
 
         [SerializeField] List<Camera> cameras = new List<Camera>();
 
+        RenderTextureFormat colorFormat = RenderTextureFormat.ARGB32;
         RenderTexture renderTexture;
 
         void Start()
@@ -19,14 +20,31 @@ namespace MegaGame
 
         public void Init()
         {
-            renderTexture = new RenderTexture(width, height, 32, RenderTextureFormat.ARGB32);
+            CreateRenderTexture();
+            SetRenderTextureToAllCameras();
+        }
+
+        void CreateRenderTexture()
+        {
+            int depthBits = 24;
+
+            // Пробуем 32 бита, но если не получится — падаем на 16
+            RenderTexture testRT = new RenderTexture(64, 64, 32, colorFormat);
+
+            if (!testRT.Create())
+            {
+                depthBits = 16;  // 16 бит работает абсолютно везде
+                Debug.LogWarning("32-bit depth не поддерживается, используем 16-bit");
+            }
+            else
+                testRT.Release();
+
+            // Создаём финальную текстуру с правильной глубиной
+            renderTexture = new RenderTexture(width, height, depthBits, colorFormat);
             renderTexture.autoGenerateMips = false;
             renderTexture.useMipMap = false;
             renderTexture.antiAliasing = 1;
-            renderTexture.depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D32_SFloat_S8_UInt;
             renderTexture.Create();
-
-            SetRenderTextureToAllCameras();
         }
 
         void OnDestroy()
