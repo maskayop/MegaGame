@@ -86,6 +86,8 @@ namespace MegaGame.UI
 
             ChangeMusicVolume();
             ChangeUIVolume();
+            ChangeSFXVolume();
+            ChangeVoiceVolume();
 
             SetSliderLoadedValue("MovementSensitivity", movementSensitivitySlider, movementSensitivityValueText, movementSensitivitySlider.maxValue / 2);
             SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, zoomSensitivitySlider.maxValue / 2);

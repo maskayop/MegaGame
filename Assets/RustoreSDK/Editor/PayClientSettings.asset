@@ -11,6 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3e591d99a91dca4ba692a69b0d0dd43, type: 3}
   m_Name: PayClientSettings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: RuStorePay-Editor::RuStore.Editor.PayClientSettings
+  schemeVersion: 1
   consoleApplicationId: 2063698672
   deeplinkScheme: boansandnopoxscheme
+  customMainActivityClass: MyMainActivityClass
+  unityMainActivityClass: com.unity3d.player.UnityPlayerActivity
+  customDeeplinkActivityClass: MyDeeplinkActivityClass
+  rustoreDeeplinkActivityClass: ru.rustore.unitysdk.RuStoreDeeplinkActivityDefault

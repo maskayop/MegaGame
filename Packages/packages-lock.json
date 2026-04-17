@@ -293,17 +293,17 @@
       "url": "https://packages.unity.com"
     },
     "ru.rustore.core": {
-      "version": "file:../../upm_tgz/ru.rustore.core-10.1.0.tgz",
+      "version": "file:E:/__myProjects/Rustore/Unity RuStore Pay SDK 10.3.0/ru.rustore.core-10.3.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
     },
     "ru.rustore.pay": {
-      "version": "file:E:/__myProjects/unity-rustore-pay-sdk/upm_tgz/ru.rustore.pay-10.1.1.tgz",
+      "version": "file:E:/__myProjects/Rustore/Unity RuStore Pay SDK 10.3.0/ru.rustore.pay-10.3.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "ru.rustore.core": "10.1.0"
+        "ru.rustore.core": "10.3.0"
       }
     },
     "com.unity.modules.accessibility": {
