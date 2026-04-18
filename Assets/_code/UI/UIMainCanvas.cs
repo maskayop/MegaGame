@@ -248,14 +248,14 @@ namespace MegaGame.UI
             messagePanel.SpawnWrongTargetPortMessage(rightTarget);
         }
 
-        public void SpawnNekarkMessage()
+        public void SpawnNekarkMessage(Vector3 targetPosition)
         {
-            messagePanel.SpawnNekarkMessage();
+            messagePanel.SpawnNekarkMessage(targetPosition);
         }
 
-        public void SpawnNafaivelMessage()
+        public void SpawnNafaivelMessage(Vector3 targetPosition)
         {
-            messagePanel.SpawnNafaivelMessage();
+            messagePanel.SpawnNafaivelMessage(targetPosition);
         }
 
         public void SpawnFortConstructionMessage(Port port)

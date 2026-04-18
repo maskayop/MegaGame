@@ -360,13 +360,13 @@ namespace MegaGame
         public void SpawnNekarkWarningCircle(Warship ship)
         {
             scenePrefabsManager.SpawnNekarkWarningCircle(ship.transform.position);
-            UIMainCanvas.Instance.SpawnNekarkMessage();
+            UIMainCanvas.Instance.SpawnNekarkMessage(ship.transform.position);
         }
 
         public void SpawnNafaivelWarningCircle(Warship ship)
         {
             scenePrefabsManager.SpawnNafaivelWarningCircle(ship.transform.position);
-            UIMainCanvas.Instance.SpawnNafaivelMessage();
+            UIMainCanvas.Instance.SpawnNafaivelMessage(ship.transform.position);
         }
 
         public void PlaySetAsTargetClip()
