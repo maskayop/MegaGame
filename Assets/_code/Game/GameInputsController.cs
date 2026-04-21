@@ -14,8 +14,10 @@ namespace MegaGame
         Port currentSelectedPort;
         public Port CurrentSelectedPort { get { return currentSelectedPort; } }
 
+        bool buildShipsX2 = false;
+        public bool BuildShipsX2 { get { return buildShipsX2; } set { buildShipsX2 = value; } }
+
         Tutorial tutorial;
-        UITutorialWindow tutorialWindow;
 
         void Awake()
         {
@@ -61,7 +63,6 @@ namespace MegaGame
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
             cameraController = CameraController.Instance;
             tutorial = Tutorial.Instance;
-            tutorialWindow = UITutorialWindow.Instance;
         }
 
         void SelectObject()
@@ -83,7 +84,7 @@ namespace MegaGame
                         }
 
                         if (port == gameController.playerOpposingPorts.antagonPort)
-                            gameplayObjectsBuilder.TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
+                            TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
                         else if (port.owner != BaseCharacter.Owner.player)
                             gameplayObjectsBuilder.SpawnWrongTargetPortMessage(gameController.playerOpposingPorts.antagonPort, port);
                         else if (port.owner == BaseCharacter.Owner.player)
@@ -113,9 +114,9 @@ namespace MegaGame
                         }
 
                         if (village.owner == BaseCharacter.Owner.player)
-                            gameplayObjectsBuilder.TryCreatePlayerShip(village, false);
+                            TryCreatePlayerShip(village, false);
                         else
-                            gameplayObjectsBuilder.TryCreatePlayerShip(village, true);
+                            TryCreatePlayerShip(village, true);
 
                         return;
                     }
@@ -133,7 +134,7 @@ namespace MegaGame
                                 return;
                         }
 
-                        gameplayObjectsBuilder.TryCreatePlayerShip(fortress, true);
+                        TryCreatePlayerShip(fortress, true);
                         return;
                     }
 
@@ -141,11 +142,19 @@ namespace MegaGame
 
                     if (island && island.owner != BaseCharacter.Owner.player)
                     {
-                        gameplayObjectsBuilder.TryCreatePlayerShip(island.pirateLair, true);
+                        TryCreatePlayerShip(island.pirateLair, true);
                         return;
                     }
                 }
             }
+        }
+
+        void TryCreatePlayerShip(BaseSettlement targetSettlement, bool isAttackingShipType)
+        {
+            gameplayObjectsBuilder.TryCreatePlayerShip(targetSettlement, isAttackingShipType);
+
+            if (BuildShipsX2)
+                gameplayObjectsBuilder.TryCreatePlayerShip(targetSettlement, isAttackingShipType);
         }
 
         void PlaceCameraToCurrentPort()

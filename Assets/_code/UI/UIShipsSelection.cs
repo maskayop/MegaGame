@@ -18,11 +18,13 @@ namespace MegaGame.UI
 
         [SerializeField] GameObject buttonsPanel;
         [SerializeField] GameObject addButton;
+        [SerializeField] UIShipSelectionButton buildShipsX2Button;
         [SerializeField] List<ShipSelectionItem> shipSelectionItems = new List<ShipSelectionItem>();
         [SerializeField] ShipSelectionItem defenderShipBuildingItem;
 
         GameController gameController;
         GameplayObjectsBuilder gameplayObjectsBuilder;
+        GameInputsController gameInputsController;
         GameShop gameShop;
 
         void Awake()
@@ -58,10 +60,13 @@ namespace MegaGame.UI
         {
             gameController = GameController.Instance;
             gameplayObjectsBuilder = GameplayObjectsBuilder.Instance;
+            gameInputsController = GameInputsController.Instance;
             gameShop = GameShop.Instance;
 
             SetMaxBuildingShip(2);
             SetBuildDefenderShip();
+            SetBuildShipsX2();
+            SetBuildShipsX2();
             UpdateButtonsState();
         }
 
@@ -93,6 +98,12 @@ namespace MegaGame.UI
         {
             gameplayObjectsBuilder.CanBuildDefenderShips = !gameplayObjectsBuilder.CanBuildDefenderShips;
             defenderShipBuildingItem.shipSelectionButton.Select(gameplayObjectsBuilder.CanBuildDefenderShips);
+        }
+
+        public void SetBuildShipsX2()
+        {
+            gameInputsController.BuildShipsX2 = !gameInputsController.BuildShipsX2;
+            buildShipsX2Button.Select(gameInputsController.BuildShipsX2);
         }
 
         public void UpdateButtonsState()

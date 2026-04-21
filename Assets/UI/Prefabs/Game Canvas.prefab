@@ -13461,7 +13461,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -30, y: 30}
-  m_SizeDelta: {x: 120, y: 450}
+  m_SizeDelta: {x: 100, y: 450}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &2397445567108931314
 MonoBehaviour:
@@ -20460,6 +20460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShipsSelection
   buttonsPanel: {fileID: 8010652369301981667}
   addButton: {fileID: 70132748469340628}
+  buildShipsX2Button: {fileID: 7064960646372777673}
   shipSelectionItems:
   - name: "\u041C\u0430\u043B\u044B\u0439 \u043A\u043E\u0440\u0430\u0431\u043B\u044C"
     shipSelectionButton: {fileID: 4218557374138160821}
@@ -21657,6 +21658,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8565068796526445393}
+  - {fileID: 7715993685967580794}
   - {fileID: 8523875148193995141}
   - {fileID: 350138489288747808}
   - {fileID: 6171533778731437213}
@@ -27773,11 +27775,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4964987115933011078, guid: 2fcb692c5707f104fad3822644bb9ccd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -25
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 4964987115933011078, guid: 2fcb692c5707f104fad3822644bb9ccd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 4964987115933011078, guid: 2fcb692c5707f104fad3822644bb9ccd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -29805,6 +29807,119 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4964987115933011078, guid: a28c28f5acf9dc748a9193a5fe74eb42, type: 3}
   m_PrefabInstance: {fileID: 2949929315313309813}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3379174136641870752
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7119560042564820961}
+    m_Modifications:
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -140
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549060669553435148, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+      propertyPath: m_Name
+      value: X2 Ships
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+--- !u!114 &7064960646372777673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5543637296534783337, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+  m_PrefabInstance: {fileID: 3379174136641870752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b474f94c7109027438939538230da9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShipSelectionButton
+--- !u!224 &7715993685967580794 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5039962947619190234, guid: 3a681f4d0e9154b4b8b194bfcc1ae1a5, type: 3}
+  m_PrefabInstance: {fileID: 3379174136641870752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3422536163958683250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30198,7 +30313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -150
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 5039962947619190234, guid: 67bc8c891e39d5f459b601509f506cef, type: 3}
       propertyPath: m_AnchoredPosition.y
