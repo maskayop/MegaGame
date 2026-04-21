@@ -77,18 +77,20 @@ namespace MegaGame.UI
 
         public void SpawnFortConstructionMessage(Port port)
         {
+            Color c = uiColors.GetTextOwnerColor(port.owner);
             string txt = uiColors.GetTextOwnerColorString(port.owner) + port.Island.islandData.islandName.GetLocalizedString() +
                 " " + uiColors.GetDefaultColorString() + fortConstruction.GetMessageText();
-            SpawnMessage(fortConstructionMessagePrefab, txt, uiColors.GetTextOwnerColor(port.owner));
-            SpawnMessageButton(fortConstructionMessageButtonPrefab, port.transform.position);
+            SpawnMessage(fortConstructionMessagePrefab, txt, c);
+            SpawnMessageButton(fortConstructionMessageButtonPrefab, port.transform.position, c);
         }
 
         public void SpawnTraderConstructionMessage(Port port)
         {
+            Color c = uiColors.GetTextOwnerColor(port.owner);
             string txt = uiColors.GetTextOwnerColorString(port.owner) + port.Island.islandData.islandName.GetLocalizedString() +
                 " " + uiColors.GetDefaultColorString() + traderConstruction.GetMessageText();
-            SpawnMessage(traderConstructionMessagePrefab, txt, uiColors.GetTextOwnerColor(port.owner));
-            SpawnMessageButton(traderConstructionMessageButtonPrefab, port.transform.position);
+            SpawnMessage(traderConstructionMessagePrefab, txt, c);
+            SpawnMessageButton(traderConstructionMessageButtonPrefab, port.transform.position, c);
         }
 
         public void SpawnPiratesAttackVillageMessage(Village village)
@@ -123,6 +125,13 @@ namespace MegaGame.UI
             GameObject mes = Instantiate(prefab, messageButtonsContainer);
             UIMessageButton messageButton = mes.GetComponent<UIMessageButton>();
             messageButton.Init(targetPosition);
+        }
+
+        void SpawnMessageButton(GameObject prefab, Vector3 targetPosition, Color color)
+        {
+            GameObject mes = Instantiate(prefab, messageButtonsContainer);
+            UIMessageButton messageButton = mes.GetComponent<UIMessageButton>();
+            messageButton.Init(targetPosition, color);
         }
     }
 }

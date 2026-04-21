@@ -73,77 +73,100 @@ namespace MegaGame
 
                 if (Physics.Raycast(ray, out RaycastHit hit, 1000000, 1 << 9))
                 {
+                    Island island = hit.collider.GetComponent<Island>();
+
                     Port port = hit.collider.GetComponent<Port>();
+                    Village village = hit.collider.GetComponent<Village>();
+                    Fortress fortress = hit.collider.GetComponent<Fortress>();
 
                     if (port)
-                    {
-                        if (GetCurrentTutorialChapter() != -1)
-                        {
-                            if (GetCurrentTutorialChapter() != 5 && GetCurrentTutorialChapter() != 10)
-                                return;
-                        }
+                        island = port.Island;
+                    else if (village)
+                        island = village.Island;
+                    else if (fortress)
+                        island = fortress.Island;
 
-                        if (port == gameController.playerOpposingPorts.antagonPort)
-                            TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
-                        else if (port.owner != BaseCharacter.Owner.player)
-                            gameplayObjectsBuilder.SpawnWrongTargetPortMessage(gameController.playerOpposingPorts.antagonPort, port);
-                        else if (port.owner == BaseCharacter.Owner.player)
+                    if (island && island.owner != BaseCharacter.Owner.player)
+                    {
+                        if (island.pirateLair)
+                            TryCreatePlayerShip(island.pirateLair, true);
+                        else if (island.settlement)
                         {
+                            if (island.settlement as Port)
+                            {
+                                port = (Port)island.settlement;
+
+                                if (GetCurrentTutorialChapter() != -1)
+                                {
+                                    if (GetCurrentTutorialChapter() != 5 && GetCurrentTutorialChapter() != 10)
+                                        return;
+                                }
+
+                                if (port == gameController.playerOpposingPorts.antagonPort)
+                                    TryCreatePlayerShip(gameController.playerOpposingPorts.antagonPort, true);
+                                else
+                                    gameplayObjectsBuilder.SpawnWrongTargetPortMessage(gameController.playerOpposingPorts.antagonPort, port);
+
+                                return;
+                            }
+
+                            if (island.settlement as Village)
+                            {
+                                village = (Village)island.settlement;
+
+                                if (GetCurrentTutorialChapter() != -1)
+                                {
+                                    if (GetCurrentTutorialChapter() != 8 && GetCurrentTutorialChapter() != 10)
+                                        return;
+
+                                    if (GetCurrentTutorialChapter() == 8 && village != UITutorialWindow.Instance.GetCurrentTargetVillage())
+                                        return;
+                                }
+
+                                TryCreatePlayerShip(village, true);
+                                return;
+                            }
+
+                            if (island.settlement as Fortress)
+                            {
+                                fortress = (Fortress)island.settlement;
+
+                                if (GetCurrentTutorialChapter() != -1)
+                                {
+                                    if (GetCurrentTutorialChapter() != 9)
+                                        return;
+
+                                    if (GetCurrentTutorialChapter() == 9 && fortress != UITutorialWindow.Instance.GetCurrentTargetFortress())
+                                        return;
+                                }
+
+                                TryCreatePlayerShip(fortress, true);
+                                return;
+                            }
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        if (island.settlement as Port)
+                        {
+                            port = (Port)island.settlement;
                             if (tutorial)
                                 if (tutorial.isTutorial)
                                     return;
 
                             currentSelectedPort = port;
                             UISettlementPanel.Instance.Open(port.Island);
+
+                            return;
                         }
 
-                        return;
-                    }
-
-                    Village village = hit.collider.GetComponent<Village>();
-
-                    if (village)
-                    {
-                        if (GetCurrentTutorialChapter() != -1)
+                        if (island.settlement as Village)
                         {
-                            if (GetCurrentTutorialChapter() != 8 && GetCurrentTutorialChapter() != 10)
-                                return;
-
-                            if (GetCurrentTutorialChapter() == 8 && village != UITutorialWindow.Instance.GetCurrentTargetVillage())
-                                return;
-                        }
-
-                        if (village.owner == BaseCharacter.Owner.player)
+                            village = (Village)island.settlement;
                             TryCreatePlayerShip(village, false);
-                        else
-                            TryCreatePlayerShip(village, true);
-
-                        return;
-                    }
-
-                    Fortress fortress = hit.collider.GetComponent<Fortress>();
-
-                    if (fortress && fortress.owner != BaseCharacter.Owner.player)
-                    {
-                        if (GetCurrentTutorialChapter() != -1)
-                        {
-                            if (GetCurrentTutorialChapter() != 9)
-                                return;
-
-                            if (GetCurrentTutorialChapter() == 9 && fortress != UITutorialWindow.Instance.GetCurrentTargetFortress())
-                                return;
+                            return;
                         }
-
-                        TryCreatePlayerShip(fortress, true);
-                        return;
-                    }
-
-                    Island island = hit.collider.GetComponent<Island>();
-
-                    if (island && island.owner != BaseCharacter.Owner.player)
-                    {
-                        TryCreatePlayerShip(island.pirateLair, true);
-                        return;
                     }
                 }
             }

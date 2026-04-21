@@ -167,6 +167,9 @@ namespace MegaGame
 
         public void EnableExploringCircle(bool state)
         {
+            if (!pirateLair)
+                return;
+
             exploringCircle.SetActive(state);
             coll.enabled = state;
         }

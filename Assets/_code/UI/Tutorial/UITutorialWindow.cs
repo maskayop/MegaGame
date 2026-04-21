@@ -186,6 +186,7 @@ namespace MegaGame.UI
         {
             tutorial?.EndTutorial();
             cameraController.TutorialFreeze(false);
+            cameraController.SetPosition(sceneObjects.GetStartGameMedal().transform.position);
 
             if (gameController.gameState != GameController.GameState.battle)
                 sceneObjects.ShowStartGameModelButton(true);
