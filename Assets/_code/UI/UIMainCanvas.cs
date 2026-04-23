@@ -28,8 +28,8 @@ namespace MegaGame.UI
         [Header("HUD")]
         [SerializeField] float cameraZoomMultiplier = 2.0f;
         [SerializeField] GameObject cameraZoomButtons;
-
         [SerializeField] UIExploringButton exploringButton;
+        [SerializeField] GameObject FPS;
 
         [Header("Messages")]
         [SerializeField] UIMessagePanel messagePanel;
@@ -97,8 +97,6 @@ namespace MegaGame.UI
 
             currentGameState = gameController.gameState;
         }
-
-
 
         public void GoToCamera(bool isNext)
         {
@@ -318,6 +316,11 @@ namespace MegaGame.UI
         public void CloseShopWindow()
         {
             gameShopWindow.Close();
+        }
+
+        public void ShowFPS(bool state)
+        {
+            FPS.SetActive(state);
         }
     }
 }

@@ -24,6 +24,12 @@ namespace MegaGame.UI
         [SerializeField] int defaultGraphicsLevel;
         [SerializeField] List<Toggle> graphicsLevelToggles = new List<Toggle>();
 
+        [Header("FPS")]
+        [SerializeField] bool default60FPS;
+        [SerializeField] List<Toggle> fpsLevelToggles = new List<Toggle>();
+        [SerializeField] bool defaultShowFPS;
+        [SerializeField] List<Toggle> showFpsToggles = new List<Toggle>();
+
         [Header("Audio")]
         [SerializeField] Slider musicSlider;
         [SerializeField] TextMeshProUGUI musicValueText;
@@ -93,6 +99,8 @@ namespace MegaGame.UI
             SetSliderLoadedValue("ZoomSensitivity", zoomSensitivitySlider, zoomSensitivityValueText, zoomSensitivitySlider.maxValue / 2);
 
             SetScreenResolutionSettings();
+            ChangeTargetFPS60();
+            ChangeShowFPS();
 
             if (appVersionText)
                 appVersionText.text = Application.version;
@@ -237,6 +245,67 @@ namespace MegaGame.UI
 
             if (locale != null)
                 LocalizationSettings.SelectedLocale = locale;
+        }
+
+        public void SetTargetFPS60(bool state)
+        {
+            if (!app)
+                return;
+
+            app.SetTargetFPS(state);
+
+            if (!state)
+                dataSaveLoad.Save("60FPS", 0);
+            else
+                dataSaveLoad.Save("60FPS", 1);
+        }
+
+        void ChangeTargetFPS60()
+        {
+            short fps = dataSaveLoad.GetSavedShort("60FPS");
+
+            if (fps == -1)
+            {
+                if (default60FPS)
+                    fpsLevelToggles[1].isOn = true;
+                else
+                    fpsLevelToggles[0].isOn = true;
+            }
+            else if (fps == 0)
+                fpsLevelToggles[0].isOn = true;
+            else if (fps == 1)
+                fpsLevelToggles[1].isOn = true;
+        }
+
+        public void SetShowFPS(bool state)
+        {
+            if (!app)
+                return;
+
+            if (UIMainCanvas.Instance)
+                UIMainCanvas.Instance.ShowFPS(state);
+
+            if (!state)
+                dataSaveLoad.Save("ShowFPS", 0);
+            else
+                dataSaveLoad.Save("ShowFPS", 1);
+        }
+
+        void ChangeShowFPS()
+        {
+            short fps = dataSaveLoad.GetSavedShort("ShowFPS");
+
+            if (fps == -1)
+            {
+                if (defaultShowFPS)
+                    showFpsToggles[1].isOn = true;
+                else
+                    showFpsToggles[0].isOn = true;
+            }
+            else if (fps == 0)
+                showFpsToggles[0].isOn = true;
+            else if (fps == 1)
+                showFpsToggles[1].isOn = true;
         }
     }
 }

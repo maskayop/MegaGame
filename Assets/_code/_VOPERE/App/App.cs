@@ -8,7 +8,6 @@ namespace Vopere.Common
 
         [SerializeField] int defaultGraphicsLevel = 0;
 
-        [SerializeField] bool useTargetFPS = true;
         [SerializeField] bool initialize = false;
 
         public bool IsInitialized { get { return initialize; } }
@@ -41,8 +40,6 @@ namespace Vopere.Common
 
             if (defaultScreenResolution.y == -1)
                 defaultScreenResolution.y = Screen.height;
-
-            SetTargetFPS(useTargetFPS);
 
             graphicsLevel = DataSaveLoad.Instance.GetSavedInt("GraphicsLevel");
 
