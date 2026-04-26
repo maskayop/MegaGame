@@ -359,6 +359,7 @@ MonoBehaviour:
   useLookAt: 0
   inverseScaling: 1
   scaleForDisabling: 0.35
+  randomValue: {x: 10, y: 20}
 --- !u!95 &7216035672551784228
 Animator:
   serializedVersion: 7
@@ -393,5 +394,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816f0751f34cd6844ab271272f80430c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vopere.Common.DestroyAfterTime
-  time: 2
   destroyAtStart: 1
+  time: 2

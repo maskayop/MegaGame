@@ -46,6 +46,9 @@ namespace MegaGame
         [SerializeField] GameObject shopAdditionalCamera;
         [SerializeField] List<ShopItemSceneObject> shopItemSceneObjects = new List<ShopItemSceneObject>();
 
+        [SerializeField] GameObject infopediaAdditionalCamera;
+        [SerializeField] List<ShopItemSceneObject> infopediaItemSceneObjects = new List<ShopItemSceneObject>();
+
         [Space(10)]
         [SerializeField] GameObject premiumItemsPreview;
         [SerializeField] GameObject shopPremiumAdditionalCamera;

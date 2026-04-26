@@ -11,10 +11,14 @@ namespace MegaGame
         [Header("Transform")]
         [SerializeField] float minScale = 0;
         [SerializeField] bool useLookAt = false;
+        [SerializeField] Camera cameraOverride;
 
         [Header("Inverse")]
         [SerializeField] bool inverseScaling = false;
         [SerializeField] float scaleForDisabling = 1;
+
+        [Header("Values")]
+        [SerializeField] Vector2Int randomValue = Vector2Int.zero;
 
         void Update()
         {
@@ -24,7 +28,12 @@ namespace MegaGame
                 container.SetActive(true);
 
             if (useLookAt)
-                container.transform.LookAt(CameraController.Instance.mainCamera.transform.position);
+            {
+                if (cameraOverride)
+                    container.transform.LookAt(cameraOverride.transform.position);
+                else
+                    container.transform.LookAt(CameraController.Instance.mainCamera.transform.position);
+            }
             else
             {
                 container.transform.rotation = CameraController.Instance.mainCamera.transform.rotation;
@@ -51,6 +60,12 @@ namespace MegaGame
                 return;
 
             INrenderer.material.SetColor(INvalueName, INcolor);
+        }
+
+        public void SetRandomPreviewProfitValue()
+        {
+            int random = Random.Range(randomValue.x, randomValue.y);
+            SetText("+" + random.ToString());
         }
     }
 }
