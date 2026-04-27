@@ -20,6 +20,19 @@ namespace MegaGame
         [Space(20)]
         public GameObject prefab;
 
+        [Header("Characteristics")]
+        public bool showDamage = false;
+        public bool showAttackSpeed = false;
+        public bool showMovementSpeed = false;
+        public bool showHealth = false;
+        public bool showRegeneration = false;
+        public bool showMaintenance = false;
+        public bool showRevenue = false;
+        public bool showBuildingPrice = false;
+
+        public enum SettlementConstructionType { none, bigPortFort, smallPortFort, trader }
+        public SettlementConstructionType type = SettlementConstructionType.none;
+
         public bool IsPremium()
         {
             if (openRealPrice != 0 || !string.IsNullOrWhiteSpace(rustoreId))

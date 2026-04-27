@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Vopere.Common;
 
 namespace MegaGame.UI
 {
@@ -288,25 +289,48 @@ namespace MegaGame.UI
             if (!currentCharacter)
                 return;
 
+            damageContainer.SetActive(currentItemData.showDamage);
+            attackContainer.SetActive(currentItemData.showAttackSpeed);
+            movementContainer.SetActive(currentItemData.showMovementSpeed);
+            healthContainer.SetActive(currentItemData.showHealth);
+            regenerationContainer.SetActive(currentItemData.showRegeneration);
+            maintenanceContainer.SetActive(currentItemData.showMaintenance);
+            revenueContainer.SetActive(currentItemData.showRevenue);
+            buildingPriceContainer.SetActive(currentItemData.showBuildingPrice);
+
             damageText.text = currentCharacter.damage.ToString();
             attackSpeedText.text = Mathf.FloorToInt(60 / currentCharacter.attackDelay).ToString();
 
             if (currentCharacter as Warship)
-            {
                 movementSpeedText.text = currentCharacter.GetComponent<Warship>().speed.ToString();
-                revenueContainer.SetActive(false);
-            }
             else if (currentCharacter as BaseSettlement)
-            {
-                revenueContainer.SetActive(true);
                 revenueText.text = currentCharacter.revenue.ToString();
-            }
 
             healthText.text = currentCharacter.health.ToString();
             regenerationText.text = currentCharacter.healthRegeneration.ToString();
             maintenanceText.text = currentCharacter.maintenance.ToString();
-
             buildingPriceText.text = gameplayObjectsBuilder.GetShipBuildingCost(currentItemData.priceId).ToString();
+
+            SettlementConstructions sc = currentCharacter.GetComponent<SettlementConstructions>();
+
+            if (!sc)
+                return;
+
+            if (currentItemData.type == Data_Item.SettlementConstructionType.bigPortFort ||
+                currentItemData.type == Data_Item.SettlementConstructionType.smallPortFort)
+            {
+                damageText.text = "+" + sc.additionalDamage.ToString();
+                healthText.text = "+" + sc.additionalHealth.ToString();
+                regenerationText.text = "+" + sc.additionalHealthRegeneration.ToString();
+                maintenanceText.text = sc.fortMaintenance.ToString();
+
+                if (currentItemData.type == Data_Item.SettlementConstructionType.bigPortFort)
+                    buildingPriceText.text = Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(3)).ToString();
+                else
+                    buildingPriceText.text = Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(2)).ToString();
+            }
+            else if (currentItemData.type == Data_Item.SettlementConstructionType.trader)
+                buildingPriceText.text = Strint.GetInt(gameplayObjectsBuilder.GetSettlementBuildingCost(1)).ToString();
         }
 
         void UpdateItemOpenState()
@@ -322,7 +346,12 @@ namespace MegaGame.UI
             if (currentItemData.openGamePrice == 0 && currentItemData.openRealPrice == 0)
             {
                 openItemButton.SetActive(false);
-                itemIsAvailablePanel.SetActive(true);
+
+                if (isShopItems)
+                    itemIsAvailablePanel.SetActive(true);
+                else
+                    itemIsAvailablePanel.SetActive(false);
+
                 return;
             }
 
@@ -390,6 +419,13 @@ namespace MegaGame.UI
         void ShowPurchasedItemObjects()
         {
             openItemButton.SetActive(false);
+
+            if (!isShopItems)
+            {
+                premiumItemIsAvailablePanel.SetActive(false);
+                itemIsAvailablePanel.SetActive(false);
+                return;
+            }
 
             if (currentItemData.IsPremium())
                 premiumItemIsAvailablePanel.SetActive(true);
