@@ -1,24 +1,15 @@
-using UnityEngine;
-
 namespace MegaGame.UI
 {
-    public class UIExploringButton : MonoBehaviour
+    public class UIExploringButton : UIBaseSwitchButton
     {
-        [SerializeField] GameObject imageOff;
-        [SerializeField] GameObject imageOn;
-
         GameController gameController;
 
         bool isSelected;
 
-        void Start()
-        {
-            Init();
-        }
-
-        public void Init()
+        protected override void OnInit()
         {
             gameController = GameController.Instance;
+
             Select(false);
         }
 
@@ -27,13 +18,11 @@ namespace MegaGame.UI
             Select(!isSelected);
         }
 
-        public void Select(bool state)
+        public override void Select(bool state)
         {
+            base.Select(state);
+
             isSelected = state;
-
-            imageOn.SetActive(state);
-            imageOff.SetActive(!state);
-
             gameController.SetGameModeAsExploring(state);
         }
     }

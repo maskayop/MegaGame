@@ -110,6 +110,9 @@ namespace MegaGame
 
         public void ShowShopPanel()
         {
+            if (shopPanelIsOpen)
+                return;
+
             shopPanel.SetActive(true);
             shopPanelIsOpen = true;
         }
@@ -142,20 +145,33 @@ namespace MegaGame
             startGameModelButton.transform.position += new Vector3(0, offsetY, 0);
         }
 
-        public void ShowShopItem(Data_Item item)
+        public void ShowShopItem(Data_Item item, bool isInfopedia)
         {
             HideAllShopItemsObjects();
+            ShowShopPanel();
 
-            if (!shopPanelIsOpen)
-                ShowShopPanel();
-
-            for (int i = 0; i < shopItemSceneObjects.Count; i++)
+            if (!isInfopedia)
             {
-                if (item == shopItemSceneObjects[i].itemData)
+                for (int i = 0; i < shopItemSceneObjects.Count; i++)
                 {
-                    EnableShopObjects(false);
-                    shopItemSceneObjects[i].itemGameObject.SetActive(true);
-                    break;
+                    if (item == shopItemSceneObjects[i].itemData)
+                    {
+                        EnableShopObjects(false, false);
+                        shopItemSceneObjects[i].itemGameObject.SetActive(true);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < infopediaItemSceneObjects.Count; i++)
+                {
+                    if (item == infopediaItemSceneObjects[i].itemData)
+                    {
+                        EnableShopObjects(false, true);
+                        infopediaItemSceneObjects[i].itemGameObject.SetActive(true);
+                        break;
+                    }
                 }
             }
 
@@ -163,7 +179,7 @@ namespace MegaGame
             {
                 if (item == shopPremiumItemSceneObjects[i].itemData)
                 {
-                    EnableShopObjects(true);
+                    EnableShopObjects(true, false);
                     shopPremiumItemSceneObjects[i].itemContainer.SetActive(true);
 
                     if (gameShop.CheckForPurchasing(item))
@@ -189,6 +205,9 @@ namespace MegaGame
             for (int i = 0; i < shopItemSceneObjects.Count; i++)
                 shopItemSceneObjects[i].itemGameObject.SetActive(false);
 
+            for (int i = 0; i < infopediaItemSceneObjects.Count; i++)
+                infopediaItemSceneObjects[i].itemGameObject.SetActive(false);
+
             for (int i = 0; i < shopPremiumItemSceneObjects.Count; i++)
             {
                 shopPremiumItemSceneObjects[i].itemContainer.SetActive(false);
@@ -198,21 +217,33 @@ namespace MegaGame
             }
         }
 
-        void EnableShopObjects(bool isPremium)
+        void EnableShopObjects(bool isPremium, bool isInfopedia)
         {
+            shopAdditionalCamera.SetActive(false);
+            infopediaAdditionalCamera.SetActive(false);
+            shopPremiumAdditionalCamera.SetActive(false);
+
             if (isPremium)
             {
                 gameModelsPreview.SetActive(false);
-                shopAdditionalCamera.SetActive(false);
                 premiumItemsPreview.SetActive(true);
                 shopPremiumAdditionalCamera.SetActive(true);
             }
             else
             {
                 gameModelsPreview.SetActive(true);
-                shopAdditionalCamera.SetActive(true);
                 premiumItemsPreview.SetActive(false);
-                shopPremiumAdditionalCamera.SetActive(false);
+
+                if (isInfopedia)
+                {
+                    if (!infopediaAdditionalCamera.activeInHierarchy)
+                        infopediaAdditionalCamera.SetActive(true);
+                }
+                else
+                {
+                    if (!shopAdditionalCamera.activeInHierarchy)
+                        shopAdditionalCamera.SetActive(true);
+                }
             }
         }
 

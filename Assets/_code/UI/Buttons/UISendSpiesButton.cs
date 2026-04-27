@@ -1,32 +1,16 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace MegaGame.UI
 {
-    [RequireComponent(typeof(Button))]
-    public class UISendSpiesButton : MonoBehaviour
+    public class UISendSpiesButton : UIBaseSwitchButton
     {
-        [SerializeField] GameObject imageOff;
-        [SerializeField] GameObject imageOn;
-
-        Button button;
-
-        void Start()
+        protected override void OnInit()
         {
-            Init();
-        }
-
-        public void Init()
-        {
-            button = GetComponent<Button>();
-
             Select(false);
         }
 
-        public void Select(bool state)
+        public override void Select(bool state)
         {
-            imageOn.SetActive(state);
-            imageOff.SetActive(!state);
+            base.Select(state);
+
             button.interactable = !state;
         }
     }

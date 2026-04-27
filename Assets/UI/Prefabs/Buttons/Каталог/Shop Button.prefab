@@ -339,34 +339,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5618331103488965685}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetMaxBuildingShip
-      objectReference: {fileID: 0}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MegaGame.UI.UIShipSelectionButton, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2017793778363205220, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       propertyPath: m_Name
       value: Shop Button
@@ -433,7 +405,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5618331103488965685}
+      addedObject: {fileID: 2828387870874683288}
   m_SourcePrefab: {fileID: 100100000, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
 --- !u!1 &1060219719080188957 stripped
 GameObject:
@@ -450,7 +422,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
   m_PrefabInstance: {fileID: 4774232830933863209}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5618331103488965685
+--- !u!114 &2828387870874683288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,9 +431,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8625232774977166160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b474f94c7109027438939538230da9f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ce400a53b2a8ea4b92ed44fd811ed8a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShipSelectionButton
-  id: 0
-  imageOff: {fileID: 1060219719080188957}
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShopInfoButton
   imageOn: {fileID: 8189611707519120135}
+  imageOff: {fileID: 1060219719080188957}

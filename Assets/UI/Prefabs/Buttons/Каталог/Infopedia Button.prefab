@@ -402,10 +402,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2556381421800695858}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6367978015279719135}
   m_SourcePrefab: {fileID: 100100000, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+--- !u!1 &1060219719080188957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5546133743891224372, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+  m_PrefabInstance: {fileID: 4774232830933863209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4964987115933011078 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 479165033142945711, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
   m_PrefabInstance: {fileID: 4774232830933863209}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8625232774977166160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3887592690207953017, guid: d37f3743ebb2a7340881a5edcdc77f9f, type: 3}
+  m_PrefabInstance: {fileID: 4774232830933863209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6367978015279719135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625232774977166160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce400a53b2a8ea4b92ed44fd811ed8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MegaGame.UI.UIShopInfoButton
+  imageOn: {fileID: 8189611707519120135}
+  imageOff: {fileID: 1060219719080188957}

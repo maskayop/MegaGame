@@ -23,6 +23,10 @@ namespace MegaGame.UI
 
         [SerializeField] GameObject window;
 
+        [Header("Shop or Infopedia")]
+        [SerializeField] UIShopInfoButton shopButton;
+        [SerializeField] UIShopInfoButton infopediaButton;
+
         [Header("Name, Description, Money")]
         [SerializeField] TextMeshProUGUI itemNameText;
         [SerializeField] TextMeshProUGUI itemDescriptionText;
@@ -70,6 +74,7 @@ namespace MegaGame.UI
 
         [Header("Items")]
         [SerializeField] List<UIShopItem> shopItemsData = new List<UIShopItem>();
+        [SerializeField] List<UIShopItem> infopediaItemsData = new List<UIShopItem>();
 
         [Header("Status Windows")]
         [SerializeField] UIShopLoadingIndicator shopLoadingIndicator;
@@ -85,11 +90,13 @@ namespace MegaGame.UI
 
         Data_Item currentItemData;
         int currentItemId = 0;
+        int currentInfopediaItemId = 0;
         BaseCharacter currentCharacter;
 
         RustorePayments rustorePayments;
 
         bool isInitialized = false;
+        bool isShopItems = true;
 
         void Awake()
         {
@@ -128,9 +135,11 @@ namespace MegaGame.UI
 
             if (shopItemsData.Count > 0)
             {
-                currentItemData = shopItemsData[0].itemData;
                 currentItemId = 0;
+                currentItemData = shopItemsData[0].itemData;
             }
+
+            ShowShopItems();
 
             Close();
 
@@ -164,6 +173,8 @@ namespace MegaGame.UI
             }
 
             gameShop?.UpdateRustorePurchases();
+
+            ShowShopItems();
             ShowCurrentItem();
 
             shopBuySuccessWindow.SetActive(false);
@@ -186,8 +197,16 @@ namespace MegaGame.UI
 
         void ShowCurrentItem()
         {
-            currentItemData = shopItemsData[currentItemId].itemData;
-            additionalSceneObjects.ShowShopItem(currentItemData);
+            if (isShopItems)
+            {
+                currentItemData = shopItemsData[currentItemId].itemData;
+                additionalSceneObjects.ShowShopItem(currentItemData, false);
+            }
+            else
+            {
+                currentItemData = infopediaItemsData[currentInfopediaItemId].itemData;
+                additionalSceneObjects.ShowShopItem(currentItemData, true);
+            }
 
             if (currentItemData.prefab)
             {
@@ -205,7 +224,11 @@ namespace MegaGame.UI
             }
 
             HideAllItemIcons();
-            shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
+
+            if (isShopItems)
+                shopItemsData[currentItemId].itemIconGameObject.SetActive(true);
+            else
+                infopediaItemsData[currentInfopediaItemId].itemIconGameObject.SetActive(true);
 
             UpdateItemOpenState();
             UpdateItemTexts();
@@ -216,17 +239,37 @@ namespace MegaGame.UI
         {
             if (next)
             {
-                currentItemId++;
+                if (isShopItems)
+                {
+                    currentItemId++;
 
-                if (currentItemId >= shopItemsData.Count)
-                    currentItemId = 0;
+                    if (currentItemId >= shopItemsData.Count)
+                        currentItemId = 0;
+                }
+                else
+                {
+                    currentInfopediaItemId++;
+
+                    if (currentInfopediaItemId >= infopediaItemsData.Count)
+                        currentInfopediaItemId = 0;
+                }
             }
             else
             {
-                currentItemId--;
+                if (isShopItems)
+                {
+                    currentItemId--;
 
-                if (currentItemId < 0)
-                    currentItemId = shopItemsData.Count - 1;
+                    if (currentItemId < 0)
+                        currentItemId = shopItemsData.Count - 1;
+                }
+                else
+                {
+                    currentInfopediaItemId--;
+
+                    if (currentInfopediaItemId < 0)
+                        currentInfopediaItemId = infopediaItemsData.Count - 1;
+                }
             }
 
             ShowCurrentItem();
@@ -363,7 +406,7 @@ namespace MegaGame.UI
         public void TryPurchaseItem()
         {
             gameShop.TryPurchaseItem(currentItemData);
-            additionalSceneObjects.ShowShopItem(currentItemData);
+            additionalSceneObjects.ShowShopItem(currentItemData, false);
 
             ShowOpenItemQuestionButtons(false);
             UpdateItemOpenState();
@@ -374,6 +417,9 @@ namespace MegaGame.UI
         {
             for (int i = 0; i < shopItemsData.Count; i++)
                 shopItemsData[i].itemIconGameObject.SetActive(false);
+
+            for (int i = 0; i < infopediaItemsData.Count; i++)
+                infopediaItemsData[i].itemIconGameObject.SetActive(false);
         }
 
         bool CanGetRustoreData()
@@ -406,6 +452,34 @@ namespace MegaGame.UI
             shopLoadingIndicator.Hide();
 
             shopBuyFailedWindow.GetComponent<UIShopMessagePanel>()?.Show(gameShop.GetCurrentError());
+        }
+
+        public void ShowShopItems()
+        {
+            shopButton.Select(true);
+            isShopItems = true;
+
+            HideInfopediaItems();
+            ShowCurrentItem();
+        }
+
+        void HideShopItems()
+        {
+            shopButton.Select(false);
+        }
+
+        public void ShowInfopediaItems()
+        {
+            infopediaButton.Select(true);
+            isShopItems = false;
+
+            HideShopItems();
+            ShowCurrentItem();
+        }
+
+        void HideInfopediaItems()
+        {
+            infopediaButton.Select(false);
         }
     }
 }
