@@ -17,6 +17,9 @@ namespace MegaGame
         bool buildShipsX2 = false;
         public bool BuildShipsX2 { get { return buildShipsX2; } set { buildShipsX2 = value; } }
 
+        bool canClick = true;
+        public bool CanClick { get { return canClick; } set { canClick = value; } }
+
         Tutorial tutorial;
 
         void Awake()
@@ -67,6 +70,12 @@ namespace MegaGame
 
         void SelectObject()
         {
+            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
+                canClick = false;
+
+            if (!canClick)
+                return;
+
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = CameraController.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);

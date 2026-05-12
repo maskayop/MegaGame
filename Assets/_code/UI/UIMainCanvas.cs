@@ -41,6 +41,7 @@ namespace MegaGame.UI
         UIGameShop gameShopWindow;
         UIMainMenu mainMenu;
         AudioController audioController;
+        GameInputsController gameInputsController;
 
         GameState currentGameState;
 
@@ -65,6 +66,7 @@ namespace MegaGame.UI
             gameShopWindow = UIGameShop.Instance;
             mainMenu = UIMainMenu.Instance;
             audioController = AudioController.Instance;
+            gameInputsController = GameInputsController.Instance;
 
             ShowStartGameWindow();
         }
@@ -321,6 +323,11 @@ namespace MegaGame.UI
         public void ShowFPS(bool state)
         {
             FPS.SetActive(state);
+        }
+
+        public void SetNonUIClick(bool state)
+        {
+            gameInputsController.CanClick = state;
         }
     }
 }
