@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MegaGame.UI
 {
@@ -28,6 +29,7 @@ namespace MegaGame.UI
         [SerializeField] UISendSpiesButton sendSpiesButton;
         [SerializeField] GameObject sendSpiesPanel;
         [SerializeField] TextMeshProUGUI sendSpicesPriceText;
+        [SerializeField] Button sendSpicesButton;
 
         GameController gameController;
         ObjectsManager objectsManager;
@@ -87,7 +89,14 @@ namespace MegaGame.UI
             UpdateFractionsResources();
 
             if (sendSpiesPanelIsOpen)
+            {
                 sendSpicesPriceText.text = resourcesController.GetSendSpiesPrice().ToString();
+
+                if (resourcesController.GetSendSpiesPrice() > resourcesController.GetPlayerMoney())
+                    sendSpicesButton.interactable = false;
+                else
+                    sendSpicesButton.interactable = true;
+            }
         }
 
         void UpdateFractionsResources()

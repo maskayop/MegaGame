@@ -190,7 +190,7 @@ namespace MegaGame.UI
 
             additionalSceneObjects.HideShopPanel();
 
-            ResourcesController.Instance?.CloseEnemyResources();
+            ResourcesController.Instance?.TryOpenPurchasedEnemyResources();
 
             if (isInitialized)
                 gameDataSaver.SavePremiumShopData();

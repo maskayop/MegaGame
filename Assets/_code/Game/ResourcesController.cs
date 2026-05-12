@@ -379,15 +379,25 @@ namespace MegaGame
 
         public void CloseEnemyResources()
         {
-            if (gameShop)
+            if (!gameShop)
             {
-                if (gameShop.CheckForPurchasing(sendSpiesItem))
-                    enemyResourcesAreOpen = true;
-                else
-                    enemyResourcesAreOpen = false;
+                enemyResourcesAreOpen = false;
+                return;
             }
+
+            if (gameShop.CheckForPurchasing(sendSpiesItem))
+                enemyResourcesAreOpen = true;
             else
                 enemyResourcesAreOpen = false;
+        }
+
+        public void TryOpenPurchasedEnemyResources()
+        {
+            if (!gameShop)
+                return;
+
+            if (gameShop.CheckForPurchasing(sendSpiesItem))
+                enemyResourcesAreOpen = true;
         }
     }
 }

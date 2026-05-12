@@ -189,7 +189,7 @@ namespace MegaGame.UI
         public void OpenRenameAccountQuestionWindow()
         {
             renameAccountQuestionWindow.SetActive(true);
-            renameAccountNameInputField.text = "";
+            renameAccountNameInputField.text = gameDataSaver.GetCurrentAccountName();
             CheckForRenamingNameAvailability();
         }
 
