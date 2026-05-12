@@ -174,12 +174,12 @@ namespace MegaGame
             GlobalTimeController.Instance.currentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
             resourcesController.CurrentDay = dataSaveLoad.GetSavedInt(currentAccountNameKey + currentDayFormat);
 
-            if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 1)
+            if (GetCampaignEndedState(currentAccountNameKey) == 1)
             {
                 gameController.IsVictory = true;
                 gameController.CampaignIsEnded = true;
             }
-            else if (dataSaveLoad.GetSavedShort(currentAccountNameKey + campaignIsEndedFormat) == 2)
+            else if (GetCampaignEndedState(currentAccountNameKey) == 2)
             {
                 gameController.IsVictory = false;
                 gameController.CampaignIsEnded = true;
@@ -295,7 +295,7 @@ namespace MegaGame
         {
             List<int> ints = new List<int>();
 
-            for (int i = 0; i <= 4; i++)
+            for (int i = 0; i <= 5; i++)
                 ints.Add(0);
 
             string accountNameKey = "";
@@ -338,6 +338,7 @@ namespace MegaGame
             ints[2] = enemyPortsCount;
             ints[3] = playerVillagesCount;
             ints[4] = enemyVillagesCount;
+            ints[5] = GetCampaignEndedState(accountNameKey);
 
             return ints;
         }
@@ -491,6 +492,11 @@ namespace MegaGame
         public int GetCurrentTutorialState()
         {
             return currentTutorialProgress;
+        }
+
+        public int GetCampaignEndedState(string accountNameKey)
+        {
+            return dataSaveLoad.GetSavedShort(accountNameKey + campaignIsEndedFormat);
         }
     }
 }

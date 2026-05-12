@@ -58,8 +58,6 @@ namespace MegaGame.UI
                 mainButton.interactable = true;
                 currentAccountPanel.SetActive(false);
             }
-
-            gameEndPanel.SetActive(false);
         }
 
         public void Init()
@@ -80,6 +78,25 @@ namespace MegaGame.UI
             enemyPortsText.text = dataList[2].ToString();
             playerVillagesText.text = dataList[3].ToString();
             enemyVillagesText.text = dataList[4].ToString();
+
+            gameEndPanel.SetActive(false);
+            victoryPanel.SetActive(false);
+            defeatPanel.SetActive(false);
+
+            if (dataList[5] == -1)
+                return;
+
+            if (dataList[5] > 0)
+            {
+                gameEndPanel.SetActive(true);
+                moneyPanel.SetActive(false);
+                settlementsPanel.SetActive(false);
+            }
+
+            if (dataList[5] == 1)
+                victoryPanel.SetActive(true);
+            else if (dataList[5] == 2)
+                defeatPanel.SetActive(true);
         }
 
         public void TryLoadAccount()
