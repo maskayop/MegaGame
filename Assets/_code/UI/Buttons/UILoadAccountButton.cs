@@ -114,5 +114,10 @@ namespace MegaGame.UI
         {
             accountManagerWindow.DeleteAccount();
         }
+
+        public void TryRenameAccount()
+        {
+            accountManagerWindow.OpenRenameAccountQuestionWindow();
+        }
     }
 }

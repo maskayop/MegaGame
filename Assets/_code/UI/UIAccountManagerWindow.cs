@@ -21,6 +21,11 @@ namespace MegaGame.UI
         [SerializeField] TMP_InputField createAccountNameInputField;
         [SerializeField] Button createAccountButton;
 
+        [Header("Rename Account")]
+        [SerializeField] GameObject renameAccountQuestionWindow;
+        [SerializeField] TMP_InputField renameAccountNameInputField;
+        [SerializeField] Button renameAccountButton;
+
         [Header("Delete Saves")]
         [SerializeField] GameObject deleteSavesButton;
         [SerializeField] GameObject deleteSavesQuestionWindow;
@@ -87,6 +92,7 @@ namespace MegaGame.UI
 
             CloseLoadAccountQuestionWindow();
             CloseCreateAccountQuestionWindow();
+            CloseRenameAccountQuestionWindow();
             CloseDeleteSavesQuestionWindow();
             CloseDeleteSavesSecurityQuestionWindow();
         }
@@ -96,6 +102,12 @@ namespace MegaGame.UI
             gameDataSaver.CreateAccount(createAccountNameInputField.text);
             gameDataSaver.SaveTutorialData(1);
             ScenesManager.Instance.LoadScene(ScenesManager.Instance.GetCurrentOpenScene().name);
+        }
+
+        public void RenameAccount()
+        {
+            gameDataSaver.SetAccountName(renameAccountNameInputField.text);
+            mainMenu.Init();
         }
 
         public void DeleteAccount()
@@ -166,12 +178,24 @@ namespace MegaGame.UI
         {
             createAccountQuestionWindow.SetActive(true);
             createAccountNameInputField.text = "";
-            CheckForNameAvailability();
+            CheckForCreatingNameAvailability();
         }
 
         public void CloseCreateAccountQuestionWindow()
         {
             createAccountQuestionWindow.SetActive(false);
+        }
+
+        public void OpenRenameAccountQuestionWindow()
+        {
+            renameAccountQuestionWindow.SetActive(true);
+            renameAccountNameInputField.text = "";
+            CheckForRenamingNameAvailability();
+        }
+
+        public void CloseRenameAccountQuestionWindow()
+        {
+            renameAccountQuestionWindow.SetActive(false);
         }
 
         public void OpenDeleteSavesQuestionWindow()
@@ -201,7 +225,12 @@ namespace MegaGame.UI
             createAccountButton.interactable = state;
         }
 
-        public void CheckForNameAvailability()
+        void SetRenameAccountButtonInteractable(bool state)
+        {
+            renameAccountButton.interactable = state;
+        }
+
+        public void CheckForCreatingNameAvailability()
         {
             if (string.IsNullOrWhiteSpace(createAccountNameInputField.text))
             {
@@ -219,6 +248,26 @@ namespace MegaGame.UI
             }
 
             SetCreateAccountButtonInteractable(true);
+        }
+
+        public void CheckForRenamingNameAvailability()
+        {
+            if (string.IsNullOrWhiteSpace(renameAccountNameInputField.text))
+            {
+                SetRenameAccountButtonInteractable(false);
+                return;
+            }
+
+            for (int i = 0; i < accountsNames.Count; i++)
+            {
+                if (accountsNames[i] == renameAccountNameInputField.text)
+                {
+                    SetRenameAccountButtonInteractable(false);
+                    return;
+                }
+            }
+
+            SetRenameAccountButtonInteractable(true);
         }
     }
 }
